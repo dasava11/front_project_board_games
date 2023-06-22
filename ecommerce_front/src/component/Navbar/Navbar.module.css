@@ -1,0 +1,24 @@
+.listFlex{
+    display: flex;
+    margin: 0;
+    padding: 1.5rem;
+}
+
+.listFlex li{
+    list-style: none;
+    margin: 0 3rem;
+}
+
+.listFlex li button{
+    background-color: transparent;
+    color: white;
+    border: none;
+}
+
+.listFlex li button:hover{
+    cursor: pointer;
+}
+
+.navBar{
+    background-color: hsl(240, 34%, 16%, 80%);
+}

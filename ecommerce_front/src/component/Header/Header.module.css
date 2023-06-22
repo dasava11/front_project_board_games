@@ -1,0 +1,33 @@
+.headerFlex{
+    display: flex;
+    background-color: #000035;
+    justify-content: space-between;
+    align-items: start;
+    height: 130px;
+}
+
+.inputsSB{
+    display: flex;
+    padding: 1rem;
+    align-items: center;
+    gap: 3rem;
+}
+
+.inputs{
+    display: flex;
+}
+
+.inputs h6{
+    color: white;
+    margin: 0;
+    text-align: center;
+}
+
+.inputs button{
+    background-color: transparent;
+    border: none;
+}
+
+.inputs button:hover{
+    cursor: pointer;
+}
