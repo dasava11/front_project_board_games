@@ -1,0 +1,17 @@
+.inputSearch{
+    border: 1px solid transparent;
+    border-radius: 10px;
+    height: 30px;
+}
+
+.searchBtn{
+    background-color: transparent;
+    border: none;
+    position: relative;
+    right: 30px;
+    top: 3px;
+}
+
+.searchBtn:hover{
+    cursor: pointer;
+}
