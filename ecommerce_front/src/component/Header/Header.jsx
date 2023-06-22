@@ -5,6 +5,7 @@ import dice4 from '../../Photos/dice_4.svg'
 import SearchBar from '../SearchBar/SearchBar'
 import style from './Header.module.css'
 import Navbar from '../Navbar/Navbar'
+import Footer from '../Footer/Footer'
 
 const Header = () => {
 
@@ -27,6 +28,7 @@ const Header = () => {
             </div>
         </div>
         <Navbar/>
+        <Footer/>
     </div>
     
   )
