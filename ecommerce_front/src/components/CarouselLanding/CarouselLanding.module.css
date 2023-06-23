@@ -1,0 +1,38 @@
+.carouselContainer {
+  display: flex;
+  justify-content: center;
+  position: relative;
+  width: 1400px;
+  height: 400px;
+  margin: 0 auto;
+}
+
+.carouselBtnLft {
+  width: 50px;
+  height: 50px;
+ /*  font-family: Arial, Helvetica, sans-serif; */
+  font-weight: bold;
+  background-color: rgba(255, 255, 255, 0.483);
+  border: none;
+  border-radius: 50%;
+  color: rgb(69, 69, 69);
+  position: absolute;
+  left: 3%;
+  top: 50%;
+  cursor: pointer;
+}
+
+.carouselBtnRig {
+  width: 50px;
+  height: 50px;
+  /* font-family: Arial, Helvetica, sans-serif; */
+  font-weight: bold;
+  background-color: rgba(255, 255, 255, 0.483);
+  border: none;
+  border-radius: 50%;
+  color: rgb(69, 69, 69);
+  position: absolute;
+  right: 3%;
+  top: 50%;
+  cursor: pointer;
+}
