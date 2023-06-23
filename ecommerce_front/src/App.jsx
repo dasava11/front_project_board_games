@@ -1,8 +1,8 @@
 import './App.css'
 import { Route, BrowserRouter, Routes } from 'react-router-dom';
 import CreateGame from "./components/Admin/Forms/CreateGame";
-import Home from './component/Home/Home'
-import Games from './component/Games/Games';
+import Home from './components/Home/Home'
+import Games from './components/Games/Games';
 import CardDetail from "./components/CardDetail/CardDetail";
 
 function App() {
