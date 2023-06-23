@@ -1,0 +1,37 @@
+.menuList{
+    border: 1px solid transparent;
+    -webkit-box-shadow: 4px 7px 8px -5px #000000; 
+    box-shadow: 4px 7px 8px -5px #000000;   
+    border-radius: 1rem;
+    width: 110px;
+}
+
+.menuItem{
+    background-color: white;
+    border: none;
+    padding: 0.3rem;
+    text-transform: capitalize;
+   
+}
+
+.menuItem:hover{
+    background-color: hsl(0, 0%, 74%);
+    cursor: pointer;
+}
+
+.filterBtn{
+    border: 1px solid transparent;
+    color: white;
+    background-color: #FADA5C;
+    font-weight: bold;
+    height: 30px;
+    width: 122px;
+    border-radius: 0.5rem;
+    text-transform: capitalize;
+    font-size: 1.5rem;
+}
+
+.filterBtn:hover{
+    background-color: #E3C652;
+    cursor: pointer;
+}
