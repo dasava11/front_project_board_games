@@ -5,7 +5,6 @@ import CarouselLanding from "../CarouselLanding/CarouselLanding";
 const Home = () => {
   return (
     <div>
-      <Header />
       <CarouselLanding />
     </div>
   );
