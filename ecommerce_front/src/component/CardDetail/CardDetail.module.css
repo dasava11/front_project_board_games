@@ -1,0 +1,72 @@
+.containerGame{
+    width: 730px;
+    height: 650px;
+    margin-left: 280px;
+    margin-right: 640px;
+    margin-top: 106px;
+    background: #FFF;
+}
+
+.name{
+    position: relative;
+    top: -730px;
+    left: 1250px;
+    font-size: 40px;
+}
+
+.imgDetail{
+    width: 550px;
+    margin-top: 50px;
+    margin-left: 88px;
+}
+
+.comment{
+    position: relative;
+    top: -730px;
+    left: 1250px;
+    color: #00324F;
+    font-size: 22px;
+}
+
+.price{
+    position: relative;
+    top: -760px;
+    left: 1250px;
+    color: #00006FCC;
+    font-size: 40px;
+    font-family: Roboto;
+}
+
+.addToCart{
+    width: 332px;
+    height: 59px;
+    flex-shrink: 0;
+    border-radius: 15px;
+    background: #37A0DB;
+    position: relative;
+    top: -760px;
+    left: 1250px;
+}
+
+.pAddToCart{
+    display: inline-block;
+    width: 198px;
+    height: 30px;
+    flex-direction: column;
+    color: #000;
+    text-align: center;
+    font-size: 28px;
+    font-family: Roboto;
+    font-weight: 500;
+}
+
+.imgCanasta{
+    width: 54px;
+    height: 52px;
+}
+
+.imgHeart{
+    width: 70px;
+    height: 70px;
+    flex-shrink: 0;
+}
