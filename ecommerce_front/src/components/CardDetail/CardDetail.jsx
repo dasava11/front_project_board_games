@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getDetail } from "../../Redux/action-creators";
 import { useParams } from "react-router-dom";
 import Header from "../Header/Header";
+import { getDetail } from "../../Redux/actions_creators";
 
 const CardDetail = () => {
   const dispatch = useDispatch();
