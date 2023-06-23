@@ -1,8 +1,11 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getDetail } from '../../Redux/action-creators';
+import { getDetail } from '../../Redux/actions_creators/index';
 import { useParams } from 'react-router-dom';
 import Header from '../Header/Header';
+import style from '../CardDetail/CardDetail.module.css'
+import Canasta from '../../Photos/Canasta.png'
+import CorazonFav from '../../Photos/CorazonFav.png'
 
 const CardDetail = () => {
   const dispatch = useDispatch();
@@ -17,10 +20,20 @@ const CardDetail = () => {
   return (
     <div>
         <Header/>
-      <h1>Id: {game[0].game_id}</h1>
-      <h2>Title: {game[0].name}</h2>
-      <p>Released: {game[0].released}</p>
-      <p>Price: {game[0].price}</p>
+        <div className={style.containerGame}>
+            <img className={style.imgDetail} src={game[0].image.url}/>
+        </div>
+        <h1 className={style.name}>{game[0].name}</h1>
+        <p className={style.comment}>comment</p>
+        <p className={style.price}>$ {game[0].price} USD</p>
+        <button className={style.addToCart}>
+            <img className={style.imgCanasta}src={Canasta}/>
+            <p className={style.pAddToCart}>Add to cart</p>
+        </button>
+        <button>
+            <img className={style.imgHeart} src={CorazonFav}/>
+        </button>
+        <p>Released: {game[0].released}</p>
       <p>Age: {game[0].age}</p>
       <p>Min Players: {game[0].players_min}</p>
       <p>Max Players: {game[0].players_max}</p>
@@ -28,10 +41,12 @@ const CardDetail = () => {
       <p>Active: {game[0].active ? 'Yes' : 'No'}</p>
       <p>Weight: {game[0].weight}</p>
       <p>Playing Time: {game[0].playing_time}</p>
-      <p>Thematic ID: {game[0].ThematicThematicId}</p>
-      <p>Mechanic ID: {game[0].MechanicMechanicId}</p>
-      <p>Editorial ID: {game[0].EditorialIdEditorial}</p>
-      <p>Author ID: {game[0].AuthorAuthorId}</p>
+      <p>Author: {game[0].Author.author_name}</p>
+      <p>Categories: {game[0].Categories[0].category_name}</p>
+      <p>Designers: {game[0].Designers[0].designer_name}</p>
+      <p>Editorial: {game[0].Editorial.editorial_name}</p>
+      <p>Lenguages: {game[0].Languages[0].languages_name}</p>
+      <p>Mechanic: {game[0].Mechanic.mechanic_name}</p>
     </div>
   );
 };

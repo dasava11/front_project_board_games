@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react'
 import {useDispatch, useSelector} from 'react-redux';
-import {getAllGames} from '../../Redux/action-creators'
+import {getAllGames} from '../../Redux/action-types/index'
 import Header from '../Header/Header'
 import style from './Games.module.css'
 import promotionalBanner from '../../Photos/PromotionalBanner.png'

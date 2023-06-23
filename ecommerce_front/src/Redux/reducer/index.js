@@ -1,4 +1,3 @@
-
 import {
   GET_ALL_GAMES,
   GET_AUTHORS,
@@ -8,13 +7,13 @@ import {
   GET_LANGUAGES,
   GET_MECHANICS,
   GET_THEMATICS,
-  GET_DETAIL
-} from "../actions_types";
+  GET_DETAIL,
+} from "../action-types/index";
 
 const initialState = {
   games: [],
-    
-    gameDetail: [],
+
+  gameDetail: [],
   allGames: [],
   allAuthors: [],
   allCategories: [],
@@ -27,21 +26,21 @@ const initialState = {
 
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
-      case GET_ALL_GAMES:
-            return{
-                ...state,
-                games: action.payload,
-                allGames: action.payload
-            }
-        case GET_DETAIL:
-            const copyGame = [...state.allGames]
-            const gameFiltered = copyGame.filter((g) => g.game_id == action.payload)
-            console.log(gameFiltered)
-            return{
-                ...state,
-                gameDetail: gameFiltered
-            }
-    
+    case GET_ALL_GAMES:
+      return {
+        ...state,
+        games: action.payload,
+        allGames: action.payload,
+      };
+    case GET_DETAIL:
+      const copyGame = [...state.allGames];
+      const gameFiltered = copyGame.filter((g) => g.game_id == action.payload);
+      console.log(gameFiltered);
+      return {
+        ...state,
+        gameDetail: gameFiltered,
+      };
+
     case GET_CATEGORIES:
       return {
         ...state,
