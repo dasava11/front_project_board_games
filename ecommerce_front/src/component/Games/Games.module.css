@@ -1,0 +1,40 @@
+.gamesBanner{
+    display: flex;
+    justify-content: center;
+    margin: 1rem;
+}
+
+.gamesMain{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 5rem 8rem;
+}
+
+.filtersMain{
+    display: flex;
+    gap: 2rem;
+}
+
+.titleMain{
+    color: #000035;
+}
+
+.titleMain h1{
+    margin: 5px 0;
+}
+
+.gamesContainer{
+    width: 75%;
+    margin: auto;
+    height: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.titleMain h3{
+    font-weight: lighter;
+    margin: 5px 0;
+}
