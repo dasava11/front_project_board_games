@@ -1,5 +1,5 @@
 import React from 'react'
-import style from '../Pagination/Pagination.module.css'
+import style from './Pagination.module.css'
 import {ChevronLeftIcon, ChevronRightIcon} from '@chakra-ui/icons'
 
 const Pagination = (props) => {
