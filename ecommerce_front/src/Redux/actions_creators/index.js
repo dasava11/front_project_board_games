@@ -8,7 +8,7 @@ import {
   GET_EDITORIALS,
   GET_MECHANICS,
   GET_THEMATICS,
-} from "../action-types/index";
+} from "../actions_types/index.js";
 import { toast } from "react-toastify";
 
 const VITE_URL_GAMES =
@@ -205,5 +205,13 @@ export const postThematics = (data) => {
     } catch (error) {
       toast.error(error.message);
     }
+  };
+};
+
+export const getDetail = (id) => {
+  return async (dispatch) => {
+    try {
+      dispatch({ type: GET_DETAIL, payload: id });
+    } catch (error) {}
   };
 };
