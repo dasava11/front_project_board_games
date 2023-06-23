@@ -8,8 +8,7 @@ import {
   GET_EDITORIALS,
   GET_MECHANICS,
   GET_THEMATICS,
-  GET_DETAIL,
-} from "../action-types/index";
+} from "../actions_types/index.js";
 import { toast } from "react-toastify";
 
 const VITE_URL_GAMES =
