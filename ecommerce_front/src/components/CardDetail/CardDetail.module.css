@@ -17,7 +17,7 @@
 .imgDetail{
     width: 550px;
     margin-top: 50px;
-    margin-left: 88px;
+    margin-left: 80px;
 }
 
 .comment{
@@ -46,9 +46,11 @@
     position: relative;
     top: -760px;
     left: 1250px;
+    margin-right: 11px;
 }
 
 .pAddToCart{
+    position: relative;
     display: inline-block;
     width: 198px;
     height: 30px;
@@ -58,15 +60,30 @@
     font-size: 28px;
     font-family: Roboto;
     font-weight: 500;
+    top: -16px;
 }
 
 .imgCanasta{
+    position: relative;
     width: 54px;
-    height: 52px;
+    height: 42px;
+    top: -7px;
 }
 
-.imgHeart{
-    width: 70px;
-    height: 70px;
+.buttomFav{
+    width: 65px;
+    height: 65px;
     flex-shrink: 0;
+    position: relative;
+    top: -750px;
+    left: 1250px;
+}
+.corazonFav{
+    position: relative;
+    top: -5px;
+    left: -9px;
+}
+
+.containerGame2{
+    margin-left: -50px;
 }
