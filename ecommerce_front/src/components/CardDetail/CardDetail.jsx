@@ -16,6 +16,8 @@ const CardDetail = () => {
     console.log(game);
   }, [dispatch, id]);
 
+  const availabilityClass = game.active ? style.availableGreen : style.availableRed;
+
   return (
     <div>
       <div className={style.containerGame}>
@@ -25,6 +27,7 @@ const CardDetail = () => {
       <div className={style.containerGame2}>
         <h1 className={style.name}>{game.name}</h1>
         <p className={style.comment}>comment</p>
+        <p className={style.available + ' ' + availabilityClass}>available</p>
         <p className={style.price}>$ {game.price} USD</p>
 
         <div>
@@ -39,22 +42,50 @@ const CardDetail = () => {
         </div>
       </div>
       <p className={style.description}>{game.Mechanic.description}</p>
-      <p className={style.categories}>Categories</p>
-        {game.Categories.map((category) => (
-          <p className={style.category} key={category.category_id}>{category.category_name}</p>
+      <div className={style.containerGame3}>
+        <p className={style.categories}>Categories</p>
+          {game.Categories.map((category) => (
+            <p className={style.category} key={category.category_id}>{category.category_name}</p>
+          ))}
+        <h1 className={style.linea1}></h1>
+        <p className={style.nJugadores}>N° jugadores</p>
+        <p className={style.njugadoress}>{game.players_min} - {game.players_max}</p>
+        <h1 className={style.linea2}></h1>
+        <p className={style.timeGame}>Tiempo de juego</p>
+        <p className={style.playingTime}>{game.playing_time} min x player</p>
+
+      </div>
+      <div className={style.containerGame4}>
+        <p className={style.moreInfo}>More info</p>
+        <div className={style.etc}>
+          <p className={style.author}>Author</p>
+          <p className={style.authors}>{game.Author.author_name}</p>
+          <p className={style.nationality}>Nationality</p>
+          <p className={style.nationalitys}>{game.Author.nationality}</p>
+          <p className={style.bgg}>BGG</p>
+          <p className={style.mechanic}>Mechanic</p>    
+          <p className={style.mechanics}>{game.Mechanic.mechanic_name}</p>
+          <p className={style.thematic} >Thematic</p>
+          <p className={style.thematics}>{game.Thematic.thematic_name}</p>
+          <p className={style.age}>Age</p>
+          <p className={style.ages}>{game.age}</p>
+          <p className={style.designer}>Designers</p>
+          {game.Designers.map((designer) => (
+          <p key={designer.designer_id} className={style.designers}>{designer.designer_name}</p>
         ))}
-      <h1 className={style.linea1}></h1>
-      <p className={style.nJugadores}>N° jugadores</p>
-      <p className={style.njugadoress}>{game.players_min} - {game.players_max}</p>
-      <h1 className={style.linea2}></h1>
-      <p className={style.timeGame}>Tiempo de juego</p>
-      <p className={style.playingTime}>{game.playing_time} min x player</p>
-      <p className={style.moreInfo}>More info</p>
-      <div className={style.etc}>
-          <h1>Autores, diseñadores y demás</h1>
+          <p className={style.editorial}>Editorial</p>
+          <p className={style.editorials}>{game.Editorial.editorial_name}</p>
+          <p className={style.weight}>Weight</p>
+          <p className={style.weights}>{game.weight} g</p>
+          <p className={style.language}>Language</p>
+          {game.Languages.map((language) => (
+          <p key={language.language_id} className={style.languages}>{language.language_name}</p>
+        ))}
+      </div>
+
       </div>
       <div className={style.imgMini}>
-          <h1>Aquí van las img pequeñas</h1>
+          
       </div>
       <div className={style.containerReview}>
         <p className={style.review}>Review</p>
@@ -63,31 +94,7 @@ const CardDetail = () => {
 
 
       <p>Released: {game.released}</p>
-      <p>Age: {game.age}</p>
       <p>Stock: {game.stock}</p>
-      <p>Active: {game.active ? 'Yes' : 'No'}</p>
-      <p>Weight: {game.weight}</p>
-
-      <p>Author: {game.Author.author_name}</p>
-      <p>Nationality: {game.Author.nationality}</p>
-      
-      <p>Editorial: {game.Editorial.editorial_name}</p>
-      
-      <p>Mechanic: {game.Mechanic.mechanic_name}</p>
-      
-
-      <p>Thematic: {game.Thematic.thematic_name}</p>
-      
-
-      {game.Designers.map((designer) => (
-        <p key={designer.designer_id}>Designers: {designer.designer_name}</p>
-      ))}
-      
-
-      <p>Languages:{game.Languages.map((language) => (
-        <p key={language.language_id}>{language.language_name}</p>
-      ))}</p>
-      
     </div>
   );
 };
