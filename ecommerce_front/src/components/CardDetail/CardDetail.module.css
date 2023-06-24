@@ -86,4 +86,194 @@
 
 .containerGame2{
     margin-left: -50px;
+    margin-top: 40px;
+}
+
+.description{
+    flex-shrink: 0;
+    position: relative;
+    top: -750px;
+    left: 1200px;
+    display: flex;
+    width: 484px;
+    height: 151px;
+    flex-direction: column;
+    flex-shrink: 0;
+    text-align: center;
+}
+
+.categories{
+    flex-shrink: 0;
+    position: relative;
+    top: -703px;
+    left: 1120px;
+    display: flex;
+    width: 180px;
+    height: 110px;
+    flex-direction: column;
+    flex-shrink: 0;
+    color: #000;
+    text-align: center;
+    font-size: 24px;
+    font-family: Roboto;
+    font-weight: 500;
+}
+
+.linea1{
+    width: 3px;
+    height: 140px;
+    flex-shrink: 0;
+    position: relative;
+    top: -975px;
+    left: 1320px;
+    background: #37A0DB;
+}
+.nJugadores{
+    flex-shrink: 0;
+        position: relative;
+        top: -1142px;
+        left: 1350px;
+        display: flex;
+        width: 180px;
+        height: 110px;
+        flex-direction: column;
+        flex-shrink: 0;
+        color: #000;
+        text-align: center;
+        font-size: 24px;
+        font-family: Roboto;
+        font-weight: 500;
+}
+
+.linea2 {
+    width: 4px;
+    height: 140px;
+    flex-shrink: 0;
+    position: relative;
+    top: -1415px;
+    left: 1555px;
+    background: #37A0DB;
+}
+
+.njugadoress{
+    flex-shrink: 0;
+    position: relative;
+    top: -1220px;
+    left: 1350px;
+    display: flex;
+    width: 180px;
+    height: 110px;
+    flex-direction: column;
+    flex-shrink: 0;
+    color: #000;
+    text-align: center;
+    font-size: 24px;
+    font-family: Roboto;
+    font-weight: 500;
+}
+
+.timeGame{
+    flex-shrink: 0;
+    position: relative;
+    top: -1580px;
+    left: 1600px;
+    display: flex;
+    width: 180px;
+    height: 110px;
+    flex-direction: column;
+    flex-shrink: 0;
+    color: #000;
+    text-align: center;
+    font-size: 24px;
+    font-family: Roboto;
+    font-weight: 500;
+}
+
+.playingTime{
+    flex-shrink: 0;
+        position: relative;
+        top: -1660px;
+        left: 1600px;
+        display: flex;
+        width: 180px;
+        height: 110px;
+        flex-direction: column;
+        flex-shrink: 0;
+        color: #000;
+        text-align: center;
+        font-size: 24px;
+        font-family: Roboto;
+        font-weight: 500;
+}
+
+.category{
+    flex-shrink: 0;
+    position: relative;
+    top: -785px;
+    left: 1120px;
+    display: flex;
+    width: 180px;
+    height: 110px;
+    flex-direction: column;
+    flex-shrink: 0;
+    color: #000;
+    text-align: center;
+    font-size: 24px;
+    font-family: Roboto;
+    font-weight: 500;
+}
+
+.etc{
+    position: relative;
+    top: -1600px;
+    width: 1000px;
+    height: 500px;
+    left: 45%;
+    flex-shrink: 0;
+    background: #FFFCFC;
+    margin-left: 100px;
+}
+
+.imgMini{
+    background: #FFFCFC;
+    position: relative;
+    top: -2150px;
+    width: 738px;
+    height: 212px;
+    flex-shrink: 0;
+    left: 7%;
+}
+
+.moreInfo{
+    position: relative;
+    flex-shrink: 0;
+    top: -1600px;
+    left: 70px;
+    color: #00324F;
+    text-align: center;
+    font-size: 28px;
+    font-family: Roboto;
+}
+
+.review{
+    position: relative;
+    top: -1800px;
+    color: #00324F;
+    font-size: 28px;
+    font-family: Roboto;
+    left: 5%;
+}
+
+.opinion{
+    position: relative;
+    top: -1800px;
+    left: 5%;
+    width: 1900px;
+    height: 185px;
+    flex-shrink: 0;
+}
+
+.containerReview{
+    position: relative;
+    top: -50px;
 }
