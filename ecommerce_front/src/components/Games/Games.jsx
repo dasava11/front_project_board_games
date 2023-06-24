@@ -13,6 +13,7 @@ const Games = () => {
 
   const [currentPage, SetCurrentPage] = useState(1);
   const [postPerPage, setPostPerPage] = useState(8);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     dispatch(getAllGames());
@@ -39,32 +40,34 @@ const Games = () => {
           <Filter type={"thematics"} nameType={"thematic_name"} />
         </div>
       </div>
-      <Pagination
-        totalPosts={allGames.length}
-        setCurrentPage={SetCurrentPage}
-        postPerPage={postPerPage}
-        currentPage={currentPage}
-      />
-      <div className={style.gamesContainer}>
-        {currentPosts &&
-          currentPosts.map((game) => {
-            return (
-              <Card
-                name={game.name}
-                image={game.image}
-                price={game.price}
-                key={game.game_id}
-                id={game.game_id}
-              />
-            );
-          })}
+      <div className={style.gamePagination}>
+          <Pagination
+            totalPosts={allGames.length}
+            setCurrentPage={SetCurrentPage}
+            postPerPage={postPerPage}
+            currentPage={currentPage}
+          />
+          <div className={style.gamesContainer}>
+            {currentPosts &&
+              currentPosts.map((game) => {
+                return (
+                  <Card
+                    name={game.name}
+                    image={game.image}
+                    price={game.price}
+                    key={game.game_id}
+                    id={game.game_id}
+                  />
+                );
+              })}
+          </div>
+          <Pagination
+            totalPosts={allGames.length}
+            setCurrentPage={SetCurrentPage}
+            postPerPage={postPerPage}
+            currentPage={currentPage}
+          />
       </div>
-      <Pagination
-        totalPosts={allGames.length}
-        setCurrentPage={SetCurrentPage}
-        postPerPage={postPerPage}
-        currentPage={currentPage}
-      />
     </div>
   );
 };

@@ -25,13 +25,14 @@ const Pagination = (props) => {
                 return <button
                             key={index} 
                             onClick={() => setCurrentPage(page)}
+                            className={page === currentPage ? style.disabled : style.active}
                         >{page}</button>
             })
         }
             <button
                 onClick={() => setCurrentPage(currentPage + 1)}
-                disabled = {currentPage === 3 ? true : false}
-                className={currentPage === 3 ? style.disabled : style.active}
+                disabled = {currentPage === pages.length ? true : false}
+                className={currentPage === pages.length ? style.disabled : style.active}
             ><ChevronRightIcon/></button>
     </div>
   )
