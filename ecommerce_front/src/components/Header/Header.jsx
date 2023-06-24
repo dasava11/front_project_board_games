@@ -1,12 +1,10 @@
-import React, {useEffect} from 'react'
+import React from 'react'
 import logo from '../../Photos/logo.png'
 import dice1 from '../../Photos/dice_1.svg'
 import dice4 from '../../Photos/dice_4.svg'
 import SearchBar from '../SearchBar/SearchBar'
 import style from './Header.module.css'
 import Navbar from '../Navbar/Navbar'
-import Footer from '../Footer/Footer'
-
 const Header = () => {
 
   return (
