@@ -212,7 +212,16 @@ export const postThematics = (data) => {
 export const getDetail = (id) => {
   return async (dispatch) => {
     try {
-      dispatch({ type: GET_DETAIL, payload: id });
-    } catch (error) {}
+      const response = await axios.get(
+        `https://backprojectboardgames-production.up.railway.app/games/id/${id}`
+      );
+      console.log(response.data);
+      dispatch({
+        type: "GET_DETAIL",
+        payload: response.data,
+      });
+    } catch (error) {
+      console.error(error);
+    }
   };
 };

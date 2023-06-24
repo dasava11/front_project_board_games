@@ -33,12 +33,9 @@ const rootReducer = (state = initialState, action) => {
         allGames: action.payload,
       };
     case GET_DETAIL:
-      const copyGame = [...state.allGames];
-      const gameFiltered = copyGame.filter((g) => g.game_id == action.payload);
-      console.log(gameFiltered);
       return {
         ...state,
-        gameDetail: gameFiltered,
+        gameDetail: action.payload,
       };
 
     case GET_CATEGORIES:
