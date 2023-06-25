@@ -6,11 +6,14 @@ import Games from "./components/Games/Games";
 import CardDetail from "./components/CardDetail/CardDetail";
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   return (
     <div>
       <BrowserRouter>
+        <ToastContainer />
         <Header />
         <Routes>
           <Route path="/" element={<Home />} />
