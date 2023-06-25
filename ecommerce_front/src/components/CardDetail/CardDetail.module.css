@@ -1,7 +1,7 @@
 .containerGame{
     width: 730px;
     height: 650px;
-    margin-left: 280px;
+    margin-left: 190px;
     margin-right: 640px;
     margin-top: 106px;
     background: #FFF;
@@ -30,7 +30,7 @@
 
 .price{
     position: relative;
-    top: -760px;
+    top: -830px;
     left: 1250px;
     color: #00006FCC;
     font-size: 40px;
@@ -44,7 +44,7 @@
     border-radius: 15px;
     background: #37A0DB;
     position: relative;
-    top: -760px;
+    top: -860px;
     left: 1250px;
     margin-right: 11px;
 }
@@ -75,7 +75,7 @@
     height: 65px;
     flex-shrink: 0;
     position: relative;
-    top: -750px;
+    top: -850px;
     left: 1250px;
 }
 .corazonFav{
@@ -85,6 +85,7 @@
 }
 
 .containerGame2{
+    position: relative;
     margin-left: -50px;
     margin-top: 40px;
 }
@@ -92,7 +93,7 @@
 .description{
     flex-shrink: 0;
     position: relative;
-    top: -750px;
+    top: -830px;
     left: 1200px;
     display: flex;
     width: 484px;
@@ -227,7 +228,7 @@
     position: relative;
     top: -1600px;
     width: 1000px;
-    height: 500px;
+    height: 1000px;
     left: 45%;
     flex-shrink: 0;
     background: #FFFCFC;
@@ -237,7 +238,7 @@
 .imgMini{
     background: #FFFCFC;
     position: relative;
-    top: -2150px;
+    top: -2500px;
     width: 738px;
     height: 212px;
     flex-shrink: 0;
@@ -257,7 +258,7 @@
 
 .review{
     position: relative;
-    top: -1800px;
+    top: -1850px;
     color: #00324F;
     font-size: 28px;
     font-family: Roboto;
@@ -266,9 +267,9 @@
 
 .opinion{
     position: relative;
-    top: -1800px;
+    top: -1840px;
     left: 5%;
-    width: 1900px;
+    width: 1750px;
     height: 185px;
     flex-shrink: 0;
 }
@@ -276,4 +277,243 @@
 .containerReview{
     position: relative;
     top: -50px;
+}
+
+.author{
+    position: relative;
+    left: 50px;
+    top: 20px;
+    flex-shrink: 0;
+    color: #000;
+    font-size: 24px;
+    font-family: Roboto;
+    font-weight: 500;
+}
+
+.authors {
+    position: relative;
+    left: 550px;
+    top: -25px;
+    flex-shrink: 0;
+    color: #000;
+    font-size: 24px;
+    font-family: Roboto;
+    font-weight: 500;
+}
+
+.nationality{
+    position: relative;
+    left: 50px;
+    top: 10px;
+    flex-shrink: 0;
+    color: #000;
+    font-size: 24px;
+    font-family: Roboto;
+    font-weight: 500;
+}
+
+.nationalitys {
+    position: relative;
+    left: 550px;
+    top: -49px;
+    flex-shrink: 0;
+    color: #000;
+    font-size: 24px;
+    font-family: Roboto;
+    font-weight: 500;
+}
+.bgg{
+    position: relative;
+    left: 50px;
+    top: -10px;
+    flex-shrink: 0;
+    color: #000;
+    font-size: 24px;
+    font-family: Roboto;
+    font-weight: 500;
+}
+
+.mechanic{
+    position: relative;
+    left: 50px;
+    top: 20px;
+    flex-shrink: 0;
+    color: #000;
+    font-size: 24px;
+    font-family: Roboto;
+    font-weight: 500;
+}
+
+.mechanics {
+    position: relative;
+    left: 550px;
+    top: -25px;
+    flex-shrink: 0;
+    color: #000;
+    font-size: 24px;
+    font-family: Roboto;
+    font-weight: 500;
+}
+
+.thematic{
+    position: relative;
+    left: 50px;
+    top: 20px;
+    flex-shrink: 0;
+    color: #000;
+    font-size: 24px;
+    font-family: Roboto;
+    font-weight: 500;
+}
+
+.thematics {
+    position: relative;
+    left: 550px;
+    top: -25px;
+    flex-shrink: 0;
+    color: #000;
+    font-size: 24px;
+    font-family: Roboto;
+    font-weight: 500;
+}
+
+.age{
+    position: relative;
+    left: 50px;
+    top: 20px;
+    flex-shrink: 0;
+    color: #000;
+    font-size: 24px;
+    font-family: Roboto;
+    font-weight: 500;
+}
+
+.ages {
+    position: relative;
+    left: 550px;
+    top: -25px;
+    flex-shrink: 0;
+    color: #000;
+    font-size: 24px;
+    font-family: Roboto;
+    font-weight: 500;
+}
+
+.designer{
+    position: relative;
+    left: 50px;
+    top: 20px;
+    flex-shrink: 0;
+    color: #000;
+    font-size: 24px;
+    font-family: Roboto;
+    font-weight: 500;
+}
+
+.designers {
+    position: relative;
+    left: 550px;
+    top: -25px;
+    flex-shrink: 0;
+    color: #000;
+    font-size: 24px;
+    font-family: Roboto;
+    font-weight: 500;
+}
+
+.editorial{
+    position: relative;
+    left: 50px;
+    top: 20px;
+    flex-shrink: 0;
+    color: #000;
+    font-size: 24px;
+    font-family: Roboto;
+    font-weight: 500;
+}
+
+.editorials {
+    position: relative;
+    left: 550px;
+    top: -25px;
+    flex-shrink: 0;
+    color: #000;
+    font-size: 24px;
+    font-family: Roboto;
+    font-weight: 500;
+}
+
+.weight{
+    position: relative;
+    left: 50px;
+    top: 20px;
+    flex-shrink: 0;
+    color: #000;
+    font-size: 24px;
+    font-family: Roboto;
+    font-weight: 500;
+}
+
+.weights {
+    position: relative;
+    left: 550px;
+    top: -25px;
+    flex-shrink: 0;
+    color: #000;
+    font-size: 24px;
+    font-family: Roboto;
+    font-weight: 500;
+}
+
+.language{
+    position: relative;
+    left: 50px;
+    top: 20px;
+    flex-shrink: 0;
+    color: #000;
+    font-size: 24px;
+    font-family: Roboto;
+    font-weight: 500;
+}
+
+.languages {
+    position: relative;
+    left: 550px;
+    top: -25px;
+    flex-shrink: 0;
+    color: #000;
+    font-size: 24px;
+    font-family: Roboto;
+    font-weight: 500;
+}
+
+.available{
+    position: relative;
+    top: -750px;
+    left: 1520px;
+    color: #00324F;
+    font-size: 22px;
+    color: #00801C;
+    font-size: 30px;
+    font-family: Roboto;
+    font-weight: 500;
+}
+
+.availableGreen {
+    color: green;
+}
+
+.availableRed {
+    color: red;
+}
+
+.containerGame3{
+    position: relative;
+    top: -150px;
+}
+
+.containerGame4{
+    position: relative;
+    top: -100px;
+    
 }
