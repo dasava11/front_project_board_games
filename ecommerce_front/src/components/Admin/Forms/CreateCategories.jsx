@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
+import { Modal } from "antd";
 import {
   postAuthors,
   postCategories,
@@ -9,7 +10,8 @@ import {
   postMechanics,
   postThematics,
 } from "../../../Redux/actions_creators";
-export const CreateCategories = () => {
+
+export const CreateCategories = (setIsOpen) => {
   const [input, setInput] = useState({});
   const dispatch = useDispatch();
   const handleSubmitCategories = (e) => {
@@ -52,84 +54,113 @@ export const CreateCategories = () => {
     const { name, value } = e.target;
     setInput({ ...input, [name]: value });
   };
+  const handleOk = () => {
+    console.log("hola");
+  };
 
   return (
-    <div>
-      <form onSubmit={(e) => handleSubmitCategories(e)}>
-        <input
-          type="text"
-          placeholder="Categories"
-          onChange={handleChange}
-          name="category_name"
-        />
-        <input type="submit" />
-      </form>
-      <form onSubmit={(e) => handleSubmitThematics(e)}>
-        <input
-          type="text"
-          placeholder="Thematic"
-          onChange={handleChange}
-          name="thematic_name"
-        />
-        <input type="submit" />
-      </form>
-      <form onSubmit={(e) => handleSubmitAuthors(e)}>
-        <input
-          type="text"
-          placeholder="Author"
-          onChange={handleChange}
-          name="author_name"
-        />
-        <input
-          type="text"
-          placeholder="Nationality"
-          onChange={handleChange}
-          name="nationality"
-        />
-        <input type="submit" />
-      </form>
-      <form onSubmit={(e) => handleSubmitDesigners(e)}>
-        <input
-          type="text"
-          placeholder="Designers"
-          onChange={handleChange}
-          name="designer_name"
-        />
-        <input type="submit" />
-      </form>
-      <form onSubmit={(e) => handleSubmitEditorials(e)}>
-        <input
-          type="text"
-          placeholder="Editorial"
-          onChange={handleChange}
-          name="editorial_name"
-        />
-        <input type="submit" />
-      </form>
-      <form onSubmit={(e) => handleSubmitLanguages(e)}>
-        <input
-          type="text"
-          placeholder="Languages"
-          onChange={handleChange}
-          name="language_name"
-        />
-        <input type="submit" />
-      </form>
-      <form onSubmit={(e) => handleSubmitMechanics(e)}>
-        <input
-          type="text"
-          placeholder="Mechanic"
-          onChange={handleChange}
-          name="mechanic_name"
-        />
-        <input
-          type="text"
-          placeholder="Description"
-          onChange={handleChange}
-          name="description"
-        />
-        <input type="submit" />
-      </form>
-    </div>
+    <>
+      <Modal
+        open={setIsOpen.isOpen}
+        title="Create Information"
+        onOk={handleOk}
+        onCancel={setIsOpen.setIsOpen}
+        footer={[<button key="Guardar" onClick={handleOk}></button>]}
+      >
+        <div>
+          <h3>Create Category</h3>
+          <form onSubmit={(e) => handleSubmitCategories(e)}>
+            <input
+              className="inputs"
+              type="text"
+              placeholder="Categories"
+              onChange={handleChange}
+              name="category_name"
+            />
+            <input className="submit-button" type="submit" />
+          </form>
+          <h3>Create Thematic</h3>
+          <form onSubmit={(e) => handleSubmitThematics(e)}>
+            <input
+              className="inputs"
+              type="text"
+              placeholder="Thematic"
+              onChange={handleChange}
+              name="thematic_name"
+            />
+            <input className="submit-button" type="submit" />
+          </form>
+          <h3>Create Author</h3>
+          <form onSubmit={(e) => handleSubmitAuthors(e)}>
+            <input
+              className="inputs"
+              type="text"
+              placeholder="Author"
+              onChange={handleChange}
+              name="author_name"
+            />
+            <input
+              className="inputs"
+              type="text"
+              placeholder="Nationality"
+              onChange={handleChange}
+              name="nationality"
+            />
+            <input className="submit-button" type="submit" />
+          </form>
+          <h3>Create Designer</h3>
+          <form onSubmit={(e) => handleSubmitDesigners(e)}>
+            <input
+              className="inputs"
+              type="text"
+              placeholder="Designers"
+              onChange={handleChange}
+              name="designer_name"
+            />
+            <input className="submit-button" type="submit" />
+          </form>
+          <h3>Create Editorial</h3>
+          <form onSubmit={(e) => handleSubmitEditorials(e)}>
+            <input
+              className="inputs"
+              type="text"
+              placeholder="Editorial"
+              onChange={handleChange}
+              name="editorial_name"
+            />
+            <input className="submit-button" type="submit" />
+          </form>
+          <h3>Create Languages</h3>
+          <form onSubmit={(e) => handleSubmitLanguages(e)}>
+            <input
+              className="inputs"
+              type="text"
+              placeholder="Languages"
+              onChange={handleChange}
+              name="language_name"
+            />
+            <input className="submit-button" type="submit" />
+          </form>
+          <h3>Create Mechanic</h3>
+          <form onSubmit={(e) => handleSubmitMechanics(e)}>
+            <input
+              className="inputs"
+              type="text"
+              placeholder="Mechanic"
+              onChange={handleChange}
+              name="mechanic_name"
+            />
+            <input
+              className="inputs"
+              type="text"
+              placeholder="Description"
+              onChange={handleChange}
+              name="description"
+            />
+            <input className="submit-button" type="submit" />
+          </form>
+        </div>
+      </Modal>
+    </>
   );
 };
