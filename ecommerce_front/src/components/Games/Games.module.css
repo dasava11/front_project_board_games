@@ -28,10 +28,15 @@
     width: 75%;
     margin: auto;
     height: 100%;
-    display: flex;
+/*  display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    align-items: center;
+    align-items: center; */
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+    margin-top: 15px;
+    margin-bottom: 15px;
 }
 
 .titleMain h3{

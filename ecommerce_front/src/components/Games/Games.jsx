@@ -12,7 +12,7 @@ const Games = () => {
   let allGames = useSelector((state) => state.allGames);
 
   const [currentPage, SetCurrentPage] = useState(1);
-  const [postPerPage, setPostPerPage] = useState(8);
+  const [postPerPage, setPostPerPage] = useState(12);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -33,6 +33,7 @@ const Games = () => {
         <div className={style.titleMain}>
           <h1>Board Games</h1>
           <h3>Choose your favorite game</h3>
+          <h4>ordenamientos</h4>
         </div>
         <div className={style.filtersMain}>
           <Filter type={"categories"} nameType={"category_name"} />
@@ -41,32 +42,32 @@ const Games = () => {
         </div>
       </div>
       <div className={style.gamePagination}>
-          <Pagination
-            totalPosts={allGames.length}
-            setCurrentPage={SetCurrentPage}
-            postPerPage={postPerPage}
-            currentPage={currentPage}
-          />
-          <div className={style.gamesContainer}>
-            {currentPosts &&
-              currentPosts.map((game) => {
-                return (
-                  <Card
-                    name={game.name}
-                    image={game.image}
-                    price={game.price}
-                    key={game.game_id}
-                    id={game.game_id}
-                  />
-                );
-              })}
-          </div>
-          <Pagination
-            totalPosts={allGames.length}
-            setCurrentPage={SetCurrentPage}
-            postPerPage={postPerPage}
-            currentPage={currentPage}
-          />
+        <Pagination
+          totalPosts={allGames.length}
+          setCurrentPage={SetCurrentPage}
+          postPerPage={postPerPage}
+          currentPage={currentPage}
+        />
+        <div className={style.gamesContainer}>
+          {currentPosts &&
+            currentPosts.map((game) => {
+              return (
+                <Card
+                  name={game.name}
+                  image={game.image}
+                  price={game.price}
+                  key={game.game_id}
+                  id={game.game_id}
+                />
+              );
+            })}
+        </div>
+        <Pagination
+          totalPosts={allGames.length}
+          setCurrentPage={SetCurrentPage}
+          postPerPage={postPerPage}
+          currentPage={currentPage}
+        />
       </div>
     </div>
   );
