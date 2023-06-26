@@ -28,7 +28,6 @@
     "redux-devtools-extension": "^2.13.9",
     "redux-thunk": "^2.4.2",
     "toastify": "^2.0.1",
-    "vite": "^4.3.9",
     "vercel": "^30.2.3"
   },
   "devDependencies": {
