@@ -8,7 +8,8 @@ import {
   GET_EDITORIALS,
   GET_MECHANICS,
   GET_THEMATICS,
-  GET_GAMES_BY_NAMES
+  GET_GAMES_BY_NAMES,
+  SORT_GAMES,
 } from "../action-types/index";
 import { toast } from "react-toastify";
 
@@ -209,5 +210,12 @@ export const postThematics = (data) => {
     } catch (error) {
       toast.error(error.message);
     }
+  };
+};
+
+export const sortGames = (payload) => {
+  return {
+    type: SORT_GAMES,
+    payload,
   };
 };

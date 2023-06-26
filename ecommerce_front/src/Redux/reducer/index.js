@@ -9,6 +9,7 @@ import {
   GET_THEMATICS,
   GET_DETAIL,
   GET_GAMES_BY_NAMES,
+  SORT_GAMES,
 } from "../action-types/index";
 
 const initialState = {
@@ -72,6 +73,33 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         allThematics: action.payload,
+      };
+    case SORT_GAMES:
+      let sortsGames = [];
+
+      if (action.payload === "order") {
+        sortsGames = state.allGames;
+      } else if (action.payload === "highest price") {
+        sortsGames = state.allGames?.sort((a, b) =>
+          Number(a.price.split(".")[0]) > Number(b.price.split(".")[0]) ? -1 : 1
+        );
+      } else if (action.payload === "lowest price") {
+        sortsGames = state.allGames?.sort((a, b) =>
+          Number(a.price.split(".")[0]) > Number(b.price.split(".")[0]) ? 1 : -1
+        );
+      } else if (action.payload === "A-Z") {
+        sortsGames = state.allGames?.sort((a, b) =>
+          a.name.localeCompare(b.name)
+        );
+      } else if (action.payload === "Z-A") {
+        sortsGames = state.allGames?.sort((b, a) =>
+          a.name.localeCompare(b.name)
+        );
+      }
+      sortsGames = [...sortsGames];
+      return {
+        ...state,
+        allGames: sortsGames,
       };
     default:
       return state;
