@@ -1,4 +1,5 @@
 export const GET_ALL_GAMES = "GET_ALL_GAMES";
+export const GET_GAMES_BY_NAMES = "GET_GAMES_BY_NAMES";
 export const GET_DETAIL = "GET_DETAIL";
 export const GET_CATEGORIES = "GET_CATEGORIES";
 export const GET_AUTHORS = "GET_AUTHORS";

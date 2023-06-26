@@ -8,6 +8,7 @@ import {
   GET_MECHANICS,
   GET_THEMATICS,
   GET_DETAIL,
+  GET_GAMES_BY_NAMES,
 } from "../action-types/index";
 
 const initialState = {
@@ -36,6 +37,12 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         gameDetail: action.payload,
+      };
+
+    case GET_GAMES_BY_NAMES:
+      return {
+        ...state,
+        allGames: action.payload,
       };
 
     case GET_CATEGORIES:
