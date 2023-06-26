@@ -13,8 +13,6 @@ import {
 
 const initialState = {
   games: [],
-
-  gameDetail: [],
   allGames: [],
   allAuthors: [],
   allCategories: [],
@@ -32,11 +30,6 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         games: action.payload,
         allGames: action.payload,
-      };
-    case GET_DETAIL:
-      return {
-        ...state,
-        gameDetail: action.payload,
       };
 
     case GET_GAMES_BY_NAMES:
