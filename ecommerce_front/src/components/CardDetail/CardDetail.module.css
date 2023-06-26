@@ -486,8 +486,7 @@
     font-family: Roboto;
     font-weight: 500;
 }
-
-.available{
+.onSale{
     position: relative;
     top: -820px;
     left: 1520px;
@@ -499,11 +498,11 @@
     font-weight: 500;
 }
 
-.availableGreen {
+.onSaleGreen {
     color: green;
 }
 
-.availableRed {
+.onSaleRed {
     color: red;
 }
 
