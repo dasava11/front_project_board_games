@@ -8,6 +8,7 @@ import {
   GET_EDITORIALS,
   GET_MECHANICS,
   GET_THEMATICS,
+  GET_GAMES_BY_NAMES,
   GET_DETAIL,
 } from "../action-types/index";
 import { toast } from "react-toastify";
@@ -36,6 +37,17 @@ export const getAllGames = () => {
       dispatch({ type: GET_ALL_GAMES, payload: response.data });
     } catch (error) {
       console.error(error);
+    }
+  };
+};
+
+export const getGamesByName = (name) => {
+  return async (dispatch) => {
+    try {
+      const responseF = await axios.get(`${VITE_URL_GAMES}/name/?name=${name}`);
+      dispatch({ type: GET_GAMES_BY_NAMES, payload: responseF.data });
+    } catch (res) {
+      alert(res.response.data.message);
     }
   };
 };
