@@ -21,6 +21,7 @@ const CardDetail = () => {
       try {
         const response = await axios.get(`https://backprojectboardgames-production.up.railway.app/games/id/${id}`);
         setGame(response.data);
+        console.log(response.data);
       } catch (error) {
         console.log(error);
       }
@@ -33,7 +34,7 @@ const CardDetail = () => {
     return <p>Loading...</p>;
   }
 
-  const availabilityClass = game.active ? style.availableGreen : style.availableRed;
+  const onSaleClass = game.an_sale ? style.onSaleRed : style.onSaleGreen;
 
   return (
     <div key={game.name}>
@@ -45,7 +46,7 @@ const CardDetail = () => {
         <p className={style.comment}>comment</p>
         <p className={style.stock}>Stock: </p>
         <p className={style.stocks}>{game.stock}</p>
-        <p className={style.available + " " + availabilityClass}>available</p>
+        <p className={style.onSale + " " + onSaleClass}>On sale</p>
         <p className={style.price}>$ {game.price} USD</p>
 
         <div>
@@ -79,23 +80,19 @@ const CardDetail = () => {
     <Tbody>
       <Tr>
         <Td>Author</Td>
-        <Td>game.Author.author_name</Td>
-      </Tr>
-      <Tr>
-        <Td>Nationality</Td>
-        <Td>game.Author.nationality</Td>
+        <Td>{game.Author.author_name}</Td>
       </Tr>
       <Tr>
         <Td>Mechanic</Td>
-        <Td>game.Mechanic.mechanic_name</Td>
+        <Td>{game.Mechanic.mechanic_name}</Td>
       </Tr>
       <Tr>
         <Td>Thematic</Td>
-        <Td>game.Thematic.thematic_name</Td>
+        <Td>{game.Thematic.thematic_name}</Td>
       </Tr>
       <Tr>
         <Td>Age</Td>
-        <Td>game.age</Td>
+        <Td>{game.age}</Td>
       </Tr>
       <Tr>
         <Td>Designers</Td>
@@ -103,11 +100,11 @@ const CardDetail = () => {
       </Tr>
       <Tr>
         <Td>Editorial</Td>
-        <Td>game.Editorial.editorial_name</Td>
+        <Td>{game.Editorial.editorial_name}</Td>
       </Tr>
       <Tr>
         <Td>Weight</Td>
-        <Td>game.weight</Td>
+        <Td>{game.weight}</Td>
       </Tr>
       <Tr>
         <Td>Language</Td>
