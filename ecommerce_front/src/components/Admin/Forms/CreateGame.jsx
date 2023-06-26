@@ -66,12 +66,13 @@ export default function CreateGame() {
       image: [],
       weight: "",
       playing_time: 0,
-      Author: [],
-      Categories: [],
-      Designers: [],
-      Editorial: [],
-      Mechanic: [],
-      Thematic: [],
+      author_name: [],
+      categories_name: [],
+      designers_name: [],
+      editorial_name: [],
+      languages_name: [],
+      mechanic_name: [],
+      thematic_name: [],
     });
     e.target.reset();
   };
@@ -85,7 +86,7 @@ export default function CreateGame() {
       <div className="form-container">
         <form onSubmit={(e) => handleSubmit(e)} className="form">
           <input
-            className="inputs"
+            className="inputs-create"
             type="text"
             placeholder="Game name"
             name="name"
@@ -94,7 +95,7 @@ export default function CreateGame() {
           />
           {errors.name && <span>{errors.name}</span>}
           <input
-            className="inputs"
+            className="inputs-create"
             type="text"
             placeholder="Released"
             name="released"
@@ -103,7 +104,7 @@ export default function CreateGame() {
           />
           {errors.released && <span>{errors.released}</span>}
           <input
-            className="inputs"
+            className="inputs-create"
             type="number"
             placeholder="Price"
             name="price"
@@ -114,7 +115,7 @@ export default function CreateGame() {
           />
           {errors.price && <span>{errors.price}</span>}
           <input
-            className="inputs"
+            className="inputs-create"
             type="text"
             placeholder="Age"
             name="age"
@@ -124,7 +125,7 @@ export default function CreateGame() {
           />
           {errors.age && <span>{errors.age}</span>}
           <input
-            className="inputs"
+            className="inputs-create"
             type="text"
             placeholder="Players Min"
             name="players_min"
@@ -134,7 +135,7 @@ export default function CreateGame() {
           />
           {errors.players_min && <span>{errors.players_min}</span>}
           <input
-            className="inputs"
+            className="inputs-create"
             type="text"
             placeholder="Players Max"
             name="players_max"
@@ -144,7 +145,7 @@ export default function CreateGame() {
           />
           {errors.players_max && <span>{errors.players_max}</span>}
           <input
-            className="inputs"
+            className="inputs-create"
             type="number"
             placeholder="Stock"
             name="stock"
@@ -154,7 +155,7 @@ export default function CreateGame() {
           />
           {errors.stock && <span>{errors.stock}</span>}
           <input
-            className="inputs"
+            className="inputs-create"
             type="text"
             placeholder="Image"
             name="image"
@@ -163,7 +164,7 @@ export default function CreateGame() {
           />
 
           <input
-            className="inputs"
+            className="inputs-create"
             type="number"
             placeholder="Weight"
             name="weight"
@@ -174,7 +175,7 @@ export default function CreateGame() {
           />
           {errors.weight && <span>{errors.weight}</span>}
           <input
-            className="inputs"
+            className="inputs-create"
             type="number"
             placeholder="Playing time"
             name="playingtime"
