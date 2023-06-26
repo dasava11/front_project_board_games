@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { img1, img2, img3 } from "./images";
 import styles from "./CarouselLanding.module.css";
 
 const CarouselLanding = () => {
   const carousel = [img1, img2, img3];
+
+  const navigate = useNavigate();
 
   const [index, setIndex] = useState(0);
 
@@ -56,7 +59,11 @@ const CarouselLanding = () => {
       >
         {">"}
       </button>
-      <img src={carousel[index]} alt={`imagen ${[index]}`} />
+      <img
+        src={carousel[index]}
+        alt={`imagen ${[index]}`}
+        onClick={() => navigate("/games")}
+      />
     </div>
   );
 };

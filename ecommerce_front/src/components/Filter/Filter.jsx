@@ -3,14 +3,14 @@ import axios from "axios";
 import { Menu, MenuButton, MenuItem, MenuList } from "@chakra-ui/react";
 import { ChevronDownIcon } from "@chakra-ui/icons";
 import style from "./Filter.module.css";
-//import useLocalSotorage from "../LocalStorage/useLocalStorage";
+import useLocalSotorage from "../LocalStorage/useLocalStorage";
 
 const getAll = import.meta.env.VITE_GET;
 
 const Filter = (props) => {
-  const { type, nameType } = props;
+  const { type, nameType, allGames, SetCurrentPage } = props;
   const [fields, setFields] = useState([]);
-  /*   const [currentGames, setCurrentGames] = useLocalSotorage("currentGames", []); */
+  const [currentGames, setCurrentGames] = useLocalSotorage("currentGames", []);
 
   useEffect(() => {
     async function fetchData() {
@@ -29,14 +29,14 @@ const Filter = (props) => {
     const { value } = event.target;
 
     value === "all"
-      ? setCurrentGames(getAll)
+      ? setCurrentGames(allGames)
       : setCurrentGames(
-          getAll.filter(
+          allGames.filter(
             (game) => game[nameType] && game[nameType].includes(value)
           )
         );
-  };
- */
+  }; */
+
   return (
     <div>
       <Menu>
@@ -46,7 +46,7 @@ const Filter = (props) => {
         <MenuList
           value="all"
           className={style.menuList}
-          /* onClinck={handleFilters} */
+          onClinck={handleFilters}
         >
           {fields &&
             fields.map((field, index) => {
