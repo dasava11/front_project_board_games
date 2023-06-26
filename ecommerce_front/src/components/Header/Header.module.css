@@ -6,6 +6,12 @@
     height: 110px;
 }
 
+.logoHead{
+    width: 195px;
+    height: 109.68px;
+    cursor: pointer;
+}
+
 .inputsSB{
     display: flex;
     padding: 1rem;
