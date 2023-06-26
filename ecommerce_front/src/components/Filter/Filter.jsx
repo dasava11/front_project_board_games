@@ -1,47 +1,69 @@
-import React, {useEffect, useState} from 'react'
-import axios from 'axios'
-import {Menu,
-        MenuButton,
-        MenuItem,
-        MenuList
-} from "@chakra-ui/react";
-import {ChevronDownIcon} from '@chakra-ui/icons'
-import style from './Filter.module.css'
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import { Menu, MenuButton, MenuItem, MenuList } from "@chakra-ui/react";
+import { ChevronDownIcon } from "@chakra-ui/icons";
+import style from "./Filter.module.css";
+//import useLocalSotorage from "../LocalStorage/useLocalStorage";
 
 const getAll = import.meta.env.VITE_GET;
 
 const Filter = (props) => {
+  const { type, nameType } = props;
+  const [fields, setFields] = useState([]);
+  /*   const [currentGames, setCurrentGames] = useLocalSotorage("currentGames", []); */
 
-    const {type, nameType} = props
-    const [fields, setFields] = useState([])
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const response = await axios.get(`${getAll}/${type}`);
+        const data = response.data;
+        setFields(data);
+      } catch (error) {
+        alert(error.message);
+      }
+    }
+    fetchData();
+  }, []);
 
-    useEffect(() =>{
-        async function fetchData(){
-            try {
-                const response = await axios.get(`${getAll}/${type}`)
-                const data = response.data
-                setFields(data)
-            } catch (error) {
-                alert(error.message)
-            }
-        }
+  /*   const handleFilters = (event) => {
+    const { value } = event.target;
 
-        fetchData()
-    },[])
+    value === "all"
+      ? setCurrentGames(getAll)
+      : setCurrentGames(
+          getAll.filter(
+            (game) => game[nameType] && game[nameType].includes(value)
+          )
+        );
+  };
+ */
   return (
     <div>
-        <Menu>
-            <MenuButton className={style.filterBtn}>
-                {type} <ChevronDownIcon/>
-            </MenuButton>
-            <MenuList className={style.menuList}>
-                {fields && fields.map((field, index) =>{
-                    return <MenuItem className={style.menuItem} key={index}>{field[nameType]}</MenuItem>
-                })}
-            </MenuList>
-        </Menu>
+      <Menu>
+        <MenuButton className={style.filterBtn}>
+          {type} <ChevronDownIcon />
+        </MenuButton>
+        <MenuList
+          value="all"
+          className={style.menuList}
+          /* onClinck={handleFilters} */
+        >
+          {fields &&
+            fields.map((field, index) => {
+              return (
+                <MenuItem
+                  className={style.menuItem}
+                  key={index}
+                  value={field[nameType]}
+                >
+                  {field[nameType]}
+                </MenuItem>
+              );
+            })}
+        </MenuList>
+      </Menu>
     </div>
-  )
-}
+  );
+};
 
-export default Filter
+export default Filter;

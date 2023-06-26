@@ -14,7 +14,6 @@ const SaleGames = () => {
 
   const currentSale = allGames.filter((game) => game.on_sale === true);
 
-  console.log(allGames);
   return (
     <div className={style.Grid}>
       <img

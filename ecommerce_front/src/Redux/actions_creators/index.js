@@ -13,22 +13,14 @@ import {
 } from "../action-types/index";
 import { toast } from "react-toastify";
 
-const VITE_URL_GAMES =
-  "https://backprojectboardgames-production.up.railway.app/games";
-const VITE_URL_CATEGORIES =
-  "https://backprojectboardgames-production.up.railway.app/categories";
-const VITE_URL_AUTHORS =
-  "https://backprojectboardgames-production.up.railway.app/authors";
-const VITE_URL_DESIGNERS =
-  "https://backprojectboardgames-production.up.railway.app/designers";
-const VITE_URL_LANGUAGES =
-  "https://backprojectboardgames-production.up.railway.app/languages";
-const VITE_URL_EDITORIALS =
-  "https://backprojectboardgames-production.up.railway.app/editorials";
-const VITE_URL_MECHANICS =
-  "https://backprojectboardgames-production.up.railway.app/mechanics";
-const VITE_URL_THEMATICS =
-  "https://backprojectboardgames-production.up.railway.app/thematics";
+const VITE_URL_GAMES = import.meta.env.VITE_URL_GAMES;
+const VITE_URL_CATEGORIES = import.meta.env.VITE_URL_CATEGORIES;
+const VITE_URL_AUTHORS = import.meta.env.VITE_URL_AUTHORS;
+const VITE_URL_DESIGNERS = import.meta.env.VITE_URL_DESIGNERS;
+const VITE_URL_LANGUAGES = import.meta.env.VITE_URL_LANGUAGES;
+const VITE_URL_EDITORIALS = import.meta.env.VITE_URL_EDITORIALS;
+const VITE_URL_MECHANICS = import.meta.env.VITE_URL_MECHANICS;
+const VITE_URL_THEMATICS = import.meta.env.VITE_URL_THEMATICS;
 
 export const getAllGames = () => {
   return async (dispatch) => {
