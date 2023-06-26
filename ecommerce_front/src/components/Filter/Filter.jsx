@@ -46,7 +46,7 @@ const Filter = (props) => {
         <MenuList
           value="all"
           className={style.menuList}
-          onClinck={handleFilters}
+          /*  onClinck={handleFilters} */
         >
           {fields &&
             fields.map((field, index) => {

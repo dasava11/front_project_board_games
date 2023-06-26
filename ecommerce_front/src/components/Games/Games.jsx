@@ -7,7 +7,7 @@ import promotionalBanner from "../../Photos/PromotionalBanner.png";
 import Filter from "../Filter/Filter";
 import Card from "../Card/Card";
 import Pagination from "../Pagination/Pagination";
-//import SortGames from "../sortGames/sortGames";
+import SortGames from "../sortGames/sortGames";
 
 const Games = () => {
   const dispatch = useDispatch();
@@ -36,10 +36,12 @@ const Games = () => {
           <h1>Board Games</h1>
           <h3>Choose your favorite game</h3>
         </div>
-        <SortGames
-          className={style.sortSelect}
-          SetCurrentPage={SetCurrentPage}
-        />
+        {
+          <SortGames
+            className={style.sortSelect}
+            SetCurrentPage={SetCurrentPage}
+          />
+        }
         <div className={style.filtersMain}>
           <div className={style.filters}>
             <Filter
