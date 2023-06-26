@@ -1,0 +1,19 @@
+.Grid {
+  display: flex;
+  align-items: center;
+  align-content: center;
+  flex-direction: column;
+  margin-bottom: 3rem;
+}
+
+.saleGames {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 3rem;
+}
+
+.imgSale{
+  width: 1200px;
+  height: 300px;
+  
+}
