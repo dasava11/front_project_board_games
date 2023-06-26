@@ -8,8 +8,7 @@ import {
   GET_EDITORIALS,
   GET_MECHANICS,
   GET_THEMATICS,
-  GET_GAMES_BY_NAMES,
-  GET_DETAIL,
+  GET_GAMES_BY_NAMES
 } from "../action-types/index";
 import { toast } from "react-toastify";
 
@@ -209,23 +208,6 @@ export const postThematics = (data) => {
       dispatch(getThematics());
     } catch (error) {
       toast.error(error.message);
-    }
-  };
-};
-
-export const getDetail = (id) => {
-  return async (dispatch) => {
-    try {
-      const response = await axios.get(
-        `https://backprojectboardgames-production.up.railway.app/games/id/${id}`
-      );
-      console.log(response.data);
-      dispatch({
-        type: "GET_DETAIL",
-        payload: response.data,
-      });
-    } catch (error) {
-      console.error(error);
     }
   };
 };

@@ -30,7 +30,7 @@
 
 .price{
     position: relative;
-    top: -830px;
+    top: -900px;
     left: 1250px;
     color: #00006FCC;
     font-size: 40px;
@@ -226,10 +226,10 @@
 
 .etc{
     position: relative;
-    top: -1600px;
+    top: -1655px;
     width: 1000px;
     height: 1000px;
-    left: 45%;
+    left: 41%;
     flex-shrink: 0;
     background: #FFFCFC;
     margin-left: 100px;
@@ -248,7 +248,7 @@
 .moreInfo{
     position: relative;
     flex-shrink: 0;
-    top: -1600px;
+    top: -1660px;
     left: 70px;
     color: #00324F;
     text-align: center;
@@ -258,7 +258,7 @@
 
 .review{
     position: relative;
-    top: -1850px;
+    top: -1705px;
     color: #00324F;
     font-size: 28px;
     font-family: Roboto;
@@ -267,7 +267,7 @@
 
 .opinion{
     position: relative;
-    top: -1840px;
+    top: -1700px;
     left: 5%;
     width: 1750px;
     height: 185px;
@@ -489,7 +489,7 @@
 
 .available{
     position: relative;
-    top: -750px;
+    top: -820px;
     left: 1520px;
     color: #00324F;
     font-size: 22px;
@@ -509,11 +509,27 @@
 
 .containerGame3{
     position: relative;
-    top: -150px;
+    top: -200px;
 }
 
 .containerGame4{
     position: relative;
     top: -100px;
     
+}
+
+.stock{
+    position: relative;
+    top: -780px;
+    left: 1500px;
+    color: #00324F;
+    font-size: 22px;
+}
+
+.stocks {
+    position: relative;
+    top: -828px;
+    left: 1570px;
+    color: #00324F;
+    font-size: 22px;
 }
