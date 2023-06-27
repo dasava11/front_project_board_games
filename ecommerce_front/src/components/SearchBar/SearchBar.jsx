@@ -62,6 +62,7 @@ const SearchBar = () => {
 
   return (
     <div>
+      <img src={searchIcon} alt="search button" width="15px" height="15px" />
       <input
         className={style.inputSearch}
         type="search"
@@ -69,9 +70,6 @@ const SearchBar = () => {
         onChange={handleSearch}
         onKeyDown={handleKey}
       />
-      <button className={style.searchBtn}>
-        <img src={searchIcon} alt="search button" width="15px" height="15px" />
-      </button>
     </div>
   );
 };
