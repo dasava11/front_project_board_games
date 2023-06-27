@@ -1,18 +1,56 @@
 import "./ContactUs.css";
+import emailjs from "@emailjs/browser";
+import { toast } from "react-toastify";
+import React, { useRef, useState } from "react";
+
+const serviceId = import.meta.env.VITE_SERVICE_ID;
+const templateId = import.meta.env.VITE_TEMPLATE_ID;
+const publicId = import.meta.env.VITE_YOUR_PUBLIC_KEY;
 
 const ContactUs = () => {
+  const form = useRef();
+  const [formulario, setFormulario] = useState({
+    user_name: "",
+    user_email: "",
+    message: "",
+  });
+  const handleChange = (e) => {
+    setFormulario({ ...formulario, [e.target.name]: e.target.value });
+  };
+  const sendEmail = (e) => {
+    e.preventDefault();
+
+    emailjs.sendForm(serviceId, templateId, form.current, publicId).then(
+      (result) => {
+        toast.success("Message sent");
+        setFormulario({
+          user_name: "",
+          user_email: "",
+          message: "",
+        });
+        console.log(result.text);
+      },
+      (error) => {
+        toast.error("Message not send, try again");
+        console.log(error.text);
+      }
+    );
+  };
+
   return (
     <div className="contact-container">
       <h2>Contact Us</h2>
-      <form>
+      <form ref={form} onSubmit={sendEmail}>
         <div className="form-group">
           <label htmlFor="name">Name:</label>
           <input
             className="input-contactus"
             type="text"
             id="name"
-            name="name"
+            name="user_name"
             placeholder="Enter your name"
+            value={formulario.user_name}
+            onChange={handleChange}
           />
         </div>
         <div className="form-group">
@@ -21,8 +59,10 @@ const ContactUs = () => {
             className="input-contactus"
             type="email"
             id="email"
-            name="email"
+            name="user_email"
             placeholder="Enter your email"
+            value={formulario.user_email}
+            onChange={handleChange}
           />
         </div>
         <div className="form-group">
@@ -32,6 +72,8 @@ const ContactUs = () => {
             name="message"
             rows="4"
             placeholder="Enter your message"
+            value={formulario.message}
+            onChange={handleChange}
           />
         </div>
         <button type="submit" className="submit-btn">

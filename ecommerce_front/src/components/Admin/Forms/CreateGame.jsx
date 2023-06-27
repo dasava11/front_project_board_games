@@ -1,7 +1,13 @@
 import { useState, useEffect } from "react";
-//import { postGames } from "../../../Redux/actions_creators/index";
+import { postGames } from "../../../Redux/actions_creators/index";
 import validations from "./validations";
 import { CreateCategories } from "./CreateCategories";
+import { CreateThematics } from "./CreateThematics";
+import { CreateAuthor } from "./CreateAuthor";
+import { CreateDesigners } from "./CreateDesigners";
+import { CreateMechanics } from "./CreateMechanics";
+import { CreateEditorial } from "./CreateEditorial";
+import { CreateLanguage } from "./CreateLanguage";
 import {
   getAuthors,
   getCategories,
@@ -28,7 +34,13 @@ export default function CreateGame() {
   } = useSelector((state) => state);
 
   const [input, setInput] = useState({});
-  const [modal, setModal] = useState(false);
+  const [modalCategories, setModalCategories] = useState(false);
+  const [modalThematic, setModalThematic] = useState(false);
+  const [modalAuthor, setModalAuthor] = useState(false);
+  const [modalDesigner, setModalDesigner] = useState(false);
+  const [modalMechanic, setModalMechanic] = useState(false);
+  const [modalEditorial, setModalEditorial] = useState(false);
+  const [modalLanguage, setModalLanguage] = useState(false);
   const [errors, setErrors] = useState({});
   const dispatch = useDispatch();
 
@@ -42,19 +54,57 @@ export default function CreateGame() {
     dispatch(getThematics());
   }, [dispatch]);
 
-  const handleModalCreate = () => {
-    setModal(modal === true ? false : true);
+  const handleModalCreateCategories = () => {
+    setModalCategories(modalCategories === true ? false : true);
   };
-
+  const handleModalCreateThematic = () => {
+    setModalThematic(modalThematic === true ? false : true);
+  };
+  const handleModalCreateAuthor = () => {
+    setModalAuthor(modalAuthor === true ? false : true);
+  };
+  const handleModalCreateDesigner = () => {
+    setModalDesigner(modalDesigner === true ? false : true);
+  };
+  const handleModalCreateMechanic = () => {
+    setModalMechanic(modalMechanic === true ? false : true);
+  };
+  const handleModalCreateEditorial = () => {
+    setModalEditorial(modalEditorial === true ? false : true);
+  };
+  const handleModalCreateLanguage = () => {
+    setModalLanguage(modalLanguage === true ? false : true);
+  };
   const handleChange = (e) => {
     const { name, value } = e.target;
     setInput({ ...input, [name]: value });
     setErrors(validations(input));
   };
+  const handleChangeAuthors = (value) => {
+    setInput({ ...input, author_name: value });
+  };
+  const handleChangeCategories = (value) => {
+    setInput({ ...input, categories_name: value });
+  };
+  const handleChangeDesigners = (value) => {
+    setInput({ ...input, designers_name: value });
+  };
+  const handleChangeEditorial = (value) => {
+    setInput({ ...input, editorial_name: value });
+  };
+  const handleChangeMechanics = (value) => {
+    setInput({ ...input, mechanic_name: value });
+  };
+  const handleChangeThematics = (value) => {
+    setInput({ ...input, thematic_name: value });
+  };
+  const handleChangeLanguages = (value) => {
+    setInput({ ...input, languages_name: value });
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    //dispatch(postGames(input));
+    dispatch(postGames(input));
     setInput({
       name: "",
       released: "",
@@ -76,7 +126,7 @@ export default function CreateGame() {
     });
     e.target.reset();
   };
-
+  console.log(input);
   return (
     <>
       <div className="maincontainer">
@@ -96,13 +146,13 @@ export default function CreateGame() {
           {errors.name && <span>{errors.name}</span>}
           <input
             className="inputs-create"
-            type="text"
+            type="date"
             placeholder="Released"
             name="released"
             value={input.released}
             onChange={handleChange}
           />
-          {errors.released && <span>{errors.released}</span>}
+          {/* {errors.released && <span>{errors.released}</span>} */}
           <input
             className="inputs-create"
             type="number"
@@ -172,13 +222,14 @@ export default function CreateGame() {
             onChange={handleChange}
             step=".01"
             min={0}
+            max={10}
           />
           {errors.weight && <span>{errors.weight}</span>}
           <input
             className="inputs-create"
             type="number"
             placeholder="Playing time"
-            name="playingtime"
+            name="playing_time"
             value={input.playing_time}
             onChange={handleChange}
             min={0}
@@ -186,8 +237,8 @@ export default function CreateGame() {
           {errors.playing_time && <span>{errors.playing_time}</span>}
           <Select
             mode="multiple"
-            onChange={handleChange}
-            name="authors"
+            onChange={(value) => handleChangeAuthors(value)}
+            name="author_name"
             style={{
               width: "30%",
               margin: "0.5rem",
@@ -205,13 +256,13 @@ export default function CreateGame() {
                 );
               })}
           </Select>
-          <button className="create-button" onClick={handleModalCreate}>
+          <p className="create-button" onClick={handleModalCreateAuthor}>
             Create authors
-          </button>
+          </p>
           <Select
             mode="multiple"
-            onChange={handleChange}
-            name="categories"
+            onChange={(value) => handleChangeCategories(value)}
+            name="categories_name"
             style={{
               width: "30%",
               margin: "0.5rem",
@@ -229,13 +280,13 @@ export default function CreateGame() {
                 );
               })}
           </Select>
-          <button className="create-button" onClick={handleModalCreate}>
+          <p className="create-button" onClick={handleModalCreateCategories}>
             Create Categories
-          </button>
+          </p>
           <Select
             mode="multiple"
-            onChange={handleChange}
-            name="designers"
+            onChange={(value) => handleChangeDesigners(value)}
+            name="designers_name"
             style={{
               width: "30%",
               margin: "0.5rem",
@@ -253,13 +304,13 @@ export default function CreateGame() {
                 );
               })}
           </Select>
-          <button className="create-button" onClick={handleModalCreate}>
+          <p className="create-button" onClick={handleModalCreateDesigner}>
             Create Designers
-          </button>
+          </p>
           <Select
             mode="multiple"
-            name="editorial"
-            onChange={handleChange}
+            name="editorial_name"
+            onChange={(value) => handleChangeEditorial(value)}
             style={{
               width: "30%",
               margin: "0.5rem",
@@ -277,12 +328,12 @@ export default function CreateGame() {
                 );
               })}
           </Select>
-          <button className="create-button" onClick={handleModalCreate}>
+          <p className="create-button" onClick={handleModalCreateEditorial}>
             Create Editorials
-          </button>
+          </p>
           <Select
-            onChange={handleChange}
-            name="mechanic"
+            onChange={(value) => handleChangeMechanics(value)}
+            name="mechanic_name"
             mode="multiple"
             placeholder="Select mechanics"
             style={{
@@ -301,12 +352,12 @@ export default function CreateGame() {
                 );
               })}
           </Select>
-          <button className="create-button" onClick={handleModalCreate}>
+          <p className="create-button" onClick={handleModalCreateMechanic}>
             Create Mechanics
-          </button>
+          </p>
           <Select
-            onChange={handleChange}
-            name="thematic"
+            onChange={(value) => handleChangeThematics(value)}
+            name="thematic_name"
             mode="multiple"
             placeholder="Select thematics"
             style={{
@@ -325,14 +376,14 @@ export default function CreateGame() {
                 );
               })}
           </Select>
-          <button className="create-button" onClick={handleModalCreate}>
+          <p className="create-button" onClick={handleModalCreateThematic}>
             Create Thematics
-          </button>
+          </p>
           <Select
-            onChange={handleChange}
-            name="thematic"
+            onChange={(value) => handleChangeLanguages(value)}
+            name="languages_name"
             mode="multiple"
-            placeholder="Select thematics"
+            placeholder="Select Language"
             style={{
               width: "30%",
               margin: "0.5rem",
@@ -350,14 +401,41 @@ export default function CreateGame() {
                 );
               })}
           </Select>
-          <button className="create-button" onClick={handleModalCreate}>
+          <p className="create-button" onClick={handleModalCreateLanguage}>
             Create Languages
-          </button>
+          </p>
           <button type="submit" className="submit-button">
             Submit
           </button>
         </form>
-        <CreateCategories setIsOpen={handleModalCreate} isOpen={modal} />
+        <CreateCategories
+          setIsOpen={handleModalCreateCategories}
+          isOpen={modalCategories}
+        />
+        <CreateThematics
+          setIsOpen={handleModalCreateThematic}
+          isOpen={modalThematic}
+        />
+        <CreateAuthor
+          setIsOpen={handleModalCreateAuthor}
+          isOpen={modalAuthor}
+        />
+        <CreateDesigners
+          setIsOpen={handleModalCreateDesigner}
+          isOpen={modalDesigner}
+        />
+        <CreateMechanics
+          setIsOpen={handleModalCreateMechanic}
+          isOpen={modalMechanic}
+        />
+        <CreateEditorial
+          setIsOpen={handleModalCreateEditorial}
+          isOpen={modalEditorial}
+        />
+        <CreateLanguage
+          setIsOpen={handleModalCreateLanguage}
+          isOpen={modalLanguage}
+        />
       </div>
     </>
   );
