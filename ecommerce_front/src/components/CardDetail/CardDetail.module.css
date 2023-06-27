@@ -224,41 +224,29 @@
     font-weight: 500;
 }
 
-.etc{
-    position: relative;
-    top: -1655px;
-    width: 1000px;
-    height: 1000px;
-    left: 41%;
-    flex-shrink: 0;
-    background: #FFFCFC;
-    margin-left: 100px;
+
+.container {
+    width: 730px;
+    height: 320px;
+    background-color: #FFF;
 }
 
-.imgMini{
-    background: #FFFCFC;
-    position: relative;
-    top: -2500px;
-    width: 738px;
-    height: 212px;
-    flex-shrink: 0;
-    left: 7%;
+
+.intercalatedTable td {
+    text-align: left;
 }
 
-.moreInfo{
-    position: relative;
-    flex-shrink: 0;
-    top: -1660px;
-    left: 70px;
-    color: #00324F;
-    text-align: center;
-    font-size: 28px;
-    font-family: Roboto;
+.intercalatedTable th {
+    background-color: #f2f2f2;
+}
+
+.intercalatedTable td {
+    background-color: #ffffff;
 }
 
 .review{
     position: relative;
-    top: -1705px;
+    top: -20px;
     color: #00324F;
     font-size: 28px;
     font-family: Roboto;
@@ -267,16 +255,14 @@
 
 .opinion{
     position: relative;
-    top: -1700px;
     left: 5%;
     width: 1750px;
     height: 185px;
-    flex-shrink: 0;
-}
+} 
 
 .containerReview{
     position: relative;
-    top: -50px;
+    top: -1400px;
 }
 
 .author{
