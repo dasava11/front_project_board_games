@@ -33,15 +33,19 @@ const Games = () => {
       </div>
       <div className={style.gamesMain}>
         <div className={style.titleMain}>
-          <h1>Board Games</h1>
-          <h3>Choose your favorite game</h3>
+          <div>
+            <h1>Board Games</h1>
+            <h3>Choose your favorite game</h3>
+          </div>
+          <div>
+            {
+            <SortGames
+              className={style.sortSelect}
+              SetCurrentPage={SetCurrentPage}
+            />
+            }
+          </div>
         </div>
-        {
-          <SortGames
-            className={style.sortSelect}
-            SetCurrentPage={SetCurrentPage}
-          />
-        }
         <div className={style.filtersMain}>
           <div className={style.filters}>
             <Filter
