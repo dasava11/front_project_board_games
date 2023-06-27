@@ -105,26 +105,26 @@ export default function CreateGame() {
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(postGames(input));
-    // setInput({
-    //   name: "",
-    //   released: "",
-    //   price: 0,
-    //   age: "",
-    //   players_min: "",
-    //   players_max: "",
-    //   stock: 0,
-    //   image: [],
-    //   weight: "",
-    //   playing_time: 0,
-    //   author_name: [],
-    //   categories_name: [],
-    //   designers_name: [],
-    //   editorial_name: [],
-    //   languages_name: [],
-    //   mechanic_name: [],
-    //   thematic_name: [],
-    // });
-    // e.target.reset();
+    setInput({
+      name: "",
+      released: "",
+      price: 0,
+      age: "",
+      players_min: "",
+      players_max: "",
+      stock: 0,
+      image: [],
+      weight: "",
+      playing_time: 0,
+      author_name: [],
+      categories_name: [],
+      designers_name: [],
+      editorial_name: [],
+      languages_name: [],
+      mechanic_name: [],
+      thematic_name: [],
+    });
+    e.target.reset();
   };
   console.log(input);
   return (
