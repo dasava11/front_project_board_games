@@ -3,14 +3,14 @@ import axios from "axios";
 import { Menu, MenuButton, MenuItem, MenuList } from "@chakra-ui/react";
 import { ChevronDownIcon } from "@chakra-ui/icons";
 import style from "./Filter.module.css";
-import useLocalSotorage from "../LocalStorage/useLocalStorage";
+//import useLocalSotorage from "../LocalStorage/useLocalStorage";
 
 const getAll = import.meta.env.VITE_GET;
 
 const Filter = (props) => {
-  const { type, nameType, allGames, SetCurrentPage } = props;
+  const { type, nameType, currentGames, setCurrentGames, SetCurrentPage } =
+    props;
   const [fields, setFields] = useState([]);
-  const [currentGames, setCurrentGames] = useLocalSotorage("currentGames", []);
 
   useEffect(() => {
     async function fetchData() {
@@ -25,17 +25,18 @@ const Filter = (props) => {
     fetchData();
   }, []);
 
-  /*   const handleFilters = (event) => {
+  const handleFilters = (event) => {
     const { value } = event.target;
-
-    value === "all"
-      ? setCurrentGames(allGames)
-      : setCurrentGames(
-          allGames.filter(
+    console.log(value);
+    value
+      ? setCurrentGames(
+          currentGames.filter(
             (game) => game[nameType] && game[nameType].includes(value)
           )
-        );
-  }; */
+        )
+      : currentGames;
+    SetCurrentPage(1);
+  };
 
   return (
     <div>
@@ -46,7 +47,7 @@ const Filter = (props) => {
         <MenuList
           value="all"
           className={style.menuList}
-          /*  onClinck={handleFilters} */
+          onClick={handleFilters}
         >
           {fields &&
             fields.map((field, index) => {
