@@ -222,6 +222,7 @@ export default function CreateGame() {
             onChange={handleChange}
             step=".01"
             min={0}
+            max={10}
           />
           {errors.weight && <span>{errors.weight}</span>}
           <input
