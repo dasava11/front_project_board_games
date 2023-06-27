@@ -10,16 +10,6 @@ const Navbar = () => {
       <ul className={style.listFlex}>
         <li>
           <NavLink
-            to="/sale"
-            className={({ isActive }) =>
-              isActive ? style.active : style.disable
-            }
-          >
-            Sale
-          </NavLink>
-        </li>
-        <li>
-          <NavLink
             to="/questions"
             className={({ isActive }) =>
               isActive ? style.active : style.disable

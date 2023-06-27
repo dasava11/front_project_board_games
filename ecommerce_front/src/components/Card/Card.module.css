@@ -48,3 +48,23 @@
     height: 130px;
     margin: auto;
 }
+
+.cardSale{
+    background-color: #FF4205;
+    width: 20%;
+    color: white;
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 12px;
+    height: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #FF0000;
+    border-radius: 10px;
+}
+
+.cardInfo{
+    display: flex;
+    justify-content: space-between;
+}

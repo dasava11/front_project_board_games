@@ -15,3 +15,26 @@
 .searchBtn:hover{
     cursor: pointer;
 }
+
+.searchContainer{
+    display: flex;
+    background-color: white;
+    justify-content: center;
+    align-items: center;
+    padding: 3px;
+    border-radius: 1rem;
+    gap: 1rem;
+}
+
+.searchContainer input{
+    outline: none;
+}
+
+.searchContainer hr{
+    height: 15px
+}
+
+.searchContainer img{
+    display: flex;
+    margin: auto 5px;
+}

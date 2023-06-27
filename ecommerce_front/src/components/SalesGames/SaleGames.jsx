@@ -31,6 +31,7 @@ const SaleGames = () => {
                 price={game.price}
                 key={game.game_id}
                 id={game.game_id}
+                onSale={game.on_sale}
               />
             );
           })}
