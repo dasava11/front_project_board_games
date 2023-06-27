@@ -61,8 +61,9 @@ const SearchBar = () => {
   };
 
   return (
-    <div>
+    <div className={style.searchContainer}>
       <img src={searchIcon} alt="search button" width="15px" height="15px" />
+      <hr />
       <input
         className={style.inputSearch}
         type="search"
