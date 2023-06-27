@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllGames } from "../../Redux/actions_creators/index";
-import useLocalStorage from "../LocalStorage/useLocalStorage";
+//import useLocalStorage from "../LocalStorage/useLocalStorage";
 import style from "./Games.module.css";
 import promotionalBanner from "../../Photos/PromotionalBanner.png";
 import Filter from "../Filter/Filter";
@@ -16,18 +16,20 @@ const Games = () => {
   const [currentPage, SetCurrentPage] = useState(1);
   const [postPerPage, setPostPerPage] = useState(12);
   const [loading, setLoading] = useState(false);
-  const [currentGames, setCurrentGames] = useLocalStorage("currentGames", []);
+  //const [currentGames, setCurrentGames] = useLocalStorage("currentGames", []);
 
   useEffect(() => {
     dispatch(getAllGames());
-    setCurrentGames(allGames);
-    console.log(currentGames);
-  }, [currentGames]);
-
+    /*     setCurrentGames(allGames);
+    console.log(currentGames); */
+  }, []);
+  
+  
   const lastPostIndex = currentPage * postPerPage;
   const firstPostIndex = lastPostIndex - postPerPage;
   const currentPosts = allGames.slice(firstPostIndex, lastPostIndex);
-
+  
+  //console.log(currentPosts);
   return (
     <div>
       <div className={style.gamesBanner}>
@@ -54,22 +56,22 @@ const Games = () => {
               type={"categories"}
               nameType={"category_name"}
               SetCurrentPage={SetCurrentPage}
-              setCurrentGames={setCurrentGames}
-              currentGames={currentGames}
+              /* setCurrentGames={setCurrentGames}
+              currentGames={currentGames} */
             />
             <Filter
               type={"mechanics"}
               nameType={"mechanic_name"}
               SetCurrentPage={SetCurrentPage}
-              setCurrentGames={setCurrentGames}
-              currentGames={currentGames}
+              /* setCurrentGames={setCurrentGames}
+              currentGames={currentGames} */
             />
             <Filter
               type={"thematics"}
               nameType={"thematic_name"}
               SetCurrentPage={SetCurrentPage}
-              setCurrentGames={setCurrentGames}
-              currentGames={currentGames}
+              /* setCurrentGames={setCurrentGames}
+              currentGames={currentGames} */
             />
           </div>
         </div>

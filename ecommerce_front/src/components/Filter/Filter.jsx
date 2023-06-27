@@ -1,15 +1,17 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import {useDispatch} from "react-redux";
 import { Menu, MenuButton, MenuItem, MenuList } from "@chakra-ui/react";
 import { ChevronDownIcon } from "@chakra-ui/icons";
 import style from "./Filter.module.css";
+import { filterGames } from "../../Redux/actions_creators";
 //import useLocalSotorage from "../LocalStorage/useLocalStorage";
 
 const getAll = import.meta.env.VITE_GET;
 
 const Filter = (props) => {
-  const { type, nameType, currentGames, setCurrentGames, SetCurrentPage } =
-    props;
+  const { type, nameType, SetCurrentPage } = props;
+  const dispatch = useDispatch()
   const [fields, setFields] = useState([]);
 
   useEffect(() => {
@@ -27,15 +29,9 @@ const Filter = (props) => {
 
   const handleFilters = (event) => {
     const { value } = event.target;
-    console.log(value);
-    value
-      ? setCurrentGames(
-          currentGames.filter(
-            (game) => game[nameType] && game[nameType].includes(value)
-          )
-        )
-      : currentGames;
+    dispatch(filterGames({value, nameType}))
     SetCurrentPage(1);
+
   };
 
   return (
@@ -45,7 +41,6 @@ const Filter = (props) => {
           {type} <ChevronDownIcon />
         </MenuButton>
         <MenuList
-          value="all"
           className={style.menuList}
           onClick={handleFilters}
         >

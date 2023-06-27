@@ -10,6 +10,7 @@ import {
   GET_THEMATICS,
   GET_GAMES_BY_NAMES,
   SORT_GAMES,
+  FILTER_GAMES,
 } from "../action-types/index";
 import { toast } from "react-toastify";
 
@@ -219,3 +220,10 @@ export const sortGames = (payload) => {
     payload,
   };
 };
+
+export const filterGames = (payload)=>{
+  return{
+    type: FILTER_GAMES,
+    payload, 
+  }
+}

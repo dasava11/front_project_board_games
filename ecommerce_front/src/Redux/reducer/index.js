@@ -7,9 +7,9 @@ import {
   GET_LANGUAGES,
   GET_MECHANICS,
   GET_THEMATICS,
-  GET_DETAIL,
   GET_GAMES_BY_NAMES,
   SORT_GAMES,
+  FILTER_GAMES,
 } from "../action-types/index";
 
 const initialState = {
@@ -101,6 +101,28 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         allGames: sortsGames,
       };
+    case FILTER_GAMES:
+
+        let filterGames = [];
+
+        if (action.payload.nameType === "mechanic_name") {
+          filterGames = state.allGames.filter((game)=> game.Mechanic?.mechanic_name && game.Mechanic?.mechanic_name.includes(action.payload.value))
+        }
+        if (action.payload.nameType === "thematic_name") {
+          filterGames = state.allGames.filter((game)=>game.Thematic?.thematic_name && game.Thematic?.thematic_name.includes(action.payload.value))
+        }
+        if (action.payload.nameType === "category_name") {
+          filterGames = state.allGames.filter((game)=>game.Categories?.map((c)=>c.category_name && c.category_name.includes(action.payload.value)))
+          
+          console.log(action.payload.value);
+          console.log(filterGames);
+        }
+      
+        return{
+          ...state, 
+          allGames: filterGames
+
+        } 
     default:
       return state;
   }
