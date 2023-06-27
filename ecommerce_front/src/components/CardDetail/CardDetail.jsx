@@ -2,20 +2,26 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import style from "../CardDetail/CardDetail.module.css";
-import Canasta from "../../Photos/Canasta.png";
-import CorazonFav from "../../Photos/CorazonFav.png";
-import styles from './MoreInfo.module.css';
+import cart from "../../Photos/plusCart.svg"
+import heart from "../../Photos/heart.svg"
+import MoreDetail from "../MoreDetail/MoreDetail";
+import { ChevronDownIcon, ChevronUpIcon } from '@chakra-ui/icons'
+
 
 const CardDetail = () => {
   const { id } = useParams();
   const [game, setGame] = useState(null);
+  const [loading, setLoading] = useState(true)
+  const [moreInfo, setMoreInfo] = useState(false)
 
   useEffect(() => {
     const fetchGameDetail = async () => {
       try {
         const response = await axios.get(`https://backprojectboardgames-production.up.railway.app/games/id/${id}`);
         setGame(response.data);
-        console.log(response.data);
+
+
+        setLoading(false)
       } catch (error) {
         console.log(error);
       }
@@ -24,100 +30,72 @@ const CardDetail = () => {
     fetchGameDetail();
   }, [id]);
 
-  if (!game) {
-    return <p>Loading...</p>;
+  const handlerBtn = () => {
+    if(moreInfo){
+      setMoreInfo(false)
+    }else{
+      setMoreInfo(true)
+    }
   }
 
-  const onSaleClass = game.an_sale ? style.onSaleRed : style.onSaleGreen;
 
-  return (
-    <div key={game.name}>
-      <div className={style.containerGame}>
-        <img className={style.imgDetail} src={game.image.url} alt="Game Image" />
-      </div>
-      <div className={style.containerGame2}>
-        <h1 className={style.name}>{game.name}</h1>
-        <p className={style.comment}>comment</p>
-        <p className={style.stock}>Stock: </p>
-        <p className={style.stocks}>{game.stock}</p>
-        <p className={style.onSale + " " + onSaleClass}>On sale</p>
-        <p className={style.price}>$ {game.price} USD</p>
-
-        <div>
-          <button className={style.addToCart}>
-            <img className={style.imgCanasta} src={Canasta} alt="Cart" />
-            <p className={style.pAddToCart}>Add to cart</p>
-          </button>
-
-          <button className={style.buttomFav}>
-            <img className={style.corazonFav} src={CorazonFav} alt="Favorite" />
-          </button>
+  return ( loading ? <h1>Cargando...</h1> :
+    <div>
+      <div className={style.firstFlexCd}>
+        <div className={style.imgCardDetail}>
+          <img src={game.image.url} alt={game.name} />
+        </div>
+        <div className={style.inforCardDeatail}>
+          <h1>{game.name}</h1>
+          <div className={style.ratingCd}>
+            <h3>Rating</h3>
+            {game.active ? <h3 className={style.availableCd}>available</h3> : <h3 className={style.unavailableCd}>unavailable</h3>}
+          </div>
+          <h2>${game.price} USD</h2>
+          <div className={style.cardDBtns}>
+            <button className={style.cartBtn}>add to cart<span><img src={cart} alt="cart" /></span></button>
+            <button className={style.heartBtn}><img src={heart} alt="heart" /></button>
+          </div>
+          <div className={style.cardDescription}>
+            <p>{game.Mechanic.description}</p>
+          </div>
+          <div className={style.characteristics}>
+            <div className={style.categoryCd}>
+              <h2>category</h2>
+              {game && game.Categories.map((category, index) =>{
+                return <h3 key={index}>{category.category_name}</h3>
+              })}
+            </div>
+            <hr />
+            <div className={style.playersCd}>
+              <h2>number of players</h2>
+              <h3>{game.players_min} <span></span> {game.players_max}</h3>
+            </div>
+            <hr />
+            <div className={style.timeCd}>
+              <h2>time to play</h2>
+              <h3>{game.playing_time} min per player</h3>
+            </div>
+          </div>
+          <button 
+            className={style.seeMoreBtn}
+            onClick={handlerBtn}
+          >{moreInfo ? <div>less info<ChevronUpIcon/></div> : <div>more info<ChevronDownIcon/></div>}</button>
+          {moreInfo && 
+          <MoreDetail
+            game = {game}
+          />}
         </div>
       </div>
-      <p className={style.description}>{game.Mechanic.description}</p>
-      <div className={style.containerGame3}>
-        <p className={style.categories}>Categories</p>
-        {game.Categories.map((category) => (
-          <p className={style.category} key={category.category_id}>{category.category_name}</p>
-        ))}
-        <h1 className={style.linea1}></h1>
-        <p className={style.nJugadores}>N° jugadores</p>
-        <p className={style.njugadoress}>{game.players_min} - {game.players_max}</p>
-        <h1 className={style.linea2}></h1>
-        <p className={style.timeGame}>Tiempo de juego</p>
-        <p className={style.playingTime}>{game.playing_time} min x player</p>
-      </div>
-      <div className={style.containerGame4}>
-
-
-        <div className={style.container}>
-          <table className={styles.intercalatedTable}>
-            <tbody>
-                <tr className={styles.gris}>
-                  <td>Author</td>
-                  <t>{game.Author.author_name}</t>
-                </tr>
-                <tr className={styles.blanco}>
-                  <td>Mechanic</td>
-                  <td>{game.Mechanic.mechanic_name}</td>
-                </tr>
-                  <tr className={styles.gris}>
-                    <td>Thematic</td>
-                    <td>{game.Thematic.thematic_name}</td>
-                  </tr>
-                  <tr>
-                    <td>Age</td>
-                    <td>{game.age}</td>
-                  </tr>
-                  <tr className={styles.gris}>
-                    <td>Designers</td>
-                    <td>{game.Designers[0].designer_name}</td>
-                  </tr>
-                  <tr>
-                    <td>Editorial</td>
-                    <td>{game.Editorial.editorial_name}</td>
-                  </tr>
-                  <tr className={styles.gris}>
-                    <td>Weight</td>
-                    <td>{game.weight}</td>
-                  </tr>
-                  <tr>
-                    <td>Language</td>
-                    <td>{game.Languages[0].language_name}</td>
-                </tr>
-              </tbody>
-            </table>
-</div>
-
-
-
-      </div>
-      <div className={style.containerReview}>
-        <p className={style.review}>Review</p>
-        <input className={style.opinion} placeholder="leave your opinion..." />
-      </div>
+      <div className={style.reviewCardDetail}>
+          <h1>Review</h1>
+          <div className={style.textAreaDetail}>
+            <textarea cols="30" rows="5"></textarea>
+            <button>Send</button>
+          </div>
+        </div>
     </div>
-  );
+  )
 };
 
 export default CardDetail;

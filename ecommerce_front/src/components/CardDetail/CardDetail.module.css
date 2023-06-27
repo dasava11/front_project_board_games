@@ -1,520 +1,155 @@
-.containerGame{
-    width: 730px;
-    height: 650px;
-    margin-left: 190px;
-    margin-right: 640px;
-    margin-top: 106px;
-    background: #FFF;
-}
-
-.name{
-    position: relative;
-    top: -730px;
-    left: 1250px;
-    font-size: 40px;
-}
-
-.imgDetail{
-    width: 550px;
-    margin-top: 50px;
-    margin-left: 80px;
-}
-
-.comment{
-    position: relative;
-    top: -730px;
-    left: 1250px;
-    color: #00324F;
-    font-size: 22px;
-}
-
-.price{
-    position: relative;
-    top: -900px;
-    left: 1250px;
-    color: #00006FCC;
-    font-size: 40px;
-    font-family: Roboto;
-}
-
-.addToCart{
-    width: 332px;
-    height: 59px;
-    flex-shrink: 0;
-    border-radius: 15px;
-    background: #37A0DB;
-    position: relative;
-    top: -860px;
-    left: 1250px;
-    margin-right: 11px;
-}
-
-.pAddToCart{
-    position: relative;
-    display: inline-block;
-    width: 198px;
-    height: 30px;
-    flex-direction: column;
-    color: #000;
-    text-align: center;
-    font-size: 28px;
-    font-family: Roboto;
-    font-weight: 500;
-    top: -16px;
-}
-
-.imgCanasta{
-    position: relative;
-    width: 54px;
-    height: 42px;
-    top: -7px;
-}
-
-.buttomFav{
-    width: 65px;
-    height: 65px;
-    flex-shrink: 0;
-    position: relative;
-    top: -850px;
-    left: 1250px;
-}
-.corazonFav{
-    position: relative;
-    top: -5px;
-    left: -9px;
-}
-
-.containerGame2{
-    position: relative;
-    margin-left: -50px;
-    margin-top: 40px;
-}
-
-.description{
-    flex-shrink: 0;
-    position: relative;
-    top: -830px;
-    left: 1200px;
+.firstFlexCd{
     display: flex;
-    width: 484px;
-    height: 151px;
-    flex-direction: column;
-    flex-shrink: 0;
-    text-align: center;
+    padding: 5rem;
+    gap: 3rem;
+    width: 75%;
+    margin: auto;
 }
 
-.categories{
-    flex-shrink: 0;
-    position: relative;
-    top: -703px;
-    left: 1120px;
+.imgCardDetail{
+    width: 700px;
+    height: 500px;
     display: flex;
-    width: 180px;
-    height: 110px;
-    flex-direction: column;
-    flex-shrink: 0;
-    color: #000;
-    text-align: center;
-    font-size: 24px;
-    font-family: Roboto;
-    font-weight: 500;
+    justify-content: center;
+    align-items: center;
 }
 
-.linea1{
-    width: 3px;
-    height: 140px;
-    flex-shrink: 0;
-    position: relative;
-    top: -975px;
-    left: 1320px;
-    background: #37A0DB;
-}
-.nJugadores{
-    flex-shrink: 0;
-        position: relative;
-        top: -1142px;
-        left: 1350px;
-        display: flex;
-        width: 180px;
-        height: 110px;
-        flex-direction: column;
-        flex-shrink: 0;
-        color: #000;
-        text-align: center;
-        font-size: 24px;
-        font-family: Roboto;
-        font-weight: 500;
+.imgCardDetail img{
+    height: 100%;
+    width: 75%;
 }
 
-.linea2 {
-    width: 4px;
-    height: 140px;
-    flex-shrink: 0;
-    position: relative;
-    top: -1415px;
-    left: 1555px;
-    background: #37A0DB;
-}
-
-.njugadoress{
-    flex-shrink: 0;
-    position: relative;
-    top: -1220px;
-    left: 1350px;
+.ratingCd{
     display: flex;
-    width: 180px;
-    height: 110px;
-    flex-direction: column;
-    flex-shrink: 0;
-    color: #000;
-    text-align: center;
-    font-size: 24px;
-    font-family: Roboto;
-    font-weight: 500;
+    justify-content: space-around;
 }
 
-.timeGame{
-    flex-shrink: 0;
-    position: relative;
-    top: -1580px;
-    left: 1600px;
-    display: flex;
-    width: 180px;
-    height: 110px;
-    flex-direction: column;
-    flex-shrink: 0;
-    color: #000;
-    text-align: center;
-    font-size: 24px;
-    font-family: Roboto;
-    font-weight: 500;
-}
-
-.playingTime{
-    flex-shrink: 0;
-        position: relative;
-        top: -1660px;
-        left: 1600px;
-        display: flex;
-        width: 180px;
-        height: 110px;
-        flex-direction: column;
-        flex-shrink: 0;
-        color: #000;
-        text-align: center;
-        font-size: 24px;
-        font-family: Roboto;
-        font-weight: 500;
-}
-
-.category{
-    flex-shrink: 0;
-    position: relative;
-    top: -785px;
-    left: 1120px;
-    display: flex;
-    width: 180px;
-    height: 110px;
-    flex-direction: column;
-    flex-shrink: 0;
-    color: #000;
-    text-align: center;
-    font-size: 24px;
-    font-family: Roboto;
-    font-weight: 500;
-}
-
-
-.container {
-    width: 730px;
-    height: 320px;
-    background-color: #FFF;
-}
-
-
-.intercalatedTable td {
-    text-align: left;
-}
-
-.intercalatedTable th {
-    background-color: #f2f2f2;
-}
-
-.intercalatedTable td {
-    background-color: #ffffff;
-}
-
-.review{
-    position: relative;
-    top: -20px;
-    color: #00324F;
-    font-size: 28px;
-    font-family: Roboto;
-    left: 5%;
-}
-
-.opinion{
-    position: relative;
-    left: 5%;
-    width: 1750px;
-    height: 185px;
-} 
-
-.containerReview{
-    position: relative;
-    top: -1400px;
-}
-
-.author{
-    position: relative;
-    left: 50px;
-    top: 20px;
-    flex-shrink: 0;
-    color: #000;
-    font-size: 24px;
-    font-family: Roboto;
-    font-weight: 500;
-}
-
-.authors {
-    position: relative;
-    left: 550px;
-    top: -25px;
-    flex-shrink: 0;
-    color: #000;
-    font-size: 24px;
-    font-family: Roboto;
-    font-weight: 500;
-}
-
-.nationality{
-    position: relative;
-    left: 50px;
-    top: 10px;
-    flex-shrink: 0;
-    color: #000;
-    font-size: 24px;
-    font-family: Roboto;
-    font-weight: 500;
-}
-
-.nationalitys {
-    position: relative;
-    left: 550px;
-    top: -49px;
-    flex-shrink: 0;
-    color: #000;
-    font-size: 24px;
-    font-family: Roboto;
-    font-weight: 500;
-}
-.bgg{
-    position: relative;
-    left: 50px;
-    top: -10px;
-    flex-shrink: 0;
-    color: #000;
-    font-size: 24px;
-    font-family: Roboto;
-    font-weight: 500;
-}
-
-.mechanic{
-    position: relative;
-    left: 50px;
-    top: 20px;
-    flex-shrink: 0;
-    color: #000;
-    font-size: 24px;
-    font-family: Roboto;
-    font-weight: 500;
-}
-
-.mechanics {
-    position: relative;
-    left: 550px;
-    top: -25px;
-    flex-shrink: 0;
-    color: #000;
-    font-size: 24px;
-    font-family: Roboto;
-    font-weight: 500;
-}
-
-.thematic{
-    position: relative;
-    left: 50px;
-    top: 20px;
-    flex-shrink: 0;
-    color: #000;
-    font-size: 24px;
-    font-family: Roboto;
-    font-weight: 500;
-}
-
-.thematics {
-    position: relative;
-    left: 550px;
-    top: -25px;
-    flex-shrink: 0;
-    color: #000;
-    font-size: 24px;
-    font-family: Roboto;
-    font-weight: 500;
-}
-
-.age{
-    position: relative;
-    left: 50px;
-    top: 20px;
-    flex-shrink: 0;
-    color: #000;
-    font-size: 24px;
-    font-family: Roboto;
-    font-weight: 500;
-}
-
-.ages {
-    position: relative;
-    left: 550px;
-    top: -25px;
-    flex-shrink: 0;
-    color: #000;
-    font-size: 24px;
-    font-family: Roboto;
-    font-weight: 500;
-}
-
-.designer{
-    position: relative;
-    left: 50px;
-    top: 20px;
-    flex-shrink: 0;
-    color: #000;
-    font-size: 24px;
-    font-family: Roboto;
-    font-weight: 500;
-}
-
-.designers {
-    position: relative;
-    left: 550px;
-    top: -25px;
-    flex-shrink: 0;
-    color: #000;
-    font-size: 24px;
-    font-family: Roboto;
-    font-weight: 500;
-}
-
-.editorial{
-    position: relative;
-    left: 50px;
-    top: 20px;
-    flex-shrink: 0;
-    color: #000;
-    font-size: 24px;
-    font-family: Roboto;
-    font-weight: 500;
-}
-
-.editorials {
-    position: relative;
-    left: 550px;
-    top: -25px;
-    flex-shrink: 0;
-    color: #000;
-    font-size: 24px;
-    font-family: Roboto;
-    font-weight: 500;
-}
-
-.weight{
-    position: relative;
-    left: 50px;
-    top: 20px;
-    flex-shrink: 0;
-    color: #000;
-    font-size: 24px;
-    font-family: Roboto;
-    font-weight: 500;
-}
-
-.weights {
-    position: relative;
-    left: 550px;
-    top: -25px;
-    flex-shrink: 0;
-    color: #000;
-    font-size: 24px;
-    font-family: Roboto;
-    font-weight: 500;
-}
-
-.language{
-    position: relative;
-    left: 50px;
-    top: 20px;
-    flex-shrink: 0;
-    color: #000;
-    font-size: 24px;
-    font-family: Roboto;
-    font-weight: 500;
-}
-
-.languages {
-    position: relative;
-    left: 550px;
-    top: -25px;
-    flex-shrink: 0;
-    color: #000;
-    font-size: 24px;
-    font-family: Roboto;
-    font-weight: 500;
-}
-.onSale{
-    position: relative;
-    top: -820px;
-    left: 1520px;
-    color: #00324F;
-    font-size: 22px;
+.availableCd{
     color: #00801C;
-    font-size: 30px;
-    font-family: Roboto;
-    font-weight: 500;
 }
 
-.onSaleGreen {
-    color: green;
-}
-
-.onSaleRed {
+.unavailableCd{
     color: red;
 }
 
-.containerGame3{
-    position: relative;
-    top: -200px;
+.cardDBtns{
+    display: flex;
+    justify-content: center;
 }
 
-.containerGame4{
-    position: relative;
-    top: -100px;
-    
+.cartBtn{
+    border: 1px solid transparent;
+    background-color: #37A0DB;
+    height: 60px;
+    width: 330px;
+    font-size: 28px;
+    text-transform: capitalize;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 3rem;
+    border-radius: 1rem;
 }
 
-.stock{
-    position: relative;
-    top: -780px;
-    left: 1500px;
-    color: #00324F;
-    font-size: 22px;
+.cartBtn span img{
+    width: 40px;
 }
 
-.stocks {
-    position: relative;
-    top: -828px;
-    left: 1570px;
-    color: #00324F;
-    font-size: 22px;
+.cartBtn:hover{
+    cursor: pointer;
+    background-color: #2875a2;
+}
+
+.heartBtn{
+    border: none;
+}
+
+.heartBtn img:hover{
+    cursor: pointer;
+    background-color: hwb(240 0% 79%, 70%);
+}
+
+.heartBtn img{
+    width: 50px;
+}
+
+.cardDescription p{
+    text-align: center;
+    margin: 2rem;
+    padding: 0 3rem;
+}
+
+.characteristics{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.characteristics hr{
+    height: 80px;
+    width: 3px;
+    background-color: #000035;
+}
+
+.characteristics h2{
+    text-transform: capitalize;
+    font-size: 1.8rem;
+}
+
+.inforCardDeatail{
+    width: 50%;
+    background-color: hsl(0, 0%, 100%, 70%);
+    padding: 2rem;
+    border-radius: 1rem;
+}
+
+.playersCd h3{
+    text-align: center;
+}
+
+.seeMoreBtn{
+    display: flex;
+    margin: auto;
+    background-color: transparent;
+    border: 1px solid transparent;
+    color: #000035;
+    text-transform: capitalize;
+}
+
+.seeMoreBtn:hover{
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.reviewCardDetail{
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto 5rem;
+    gap: 1rem;
+    width: 75%;
+}
+
+.textAreaDetail button{
+    display: flex;
+    width: 100px;
+    height: 30px;
+    justify-content: center;
+    align-items: center;
+    background-color: #000035;
+    color: white;
+    border: 1px solid transparent;
+    border-radius: 1rem;
+}
+
+.textAreaDetail button:hover{
+    cursor: pointer;
+    background-color: #000076;
+}
+
+.textAreaDetail{
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+    gap: 2rem;
 }
