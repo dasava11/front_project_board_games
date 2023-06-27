@@ -16,11 +16,13 @@ const Games = () => {
   const [currentPage, SetCurrentPage] = useState(1);
   const [postPerPage, setPostPerPage] = useState(12);
   const [loading, setLoading] = useState(false);
-  /*   const [currentGames, setCurrentGames] = useLocalStorage("currentGames", []); */
+  const [currentGames, setCurrentGames] = useLocalStorage("currentGames", []);
 
   useEffect(() => {
     dispatch(getAllGames());
-  }, []);
+    setCurrentGames(allGames);
+    console.log(currentGames);
+  }, [currentGames]);
 
   const lastPostIndex = currentPage * postPerPage;
   const firstPostIndex = lastPostIndex - postPerPage;
@@ -39,10 +41,10 @@ const Games = () => {
           </div>
           <div>
             {
-            <SortGames
-              className={style.sortSelect}
-              SetCurrentPage={SetCurrentPage}
-            />
+              <SortGames
+                className={style.sortSelect}
+                SetCurrentPage={SetCurrentPage}
+              />
             }
           </div>
         </div>
@@ -52,19 +54,22 @@ const Games = () => {
               type={"categories"}
               nameType={"category_name"}
               SetCurrentPage={SetCurrentPage}
-              allGames={allGames}
+              setCurrentGames={setCurrentGames}
+              currentGames={currentGames}
             />
             <Filter
               type={"mechanics"}
               nameType={"mechanic_name"}
               SetCurrentPage={SetCurrentPage}
-              allGames={allGames}
+              setCurrentGames={setCurrentGames}
+              currentGames={currentGames}
             />
             <Filter
               type={"thematics"}
               nameType={"thematic_name"}
               SetCurrentPage={SetCurrentPage}
-              allGames={allGames}
+              setCurrentGames={setCurrentGames}
+              currentGames={currentGames}
             />
           </div>
         </div>
