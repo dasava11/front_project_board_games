@@ -1,0 +1,44 @@
+.moreInfoDetail{
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+}
+
+.moreInfoRow{
+    display: flex;
+    margin: auto;
+    width: 100%;
+}
+
+.moreInfoRow h2{
+    margin: 0;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.moreInfoRow1 h3{
+    margin: 0;
+    font-weight: 300;
+    font-size: 13px;
+}
+
+.moreInfoRow h3{
+    margin: 0;
+    font-weight: 300;
+    font-size: 13px;
+}
+
+.moreInfoRow1 h3{
+    margin: 0;
+    font-weight: 300;
+    font-size: 13px;
+}
+
+.moreInfoRow1{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    background-color: rgb(190, 190, 190);
+    margin: auto;
+    width: 100%;
+}
