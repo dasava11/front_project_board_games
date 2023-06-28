@@ -1,0 +1,13 @@
+.faq{
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    margin: auto;
+    height: 90vh;
+}
+
+.faq h2{
+    text-transform: capitalize;
+    text-align: center;
+}
+
