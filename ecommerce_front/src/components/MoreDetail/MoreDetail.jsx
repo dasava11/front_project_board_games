@@ -7,24 +7,19 @@ const MoreDetail = (props) => {
   return (
     <div className={style.moreInfoDetail}>
         <div className={style.moreInfoRow}>
-            <h2>Author:</h2>
-            <h3>{game && game.Author.author_name}</h3>
+            <h2>Author: <span>{game && game.Author.author_name}</span></h2>
         </div>
         <div className={style.moreInfoRow}>
-            <h2>Mechanics:</h2>
-            <h3>{game && game.Mechanic.mechanic_name}</h3>
+            <h2>Mechanics: <span>{game && game.Mechanic.mechanic_name}</span></h2>
         </div>
         <div className={style.moreInfoRow}>
-            <h2>Themantics:</h2>
-            <h3>{game && game.Thematic.thematic_name}</h3>
+            <h2>Themantics: <span>{game && game.Thematic.thematic_name}</span></h2>
         </div>
         <div className={style.moreInfoRow}>
-            <h2>Age:</h2>
-            <h3>{game && game.age}</h3>
+            <h2>Age: <span>{game && game.age}</span></h2>
         </div>
         <div className={style.moreInfoRow}>
-            <h2>Weight:</h2>
-            <h3>{game && game.weight} lb</h3>
+            <h2>Weight: <span>{game && game.weight}</span></h2>
         </div>
     </div>
   )
