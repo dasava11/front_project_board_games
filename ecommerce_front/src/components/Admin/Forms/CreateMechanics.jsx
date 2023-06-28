@@ -1,11 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { postMechanics } from "../../../Redux/actions_creators";
 import { Modal } from "antd";
 import { useDispatch } from "react-redux";
 
 export const CreateMechanics = (setIsOpen) => {
   const dispatch = useDispatch();
-
+  const [input, setInput] = useState({});
   const handleSubmitMechanics = (e) => {
     e.preventDefault();
     dispatch(postMechanics(input));
@@ -34,6 +34,13 @@ export const CreateMechanics = (setIsOpen) => {
           placeholder="Mechanics"
           onChange={handleChange}
           name="mechanic_name"
+        />
+        <input
+          className="inputs"
+          type="text"
+          placeholder="Description"
+          onChange={handleChange}
+          name="description"
         />
         <button className="submit-button-modal" type="submit">
           Create

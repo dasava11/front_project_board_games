@@ -1,11 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { postDesigners } from "../../../Redux/actions_creators";
 import { Modal } from "antd";
 import { useDispatch } from "react-redux";
 
 export const CreateDesigners = (setIsOpen) => {
   const dispatch = useDispatch();
-
+  const [input, setInput] = useState({});
   const handleSubmitDesigners = (e) => {
     e.preventDefault();
     dispatch(postDesigners(input));
@@ -33,7 +33,7 @@ export const CreateDesigners = (setIsOpen) => {
           type="text"
           placeholder="Designers"
           onChange={handleChange}
-          name="designers_name"
+          name="designer_name"
         />
         <button className="submit-button-modal" type="submit">
           Create
