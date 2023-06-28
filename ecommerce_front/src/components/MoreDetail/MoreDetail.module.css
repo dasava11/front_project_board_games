@@ -42,3 +42,7 @@
     margin: auto;
     width: 100%;
 }
+
+.moreInfoRow span{
+    font-weight: 400;
+}

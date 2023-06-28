@@ -9,6 +9,7 @@ import CardDetail from "./components/CardDetail/CardDetail";
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
 import ContactUs from "./components/ContactUs/ContactUs";
+import Faq from "./components/FAQ/Faq"
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
           <Route path="/games" element={<Games />} />
           <Route path="details/:id" element={<CardDetail />} />
           <Route path="/contact" element={<ContactUs />} />
+          <Route path='/questions' element={<Faq/>}/>
         </Routes>
         <Footer />
       </BrowserRouter>
