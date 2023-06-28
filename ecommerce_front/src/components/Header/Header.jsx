@@ -23,11 +23,23 @@ const Header = () => {
           <SearchBar />
           <div className={style.inputs}>
             <button>
-              <img src={dice1} alt="sign un" width="45px" height="45px" />
+              <img
+                src={dice1}
+                alt="sign un"
+                width="45px"
+                height="45px"
+                onClick={() => navigate("/signup")}
+              />
               <h6>Sign Up</h6>
             </button>
             <button>
-              <img src={dice4} alt="log In" width="45px" height="45px" />
+              <img
+                src={dice4}
+                alt="log In"
+                width="45px"
+                height="45px"
+                onClick={() => navigate("/login")}
+              />
               <h6>Log In</h6>
             </button>
           </div>

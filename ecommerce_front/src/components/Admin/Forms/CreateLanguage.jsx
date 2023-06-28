@@ -1,11 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { postLanguages } from "../../../Redux/actions_creators";
 import { Modal } from "antd";
 import { useDispatch } from "react-redux";
 
 export const CreateLanguage = (setIsOpen) => {
   const dispatch = useDispatch();
-
+  const [input, setInput] = useState({});
   const handleSubmitLanguage = (e) => {
     e.preventDefault();
     dispatch(postLanguages(input));

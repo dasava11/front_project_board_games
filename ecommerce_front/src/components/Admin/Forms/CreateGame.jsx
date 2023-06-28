@@ -118,7 +118,7 @@ export default function CreateGame() {
       playing_time: 0,
       author_name: [],
       categories_name: [],
-      designers_name: [],
+      designer_name: [],
       editorial_name: [],
       languages_name: [],
       mechanic_name: [],
@@ -286,7 +286,7 @@ export default function CreateGame() {
           <Select
             mode="multiple"
             onChange={(value) => handleChangeDesigners(value)}
-            name="designers_name"
+            name="designer_name"
             style={{
               width: "30%",
               margin: "0.5rem",

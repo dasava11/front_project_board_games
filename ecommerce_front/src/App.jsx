@@ -9,6 +9,8 @@ import CardDetail from "./components/CardDetail/CardDetail";
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
 import ContactUs from "./components/ContactUs/ContactUs";
+import { LogIn } from "./components/LogIn/LogIn";
+import { SignUp } from "./components/SignUp/SignUp";
 
 function App() {
   return (
@@ -22,6 +24,8 @@ function App() {
           <Route path="/games" element={<Games />} />
           <Route path="details/:id" element={<CardDetail />} />
           <Route path="/contact" element={<ContactUs />} />
+          <Route path="/login" element={<LogIn />} />
+          <Route path="/signup" element={<SignUp />} />
         </Routes>
         <Footer />
       </BrowserRouter>
