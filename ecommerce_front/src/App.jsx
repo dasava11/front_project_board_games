@@ -14,6 +14,7 @@ import { LogIn } from "./components/LogIn/LogIn";
 import { SignUp } from "./components/SignUp/SignUp";
 
 import Faq from "./components/FAQ/Faq"
+import PayPalComponent from "./components/Paypal/Paypal";
 
 
 function App() {
@@ -34,6 +35,8 @@ function App() {
 
           <Route path='/questions' element={<Faq/>}/>
 
+          <Route path='/paypal' element={<PayPalComponent/>}/>
+        
         </Routes>
         <Footer />
       </BrowserRouter>
