@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { createElement, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import style from "../CardDetail/CardDetail.module.css";
@@ -41,13 +41,24 @@ const CardDetail = () => {
   };
 
   const handleCart = () => {
-  /*   let duplicate = cart?.find((g) => g.id === game.id);
-
+ 
+    let duplicate = cart?.find((g) => g.game_id === game.game_id);
+   
     if (duplicate) {
-      return (duplicate.count += 1);
-    } */
+      //duplicate.count = duplicate.count +1
+
+      for (let index = 0; index < cart.length; index++) {
+        let element = cart[index];
+        if(element.game_id == game.game_id){
+          element.count = element.count + 1
+        }
+      }
+      setCart([...cart]);
+    }else{
     game.count = +1;
+
     setCart([...cart, game]);
+    }
   };
 
   console.log(cart);

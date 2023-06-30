@@ -16,7 +16,7 @@ const Cart = () => {
               <button>-</button>
               <input className={styles.countGameInOrder} type="text" placeholder={game.count}/>
               <button>+</button>
-              <button>X</button>
+              <button className={styles.gameDeleteByOrder} >delete</button>
               </>
               <h1 className={styles.priceOrder} >$ {game.price} USD</h1>
             </div>
