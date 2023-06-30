@@ -41,23 +41,21 @@ const CardDetail = () => {
   };
 
   const handleCart = () => {
- 
     let duplicate = cart?.find((g) => g.game_id === game.game_id);
-   
-    if (duplicate) {
-      //duplicate.count = duplicate.count +1
 
+    if (duplicate) {
       for (let index = 0; index < cart.length; index++) {
-        let element = cart[index];
-        if(element.game_id == game.game_id){
-          element.count = element.count + 1
+        let g = cart[index];
+        if (g.game_id == game.game_id) {
+          g.count = g.count + 1;
+          g.total_price = g.count * g.price;
         }
       }
       setCart([...cart]);
-    }else{
-    game.count = +1;
-
-    setCart([...cart, game]);
+    } else {
+      game.count = +1;
+      game.total_price = game.price;
+      setCart([...cart, game]);
     }
   };
 
@@ -145,22 +143,6 @@ const CardDetail = () => {
 };
 
 export default CardDetail;
-
-/*     let duplicate = cart.filter((g) => g.id === game.id);
-    if (duplicate.length < 1) {
-      game.count = 1;
-      setCart([...cart, game]);
-      //console.log(cart);
-    } else {
-      //console.log(duplicate);
-      let gameAux = cart.map((g) => {
-        if (g.id === game.id) {
-          return { ...g, count: g.count + 1 };
-        }
-        return g;
-      });
-      setCart(gameAux);
-    } */
 
 /*        let local = JSON.parse(localStorage.getItem("cart"));
        let total = parseInt(JSON.parse(localStorage.getItem("total")));
