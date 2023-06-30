@@ -76,3 +76,20 @@
   border: 1px solid white;
   border-radius: 8px;
 }
+
+.formCreateDivFlex{
+  display: flex;
+  width: 30%;
+  gap: 1rem;
+}
+
+.formCreateDivFlexSub{
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+}
+
+.formCreateDivFlexSub input{
+  width: 100%;
+  margin: 1rem 0;
+}

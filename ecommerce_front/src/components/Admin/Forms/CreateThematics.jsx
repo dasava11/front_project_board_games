@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 
 export const CreateThematics = (setIsOpen) => {
   const dispatch = useDispatch();
+  const [input, setInput] = useState({});
 
   const handleSubmitThematics = (e) => {
     e.preventDefault();
