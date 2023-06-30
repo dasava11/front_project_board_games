@@ -1,4 +1,4 @@
-import React ,{useState} from "react";
+import React, { useState } from "react";
 import { postDesigners } from "../../../Redux/actions_creators";
 import { Modal } from "antd";
 import { useDispatch } from "react-redux";
@@ -6,7 +6,6 @@ import { useDispatch } from "react-redux";
 export const CreateDesigners = (setIsOpen) => {
   const dispatch = useDispatch();
   const [input, setInput] = useState({});
-
   const handleSubmitDesigners = (e) => {
     e.preventDefault();
     dispatch(postDesigners(input));

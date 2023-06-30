@@ -17,6 +17,10 @@
     "@emailjs/browser": "^3.11.0",
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
+    "@headlessui/react": "^1.7.15",
+    "@heroicons/react": "^2.0.18",
+    "@paypal/paypal-js": "^6.0.0",
+    "@paypal/react-paypal-js": "^8.0.0",
     "antd": "^5.6.3",
     "axios": "^1.4.0",
     "bootstrap": "^5.3.0",
@@ -37,10 +41,14 @@
     "@types/react": "^18.0.37",
     "@types/react-dom": "^18.0.11",
     "@vitejs/plugin-react": "^4.0.0",
+    "autoprefixer": "^10.4.14",
     "eslint": "^8.38.0",
     "eslint-plugin-react": "^7.32.2",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.3.4",
+    "postcss": "^8.4.24",
+    "postcss-nesting": "^11.3.0",
+    "tailwindcss": "^3.3.2",
     "vite": "^4.3.9"
   }
 }

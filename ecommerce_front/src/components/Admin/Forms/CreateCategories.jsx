@@ -41,7 +41,7 @@ export const CreateCategories = (setIsOpen) => {
               onChange={handleChange}
               name="category_name"
             />
-        <button className="submit-button-modal" type="submit">
+            <button className="submit-button-modal" type="submit">
               Create
             </button>
           </form>

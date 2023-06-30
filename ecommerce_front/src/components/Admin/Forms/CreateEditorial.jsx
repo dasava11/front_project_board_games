@@ -1,4 +1,4 @@
-import React ,{useState} from "react";
+import React, { useState } from "react";
 import { postEditorials } from "../../../Redux/actions_creators";
 import { Modal } from "antd";
 import { useDispatch } from "react-redux";
@@ -6,7 +6,6 @@ import { useDispatch } from "react-redux";
 export const CreateEditorial = (setIsOpen) => {
   const dispatch = useDispatch();
   const [input, setInput] = useState({});
-
   const handleSubmitEditorial = (e) => {
     e.preventDefault();
     dispatch(postEditorials(input));

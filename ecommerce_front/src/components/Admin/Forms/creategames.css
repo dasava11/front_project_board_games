@@ -92,4 +92,15 @@
 .formCreateDivFlexSub input{
   width: 100%;
   margin: 1rem 0;
+
+.submit-button-modal{
+  height: 30px;
+    width: 17%;
+    margin: 20px;
+    background-color: #000035;
+    color: white;
+    border-radius: 7px;
+    font-size: medium;
+    text-decoration: none;
+
 }

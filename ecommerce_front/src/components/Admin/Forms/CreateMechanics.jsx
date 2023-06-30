@@ -1,4 +1,4 @@
-import React ,{useState} from "react";
+import React, { useState } from "react";
 import { postMechanics } from "../../../Redux/actions_creators";
 import { Modal } from "antd";
 import { useDispatch } from "react-redux";
@@ -6,7 +6,6 @@ import { useDispatch } from "react-redux";
 export const CreateMechanics = (setIsOpen) => {
   const dispatch = useDispatch();
   const [input, setInput] = useState({});
-
   const handleSubmitMechanics = (e) => {
     e.preventDefault();
     dispatch(postMechanics(input));

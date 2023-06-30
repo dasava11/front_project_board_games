@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { postThematics } from "../../../Redux/actions_creators";
 import { Modal } from "antd";
 import { useDispatch } from "react-redux";
@@ -6,7 +6,6 @@ import { useDispatch } from "react-redux";
 export const CreateThematics = (setIsOpen) => {
   const dispatch = useDispatch();
   const [input, setInput] = useState({});
-
   const handleSubmitThematics = (e) => {
     e.preventDefault();
     dispatch(postThematics(input));
