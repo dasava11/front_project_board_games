@@ -57,6 +57,14 @@ const Navbar = () => {
           >
             Paypal
           </NavLink>
+          <NavLink
+            to="/cart"
+            className={({ isActive }) =>
+              isActive ? style.active : style.disable
+            }
+          >
+            Shopping Cart
+          </NavLink>
         </li>
       </ul>
       <div className={style.navBarIcons}>
