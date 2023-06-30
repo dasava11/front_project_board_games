@@ -41,10 +41,11 @@ const CardDetail = () => {
   };
 
   const handleCart = () => {
-    let duplicate = cart?.find((g) => g.id === game.id);
+  /*   let duplicate = cart?.find((g) => g.id === game.id);
+
     if (duplicate) {
       return (duplicate.count += 1);
-    }
+    } */
     game.count = +1;
     setCart([...cart, game]);
   };

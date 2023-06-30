@@ -16,7 +16,7 @@ import PayPalComponent from "./components/Paypal/Paypal";
 import Cart from "./components/Cart/Cart";
 
 function App() {
-  //localStorage.clear();
+  localStorage.clear();
   return (
     <div>
       <BrowserRouter>
