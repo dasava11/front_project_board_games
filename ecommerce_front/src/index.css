@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind util;
+
 html {
   font-size: 62.5%;
   box-sizing: border-box;

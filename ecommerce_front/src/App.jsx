@@ -9,15 +9,14 @@ import CardDetail from "./components/CardDetail/CardDetail";
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
 import ContactUs from "./components/ContactUs/ContactUs";
-
 import { LogIn } from "./components/LogIn/LogIn";
 import { SignUp } from "./components/SignUp/SignUp";
-
-import Faq from "./components/FAQ/Faq"
+import Faq from "./components/FAQ/Faq";
 import PayPalComponent from "./components/Paypal/Paypal";
-
+import Cart from "./components/Cart/Cart";
 
 function App() {
+  //localStorage.clear();
   return (
     <div>
       <BrowserRouter>
@@ -33,10 +32,9 @@ function App() {
           <Route path="/login" element={<LogIn />} />
           <Route path="/signup" element={<SignUp />} />
 
-          <Route path='/questions' element={<Faq/>}/>
-
-          <Route path='/paypal' element={<PayPalComponent/>}/>
-        
+          <Route path="/questions" element={<Faq />} />
+          <Route path="/paypal" element={<PayPalComponent />} />
+          <Route path="/cart" element={<Cart />} />
         </Routes>
         <Footer />
       </BrowserRouter>
