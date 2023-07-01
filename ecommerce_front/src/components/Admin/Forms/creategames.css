@@ -58,6 +58,7 @@
   background-color: #f5f5f5;
   padding: 1px;
   margin-left: 20%;
+  font-size: smaller;
 }
 
 .create-button:hover {
@@ -85,4 +86,8 @@
     border-radius: 7px;
     font-size: medium;
     text-decoration: none;
+}
+
+.price-age-div{
+  width: 30%;
 }

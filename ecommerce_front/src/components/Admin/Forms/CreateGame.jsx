@@ -152,7 +152,7 @@ export default function CreateGame() {
             value={input.released}
             onChange={handleChange}
           />
-          {/* {errors.released && <span>{errors.released}</span>} */}
+          {errors.released && <span>{errors.released}</span>}
           <input
             className="inputs-create"
             type="number"
