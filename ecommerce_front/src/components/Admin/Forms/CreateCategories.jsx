@@ -2,13 +2,7 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Modal } from "antd";
 import {
-  postAuthors,
   postCategories,
-  postDesigners,
-  postEditorials,
-  postLanguages,
-  postMechanics,
-  postThematics,
 } from "../../../Redux/actions_creators";
 
 export const CreateCategories = (setIsOpen) => {

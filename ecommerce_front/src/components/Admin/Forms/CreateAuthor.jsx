@@ -6,7 +6,7 @@ import { useDispatch } from "react-redux";
 
 export const CreateAuthor = (setIsOpen) => {
   const dispatch = useDispatch();
-  const [input, setInput] = useState({});
+  const [input, setInput] = useState({})
   const handleSubmitAuthors = (e) => {
     e.preventDefault();
     dispatch(postAuthors(input));

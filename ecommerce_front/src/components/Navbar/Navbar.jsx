@@ -48,6 +48,24 @@ const Navbar = () => {
             Create Game
           </NavLink>
         </li>
+        <li>
+          <NavLink
+            to="/paypal"
+            className={({ isActive }) =>
+              isActive ? style.active : style.disable
+            }
+          >
+            Paypal
+          </NavLink>
+          <NavLink
+            to="/cart"
+            className={({ isActive }) =>
+              isActive ? style.active : style.disable
+            }
+          >
+            Shopping Cart
+          </NavLink>
+        </li>
       </ul>
       <div className={style.navBarIcons}>
         <button className={style.heartIcon}>
