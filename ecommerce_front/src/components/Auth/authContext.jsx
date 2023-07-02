@@ -9,6 +9,7 @@ import {
   GoogleAuthProvider,
   signInWithPopup,
   sendPasswordResetEmail,
+  fetchSignInMethodsForEmail,
 } from "firebase/auth";
 import { auth } from "../Auth/firebase";
 import { toast } from "react-toastify";
@@ -57,7 +58,12 @@ export const AuthProvider = ({ children }) => {
       }
     );
   };
-
+  const controlarEmail = async (email) => {
+    const methods = await fetchSignInMethodsForEmail(auth, email);
+    if (methods.length > 0) {
+      throw new Error("there is already a user with that email");
+    }
+  };
   const resetPassword = (email) => {
     sendPasswordResetEmail(email);
   };
@@ -104,6 +110,7 @@ export const AuthProvider = ({ children }) => {
         userAuth,
         logInWithGoogle,
         resetPassword,
+        controlarEmail,
       }}
     >
       {children}

@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { useAuth } from "../Auth/authContext";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+
 export const SignUp = () => {
   const navigate = useNavigate();
 
@@ -12,7 +13,7 @@ export const SignUp = () => {
     email: "",
     password: "",
   });
-  const { signup } = useAuth();
+  const { signup, controlarEmail } = useAuth();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -22,13 +23,19 @@ export const SignUp = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await signup(user.email, user.password, user.name);
+      await controlarEmail(e.target.email.value);
+      await signup(
+        e.target.name.value,
+        e.target.email.value,
+        e.target.password.value
+      );
+
       navigate("/");
     } catch (error) {
       if (error.code === "auth/invalid-email") {
         toast.error("Invalid email");
-        console.log(error.message);
       }
+      toast.error(error.message);
     }
   };
   return (

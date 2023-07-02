@@ -7,28 +7,21 @@ import SearchBar from "../SearchBar/SearchBar";
 import style from "./Header.module.css";
 import Navbar from "../Navbar/Navbar";
 import { useAuth } from "../Auth/authContext";
-
+import { auth } from "../Auth/firebase";
 const Header = () => {
   const navigate = useNavigate();
-  const { user, logOut } = useAuth();
-  const [isLogged, setIsLogged] = useState(false);
+  const { logOut } = useAuth();
+  //const [isLogged, setIsLogged] = useState(false);
 
   const handleLogOut = async () => {
     try {
       await logOut();
-      setIsLogged(false);
       navigate("/");
     } catch (error) {
       console.log(error);
     }
   };
-  useEffect(() => {
-    const token = window.localStorage.getItem("token");
-    console.log("aca token", token);
-    if (token) {
-      setIsLogged(true);
-    }
-  }, []);
+  useEffect(() => {}, []);
   return (
     <div>
       <div className={style.headerFlex}>
@@ -40,7 +33,8 @@ const Header = () => {
         />
         <div className={style.inputsSB}>
           <SearchBar />
-          {!isLogged && (
+
+          {!auth.currentUser && (
             <div className={style.inputs}>
               <button>
                 <img
@@ -64,7 +58,8 @@ const Header = () => {
               </button>
             </div>
           )}
-          {isLogged && (
+
+          {auth.currentUser && (
             <div className={style.inputs}>
               <button>
                 <img

@@ -59,7 +59,7 @@ export const LogIn = () => {
   return (
     <div className="container-login">
       <form className="login-form" onSubmit={(e) => handleSubmit(e)}>
-        <h2>Log In</h2>
+        <h2 className="title">Log In</h2>
         <label htmlFor="user_name" className="label">
           Username
         </label>
@@ -89,16 +89,18 @@ export const LogIn = () => {
         <button type="submit" className="login-button">
           Log in
         </button>
+      </form>
+      <div className="form-body">
+        <button className="login-button" onClick={handleGoogleSignIn}>
+          Log in with <FcGoogle />
+        </button>
+        <h6 className="forgot-p" onClick={handleForgotPassword}>
+          Forgot your password?
+        </h6>
         <span>
           Don't have an account? <Link to="/signup">Create one now</Link>
         </span>
-      </form>
-      <button className="forgot-p" onClick={handleForgotPassword}>
-        Forgot your password?
-      </button>
-      <button className="login-button" onClick={handleGoogleSignIn}>
-        Log in with <FcGoogle />
-      </button>
+      </div>
     </div>
   );
 };
