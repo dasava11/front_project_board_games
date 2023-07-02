@@ -11,35 +11,57 @@ import {
   sendPasswordResetEmail,
 } from "firebase/auth";
 import { auth } from "../Auth/firebase";
+import { toast } from "react-toastify";
 export const authContext = createContext();
+const userUrl = import.meta.env.VITE_URL_USERS;
 
-//este hook me va a dar la informacion del usuario en todos lados q lo llame
 export const useAuth = () => {
   const context = useContext(authContext);
   return context;
 };
 
 export const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(null);
+  const [userAuth, setUserAuth] = useState(null);
 
-  const signup = async (first_name, last_name, email, password) => {
+  const signup = async (email, password, name) => {
     await createUserWithEmailAndPassword(auth, email, password).then(
-      async ({ user }) => {
-        user.getIdToken().then((idToken) => {
-          window.localStorage.setItem("token", idToken);
-          // const newUser = {                VER ACA Q TENGO Q MANDAR AL BACK PARA GENERAR NUEVO USER
-          //     email:email,
-          //     token:idToken,
-          //     first_name:first_name,
-          //     last_name:last_name,
-          // }
-        });
+      ({ user }) => {
+        user
+          .getIdToken()
+          .then((idToken) => {
+            window.localStorage.setItem("token", idToken);
+            const newUser = {
+              email: email,
+              token: idToken,
+              name: name,
+            };
+            axios
+              .post(userUrl, newUser)
+              .then((res) => {
+                setUserAuth({
+                  email: newUser.email,
+                  name: newUser.name,
+                  token: idToken,
+                });
+                if (res.status === 201) {
+                  toast.success("Usuario creado con exito!");
+                } else if (res.status === 400 || res.status === 500) {
+                  toast.error(res.data.message);
+                }
+              })
+              .catch((err) => {
+                console.error(err);
+              });
+          })
+          .catch((err) => console.error(err));
       }
     );
   };
+
   const resetPassword = (email) => {
     sendPasswordResetEmail(email);
   };
+
   const login = async (email, password) => {
     const credentials = await signInWithEmailAndPassword(
       auth,
@@ -52,27 +74,37 @@ export const AuthProvider = ({ children }) => {
     window.localStorage.setItem("token", credentials);
     console.log(credentials);
   };
-  const logOut = () => {
+
+  const logOut = async () => {
     try {
-      signOut(auth);
+      await signOut(auth);
       window.localStorage.removeItem("token");
       toast.success("Log out succesfull");
     } catch (error) {
       console.log(error.message);
     }
   };
-  const logInWithGoogle = () => {
+
+  const logInWithGoogle = async () => {
     const googleProvider = new GoogleAuthProvider();
-    signInWithPopup(auth, googleProvider);
+    return await signInWithPopup(auth, googleProvider);
   };
   useEffect(() => {
     onAuthStateChanged(auth, (currentUser) => {
-      setUser(currentUser);
+      setUserAuth(currentUser);
     });
   }, []);
+
   return (
     <authContext.Provider
-      value={{ signup, login, user, logOut, logInWithGoogle, resetPassword }}
+      value={{
+        signup,
+        login,
+        logOut,
+        userAuth,
+        logInWithGoogle,
+        resetPassword,
+      }}
     >
       {children}
     </authContext.Provider>
