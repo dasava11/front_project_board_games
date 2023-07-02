@@ -46,7 +46,7 @@ const CardDetail = () => {
     if (duplicate) {
       for (let index = 0; index < cart.length; index++) {
         let g = cart[index];
-        if (g.game_id == game.game_id) {
+        if (g.game_id === game.game_id) {
           g.count = g.count + 1;
           g.total_price = g.count * g.price;
         }
@@ -58,8 +58,6 @@ const CardDetail = () => {
       setCart([...cart, game]);
     }
   };
-
-  console.log(cart);
 
   return loading ? (
     <h1>Cargando...</h1>
