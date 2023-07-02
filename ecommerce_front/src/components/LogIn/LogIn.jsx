@@ -9,7 +9,7 @@ import { FcGoogle } from "react-icons/fc";
 export const LogIn = () => {
   const navigate = useNavigate();
   const [error, setError] = useState();
-  const [input, setInput] = useState({
+  const [user, setUser] = useState({
     email: "",
     password: "",
   });
@@ -27,9 +27,9 @@ export const LogIn = () => {
     }
   };
   const handleForgotPassword = async () => {
-    if (!input.email) return setError("Please write your email");
+    if (!user.email) return setError("Please write your email");
     try {
-      await resetPassword(input.email);
+      await resetPassword(user.email);
       toast.success("We sent you an email to reset your password!");
     } catch (error) {
       console.log(error);
@@ -38,7 +38,7 @@ export const LogIn = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await login(input.email, input.password);
+      await login(user.email, user.password);
       toast.success("Successful Log in");
       navigate("/");
     } catch (error) {
@@ -51,15 +51,15 @@ export const LogIn = () => {
       }
     }
   };
-  const handleInput = (e) => {
+  const handleUser = (e) => {
     const { name, value } = e.target;
-    setInput({ ...input, [name]: value });
+    setUser({ ...user, [name]: value });
   };
 
   return (
     <div className="container-login">
       <form className="login-form" onSubmit={(e) => handleSubmit(e)}>
-        <h2>Log In</h2>
+        <h2 className="title">Log In</h2>
         <label htmlFor="user_name" className="label">
           Username
         </label>
@@ -67,8 +67,10 @@ export const LogIn = () => {
           className="login-form-inputs"
           type="email"
           name="email"
-          value={input.email}
-          onChange={handleInput}
+          id="email"
+          value={user.email}
+          onChange={handleUser}
+          placeholder="yourname@company.com"
         ></input>
         {error && <h6 className="error">{error}</h6>}
         <label htmlFor="password" className="label">
@@ -78,23 +80,27 @@ export const LogIn = () => {
           className="login-form-inputs"
           type="password"
           name="password"
-          value={input.password}
-          onChange={handleInput}
+          email="email"
+          value={user.password}
+          onChange={handleUser}
+          placeholder="******"
         ></input>
 
         <button type="submit" className="login-button">
           Log in
         </button>
+      </form>
+      <div className="form-body">
+        <button className="login-button" onClick={handleGoogleSignIn}>
+          Log in with <FcGoogle />
+        </button>
+        <h6 className="forgot-p" onClick={handleForgotPassword}>
+          Forgot your password?
+        </h6>
         <span>
           Don't have an account? <Link to="/signup">Create one now</Link>
         </span>
-      </form>
-      <button className="forgot-p" onClick={handleForgotPassword}>
-        Forgot your password?
-      </button>
-      <button className="login-button" onClick={handleGoogleSignIn}>
-        Log in with <FcGoogle />
-      </button>
+      </div>
     </div>
   );
 };
