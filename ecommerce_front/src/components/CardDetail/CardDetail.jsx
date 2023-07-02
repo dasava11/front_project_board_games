@@ -141,30 +141,3 @@ const CardDetail = () => {
 };
 
 export default CardDetail;
-
-/*        let local = JSON.parse(localStorage.getItem("cart"));
-       let total = parseInt(JSON.parse(localStorage.getItem("total")));
-
-       if (local && total) {
-         let duplicate = local.find((g) => g.game_id === game.game_id);
-         if (duplicate) {
-           duplicate.count += 1;
-           localStorage.setItem("cart", JSON.stringify(local));
-           localStorage.setItem(
-             "total",
-             JSON.stringify(total + parseInt(game.price))
-           );
-         } else {
-           game.count = 1;
-           local.push(game);
-           localStorage.setItem("cart", JSON.stringify(local));
-           localStorage.setItem(
-             "total",
-             JSON.stringify(total + parseInt(game.price))
-           );
-         }
-       } else {
-         game.count = 1;
-         localStorage.setItem("cart", JSON.stringify([local]));
-         localStorage.setItem("total", JSON.stringify(parseInt(game.price)));
-       } */
