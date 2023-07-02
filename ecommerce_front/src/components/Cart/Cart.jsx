@@ -5,14 +5,13 @@ import styles from "./Cart.module.css";
 const Cart = () => {
   //let cart = JSON.parse(localStorage.getItem("cart"));
   const [order, setOrder] = useState(JSON.parse(localStorage.getItem("cart")));
-
+  let suma = 0;
 
   
   //useLocalStorage("order", []);
 
-  // useEffect(() => {
-  //   setOrder(cart);
-  // }, [order]);
+  useEffect(() => {
+  }, [localStorage.setItem("cart", JSON.stringify(order))]);
   
 
   ///// VVV REVISAR LA IDEA VVV /////////
@@ -71,7 +70,7 @@ const Cart = () => {
                   delete
                 </button>
               </>
-              <h1 className={styles.priceOrder}>$ {game.price} USD</h1>
+              <h1 className={styles.priceOrder}>$ {(game.price * game.count).toFixed(2)} USD</h1>
             </div>
           );
         })}
@@ -79,13 +78,13 @@ const Cart = () => {
         <h1>TOTAL</h1>
         {order &&
           order.map((game) => {
-            let suma = 0;
-            if (typeof game.total_price !== "number") {
-              game.total_price = parseInt(game.total_price);
-            }
-            suma += game.total_price;
-            <h1>{suma}</h1>;
+            suma = suma + (Number((game.price * game.count)));
+            // if (typeof game.total_price !== "number") {
+            //   game.total_price = parseInt(game.total_price);
+            // }
+            
           })}
+          <h1>{suma.toFixed(2)}</h1>;
       </div>
     </div>
   );
