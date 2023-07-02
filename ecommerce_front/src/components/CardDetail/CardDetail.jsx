@@ -7,6 +7,7 @@ import shoppingCart from "../../Photos/plusCart.svg";
 import MoreDetail from "../MoreDetail/MoreDetail";
 import { ChevronDownIcon, ChevronUpIcon } from "@chakra-ui/icons";
 import useLocalStorage from "../LocalStorage/useLocalStorage";
+import { toast } from "react-toastify";
 
 const CardDetail = () => {
   const { id } = useParams();
@@ -52,10 +53,12 @@ const CardDetail = () => {
         }
       }
       setCart([...cart]);
+      toast.success(`${game.name} added to cart`);
     } else {
       game.count = +1;
       game.total_price = game.price;
       setCart([...cart, game]);
+      toast.success(`${game.name} added to cart`);
     }
   };
 
