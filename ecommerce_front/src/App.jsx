@@ -11,9 +11,16 @@ import Footer from "./components/Footer/Footer";
 import ContactUs from "./components/ContactUs/ContactUs";
 import { LogIn } from "./components/LogIn/LogIn";
 import { SignUp } from "./components/SignUp/SignUp";
+
+
 import Faq from "./components/FAQ/Faq";
+import { AuthProvider } from "./components/Auth/authContext";
+//import { ProtectedRoutes } from "./components/Auth/ProtectedRoutes";
+
+
 import PayPalComponent from "./components/Paypal/Paypal";
 import Cart from "./components/Cart/Cart";
+
 
 function App() {
   //localStorage.clear();
@@ -21,22 +28,25 @@ function App() {
     <div>
       <BrowserRouter>
         <ToastContainer />
-        <Header />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/createproduct" element={<CreateGame />} />
-          <Route path="/games" element={<Games />} />
-          <Route path="details/:id" element={<CardDetail />} />
-          <Route path="/contact" element={<ContactUs />} />
 
-          <Route path="/login" element={<LogIn />} />
-          <Route path="/signup" element={<SignUp />} />
+        <AuthProvider>
+          <Header />
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/createproduct" element={<CreateGame />} />
+            <Route path="/games" element={<Games />} />
+            <Route path="details/:id" element={<CardDetail />} />
+            <Route path="/contact" element={<ContactUs />} />
 
-          <Route path="/questions" element={<Faq />} />
-          <Route path="/paypal" element={<PayPalComponent />} />
+            <Route path="/login" element={<LogIn />} />
+            <Route path="/signup" element={<SignUp />} />
+             <Route path="/paypal" element={<PayPalComponent />} />
           <Route path="/cart" element={<Cart />} />
-        </Routes>
-        <Footer />
+            <Route path="/questions" element={<Faq />} />
+          </Routes>
+          <Footer />
+        </AuthProvider>
+
       </BrowserRouter>
     </div>
   );
