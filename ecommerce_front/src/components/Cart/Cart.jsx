@@ -1,67 +1,77 @@
 import { useEffect, useState } from "react";
-//import useLocalStorage from "../LocalStorage/useLocalStorage";
+import {useNavigate} from "react-router-dom";
+
 import styles from "./Cart.module.css";
 
 const Cart = () => {
-  //let cart = JSON.parse(localStorage.getItem("cart"));
   const [order, setOrder] = useState(JSON.parse(localStorage.getItem("cart")));
   let suma = 0;
+  const navigate = useNavigate();
 
-  
-  //useLocalStorage("order", []);
+  useEffect(() => {}, [localStorage.setItem("cart", JSON.stringify(order))]);
 
-  useEffect(() => {
-  }, [localStorage.setItem("cart", JSON.stringify(order))]);
-  
-
-  ///// VVV REVISAR LA IDEA VVV /////////
-
-    const handleAmount = (event) => {
-    
+  const handleAmount = (event) => {
     const { value } = event.target;
     order.map((game) => {
       if (value === `${game.game_id}_increase`) {
-        game.count ++;
-        setOrder ([...order]);
-        console.log(order);
+        game.count++;
+        setOrder([...order]);
       }
       if (value === `${game.game_id}_decrease`) {
-        game.count --;
-        setOrder ([...order]);
-        console.log(order);
+        game.count--;
+        setOrder([...order]);
       }
     });
   };
 
   const handleDelete = (event) => {
-    const {value} = event.target;
-    console.log(typeof value);
-    let update = order.filter((game) => game.game_id !== parseInt(value));
-    console.log(update);
-    setOrder([...update]);
-}
+    const { value } = event.target;
 
+    let update = order.filter((game) => game.game_id !== parseInt(value));
+
+    setOrder([...update]);
+  };
 
   return (
     <div className={styles.cartComponent}>
       {order &&
         order.map((game) => {
           return (
-            <div className={styles.containerCartOrder} key={order.indexOf(game)}>
-              <img
-                className={styles.imgInCart}
-                src={game.image?.url}
+            <div
+              className={styles.containerCartOrder}
+              key={order.indexOf(game)}
+            >
+              <div className={styles.imgInCart}>
+              <img src={game.image?.url}
                 alt={game.name}
               />
+              </div>
+              <div>
               <h1 className={styles.nameGameInOrder}>{game.name}</h1>
-              <>
-                <button value = {`${game.game_id}_decrease`} disabled = {game.count === 1 ? true : false} onClick = {handleAmount}>-</button>
+              </div>
+              <div>
+                <button
+                  className={styles.gameAmountBtn}
+                  value={`${game.game_id}_decrease`}
+                  disabled={game.count === 1 ? true : false}
+                  onClick={handleAmount}
+                >
+                  -
+                </button>
                 <input
                   className={styles.countGameInOrder}
                   type="text"
                   placeholder={game.count}
                 />
-                <button value = {`${game.game_id}_increase`} onClick = {handleAmount}>+</button>
+                <button
+                  className={styles.gameAmountBtn}
+                  value={`${game.game_id}_increase`}
+                  onClick={handleAmount}
+                >
+                  +
+                </button>
+                </div>
+                <div>
                 <button
                   value={game.game_id}
                   className={styles.gameDeleteByOrder}
@@ -69,22 +79,25 @@ const Cart = () => {
                 >
                   delete
                 </button>
-              </>
-              <h1 className={styles.priceOrder}>$ {(game.price * game.count).toFixed(2)} USD</h1>
+              </div>
+              <div>
+              <h1 className={styles.priceOrder}>
+                $ {(game.price * game.count).toFixed(2)} USD
+              </h1>
+              </div>
             </div>
           );
         })}
-      <div>
-        <h1>TOTAL</h1>
+      <div className= {styles.checkoutContainer}>
+        <div className = {styles.totalContainer}>
+        <h1 className={styles.total}>TOTAL</h1>
         {order &&
           order.map((game) => {
-            suma = suma + (Number((game.price * game.count)));
-            // if (typeof game.total_price !== "number") {
-            //   game.total_price = parseInt(game.total_price);
-            // }
-            
+            suma = suma + Number(game.price * game.count);
           })}
-          <h1>{suma.toFixed(2)}</h1>;
+        <h1 className={styles.totalPriceOrder}>$ {suma.toFixed(2)} USD</h1>
+        </div>
+        <button className = {styles.gameDeleteByOrder} onClick = {() => navigate("/paypal")}>CHECK OUT</button>
       </div>
     </div>
   );

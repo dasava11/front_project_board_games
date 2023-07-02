@@ -1,10 +1,12 @@
 import React from "react";
 import style from "./Navbar.module.css";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import heartIcon from "../../Photos/heartIconEmpty.svg";
 import shoppingCart from "../../Photos/shoppingCart.svg";
 
 const Navbar = () => {
+  const navigate = useNavigate();
+
   return (
     <div className={style.navBar}>
       <ul className={style.listFlex}>
@@ -48,24 +50,6 @@ const Navbar = () => {
             Create Game
           </NavLink>
         </li>
-        <li>
-          <NavLink
-            to="/paypal"
-            className={({ isActive }) =>
-              isActive ? style.active : style.disable
-            }
-          >
-            Paypal
-          </NavLink>
-          <NavLink
-            to="/cart"
-            className={({ isActive }) =>
-              isActive ? style.active : style.disable
-            }
-          >
-            Shopping Cart
-          </NavLink>
-        </li>
       </ul>
       <div className={style.navBarIcons}>
         <button className={style.heartIcon}>
@@ -77,6 +61,7 @@ const Navbar = () => {
             alt="Shopping cart"
             width="30px"
             height="30px"
+            onClick={() => navigate("/cart")}
           />
         </button>
       </div>
