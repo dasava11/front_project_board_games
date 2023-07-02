@@ -144,6 +144,7 @@ export default function CreateGame() {
       </div>
       <div className="form-container">
         <form onSubmit={(e) => handleSubmit(e)} className="form">
+
           {next === false ? 
             <FirsPage
             input = {input}
@@ -326,6 +327,7 @@ export default function CreateGame() {
           <button disabled= {next === false ? true : false} onClick={handleNext}>Prev</button>
           <button disabled={next === false ? false: true} onClick={handleNext}>Next</button>
           
+
         </form>
         <CreateCategories
           setIsOpen={handleModalCreateCategories}
