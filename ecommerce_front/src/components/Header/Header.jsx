@@ -21,7 +21,9 @@ const Header = () => {
       console.log(error);
     }
   };
-  useEffect(() => {}, []);
+  useEffect(() => {
+    const token = window.localStorage.getItem("token");
+  }, []);
   return (
     <div>
       <div className={style.headerFlex}>

@@ -24,7 +24,7 @@ export const useAuth = () => {
 export const AuthProvider = ({ children }) => {
   const [userAuth, setUserAuth] = useState(null);
 
-  const signup = async (email, password, name) => {
+  const signup = async (name, email, password) => {
     await createUserWithEmailAndPassword(auth, email, password).then(
       ({ user }) => {
         user
@@ -33,19 +33,19 @@ export const AuthProvider = ({ children }) => {
             window.localStorage.setItem("token", idToken);
             const newUser = {
               email: email,
-              token: idToken,
               name: name,
+              token: idToken,
             };
             axios
               .post(userUrl, newUser)
               .then((res) => {
                 setUserAuth({
-                  email: newUser.email,
                   name: newUser.name,
+                  email: newUser.email,
                   token: idToken,
                 });
                 if (res.status === 201) {
-                  toast.success("Usuario creado con exito!");
+                  toast.success("User created succesully!");
                 } else if (res.status === 400 || res.status === 500) {
                   toast.error(res.data.message);
                 }
@@ -58,6 +58,7 @@ export const AuthProvider = ({ children }) => {
       }
     );
   };
+
   const controlarEmail = async (email) => {
     const methods = await fetchSignInMethodsForEmail(auth, email);
     if (methods.length > 0) {
@@ -65,7 +66,7 @@ export const AuthProvider = ({ children }) => {
     }
   };
   const resetPassword = (email) => {
-    sendPasswordResetEmail(email);
+    sendPasswordResetEmail(auth, email);
   };
 
   const login = async (email, password) => {
