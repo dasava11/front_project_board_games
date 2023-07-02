@@ -24,6 +24,7 @@ const Header = () => {
   useEffect(() => {
     const token = window.localStorage.getItem("token");
   }, []);
+  console.log(auth);
   return (
     <div>
       <div className={style.headerFlex}>
@@ -62,17 +63,20 @@ const Header = () => {
           )}
 
           {auth.currentUser && (
-            <div className={style.inputs}>
-              <button>
-                <img
-                  src={dice1}
-                  alt="sign un"
-                  width="45px"
-                  height="45px"
-                  onClick={handleLogOut}
-                />
-                <h6>Sign Out</h6>
-              </button>
+            <div>
+              <h5 className={style.name}>{auth.currentUser.email}</h5>
+              <div className={style.inputs}>
+                <button>
+                  <img
+                    src={dice1}
+                    alt="sign un"
+                    width="45px"
+                    height="45px"
+                    onClick={handleLogOut}
+                  />
+                  <h6>Sign Out</h6>
+                </button>
+              </div>
             </div>
           )}
         </div>
