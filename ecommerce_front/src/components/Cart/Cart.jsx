@@ -4,12 +4,22 @@ import { useNavigate } from "react-router-dom";
 import styles from "./Cart.module.css";
 
 const Cart = () => {
+  
   const [order, setOrder] = useState(JSON.parse(localStorage.getItem("cart")));
+  
   let suma = 0;
   const navigate = useNavigate();
-
-  useEffect(() => {}, [localStorage.setItem("cart", JSON.stringify(order))]);
-
+  
+  
+ useEffect(() => {
+    return () => {
+      localStorage.setItem("cart", JSON.stringify(order))
+    }
+  }, [localStorage.setItem("cart", JSON.stringify(order)),
+      JSON.parse(localStorage.getItem("cart")) ]);
+  
+  
+  
   const handleAmount = (event) => {
     const { value } = event.target;
     order.map((game) => {
@@ -26,10 +36,9 @@ const Cart = () => {
 
   const handleDelete = (event) => {
     const { value } = event.target;
-
     let update = order.filter((game) => game.game_id !== parseInt(value));
-
     setOrder([...update]);
+    console.log(order)
   };
 
   return (
@@ -98,6 +107,7 @@ const Cart = () => {
           <h1 className={styles.totalPriceOrder}>$ {suma.toFixed(2)} USD</h1>
         </div>
         <button
+          disabled={order.length < 1 ? true : false}
           className={styles.gameDeleteByOrder}
           onClick={() => navigate("/paypal")}
         >
