@@ -1,26 +1,36 @@
 import React from 'react';
-import { PayPalScriptProvider, PayPalButtons } from '@paypal/react-paypal-js';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { PayPalButtons } from '@paypal/react-paypal-js';
+
+import style from '../Paypal/Paypal.module.css';
 
 const PayPalPaymentButton = () => {
+  const location = useLocation();
+  const navigate = useNavigate();
+  const { amount, buys } = location.state;
+
   const onSuccess = (data) => {
-    // Acciones a realizar después de un pago exitoso
-    console.log('Pago exitoso:', data);
-    alert("Pago exitoso!")
+    // Acciones después de un pago exitoso
+    const newData = { ...data, buys };
+    console.log('Pago exitoso:', newData);
+    
+    navigate('/cart');
+    alert("Pago exitoso!");
   };
 
   return (
-    <div>
-      <h2>Realizar pago</h2>
-      <PayPalScriptProvider options={{ 'client-id': 'AZF_WsZpFRtTjw6nRirMxga20RmU3isWNrl1BR_udWCxEtPh2MXQ0rXgPkAqAOnj5PHFWKckEsMmSnGm' }}>
+    <div className={style.paypalContainer}>
+      <h1 className={style.pago}>Realizar pago</h1>
+      <div>
         <PayPalButtons
-          amount="10.00"
+          amount={amount}
           currency="USD"
           createOrder={(data, actions) => {
             return actions.order.create({
               purchase_units: [
                 {
                   amount: {
-                    value: '10.00',
+                    value: amount,
                   },
                 },
               ],
@@ -28,7 +38,7 @@ const PayPalPaymentButton = () => {
           }}
           onApprove={onSuccess}
         />
-      </PayPalScriptProvider>
+      </div>
     </div>
   );
 };
