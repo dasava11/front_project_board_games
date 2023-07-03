@@ -79,17 +79,22 @@ export const AuthProvider = ({ children }) => {
     sendPasswordResetEmail(auth, email);
   };
 
+
   const login = async (email, password) => {
-    const credentials = await signInWithEmailAndPassword(
-      auth,
-      email,
-      password
-    ).then(({ user }) => user.accessToken);
-    if (window.localStorage.getItem("token")) {
+    console.log(auth)
+    const credentials = await signInWithEmailAndPassword(auth, email, password);
+    const {user} = credentials;
+
+    if(!user.emailVerified){
+      await signOut(auth);
       window.localStorage.removeItem("token");
+      throw new Error("Verify the account with the link that we sent to your email");
+    }else{
+      if (window.localStorage.getItem("token")) {
+        window.localStorage.removeItem("token");
+      }
+      window.localStorage.setItem("token",  user.accessToken);
     }
-    window.localStorage.setItem("token", credentials);
-    console.log(credentials);
   };
 
   const logOut = async () => {
@@ -104,7 +109,11 @@ export const AuthProvider = ({ children }) => {
 
   const logInWithGoogle = async () => {
     const googleProvider = new GoogleAuthProvider();
-    return await signInWithPopup(auth, googleProvider);
+    console.log('googleProvider')
+    console.log(googleProvider)
+    const userCredential =  await signInWithPopup(auth, googleProvider);
+    console.log(userCredential.user.emailVerified);
+    // return await signInWithPopup(auth, googleProvider);
   };
   useEffect(() => {
     onAuthStateChanged(auth, (currentUser) => {

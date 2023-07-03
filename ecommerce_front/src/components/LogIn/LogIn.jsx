@@ -26,6 +26,7 @@ export const LogIn = () => {
       toast.error("Oh! no! Something went wrong! Try again!");
     }
   };
+
   const handleForgotPassword = async () => {
     if (!user.email) return setError("Please write your email");
     try {
@@ -35,20 +36,26 @@ export const LogIn = () => {
       console.log(error);
     }
   };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       await login(user.email, user.password);
+      // console.log('respuesta')
+      // console.log(respuesta)
       toast.success("Successful Log in");
       navigate("/");
     } catch (error) {
-      console.log(error.code);
+      console.log('capturando el error');
+      console.log(error);
       if (error.code === "auth/user-not-found") {
         toast.error("User not found");
         navigate("/signup");
-      } else if (error.code === "auth/wrong-password") {
+      }
+      if (error.code === "auth/wrong-password") {
         toast.error("Wrong password");
       }
+      toast.error(error.message);
     }
   };
   const handleUser = (e) => {
