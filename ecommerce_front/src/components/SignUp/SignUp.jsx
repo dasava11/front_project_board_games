@@ -34,8 +34,10 @@ export const SignUp = () => {
     } catch (error) {
       if (error.code === "auth/invalid-email") {
         toast.error("Invalid email");
-        console.log(error);
+      }else{
+        toast.error(error.message);
       }
+
     }
   };
   return (

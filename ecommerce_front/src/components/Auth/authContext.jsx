@@ -72,7 +72,7 @@ export const AuthProvider = ({ children }) => {
   const controlarEmail = async (email) => {
     const methods = await fetchSignInMethodsForEmail(auth, email);
     if (methods.length > 0) {
-      throw new Error("there is already a user with that email");
+      throw new Error("There is already a user with that email");
     }
   };
   const resetPassword = (email) => {
@@ -112,7 +112,16 @@ export const AuthProvider = ({ children }) => {
     console.log('googleProvider')
     console.log(googleProvider)
     const userCredential =  await signInWithPopup(auth, googleProvider);
+    console.log('userCredential.user');
+    console.log(userCredential.user);
+    console.log('userCredential.user.emailVerified');
     console.log(userCredential.user.emailVerified);
+    if(!userCredential.user.emailVerified){
+      console.log('loginWithGoogle no esta verificado')
+      await signOut(auth);
+      window.localStorage.removeItem("token");
+      throw new Error("Verify the account with the link that we sent to your email");
+    }
     // return await signInWithPopup(auth, googleProvider);
   };
   useEffect(() => {
