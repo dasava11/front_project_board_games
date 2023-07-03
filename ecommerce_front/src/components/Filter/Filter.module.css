@@ -21,7 +21,7 @@
 
 .filterBtn{
     border: 1px solid transparent;
-    color: white;
+    color: hsl(240, 34%, 16%, 80%);
     background-color: #FADA5C;
     font-weight: bold;
     height: 30px;
