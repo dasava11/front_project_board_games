@@ -333,7 +333,7 @@ export default function CreateGame() {
                     margin: "0.5rem",
                     fontSize: "medium",
                     borderRadius: "8px",
-                    height: "33px"
+                    height: "33px",
                   }}
                 >
                   {allLanguages &&
