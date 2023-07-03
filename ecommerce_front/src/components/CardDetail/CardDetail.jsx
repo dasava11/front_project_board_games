@@ -48,12 +48,17 @@ const CardDetail = () => {
       for (let index = 0; index < cart.length; index++) {
         let g = cart[index];
         if (g.game_id === game.game_id) {
+          if(g.count < g.stock) {
           g.count = g.count + 1;
           g.total_price = g.count * g.price;
+          setCart([...cart]);
+          toast.success(`${game.name} added to cart`);
+          } else if (g.count >= g.stock) {
+            toast.error(`${game.name} exceeds stock`);
+          }
         }
       }
-      setCart([...cart]);
-      toast.success(`${game.name} added to cart`);
+      
     } else {
       game.count = +1;
       game.total_price = game.price;
