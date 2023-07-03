@@ -10,10 +10,18 @@ const Cart = () => {
   let suma = 0;
   const navigate = useNavigate();
   
+  const handleTabClose = (e) => {
+    e.preventDefault();
+    localStorage.setItem("cart", JSON.stringify(order));
+  }
   
  useEffect(() => {
+
+    window.addEventListener('beforeunload', handleTabClose);
+
     return () => {
-      localStorage.setItem("cart", JSON.stringify(order))
+      localStorage.setItem("cart", JSON.stringify(order));
+      window.removeEventListener('beforeunload', handleTabClose);
     }
   }, [localStorage.setItem("cart", JSON.stringify(order)),
       JSON.parse(localStorage.getItem("cart")) ]);
