@@ -1,29 +1,83 @@
-import React from "react";
+import React, { useState } from "react";
+import "./signup.css";
+import { Link } from "react-router-dom";
+import { useAuth } from "../Auth/authContext";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 export const SignUp = () => {
-  const handleSubmit = () => {};
+  const navigate = useNavigate();
+
+  const [user, setUser] = useState({
+    name: "",
+    email: "",
+    password: "",
+  });
+  const { signup, controlarEmail } = useAuth();
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setUser({ ...user, [name]: value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      await signup(
+        e.target.name.value,
+        e.target.email.value,
+        e.target.password.value
+      );
+      await controlarEmail(e.target.email.value);
+      navigate("/");
+    } catch (error) {
+      if (error.code === "auth/invalid-email") {
+        toast.error("Invalid email");
+        console.log(error);
+      }
+    }
+  };
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        <label>Full name:</label>
-        <input type="text"></input>
-        <label>Address:</label>
-        <input type="text"></input>
-        <label>ZIP Code</label>
-        <input type="number"></input>
-        <label>State</label>
-        <input></input>
-        <label>City</label>
-        <input></input>
-        <label>Phone number</label>
-        <input></input>
-        <label>Email:</label>
-        <input></input>
-        <label>Password:</label>
-        <input type="password"></input>
-        <label>Repeat Password:</label>
-        <input type="password"></input>
-        <button type="submit">Sign up</button>
+    <div className="signup-container">
+      <form className="signup-form" onSubmit={(e) => handleSubmit(e)}>
+        <h2 className="create-account">Create your account</h2>
+
+        <label htmlFor="name">Full Name:</label>
+        <input
+          className="inputs-signup"
+          type="text"
+          name="name"
+          id="name"
+          value={user.name}
+          onChange={handleChange}
+        ></input>
+        <label htmlFor="email">Email:</label>
+        <input
+          className="inputs-signup"
+          type="text"
+          name="email"
+          id="email"
+          value={user.email}
+          placeholder="youremail@yourcompany.com"
+          onChange={handleChange}
+        ></input>
+
+        <label htmlFor="password">Password:</label>
+        <input
+          className="inputs-signup"
+          type="password"
+          name="password"
+          id="password"
+          value={user.password}
+          onChange={handleChange}
+        ></input>
+
+        <button type="submit" className="signup-button">
+          Create Account
+        </button>
+        <span>
+          Already have an account? <Link to="/login">Log in</Link>
+        </span>
       </form>
     </div>
   );
