@@ -42,8 +42,19 @@ export default function CreateGame() {
   const [modalMechanic, setModalMechanic] = useState(false);
   const [modalEditorial, setModalEditorial] = useState(false);
   const [modalLanguage, setModalLanguage] = useState(false);
-  const [errors, setErrors] = useState({});
+  const [errors, setErrors] = useState({
+    name:"",
+    released:"",
+    price:"",
+    weight:"",
+    age:"",
+    players_min:"",
+    players_max:"",
+    playing_time:"",
+    stock:""
+  });
   const [next, setNext] = useState(false);
+  const [allowNext, setAllowNext] = useState(false)
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -136,196 +147,216 @@ export default function CreateGame() {
       setNext(true)
     }
   }
+
+
   
   return (
     <>
       <div className="maincontainer">
-        <h2 className="title-form">Create Product</h2>
+        
       </div>
       <div className="form-container">
         <form onSubmit={(e) => handleSubmit(e)} className="form">
+          <h2 className="title-form">Create Product</h2>
           {next === false ? 
             <FirsPage
             input = {input}
             errors = {errors}
             handleChange = {handleChange}
-            /> : <><Select
-              mode="multiple"
-              onChange={(value) => handleChangeAuthors(value)}
-              name="author_name"
-              style={{
-                width: "30%",
-                margin: "0.5rem",
-                boxShadow: " 0 2px 4px rgba(0, 0, 0, 0.4)",
-                fontSize: "medium",
-              }}
-              placeholder="Select authors"
-            >
-              {allAuthors &&
-                allAuthors.map((aut) => {
-                  return (
-                    <Option key={aut.author_name} value={aut.author_name}>
-                      {aut.author_name}
-                    </Option>
-                  );
-                })}
-            </Select>
-            <p className="create-button" onClick={handleModalCreateAuthor}>
-              Create authors
-            </p>
-            <Select
-              mode="multiple"
-              onChange={(value) => handleChangeCategories(value)}
-              name="categories_name"
-              style={{
-                width: "30%",
-                margin: "0.5rem",
-                boxShadow: " 0 2px 4px rgba(0, 0, 0, 0.4)",
-                fontSize: "medium",
-              }}
-              placeholder="Select categories"
-            >
-              {allCategories &&
-                allCategories.map((cat) => {
-                  return (
-                    <Option key={cat.category_name} value={cat.category_name}>
-                      {cat.category_name}
-                    </Option>
-                  );
-                })}
-            </Select>
-            <p className="create-button" onClick={handleModalCreateCategories}>
-              Create Categories
-            </p>
-            <Select
-              mode="multiple"
-              onChange={(value) => handleChangeDesigners(value)}
-              name="designers_name"
-              style={{
-                width: "30%",
-                margin: "0.5rem",
-                boxShadow: " 0 2px 4px rgba(0, 0, 0, 0.4)",
-                fontSize: "medium",
-              }}
-              placeholder="Select designers"
-            >
-              {allDesigners &&
-                allDesigners.map((des) => {
-                  return (
-                    <Option key={des.designer_name} value={des.designer_name}>
-                      {des.designer_name}
-                    </Option>
-                  );
-                })}
-            </Select>
-            <p className="create-button" onClick={handleModalCreateDesigner}>
-              Create Designers
-            </p>
-            <Select
-              mode="multiple"
-              name="editorial_name"
-              onChange={(value) => handleChangeEditorial(value)}
-              style={{
-                width: "30%",
-                margin: "0.5rem",
-                boxShadow: " 0 2px 4px rgba(0, 0, 0, 0.4)",
-                fontSize: "medium",
-              }}
-              placeholder="Select editorials"
-            >
-              {allEditorials &&
-                allEditorials.map((edit) => {
-                  return (
-                    <Option key={edit.editorial_name} value={edit.editorial_name}>
-                      {edit.editorial_name}
-                    </Option>
-                  );
-                })}
-            </Select>
-            <p className="create-button" onClick={handleModalCreateEditorial}>
-              Create Editorials
-            </p>
-            <Select
-              onChange={(value) => handleChangeMechanics(value)}
-              name="mechanic_name"
-              mode="multiple"
-              placeholder="Select mechanics"
-              style={{
-                width: "30%",
-                margin: "0.5rem",
-                boxShadow: " 0 2px 4px rgba(0, 0, 0, 0.4)",
-                fontSize: "medium",
-              }}
-            >
-              {allMechanics &&
-                allMechanics.map((mec) => {
-                  return (
-                    <Option key={mec.mechanic_name} value={mec.mechanic_name}>
-                      {mec.mechanic_name}
-                    </Option>
-                  );
-                })}
-            </Select>
+            /> : <>
+            <div className="selectFlexCreate">
+              <Select
+                mode="multiple"
+                onChange={(value) => handleChangeAuthors(value)}
+                name="author_name"
+                style={{
+                  width: "100%",
+                  margin: "0.5rem",
+                  fontSize: "medium",
+                  height: "33px",
+                  border: "1px solid white",
+                  borderRadius: "8px"
+                }}
+                placeholder="Select authors"
+              >
+                {allAuthors &&
+                  allAuthors.map((aut) => {
+                    return (
+                      <Option key={aut.author_name} value={aut.author_name}>
+                        {aut.author_name}
+                      </Option>
+                    );
+                  })}
+              </Select>
+              <p className="create-button" onClick={handleModalCreateAuthor}>
+                Create
+              </p>
+            </div>
+            <div className="selectFlexCreate">
+              <Select
+                mode="multiple"
+                onChange={(value) => handleChangeCategories(value)}
+                name="categories_name"
+                style={{
+                  width: "100%",
+                  margin: "0.5rem",
+                  fontSize: "medium",
+                  height: "33px"
+                }}
+                placeholder="Select categories"
+              >
+                {allCategories &&
+                  allCategories.map((cat) => {
+                    return (
+                      <Option key={cat.category_name} value={cat.category_name}>
+                        {cat.category_name}
+                      </Option>
+                    );
+                  })}
+              </Select>
+              <p className="create-button" onClick={handleModalCreateCategories}>
+                Create
+              </p>
+            </div>
+            <div className="selectFlexCreate">
+              <Select
+                mode="multiple"
+                onChange={(value) => handleChangeDesigners(value)}
+                name="designers_name"
+                style={{
+                  width: "100%",
+                  margin: "0.5rem",
+                  fontSize: "medium",
+                  height: "33px"
+                }}
+                placeholder="Select designers"
+              >
+                {allDesigners &&
+                  allDesigners.map((des) => {
+                    return (
+                      <Option key={des.designer_name} value={des.designer_name}>
+                        {des.designer_name}
+                      </Option>
+                    );
+                  })}
+              </Select>
+              <p className="create-button" onClick={handleModalCreateDesigner}>
+                Create
+              </p>
+            </div>
+            <div className="selectFlexCreate">
+              <Select
+                mode="multiple"
+                name="editorial_name"
+                onChange={(value) => handleChangeEditorial(value)}
+                style={{
+                  width: "100%",
+                  margin: "0.5rem",
+                  fontSize: "medium",
+                  height: "33px"
+                }}
+                placeholder="Select editorials"
+              >
+                {allEditorials &&
+                  allEditorials.map((edit) => {
+                    return (
+                      <Option key={edit.editorial_name} value={edit.editorial_name}>
+                        {edit.editorial_name}
+                      </Option>
+                    );
+                  })}
+              </Select>
+              <p className="create-button" onClick={handleModalCreateEditorial}>
+                Create
+              </p>
+            </div>
+            <div className="selectFlexCreate">
+              <Select
+                onChange={(value) => handleChangeMechanics(value)}
+                name="mechanic_name"
+                mode="multiple"
+                placeholder="Select mechanics"
+                style={{
+                  width: "100%",
+                  margin: "0.5rem",
+                  fontSize: "medium",
+                  height: "33px"
+                }}
+              >
+                {allMechanics &&
+                  allMechanics.map((mec) => {
+                    return (
+                      <Option key={mec.mechanic_name} value={mec.mechanic_name}>
+                        {mec.mechanic_name}
+                      </Option>
+                    );
+                  })}
+              </Select>
             <p className="create-button" onClick={handleModalCreateMechanic}>
-              Create Mechanics
+              Create
             </p>
-            <Select
-              onChange={(value) => handleChangeThematics(value)}
-              name="thematic_name"
-              mode="multiple"
-              placeholder="Select thematics"
-              style={{
-                width: "30%",
-                margin: "0.5rem",
-                boxShadow: " 0 2px 4px rgba(0, 0, 0, 0.4)",
-                fontSize: "medium",
-              }}
-            >
-              {allThematics &&
-                allThematics.map((them) => {
-                  return (
-                    <Option key={them.thematic_name} value={them.thematic_name}>
-                      {them.thematic_name}
-                    </Option>
-                  );
-                })}
-            </Select>
-            <p className="create-button" onClick={handleModalCreateThematic}>
-              Create Thematics
-            </p>
-            <Select
-              onChange={(value) => handleChangeLanguages(value)}
-              name="languages_name"
-              mode="multiple"
-              placeholder="Select Language"
-              style={{
-                width: "30%",
-                margin: "0.5rem",
-                boxShadow: " 0 2px 4px rgba(0, 0, 0, 0.4)",
-                fontSize: "medium",
-                borderRadius: "8px",
-              }}
-            >
-              {allLanguages &&
-                allLanguages.map((len) => {
-                  return (
-                    <Option key={len.language_name} value={len.language_name}>
-                      {len.language_name}
-                    </Option>
-                  );
-                })}
-            </Select>
-            <p className="create-button" onClick={handleModalCreateLanguage}>
-              Create Languages
-            </p>
+            </div>
+            <div className="selectFlexCreate">
+              <Select
+                onChange={(value) => handleChangeThematics(value)}
+                name="thematic_name"
+                mode="multiple"
+                placeholder="Select thematics"
+                style={{
+                  width: "100%",
+                  margin: "0.5rem",
+                  fontSize: "medium",
+                  height: "33px"
+                }}
+              >
+                {allThematics &&
+                  allThematics.map((them) => {
+                    return (
+                      <Option key={them.thematic_name} value={them.thematic_name}>
+                        {them.thematic_name}
+                      </Option>
+                    );
+                  })}
+              </Select>
+              <p className="create-button" onClick={handleModalCreateThematic}>
+                Create
+              </p>
+            </div>
+            <div className="selectFlexCreate">
+                <Select
+                  onChange={(value) => handleChangeLanguages(value)}
+                  name="languages_name"
+                  mode="multiple"
+                  placeholder="Select Language"
+                  style={{
+                    width: "100%",
+                    margin: "0.5rem",
+                    fontSize: "medium",
+                    borderRadius: "8px",
+                    height: "33px"
+                  }}
+                >
+                  {allLanguages &&
+                    allLanguages.map((len) => {
+                      return (
+                        <Option key={len.language_name} value={len.language_name}>
+                          {len.language_name}
+                        </Option>
+                      );
+                    })}
+                </Select>
+                <p className="create-button" onClick={handleModalCreateLanguage}>
+                  Create
+                </p>
+            </div>
+            </>}
+              {next === false ? 
+              <a onClick={handleNext} className="next-button">
+              Next
+              </a> :
               <button type="submit" className="submit-button">
               Submit
-              </button>
-            </>}
-          
-          <button disabled= {next === false ? true : false} onClick={handleNext}>Prev</button>
-          <button disabled={next === false ? false: true} onClick={handleNext}>Next</button>
-          
+              </button>}
         </form>
         <CreateCategories
           setIsOpen={handleModalCreateCategories}
