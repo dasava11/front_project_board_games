@@ -1,6 +1,6 @@
 .pagination{
     display: flex;
-    justify-content: end;
+    justify-content: flex-end;
     align-items: center;
     width: 80%;
     gap: 1rem;
@@ -12,7 +12,7 @@
     border-radius: 10px;
     width: 2.5rem;
     height: 2.5rem;
-    color: white;
+    color:hsl(240, 34%, 16%, 80%);
     font-weight: bold;
 }
 

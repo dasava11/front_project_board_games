@@ -102,34 +102,28 @@ const FirsPage = (props) => {
             value={input.image}
             onChange={handleChange}
           />
-          <div className='formCreateDivFlex'>
-            <div className='formCreateDivFlexSub'>
-              <input
-                className="inputs-create"
-                type="number"
-                placeholder="Weight"
-                name="weight"
-                value={input.weight}
-                onChange={handleChange}
-                step=".01"
-                min={0}
-                max={10}
-              />
-              {errors.weight && <span>{errors.weight}</span>}
-            </div>
-            <div className='formCreateDivFlexSub'>
-              <input
-                className="inputs-create"
-                type="number"
-                placeholder="Playing time"
-                name="playing_time"
-                value={input.playing_time}
-                onChange={handleChange}
-                min={0}
-              />
-              {errors.playing_time && <span>{errors.playing_time}</span>}
-            </div>
-          </div>
+          <input
+            className={style.inputsCreate}
+            type="number"
+            placeholder="Weight"
+            name="weight"
+            value={input.weight}
+            onChange={handleChange}
+            step=".01"
+            min={0}
+            max={10}
+          />
+          {errors.weight && <span>{errors.weight}</span>}
+          <input
+            className={style.inputsCreate}
+            type="number"
+            placeholder="Playing time"
+            name="playing_time"
+            value={input.playing_time}
+            onChange={handleChange}
+            min={0}
+          />
+          {errors.playing_time && <span>{errors.playing_time}</span>}
     </div>
   )
 }
