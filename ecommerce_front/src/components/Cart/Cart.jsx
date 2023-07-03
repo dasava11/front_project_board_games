@@ -2,32 +2,31 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import styles from "./Cart.module.css";
+import { toast } from "react-toastify";
 
 const Cart = () => {
-  
   const [order, setOrder] = useState(JSON.parse(localStorage.getItem("cart")));
-  
+
   let suma = 0;
   const navigate = useNavigate();
-  
+
   const handleTabClose = (e) => {
     e.preventDefault();
     localStorage.setItem("cart", JSON.stringify(order));
-  }
-  
- useEffect(() => {
+  };
 
-    window.addEventListener('beforeunload', handleTabClose);
+  useEffect(() => {
+    window.addEventListener("beforeunload", handleTabClose);
 
     return () => {
       localStorage.setItem("cart", JSON.stringify(order));
-      window.removeEventListener('beforeunload', handleTabClose);
-    }
-  }, [localStorage.setItem("cart", JSON.stringify(order)),
-      JSON.parse(localStorage.getItem("cart")) ]);
-  
-  
-  
+      window.removeEventListener("beforeunload", handleTabClose);
+    };
+  }, [
+    localStorage.setItem("cart", JSON.stringify(order)),
+    JSON.parse(localStorage.getItem("cart")),
+  ]);
+
   const handleAmount = (event) => {
     const { value } = event.target;
     order.map((game) => {
@@ -46,7 +45,15 @@ const Cart = () => {
     const { value } = event.target;
     let update = order.filter((game) => game.game_id !== parseInt(value));
     setOrder([...update]);
-    console.log(order)
+    console.log(order);
+  };
+
+  const handlePaypal = () => {
+    if (order.length === 0) {
+      toast.error("your cart is empty");
+    } else {
+      navigate("/paypal");
+    }
   };
 
   return (
@@ -115,9 +122,9 @@ const Cart = () => {
           <h1 className={styles.totalPriceOrder}>$ {suma.toFixed(2)} USD</h1>
         </div>
         <button
-          disabled={order.length < 1 ? true : false}
+          //disabled={order.length < 1 ? true : false}
           className={styles.gameDeleteByOrder}
-          onClick={() => navigate("/paypal")}
+          onClick={() => handlePaypal()}
         >
           CHECK OUT
         </button>
