@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { createElement, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import style from "../CardDetail/CardDetail.module.css";
@@ -7,6 +7,7 @@ import shoppingCart from "../../Photos/plusCart.svg";
 import MoreDetail from "../MoreDetail/MoreDetail";
 import { ChevronDownIcon, ChevronUpIcon } from "@chakra-ui/icons";
 import useLocalStorage from "../LocalStorage/useLocalStorage";
+import { toast } from "react-toastify";
 
 const CardDetail = () => {
   const { id } = useParams();
@@ -41,15 +42,30 @@ const CardDetail = () => {
   };
 
   const handleCart = () => {
-    let duplicate = cart?.find((g) => g.id === game.id);
-    if (duplicate) {
-      return (duplicate.count += 1);
-    }
-    game.count = +1;
-    setCart([...cart, game]);
-  };
+    let duplicate = cart?.find((g) => g.game_id === game.game_id);
 
-  console.log(cart);
+    if (duplicate) {
+      for (let index = 0; index < cart.length; index++) {
+        let g = cart[index];
+        if (g.game_id === game.game_id) {
+          if(g.count < g.stock) {
+          g.count = g.count + 1;
+          g.total_price = g.count * g.price;
+          setCart([...cart]);
+          toast.success(`${game.name} added to cart`);
+          } else if (g.count >= g.stock) {
+            toast.error(`${game.name} exceeds stock`);
+          }
+        }
+      }
+      
+    } else {
+      game.count = +1;
+      game.total_price = game.price;
+      setCart([...cart, game]);
+      toast.success(`${game.name} added to cart`);
+    }
+  };
 
   return loading ? (
     <h1>Cargando...</h1>
@@ -133,46 +149,3 @@ const CardDetail = () => {
 };
 
 export default CardDetail;
-
-/*     let duplicate = cart.filter((g) => g.id === game.id);
-    if (duplicate.length < 1) {
-      game.count = 1;
-      setCart([...cart, game]);
-      //console.log(cart);
-    } else {
-      //console.log(duplicate);
-      let gameAux = cart.map((g) => {
-        if (g.id === game.id) {
-          return { ...g, count: g.count + 1 };
-        }
-        return g;
-      });
-      setCart(gameAux);
-    } */
-
-/*        let local = JSON.parse(localStorage.getItem("cart"));
-       let total = parseInt(JSON.parse(localStorage.getItem("total")));
-
-       if (local && total) {
-         let duplicate = local.find((g) => g.game_id === game.game_id);
-         if (duplicate) {
-           duplicate.count += 1;
-           localStorage.setItem("cart", JSON.stringify(local));
-           localStorage.setItem(
-             "total",
-             JSON.stringify(total + parseInt(game.price))
-           );
-         } else {
-           game.count = 1;
-           local.push(game);
-           localStorage.setItem("cart", JSON.stringify(local));
-           localStorage.setItem(
-             "total",
-             JSON.stringify(total + parseInt(game.price))
-           );
-         }
-       } else {
-         game.count = 1;
-         localStorage.setItem("cart", JSON.stringify([local]));
-         localStorage.setItem("total", JSON.stringify(parseInt(game.price)));
-       } */

@@ -37,3 +37,7 @@
 .inputs button:hover{
     cursor: pointer;
 }
+.name {
+    color:white;
+    margin-top: 0px;
+}
