@@ -17,7 +17,7 @@ import Faq from "./components/FAQ/Faq";
 import { AuthProvider } from "./components/Auth/authContext";
 //import { ProtectedRoutes } from "./components/Auth/ProtectedRoutes";
 
-import PayPalComponent from "./components/Paypal/Paypal";
+import CheckOut from "./components/CheckOut/CheckOut";
 import { PayPalScriptProvider } from '@paypal/react-paypal-js';
 
 import Cart from "./components/Cart/Cart";
@@ -42,7 +42,7 @@ function App() {
                <Route path="/admin" element={<DashboardAdmin />} />
               <Route path="/login" element={<LogIn />} />
               <Route path="/signup" element={<SignUp />} />
-              <Route path="/paypal" element={<PayPalComponent />} />
+              <Route path="/checkout" element={<CheckOut />} />
             <Route path="/cart" element={<Cart />} />
               <Route path="/questions" element={<Faq />} />
             </Routes>

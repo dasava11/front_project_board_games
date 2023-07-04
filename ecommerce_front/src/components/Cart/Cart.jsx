@@ -47,7 +47,7 @@ const Cart = () => {
       price: game.price,
       quantity: game.count,
     }));
-    navigate("/paypal", { state: { amount: suma.toString(), buys: gameDescriptions } });
+    navigate("/checkout", { state: { amount: suma.toString(), buys: gameDescriptions } });
   };
 
   return (
@@ -125,7 +125,7 @@ const Cart = () => {
           <button
             //disabled={order.length < 1 ? true : false}
             className={styles.gameDeleteByOrder}
-            onClick={() => handlePaypal()}
+            onClick={() => handleCheckout()}
           >
             check out
           </button>
