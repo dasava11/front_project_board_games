@@ -150,7 +150,7 @@ export default function CreateGame() {
   };
   
 
-  }
+  
 
 
   
@@ -413,5 +413,4 @@ export default function CreateGame() {
         />
       </div>
     </>
-  );
-}
+  );}
