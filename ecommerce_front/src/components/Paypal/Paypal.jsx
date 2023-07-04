@@ -24,7 +24,7 @@ const PayPalPaymentButton = () => {
 
   return (
     <div className={styles.paypalContainer}>
-      <h1 className={styles.pago}>Realizar pago</h1>
+      <h1 className={styles.h1Purchase}>Realizar pago</h1>
       <div>
         <PayPalButtons
           amount={amount}
