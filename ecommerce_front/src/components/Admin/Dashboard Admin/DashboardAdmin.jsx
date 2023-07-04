@@ -12,8 +12,7 @@ import {
   getMechanics,
 } from "../../../Redux/actions_creators";
 import { Link } from "react-router-dom";
-import styles from "./DashboardAdmin.module.css";
-
+import styles from "./test.module.css";
 
 export const DashboardAdmin = () => {
   const dispatch = useDispatch();
