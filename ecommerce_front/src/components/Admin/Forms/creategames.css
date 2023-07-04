@@ -60,7 +60,11 @@
   margin-left: 20%;
   font-size: smaller;
 }
-
+.titleform{
+  font-size:x-large;
+  font-weight: bold;
+  margin:1rem;
+}
 .create-button:hover {
   cursor: pointer;
 }
