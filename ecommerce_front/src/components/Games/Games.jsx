@@ -7,7 +7,7 @@ import promotionalBanner from "../../Photos/PromotionalBanner.png";
 import Filter from "../Filter/Filter";
 import Card from "../Card/Card";
 import Pagination from "../Pagination/Pagination";
-import SortGames from "../sortGames/sortGames";
+import SortGames from "../SortGames/SortGames";
 
 const Games = () => {
   const dispatch = useDispatch();
@@ -23,12 +23,11 @@ const Games = () => {
     /*     setCurrentGames(allGames);
     console.log(currentGames); */
   }, []);
-  
-  
+
   const lastPostIndex = currentPage * postPerPage;
   const firstPostIndex = lastPostIndex - postPerPage;
   const currentPosts = allGames.slice(firstPostIndex, lastPostIndex);
-  
+
   //console.log(currentPosts);
   return (
     <div>
