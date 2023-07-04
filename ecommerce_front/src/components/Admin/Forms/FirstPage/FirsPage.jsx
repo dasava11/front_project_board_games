@@ -132,9 +132,7 @@ const FirsPage = (props) => {
 
         </div>
       </div>
-
-         
-  
+      </div> 
   );
 };
 

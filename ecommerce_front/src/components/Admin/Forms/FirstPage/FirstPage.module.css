@@ -16,7 +16,7 @@
     font-size: medium;
     border: 1px solid white;
     border-radius: 8px;
-
+}
 
 .buttonCloudinary{
     border: 1px solid black;
@@ -31,3 +31,4 @@
     background-color: blue;
 
     padding: 1rem;
+}
