@@ -42,12 +42,12 @@ const Navbar = () => {
         </li>
         <li>
           <NavLink
-            to="/createproduct"
+            to="/admin"
             className={({ isActive }) =>
               isActive ? style.active : style.disable
             }
           >
-            Create Game
+            Menu Admin
           </NavLink>
         </li>
       </ul>

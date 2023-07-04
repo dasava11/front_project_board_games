@@ -96,11 +96,11 @@ export default function CreateGame() {
   const handleChangeAuthors = (value) => {
     setInput({ ...input, author_name: value });
   };
-  const handleChangeCategories = (value) => {
-    setInput({ ...input, categories_name: value });
+  const handleChangeCategories = (values) => {
+    setInput({ ...input, categories_name: values });
   };
-  const handleChangeDesigners = (value) => {
-    setInput({ ...input, designers_name: value });
+  const handleChangeDesigners = (values) => {
+    setInput({ ...input, designers_name: values });
   };
   const handleChangeEditorial = (value) => {
     setInput({ ...input, editorial_name: value });
@@ -111,8 +111,8 @@ export default function CreateGame() {
   const handleChangeThematics = (value) => {
     setInput({ ...input, thematic_name: value });
   };
-  const handleChangeLanguages = (value) => {
-    setInput({ ...input, languages_name: value });
+  const handleChangeLanguages = (values) => {
+    setInput({ ...input, languages_name: values });
   };
 
   const handleSubmit = (e) => {
@@ -140,16 +140,21 @@ export default function CreateGame() {
     e.target.reset();
   };
 
-  const handleNext = () =>{
-    if(next === true){
-      setNext(false)
-    }else{
-      setNext(true)
+  const handleNext = () => {
+    if (next === true) {
+      setNext(false);
+    } else {
+      setNext(true);
     }
+
+  };
+  
+
   }
 
 
   
+
   return (
     <>
       <div className="maincontainer">
@@ -157,16 +162,19 @@ export default function CreateGame() {
       </div>
       <div className="form-container">
         <form onSubmit={(e) => handleSubmit(e)} className="form">
+
           <h2 className="title-form">Create Product</h2>
           {next === false ? 
             <FirsPage
             input = {input}
             errors = {errors}
             handleChange = {handleChange}
+            setInput={setInput}
+            setErrors={setErrors}
             /> : <>
             <div className="selectFlexCreate">
               <Select
-                mode="multiple"
+               
                 onChange={(value) => handleChangeAuthors(value)}
                 name="author_name"
                 style={{
@@ -176,6 +184,7 @@ export default function CreateGame() {
                   height: "33px",
                   border: "1px solid white",
                   borderRadius: "8px"
+
                 }}
                 placeholder="Select authors"
               >
@@ -189,19 +198,21 @@ export default function CreateGame() {
                   })}
               </Select>
               <p className="create-button" onClick={handleModalCreateAuthor}>
+
                 Create
               </p>
             </div>
             <div className="selectFlexCreate">
               <Select
                 mode="multiple"
-                onChange={(value) => handleChangeCategories(value)}
+                onChange={(values) => handleChangeCategories(values)}
                 name="categories_name"
                 style={{
                   width: "100%",
                   margin: "0.5rem",
                   fontSize: "medium",
                   height: "33px"
+
                 }}
                 placeholder="Select categories"
               >
@@ -214,6 +225,7 @@ export default function CreateGame() {
                     );
                   })}
               </Select>
+
               <p className="create-button" onClick={handleModalCreateCategories}>
                 Create
               </p>
@@ -221,13 +233,14 @@ export default function CreateGame() {
             <div className="selectFlexCreate">
               <Select
                 mode="multiple"
-                onChange={(value) => handleChangeDesigners(value)}
+                onChange={(values) => handleChangeDesigners(values)}
                 name="designers_name"
                 style={{
                   width: "100%",
                   margin: "0.5rem",
                   fontSize: "medium",
                   height: "33px"
+
                 }}
                 placeholder="Select designers"
               >
@@ -241,12 +254,13 @@ export default function CreateGame() {
                   })}
               </Select>
               <p className="create-button" onClick={handleModalCreateDesigner}>
+
                 Create
               </p>
             </div>
             <div className="selectFlexCreate">
               <Select
-                mode="multiple"
+               
                 name="editorial_name"
                 onChange={(value) => handleChangeEditorial(value)}
                 style={{
@@ -254,19 +268,23 @@ export default function CreateGame() {
                   margin: "0.5rem",
                   fontSize: "medium",
                   height: "33px"
+
                 }}
                 placeholder="Select editorials"
               >
                 {allEditorials &&
                   allEditorials.map((edit) => {
                     return (
+
                       <Option key={edit.editorial_name} value={edit.editorial_name}>
+
                         {edit.editorial_name}
                       </Option>
                     );
                   })}
               </Select>
               <p className="create-button" onClick={handleModalCreateEditorial}>
+
                 Create
               </p>
             </div>
@@ -274,13 +292,14 @@ export default function CreateGame() {
               <Select
                 onChange={(value) => handleChangeMechanics(value)}
                 name="mechanic_name"
-                mode="multiple"
+                
                 placeholder="Select mechanics"
                 style={{
                   width: "100%",
                   margin: "0.5rem",
                   fontSize: "medium",
                   height: "33px"
+
                 }}
               >
                 {allMechanics &&
@@ -292,6 +311,7 @@ export default function CreateGame() {
                     );
                   })}
               </Select>
+
             <p className="create-button" onClick={handleModalCreateMechanic}>
               Create
             </p>
@@ -300,31 +320,35 @@ export default function CreateGame() {
               <Select
                 onChange={(value) => handleChangeThematics(value)}
                 name="thematic_name"
-                mode="multiple"
+               
                 placeholder="Select thematics"
                 style={{
                   width: "100%",
                   margin: "0.5rem",
                   fontSize: "medium",
                   height: "33px"
+
                 }}
               >
                 {allThematics &&
                   allThematics.map((them) => {
                     return (
+
                       <Option key={them.thematic_name} value={them.thematic_name}>
+
                         {them.thematic_name}
                       </Option>
                     );
                   })}
               </Select>
               <p className="create-button" onClick={handleModalCreateThematic}>
+
                 Create
               </p>
             </div>
             <div className="selectFlexCreate">
                 <Select
-                  onChange={(value) => handleChangeLanguages(value)}
+                  onChange={(values) => handleChangeLanguages(values)}
                   name="languages_name"
                   mode="multiple"
                   placeholder="Select Language"
@@ -357,6 +381,7 @@ export default function CreateGame() {
               <button type="submit" className="submit-button">
               Submit
               </button>}
+
         </form>
         <CreateCategories
           setIsOpen={handleModalCreateCategories}

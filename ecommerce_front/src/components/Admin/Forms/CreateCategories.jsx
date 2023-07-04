@@ -1,10 +1,8 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Modal } from "antd";
-import {
-  postCategories,
-} from "../../../Redux/actions_creators";
-
+import { postCategories } from "../../../Redux/actions_creators";
+import "./creategames.css";
 export const CreateCategories = (setIsOpen) => {
   const [input, setInput] = useState({});
   const dispatch = useDispatch();
