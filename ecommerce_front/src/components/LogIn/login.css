@@ -59,3 +59,7 @@
 .form-body {
     width: 70%;
 }
+
+.login-disabled{
+    filter: blur(2px);
+}

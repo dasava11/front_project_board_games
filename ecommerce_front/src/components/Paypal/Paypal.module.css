@@ -51,7 +51,7 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    border: 1px solid #000000;
+    border: 2px solid #000000;
 }
 
 .closeButton {
@@ -64,23 +64,22 @@
 }
 
 .paypalButtonContainer {
-    margin-top: 20px;
-}
-
-@media screen and (max-width: 768px) {
-    .summaryContent {
-        max-width: 90%;
-    }
+    margin-top: 30px;
+    margin-bottom: 30px;
 }
 
 .h1Purchase {
     font-weight: bold;
-    margin-top: 20px;
     margin-bottom: 20px;
 }
 
 .orderID{
     font-weight: bold;
     margin-top: 20px;
-    margin-bottom: 20px;
+    color: rgb(0, 157, 42);
+}
+@media screen and (max-width: 768px) {
+    .summaryContent {
+        max-width: 90%;
+    }
 }

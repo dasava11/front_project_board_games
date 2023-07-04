@@ -75,8 +75,17 @@ export const AuthProvider = ({ children }) => {
       throw new Error("There is already a user with that email");
     }
   };
-  const resetPassword = (email) => {
-    sendPasswordResetEmail(auth, email);
+  const resetPassword = async(email) => {
+    const configuration = {
+      url : 'http://localhost:5173/login'
+    }
+    try{
+      const response = await fetchSignInMethodsForEmail(auth,email)
+      if(response.length !== 0){
+        await sendPasswordResetEmail(auth, email,configuration);
+      }
+    }catch(error){
+    }
   };
 
 

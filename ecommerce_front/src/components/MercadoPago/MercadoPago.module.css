@@ -1,0 +1,28 @@
+.botonMercadoPago{
+    background-color: #00b0eb;
+    width: 200px;
+    margin: auto;
+    height: 35px;
+    border-radius: 4px;
+    text-transform: capitalize;
+    font-size: 13px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    color: white;
+}
+
+.botonMercadoPago:hover{
+    background-color: #008bb9;
+}
+
+.botonMercadoPagoDisabled{
+    background-color: #016283;
+    width: 200px;
+    margin: auto;
+    height: 35px;
+    border-radius: 4px;
+    text-transform: capitalize;
+    font-size: 13px;
+}

@@ -11,7 +11,7 @@ const PayPalPaymentButton = () => {
   const [orderId, setOrderId] = useState('');
 
   const onSuccess = (data) => {
-    const newData = { ...data, buys };
+    const newData = { ...data, buys, amount };
     console.log('Pago exitoso:', newData);
     setOrderId(newData.orderID);
     setShowSummary(true);
@@ -57,6 +57,7 @@ const PayPalPaymentButton = () => {
                 </li>
               ))}
             </ul>
+            <h1>Total: {amount} $</h1>
             <button className={styles.closeButton} onClick={handleCloseSummary}>
               Cerrar
             </button>

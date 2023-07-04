@@ -47,7 +47,7 @@ const Cart = () => {
       price: game.price,
       quantity: game.count,
     }));
-    navigate("/paypal", { state: { amount: suma.toString(), buys: gameDescriptions } });
+    navigate("/checkout", { state: { amount: suma.toString(), buys: gameDescriptions } });
   };
 
   return (

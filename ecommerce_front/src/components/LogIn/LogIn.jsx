@@ -13,27 +13,36 @@ export const LogIn = () => {
     email: "",
     password: "",
   });
+  const [forgotPassword, setForgotPassword] = useState(false)
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
   const { login, logInWithGoogle, resetPassword } = useAuth();
 
-  const handleGoogleSignIn = async () => {
+  const handleGoogleSignIn = async (e) => {
+    e.preventDefault();
     try {
       await logInWithGoogle();
       toast.success("A successfull log in with Google!");
       navigate("/");
     } catch (error) {
-      console.log('error')
-      console.log(error)
-      // toast.error("Oh! no! Something went wrong! Try again!");
       toast.error(error.message);
     }
   };
 
-  const handleForgotPassword = async () => {
-    if (!user.email) return setError("Please write your email");
+  const handleRecoverPassword = async (e) => {
+    e.preventDefault();
     try {
-      await resetPassword(user.email);
-      toast.success("We sent you an email to reset your password!");
+      if (!user.email || !emailRegex.test(user.email)){
+        setError("Please write a valid email");
+      } else {
+        await resetPassword(user.email);
+        toast.success("If your account exists, you will receive an email to reset your password.");
+        setForgotPassword(false);
+        setUser({
+          email: "",
+          password: "",
+        });
+      }
     } catch (error) {
       toast.error(error.mesage);
     }
@@ -58,17 +67,23 @@ export const LogIn = () => {
       }
     }
   };
+
   const handleUser = (e) => {
     const { name, value } = e.target;
     setUser({ ...user, [name]: value });
+    setError("");
   };
+
+  const handleForgotPassword = () => {
+    setForgotPassword(true);
+  }
 
   return (
     <div className="container-login">
-      <form className="login-form" onSubmit={(e) => handleSubmit(e)}>
+      <form className="login-form" >
         <h2 className="title">Log In</h2>
         <label htmlFor="user_name" className="label">
-          Username
+          Email
         </label>
         <input
           className="login-form-inputs"
@@ -77,28 +92,31 @@ export const LogIn = () => {
           id="email"
           value={user.email}
           onChange={handleUser}
-          placeholder="yourname@company.com"
-        ></input>
+          placeholder="yourname@company.com"/>
+
         {error && <h6 className="error">{error}</h6>}
-        <label htmlFor="password" className="label">
+        {forgotPassword && <button className="login-button" onClick={handleRecoverPassword}>Send</button>}
+
+        <label htmlFor="password" className={`label ${forgotPassword && "login-disabled"}`}>
           Password
         </label>
+
         <input
-          className="login-form-inputs"
+          className={`login-form-inputs ${forgotPassword && "login-disabled"}`}
           type="password"
           name="password"
           email="email"
           value={user.password}
           onChange={handleUser}
           placeholder="******"
-        ></input>
+          disabled={forgotPassword}/>
 
-        <button type="submit" className="login-button">
+        <button className={`login-button ${forgotPassword && "login-disabled"}`} disabled={forgotPassword} onClick={handleSubmit}>
           Log in
         </button>
       </form>
       <div className="form-body">
-        <button className="login-button" onClick={handleGoogleSignIn}>
+        <button className={`login-button ${forgotPassword && "login-disabled"}`} onClick={handleGoogleSignIn} disabled={forgotPassword}>
           Log in with <FcGoogle />
         </button>
         <h6 className="forgot-p" onClick={handleForgotPassword}>
