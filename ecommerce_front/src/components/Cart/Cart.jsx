@@ -1,12 +1,9 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-
 import styles from "./Cart.module.css";
-import { toast } from "react-toastify";
 
 const Cart = () => {
   const [order, setOrder] = useState(JSON.parse(localStorage.getItem("cart")));
-
   let suma = 0;
   const navigate = useNavigate();
 
@@ -22,10 +19,7 @@ const Cart = () => {
       localStorage.setItem("cart", JSON.stringify(order));
       window.removeEventListener("beforeunload", handleTabClose);
     };
-  }, [
-    localStorage.setItem("cart", JSON.stringify(order)),
-    JSON.parse(localStorage.getItem("cart")),
-  ]);
+  }, [order]);
 
   const handleAmount = (event) => {
     const { value } = event.target;
@@ -45,15 +39,15 @@ const Cart = () => {
     const { value } = event.target;
     let update = order.filter((game) => game.game_id !== parseInt(value));
     setOrder([...update]);
-    console.log(order);
   };
 
-  const handlePaypal = () => {
-    if (order.length === 0) {
-      toast.error("your cart is empty");
-    } else {
-      navigate("/paypal");
-    }
+  const handleCheckout = () => {
+    const gameDescriptions = order.map((game) => ({
+      name: game.name,
+      price: game.price,
+      quantity: game.count,
+    }));
+    navigate("/paypal", { state: { amount: suma.toString(), buys: gameDescriptions } });
   };
 
   return (
@@ -61,10 +55,7 @@ const Cart = () => {
       {order &&
         order.map((game) => {
           return (
-            <div
-              className={styles.containerCartOrder}
-              key={order.indexOf(game)}
-            >
+            <div className={styles.containerCartOrder} key={game.game_id}>
               <div className={styles.imgInCart}>
                 <img src={game.image?.url} alt={game.name} />
               </div>
@@ -75,7 +66,7 @@ const Cart = () => {
                 <button
                   className={styles.gameAmountBtn}
                   value={`${game.game_id}_decrease`}
-                  disabled={game.count === 1 ? true : false}
+                  disabled={game.count === 1}
                   onClick={handleAmount}
                 >
                   -
@@ -89,7 +80,7 @@ const Cart = () => {
                 <button
                   className={styles.gameAmountBtn}
                   value={`${game.game_id}_increase`}
-                  disabled={game.count >= game.stock ? true : false}
+                  disabled={game.count >= game.stock}
                   onClick={handleAmount}
                 >
                   +
@@ -122,9 +113,8 @@ const Cart = () => {
           <h1 className={styles.totalPriceOrder}>$ {suma.toFixed(2)} USD</h1>
         </div>
         <button
-          //disabled={order.length < 1 ? true : false}
           className={styles.gameDeleteByOrder}
-          onClick={() => handlePaypal()}
+          onClick={handleCheckout}
         >
           CHECK OUT
         </button>
