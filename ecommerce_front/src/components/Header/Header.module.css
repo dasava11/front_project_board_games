@@ -2,7 +2,7 @@
     display: flex;
     background-color: #000035;
     justify-content: space-between;
-    align-items: start;
+    align-items: flex-start;
     height: 110px;
 }
 
