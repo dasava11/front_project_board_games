@@ -125,7 +125,7 @@ const Cart = () => {
           <button
             //disabled={order.length < 1 ? true : false}
             className={styles.gameDeleteByOrder}
-            onClick={() => handlePaypal()}
+            onClick={() => handleCheckout()}
           >
             check out
           </button>
