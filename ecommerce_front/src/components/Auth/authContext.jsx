@@ -109,13 +109,8 @@ export const AuthProvider = ({ children }) => {
 
   const logInWithGoogle = async () => {
     const googleProvider = new GoogleAuthProvider();
-    console.log('googleProvider')
-    console.log(googleProvider)
+
     const userCredential =  await signInWithPopup(auth, googleProvider);
-    console.log('userCredential.user');
-    console.log(userCredential.user);
-    console.log('userCredential.user.emailVerified');
-    console.log(userCredential.user.emailVerified);
     if(!userCredential.user.emailVerified){
       console.log('loginWithGoogle no esta verificado')
       await signOut(auth);
