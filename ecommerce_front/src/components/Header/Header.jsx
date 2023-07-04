@@ -24,7 +24,7 @@ const Header = () => {
   useEffect(() => {
     const token = window.localStorage.getItem("token");
   }, []);
-  console.log(auth);
+  // console.log(auth);
   return (
     <div>
       <div className={style.headerFlex}>

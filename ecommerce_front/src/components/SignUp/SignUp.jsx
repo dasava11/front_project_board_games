@@ -23,18 +23,21 @@ export const SignUp = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      await controlarEmail(e.target.email.value);
       await signup(
         e.target.name.value,
         e.target.email.value,
         e.target.password.value
       );
-      await controlarEmail(e.target.email.value);
-      navigate("/");
+      toast.success("You will receive an email to verify your account.");
+      navigate("/login");
     } catch (error) {
       if (error.code === "auth/invalid-email") {
         toast.error("Invalid email");
-        console.log(error);
+      }else{
+        toast.error(error.message);
       }
+
     }
   };
   return (

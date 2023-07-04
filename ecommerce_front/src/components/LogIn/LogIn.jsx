@@ -22,32 +22,39 @@ export const LogIn = () => {
       toast.success("A successfull log in with Google!");
       navigate("/");
     } catch (error) {
-      console.log(error);
-      toast.error("Oh! no! Something went wrong! Try again!");
+      console.log('error')
+      console.log(error)
+      // toast.error("Oh! no! Something went wrong! Try again!");
+      toast.error(error.message);
     }
   };
+
   const handleForgotPassword = async () => {
     if (!user.email) return setError("Please write your email");
     try {
       await resetPassword(user.email);
       toast.success("We sent you an email to reset your password!");
     } catch (error) {
-      console.log(error);
+      toast.error(error.mesage);
     }
   };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       await login(user.email, user.password);
+
       toast.success("Successful Log in");
       navigate("/");
     } catch (error) {
-      console.log(error.code);
       if (error.code === "auth/user-not-found") {
         toast.error("User not found");
         navigate("/signup");
-      } else if (error.code === "auth/wrong-password") {
+      }
+      if (error.code === "auth/wrong-password") {
         toast.error("Wrong password");
+      } else{
+        toast.error(error.message);
       }
     }
   };
