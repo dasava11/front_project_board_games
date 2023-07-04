@@ -18,6 +18,8 @@ import { AuthProvider } from "./components/Auth/authContext";
 //import { ProtectedRoutes } from "./components/Auth/ProtectedRoutes";
 
 import PayPalComponent from "./components/Paypal/Paypal";
+import { PayPalScriptProvider } from '@paypal/react-paypal-js';
+
 import Cart from "./components/Cart/Cart";
 
 function App() {
@@ -25,26 +27,29 @@ function App() {
   return (
     <div>
       <BrowserRouter>
-        <ToastContainer />
 
-        <AuthProvider>
-          <Header />
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/createproduct" element={<CreateGame />} />
-            <Route path="/games" element={<Games />} />
-            <Route path="details/:id" element={<CardDetail />} />
-            <Route path="/contact" element={<ContactUs />} />
-            <Route path="/admin" element={<DashboardAdmin />} />
+        <PayPalScriptProvider options={{ 'client-id': 'AZF_WsZpFRtTjw6nRirMxga20RmU3isWNrl1BR_udWCxEtPh2MXQ0rXgPkAqAOnj5PHFWKckEsMmSnGm' }}>
+          <ToastContainer />
 
-            <Route path="/login" element={<LogIn />} />
-            <Route path="/signup" element={<SignUp />} />
-            <Route path="/paypal" element={<PayPalComponent />} />
+          <AuthProvider>
+            <Header />
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/createproduct" element={<CreateGame />} />
+              <Route path="/games" element={<Games />} />
+              <Route path="details/:id" element={<CardDetail />} />
+              <Route path="/contact" element={<ContactUs />} />
+               <Route path="/admin" element={<DashboardAdmin />} />
+              <Route path="/login" element={<LogIn />} />
+              <Route path="/signup" element={<SignUp />} />
+              <Route path="/paypal" element={<PayPalComponent />} />
             <Route path="/cart" element={<Cart />} />
-            <Route path="/questions" element={<Faq />} />
-          </Routes>
-          <Footer />
-        </AuthProvider>
+              <Route path="/questions" element={<Faq />} />
+            </Routes>
+            <Footer />
+          </AuthProvider>
+        </PayPalScriptProvider>
+
       </BrowserRouter>
     </div>
   );

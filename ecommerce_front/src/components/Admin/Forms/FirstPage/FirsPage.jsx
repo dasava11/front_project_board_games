@@ -105,8 +105,8 @@ const FirsPage = (props) => {
       {input.image > 0 && <h2>Uploaded</h2>}
       <div className="formCreateDivFlex">
         <div className="formCreateDivFlexSub">
-          <input
-            className="inputs-create"
+           <input
+            className={style.inputsCreate}
             type="number"
             placeholder="Weight"
             name="weight"
@@ -119,8 +119,8 @@ const FirsPage = (props) => {
           {errors.weight && <span>{errors.weight}</span>}
         </div>
         <div className="formCreateDivFlexSub">
-          <input
-            className="inputs-create"
+         <input
+            className={style.inputsCreate}
             type="number"
             placeholder="Playing time"
             name="playing_time"
@@ -129,9 +129,12 @@ const FirsPage = (props) => {
             min={0}
           />
           {errors.playing_time && <span>{errors.playing_time}</span>}
+
         </div>
       </div>
-    </div>
+
+         
+  
   );
 };
 
