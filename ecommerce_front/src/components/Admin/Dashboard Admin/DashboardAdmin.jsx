@@ -12,7 +12,7 @@ import {
   getMechanics,
 } from "../../../Redux/actions_creators";
 import { Link } from "react-router-dom";
-import style from "./DashboardAdmin.module.css";
+import styles from "./DashboardAdmin.module.css";
 export const DashboardAdmin = () => {
   const dispatch = useDispatch();
   const games = useSelector((state) => state.allGames);
@@ -36,11 +36,11 @@ export const DashboardAdmin = () => {
   }, []);
   console.log(authors);
   return (
-    <div className={style.containerAdmin}>
+    <div className={styles.containerAdmin}>
       <br />
       <h1>DASHBOARD ADMIN</h1>
       <br />
-      <button className={style.buttonCreate}>
+      <button className={styles.buttonCreate}>
         <Link to="/createproduct">Create New Game</Link>
       </button>
 
