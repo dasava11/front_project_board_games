@@ -24,7 +24,6 @@ const PayPalPaymentButton = () => {
 
   return (
     <div className={styles.paypalContainer}>
-      <h1 className={styles.h1Purchase}>Realizar pago</h1>
       <div>
         <PayPalButtons
           amount={amount}
@@ -46,7 +45,8 @@ const PayPalPaymentButton = () => {
       {showSummary && (
         <div className={styles.summaryModal}>
           <div className={styles.summaryContent}>
-            <h1 className={styles.h1Purchase}>Resumen de la compra</h1>
+
+            <h2 className={styles.h1Purchase}>Resumen de la compra</h2>
             <h3 className={styles.orderID}>Order Id: {orderId}</h3> 
             <ul>
               {buys.map((item, index) => (
