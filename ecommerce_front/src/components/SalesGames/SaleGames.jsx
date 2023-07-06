@@ -22,6 +22,10 @@ const SaleGames = () => {
         src={salesBanner}
         alt="offer"
       />
+      <div className={style.salesTitle}>
+        <h1>Games on Sale</h1>
+        <h3>Take advantage of the discounts</h3>
+      </div>
       <div className={style.saleGames}>
         {allGames &&
           currentSale.map((game) => {
