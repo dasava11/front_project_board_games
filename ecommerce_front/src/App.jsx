@@ -21,6 +21,7 @@ import CheckOut from "./components/CheckOut/CheckOut";
 import { PayPalScriptProvider } from '@paypal/react-paypal-js';
 
 import Cart from "./components/Cart/Cart";
+import PayPalPaymentButton from "./components/Paypal/Paypal";
 
 function App() {
   //localStorage.clear();
@@ -42,6 +43,7 @@ function App() {
                <Route path="/admin" element={<DashboardAdmin />} />
               <Route path="/login" element={<LogIn />} />
               <Route path="/signup" element={<SignUp />} />
+              <Route path="/paypal" element={<PayPalPaymentButton />} />
               <Route path="/checkout" element={<CheckOut />} />
             <Route path="/cart" element={<Cart />} />
               <Route path="/questions" element={<Faq />} />
