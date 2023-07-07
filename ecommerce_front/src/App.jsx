@@ -18,7 +18,7 @@ import { AuthProvider } from "./components/Auth/authContext";
 //import { ProtectedRoutes } from "./components/Auth/ProtectedRoutes";
 
 import CheckOut from "./components/CheckOut/CheckOut";
-import { PayPalScriptProvider } from '@paypal/react-paypal-js';
+import { PayPalScriptProvider } from "@paypal/react-paypal-js";
 
 import Cart from "./components/Cart/Cart";
 import PayPalPaymentButton from "./components/Paypal/Paypal";
@@ -28,8 +28,12 @@ function App() {
   return (
     <div>
       <BrowserRouter>
-
-        <PayPalScriptProvider options={{ 'client-id': 'AZF_WsZpFRtTjw6nRirMxga20RmU3isWNrl1BR_udWCxEtPh2MXQ0rXgPkAqAOnj5PHFWKckEsMmSnGm' }}>
+        <PayPalScriptProvider
+          options={{
+            "client-id":
+              "AZF_WsZpFRtTjw6nRirMxga20RmU3isWNrl1BR_udWCxEtPh2MXQ0rXgPkAqAOnj5PHFWKckEsMmSnGm",
+          }}
+        >
           <ToastContainer />
 
           <AuthProvider>
@@ -40,18 +44,18 @@ function App() {
               <Route path="/games" element={<Games />} />
               <Route path="details/:id" element={<CardDetail />} />
               <Route path="/contact" element={<ContactUs />} />
-               <Route path="/admin" element={<DashboardAdmin />} />
+              <Route path="/admin" element={<DashboardAdmin />} />
               <Route path="/login" element={<LogIn />} />
               <Route path="/signup" element={<SignUp />} />
               <Route path="/paypal" element={<PayPalPaymentButton />} />
               <Route path="/checkout" element={<CheckOut />} />
-            <Route path="/cart" element={<Cart />} />
+              <Route path="/editproduct" element={<EditProduct />} />
+              <Route path="/cart" element={<Cart />} />
               <Route path="/questions" element={<Faq />} />
             </Routes>
             <Footer />
           </AuthProvider>
         </PayPalScriptProvider>
-
       </BrowserRouter>
     </div>
   );

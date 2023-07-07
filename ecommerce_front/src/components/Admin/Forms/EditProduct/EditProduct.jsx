@@ -1,19 +1,20 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import style from "./editproduct.module.css";
 import { Modal, Switch } from "antd";
 import { FormOutlined } from "@ant-design/icons";
 import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+import { getAllGames } from "../../../../Redux/actions_creators";
 //import { showUploadWidget } from "../../Cloudinary/Cloudinary";
-export const EditProduct = ({
-  games,
-  categories,
-  authors,
-  designers,
-  languages,
-  editorials,
-  thematics,
-  mechanics,
-}) => {
+import { HeaderAdmin } from "../../HeaderAdmin/HeaderAdmin";
+export const EditProduct = () => {
+  const dispatch = useDispatch();
+  const games = useSelector((state) => state.allGames);
+
+  useEffect(() => {
+    dispatch(getAllGames());
+  }, []);
+
   const [open, setOpen] = useState(false);
   const [product, setProduct] = useState({});
   const [error, setError] = useState();
@@ -22,7 +23,37 @@ export const EditProduct = ({
   };
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setProduct({ ...product, [name]: value });
+    if (name === "author_name") {
+      setProduct({
+        ...product,
+        Author: { ...product.Author, author_name: value },
+      });
+    } else if (name === "editorial_name") {
+      setProduct({
+        ...product,
+        Editorial: { ...product.Editorial, editorial_name: value },
+      });
+    } else if (name === "mechanic_name") {
+      setProduct({
+        ...product,
+        Mechanic: { ...product.Mechanic, mechanic_name: value },
+      });
+    } else if (name === "thematic_name") {
+      setProduct({
+        ...product,
+        Thematic: { ...product.Thematic, thematic_name: value },
+      });
+    } else if (name === "language_name") {
+      const updatedLanguage = product.Languages?.map((lan) =>
+        lan.language_name === value ? { ...lan, language_name: value } : lan
+      );
+      setProduct({
+        ...product,
+        Languages: updatedLanguage,
+      });
+    } else {
+      setProduct({ ...product, [name]: value });
+    }
   };
 
   const handleOk = () => {
@@ -32,14 +63,19 @@ export const EditProduct = ({
     );
   };
   const showModal = (g) => {
+    setProduct(g);
     setOpen(true);
   };
   const handleCancel = () => {
     setOpen(false);
   };
-  console.log(games);
+  //console.log(product.image);
+  console.log(product);
+
   return (
     <div className={style.editProductForm}>
+      <HeaderAdmin />
+      <h1>Edit Product</h1>
       <table className={style.mainTable}>
         <thead className={style.titleTable}>
           <tr className={style.tr}>
@@ -83,10 +119,14 @@ export const EditProduct = ({
         onOk={handleOk}
         onCancel={handleCancel}
         footer={[
-          <button key="Save" onClick={handleOk}>
+          <button key="Save" onClick={handleOk} className={style.buttonSave}>
             Save
           </button>,
-          <button key="Cancel" onClick={handleCancel}>
+          <button
+            key="Cancel"
+            onClick={handleCancel}
+            className={style.buttonSave}
+          >
             Cancel
           </button>,
         ]}
@@ -99,17 +139,17 @@ export const EditProduct = ({
             onChange={handleChange}
             className={style.inputEdit}
           />
-          <label>Date released</label>
+          <label>Date released (YYYY/MM/DD)</label>
           <input
             name="released"
-            value={product.released}
+            value={product.released?.substring(0, 10)}
             onChange={handleChange}
             className={style.inputEdit}
           />
-          <label>Price</label>
+          <label>Price U$D</label>
           <input
             name="price"
-            value={product.value}
+            value={product.price}
             onChange={handleChange}
             className={style.inputEdit}
           />
@@ -130,7 +170,7 @@ export const EditProduct = ({
           <label>Quantity max players</label>
           <input
             name="playes_max"
-            value={product.playes_max}
+            value={product.players_max}
             onChange={handleChange}
             className={style.inputEdit}
           />
@@ -141,14 +181,21 @@ export const EditProduct = ({
             onChange={handleChange}
             className={style.inputEdit}
           />
+          <label>On Sale?</label>
+          <input
+            name="on_sale"
+            value={product.on_sale}
+            onChange={handleChange}
+            className={style.inputEdit}
+          />
           <label htmlFor="image">Image</label>
-          {/* <button
+          <button
             className={style.buttonCloudinary}
             onClick={() => showUploadWidget(setProduct, product, setError)}
           >
             Upload Image
           </button>
-          {error && <h2>Imagen No subida</h2>}
+          {/* {error && <h2>Imagen No subida</h2>}
           {product.image > 0 && <h2>Imagen cargada correctamente</h2>} */}
           <label>Box weight</label>
           <input
@@ -167,49 +214,65 @@ export const EditProduct = ({
           <label>Author</label>
           <input
             name="author_name"
-            value={product.author_name}
+            value={product.Author?.author_name || ""}
             onChange={handleChange}
             className={style.inputEdit}
           />
           <label>Categories</label>
-          <input
-            name="categories_name"
-            value={product.categories_name}
-            onChange={handleChange}
-            className={style.inputEdit}
-          />
-          <label>Designer</label>
-          <input
-            name="designers_name"
-            value={product.designers_name}
-            onChange={handleChange}
-            className={style.inputEdit}
-          />
+          {product.Categories &&
+            product.Categories?.map((cat) => (
+              <input
+                className={style.inputEdit}
+                key={cat.category_name}
+                value={cat.category_name}
+                name="category_name"
+                onChange={handleChange}
+              />
+            ))}
+          <label>Designers</label>
+          {product.Designers &&
+            product.Designers?.map((des) => {
+              return (
+                <input
+                  className={style.inputEdit}
+                  key={des.designer_name}
+                  value={des.designer_name}
+                  name="designer_name"
+                  onChange={handleChange}
+                />
+              );
+            })}
           <label>Editorial</label>
           <input
             name="editorial_name"
-            value={product.editorial_name}
+            value={product.Editorial?.editorial_name || ""}
             onChange={handleChange}
             className={style.inputEdit}
           />
           <label>Languages</label>
-          <input
-            name="languages_name"
-            value={product.languages_name}
-            onChange={handleChange}
-            className={style.inputEdit}
-          />
+          {product.Languages &&
+            product.Languages?.map((lan) => {
+              return (
+                <input
+                  className={style.inputEdit}
+                  key={lan.language_name}
+                  value={lan.language_name}
+                  name="language_name"
+                  onChange={handleChange}
+                />
+              );
+            })}
           <label>Mechanic</label>
           <input
             name="mechanic_name"
-            value={product.mechanic_name}
+            value={product.Mechanic?.mechanic_name || ""}
             onChange={handleChange}
             className={style.inputEdit}
           />
           <label>Thematic</label>
           <input
             name="thematic_name"
-            value={product.thematic_name}
+            value={product.Thematic?.thematic_name || ""}
             onChange={handleChange}
             className={style.inputEdit}
           />
