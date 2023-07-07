@@ -1,5 +1,5 @@
 //crear un estado por otro archivo, por fuera
-import axios from "axios";
+// import axios from "axios";
 import { createContext, useContext, useEffect, useState } from "react";
 import {
   createUserWithEmailAndPassword,
@@ -10,12 +10,14 @@ import {
   signInWithPopup,
   sendPasswordResetEmail,
   fetchSignInMethodsForEmail,
-  sendEmailVerification
+  sendEmailVerification,
 } from "firebase/auth";
 import { auth } from "../Auth/firebase";
 import { toast } from "react-toastify";
 export const authContext = createContext();
-const userUrl = import.meta.env.VITE_URL_USERS;
+// const userUrl = import.meta.env.VITE_URL_USERS;
+
+const URL_LOGIN = import.meta.env.VITE_URL_LOGIN;
 
 export const useAuth = () => {
   const context = useContext(authContext);
@@ -59,12 +61,22 @@ export const AuthProvider = ({ children }) => {
       }
     );
     const configuration = {
-      url : 'http://localhost:5173/login'
-    }
-    await sendEmailVerification(auth.currentUser,configuration)
-    .then(() => {console.log(`Se ha enviado un correo electrónico de verificación a ${last_name}.`);})
-    .catch((error) => {console.error("Error al enviar el correo electrónico de verificación:", error);});
-    
+      url: URL_LOGIN,
+    };
+
+    await sendEmailVerification(auth.currentUser, configuration)
+      .then(() => {
+        console.log(
+          `Se ha enviado un correo electrónico de verificación a ${last_name}.`
+        );
+      })
+      .catch((error) => {
+        console.error(
+          "Error al enviar el correo electrónico de verificación:",
+          error
+        );
+      });
+
     await signOut(auth);
     window.localStorage.removeItem("token");
   };
@@ -75,34 +87,36 @@ export const AuthProvider = ({ children }) => {
       throw new Error("There is already a user with that email");
     }
   };
-  const resetPassword = async(email) => {
+  const resetPassword = async (email) => {
     const configuration = {
-      url : 'http://localhost:5173/login'
-    }
-    try{
-      const response = await fetchSignInMethodsForEmail(auth,email)
-      if(response.length !== 0){
-        await sendPasswordResetEmail(auth, email,configuration);
+      url: URL_LOGIN,
+    };
+    try {
+      const response = await fetchSignInMethodsForEmail(auth, email);
+      if (response.length !== 0) {
+        await sendPasswordResetEmail(auth, email, configuration);
       }
-    }catch(error){
+    } catch (error) {
+      console.error(error.message);
     }
   };
 
-
   const login = async (email, password) => {
-    console.log(auth)
+    // console.log(auth);
     const credentials = await signInWithEmailAndPassword(auth, email, password);
-    const {user} = credentials;
+    const { user } = credentials;
 
-    if(!user.emailVerified){
+    if (!user.emailVerified) {
       await signOut(auth);
       window.localStorage.removeItem("token");
-      throw new Error("Verify the account with the link that we sent to your email");
-    }else{
+      throw new Error(
+        "Verify the account with the link that we sent to your email"
+      );
+    } else {
       if (window.localStorage.getItem("token")) {
         window.localStorage.removeItem("token");
       }
-      window.localStorage.setItem("token",  user.accessToken);
+      window.localStorage.setItem("token", user.accessToken);
     }
   };
 
@@ -119,12 +133,14 @@ export const AuthProvider = ({ children }) => {
   const logInWithGoogle = async () => {
     const googleProvider = new GoogleAuthProvider();
 
-    const userCredential =  await signInWithPopup(auth, googleProvider);
-    if(!userCredential.user.emailVerified){
-      console.log('loginWithGoogle no esta verificado')
+    const userCredential = await signInWithPopup(auth, googleProvider);
+    if (!userCredential.user.emailVerified) {
+      // console.log("loginWithGoogle no esta verificado");
       await signOut(auth);
       window.localStorage.removeItem("token");
-      throw new Error("Verify the account with the link that we sent to your email");
+      throw new Error(
+        "Verify the account with the link that we sent to your email"
+      );
     }
     // return await signInWithPopup(auth, googleProvider);
   };
