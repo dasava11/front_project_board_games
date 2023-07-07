@@ -23,6 +23,7 @@ import MercadoPagoFailure from "./components/MercadoPagoFailure/MercadoPagoFailu
 import MercadoPagoPending from "./components/MercadoPagoPending/MercadoPagoPending";
 
 const PAYPAL_TOKEN = import.meta.env.PAYPAL_TOKEN;
+import PayPalPaymentButton from "./components/Paypal/Paypal";
 
 function App() {
   return (
@@ -46,6 +47,7 @@ function App() {
               <Route path="/admin" element={<DashboardAdmin />} />
               <Route path="/login" element={<LogIn />} />
               <Route path="/signup" element={<SignUp />} />
+              <Route path="/paypal" element={<PayPalPaymentButton />} />
               <Route path="/checkout" element={<CheckOut />} />
               <Route path="/cart" element={<Cart />} />
               <Route path="/questions" element={<Faq />} />
