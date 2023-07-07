@@ -113,6 +113,7 @@ const Cart = () => {
                 <h2>Check our catalog to add something to your cart</h2>
               </div>}
           </div>
+          {order.length > 0 ? 
           <div className={styles.checkoutContainer}>
           <div className={styles.totalContainer}>
             <h1 className={styles.total}>subtotal ({order.length} producto):</h1>
@@ -129,7 +130,8 @@ const Cart = () => {
           >
             check out
           </button>
-        </div>
+          </div> : ''}
+          
       </div>
     </div>
   );
