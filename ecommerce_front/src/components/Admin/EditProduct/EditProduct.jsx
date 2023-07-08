@@ -4,9 +4,9 @@ import { Modal, Switch } from "antd";
 import { FormOutlined } from "@ant-design/icons";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllGames } from "../../../../Redux/actions_creators";
+import { getAllGames } from "../../../Redux/actions_creators";
 //import { showUploadWidget } from "../../Cloudinary/Cloudinary";
-import { HeaderAdmin } from "../../HeaderAdmin/HeaderAdmin";
+import { HeaderAdmin } from "../HeaderAdmin/HeaderAdmin";
 export const EditProduct = () => {
   const dispatch = useDispatch();
   const games = useSelector((state) => state.allGames);
