@@ -17,13 +17,13 @@ import Faq from "./components/FAQ/Faq";
 import { AuthProvider } from "./components/Auth/authContext";
 import CheckOut from "./components/CheckOut/CheckOut";
 import { PayPalScriptProvider } from "@paypal/react-paypal-js";
-
+import { EditProduct } from "./components/Admin/EditProduct/EditProduct";
 import Cart from "./components/Cart/Cart";
 import MercadoPagoSuccess from "./components/MercadoPagoSuccess/MercadoPagoSuccess";
 import MercadoPagoFailure from "./components/MercadoPagoFailure/MercadoPagoFailure";
 import MercadoPagoPending from "./components/MercadoPagoPending/MercadoPagoPending";
 
-const PAYPAL_TOKEN = import.meta.env.PAYPAL_TOKEN;
+const PAYPAL_TOKEN = import.meta.env.VITE_PAYPAL_TOKEN;
 import PayPalPaymentButton from "./components/Paypal/Paypal";
 
 function App() {
@@ -32,12 +32,7 @@ function App() {
       <BrowserRouter>
         <PayPalScriptProvider
           options={{
-
-            "client-id":
-              "AZF_WsZpFRtTjw6nRirMxga20RmU3isWNrl1BR_udWCxEtPh2MXQ0rXgPkAqAOnj5PHFWKckEsMmSnGm",
-
             "client-id": PAYPAL_TOKEN,
-
           }}
         >
           <ToastContainer />

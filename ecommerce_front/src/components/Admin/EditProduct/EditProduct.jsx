@@ -4,9 +4,9 @@ import { Modal, Switch } from "antd";
 import { FormOutlined } from "@ant-design/icons";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllGames } from "../../../../Redux/actions_creators";
+import { getAllGames } from "../../../Redux/actions_creators";
 //import { showUploadWidget } from "../../Cloudinary/Cloudinary";
-import { HeaderAdmin } from "../../HeaderAdmin/HeaderAdmin";
+import { HeaderAdmin } from "../HeaderAdmin/HeaderAdmin";
 export const EditProduct = () => {
   const dispatch = useDispatch();
   const games = useSelector((state) => state.allGames);
@@ -69,13 +69,11 @@ export const EditProduct = () => {
   const handleCancel = () => {
     setOpen(false);
   };
-  //console.log(product.image);
-  console.log(product);
 
   return (
     <div className={style.editProductForm}>
       <HeaderAdmin />
-      <h1>Edit Product</h1>
+      <h1 className={style.titleEdit}>Edit Product</h1>
       <table className={style.mainTable}>
         <thead className={style.titleTable}>
           <tr className={style.tr}>
@@ -189,6 +187,7 @@ export const EditProduct = () => {
             className={style.inputEdit}
           />
           <label htmlFor="image">Image</label>
+          <img src="" />
           <button
             className={style.buttonCloudinary}
             onClick={() => showUploadWidget(setProduct, product, setError)}

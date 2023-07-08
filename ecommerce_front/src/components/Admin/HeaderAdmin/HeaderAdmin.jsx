@@ -10,7 +10,7 @@ export const HeaderAdmin = () => {
           </a>
           <div className={style.dropdownContent}>
             <a href="/createproduct">Create Product</a>
-            <a href="/editproduct">Edit Product && Deactivate product</a>
+            <a href="/editproduct">Edit && Deactivate Product</a>
           </div>
         </li>
       </ul>
