@@ -1,5 +1,5 @@
 import "./App.css";
-import { Route, BrowserRouter, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Home from "./components/Home/Home";
@@ -28,37 +28,35 @@ import PayPalPaymentButton from "./components/Paypal/Paypal";
 function App() {
   return (
     <div>
-      <BrowserRouter>
-        <PayPalScriptProvider
-          options={{
-            "client-id": PAYPAL_TOKEN,
-          }}
-        >
-          <ToastContainer />
-          <AuthProvider>
-            <Header />
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/createproduct" element={<CreateGame />} />
-              <Route path="/games" element={<Games />} />
-              <Route path="details/:id" element={<CardDetail />} />
-              <Route path="/contact" element={<ContactUs />} />
-              <Route path="/admin" element={<DashboardAdmin />} />
-              <Route path="/login" element={<LogIn />} />
-              <Route path="/signup" element={<SignUp />} />
-              <Route path="/paypal" element={<PayPalPaymentButton />} />
-              <Route path="/checkout" element={<CheckOut />} />
-              <Route path="/editproduct" element={<EditProduct />} />
-              <Route path="/cart" element={<Cart />} />
-              <Route path="/questions" element={<Faq />} />
-              <Route exact path="/success" element={<MercadoPagoSuccess />} />
-              <Route exact path="/failure" element={<MercadoPagoFailure />} />
-              <Route exact path="/pending" element={<MercadoPagoPending />} />
-            </Routes>
-            <Footer />
-          </AuthProvider>
-        </PayPalScriptProvider>
-      </BrowserRouter>
+      <PayPalScriptProvider
+        options={{
+          "client-id": PAYPAL_TOKEN,
+        }}
+      >
+        <ToastContainer />
+        <AuthProvider>
+          <Header />
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/createproduct" element={<CreateGame />} />
+            <Route path="/games" element={<Games />} />
+            <Route path="details/:id" element={<CardDetail />} />
+            <Route path="/contact" element={<ContactUs />} />
+            <Route path="/admin" element={<DashboardAdmin />} />
+            <Route path="/login" element={<LogIn />} />
+            <Route path="/signup" element={<SignUp />} />
+            <Route path="/paypal" element={<PayPalPaymentButton />} />
+            <Route path="/checkout" element={<CheckOut />} />
+            <Route path="/editproduct" element={<EditProduct />} />
+            <Route path="/cart" element={<Cart />} />
+            <Route path="/questions" element={<Faq />} />
+            <Route exact path="/success" element={<MercadoPagoSuccess />} />
+            <Route exact path="/failure" element={<MercadoPagoFailure />} />
+            <Route exact path="/pending" element={<MercadoPagoPending />} />
+          </Routes>
+          <Footer />
+        </AuthProvider>
+      </PayPalScriptProvider>
     </div>
   );
 }

@@ -35,7 +35,7 @@ export default function CreateGame() {
     allLanguages,
   } = useSelector((state) => state);
 
-  const [input, setInput] = useState({ image: {} });
+  const [input, setInput] = useState({ image: [] });
   const [modalCategories, setModalCategories] = useState(false);
   const [modalThematic, setModalThematic] = useState(false);
   const [modalAuthor, setModalAuthor] = useState(false);
@@ -106,11 +106,11 @@ export default function CreateGame() {
   const handleChangeEditorial = (value) => {
     setInput({ ...input, editorial_name: value });
   };
-  const handleChangeMechanics = (value) => {
-    setInput({ ...input, mechanic_name: value });
+  const handleChangeMechanics = (values) => {
+    setInput({ ...input, mechanic_name: values });
   };
-  const handleChangeThematics = (value) => {
-    setInput({ ...input, thematic_name: value });
+  const handleChangeThematics = (values) => {
+    setInput({ ...input, thematic_name: values });
   };
   const handleChangeLanguages = (values) => {
     setInput({ ...input, languages_name: values });
@@ -133,10 +133,10 @@ export default function CreateGame() {
       author_name: "",
       categories_name: [],
       designer_name: [],
-      editorial_name: "",
+      editorial_name: [],
       languages_name: [],
-      mechanic_name: "",
-      thematic_name: "",
+      mechanic_name: [],
+      thematic_name: [],
     });
     e.target.reset();
   };
@@ -148,7 +148,7 @@ export default function CreateGame() {
       setNext(true);
     }
   };
-  console.log(typeof input.image);
+
   return (
     <>
       <div className="maincontainer">
@@ -292,7 +292,8 @@ export default function CreateGame() {
               </div>
               <div className="selectFlexCreate">
                 <Select
-                  onChange={(value) => handleChangeMechanics(value)}
+                  mode="multiple"
+                  onChange={(values) => handleChangeMechanics(values)}
                   name="mechanic_name"
                   placeholder="Select mechanics"
                   style={{
@@ -324,7 +325,8 @@ export default function CreateGame() {
               </div>
               <div className="selectFlexCreate">
                 <Select
-                  onChange={(value) => handleChangeThematics(value)}
+                  mode="multiple"
+                  onChange={(values) => handleChangeThematics(values)}
                   name="thematic_name"
                   placeholder="Select thematics"
                   style={{

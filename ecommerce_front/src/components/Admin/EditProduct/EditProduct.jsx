@@ -5,7 +5,7 @@ import { FormOutlined } from "@ant-design/icons";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllGames } from "../../../Redux/actions_creators";
-//import { showUploadWidget } from "../../Cloudinary/Cloudinary";
+//import { showUploadWidget } from "../Cloudinary/Cloudinary";
 import { HeaderAdmin } from "../HeaderAdmin/HeaderAdmin";
 export const EditProduct = () => {
   const dispatch = useDispatch();
@@ -69,8 +69,7 @@ export const EditProduct = () => {
   const handleCancel = () => {
     setOpen(false);
   };
-
-
+  console.log(product);
   return (
     <div className={style.editProductForm}>
       <HeaderAdmin />

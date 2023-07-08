@@ -35,13 +35,11 @@ export const showUploadWidget = (setInput, input) => {
     (err, info) => {
       if (!err) {
         if (info.event === "queues-end") {
-          let newImage = info.data.info.files.map(
-            (img) => img.uploadInfo.secure_url
-          );
+          let newImage = info.data.info.files[0].uploadInfo.secure_url;
 
           setInput({
             ...input,
-            image: { ...input.image, newImage },
+            image: input.image.push(newImage),
           });
         }
       }
