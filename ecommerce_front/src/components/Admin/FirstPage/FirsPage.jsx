@@ -4,7 +4,6 @@ import { showUploadWidget } from "../Cloudinary/Cloudinary";
 const FirsPage = (props) => {
   const { input, errors, handleChange, setError, setInput, error } = props;
 
-  console.log(typeof input.image);
   console.log(input.image);
   return (
     <div className={style.firstPageStyle}>

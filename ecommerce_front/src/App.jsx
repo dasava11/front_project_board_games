@@ -2,7 +2,6 @@ import "./App.css";
 import { Route, BrowserRouter, Routes } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
 import Home from "./components/Home/Home";
 import CreateGame from "./components/Admin/Forms/CreateGame";
 import Games from "./components/Games/Games";
@@ -36,7 +35,6 @@ function App() {
           }}
         >
           <ToastContainer />
-
           <AuthProvider>
             <Header />
             <Routes>
@@ -50,16 +48,13 @@ function App() {
               <Route path="/signup" element={<SignUp />} />
               <Route path="/paypal" element={<PayPalPaymentButton />} />
               <Route path="/checkout" element={<CheckOut />} />
-
               <Route path="/editproduct" element={<EditProduct />} />
-
               <Route path="/cart" element={<Cart />} />
               <Route path="/questions" element={<Faq />} />
               <Route exact path="/success" element={<MercadoPagoSuccess />} />
               <Route exact path="/failure" element={<MercadoPagoFailure />} />
               <Route exact path="/pending" element={<MercadoPagoPending />} />
             </Routes>
-
             <Footer />
           </AuthProvider>
         </PayPalScriptProvider>
