@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { EditProduct } from "../Forms/EditProduct/EditProduct";
+import { EditProduct } from "../EditProduct/EditProduct";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllGames } from "../../../Redux/actions_creators";
 import { Link } from "react-router-dom";
