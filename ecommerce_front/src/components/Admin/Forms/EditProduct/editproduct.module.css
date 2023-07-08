@@ -24,12 +24,6 @@
 }
 
 
-.tr{
-    
-    
-}
-
-
 .th{
     padding: 10px 13px;
 }
@@ -52,4 +46,18 @@
 .buttonCloudinary:hover{
   cursor: pointer;
   background-color: blue;
+}
+
+.buttonSave {
+    border:1px solid #000035;
+    background-color: #000035;
+    color:white;
+    border-radius: 4px;
+    margin:1rem;
+    width:9vh;
+}
+
+.buttonSave:hover{
+    cursor: pointer;
+    background-color: blue;
 }

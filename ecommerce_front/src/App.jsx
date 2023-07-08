@@ -17,6 +17,7 @@ import Faq from "./components/FAQ/Faq";
 import { AuthProvider } from "./components/Auth/authContext";
 import CheckOut from "./components/CheckOut/CheckOut";
 import { PayPalScriptProvider } from "@paypal/react-paypal-js";
+
 import Cart from "./components/Cart/Cart";
 import MercadoPagoSuccess from "./components/MercadoPagoSuccess/MercadoPagoSuccess";
 import MercadoPagoFailure from "./components/MercadoPagoFailure/MercadoPagoFailure";
@@ -31,7 +32,12 @@ function App() {
       <BrowserRouter>
         <PayPalScriptProvider
           options={{
+
+            "client-id":
+              "AZF_WsZpFRtTjw6nRirMxga20RmU3isWNrl1BR_udWCxEtPh2MXQ0rXgPkAqAOnj5PHFWKckEsMmSnGm",
+
             "client-id": PAYPAL_TOKEN,
+
           }}
         >
           <ToastContainer />
@@ -49,6 +55,9 @@ function App() {
               <Route path="/signup" element={<SignUp />} />
               <Route path="/paypal" element={<PayPalPaymentButton />} />
               <Route path="/checkout" element={<CheckOut />} />
+
+              <Route path="/editproduct" element={<EditProduct />} />
+
               <Route path="/cart" element={<Cart />} />
               <Route path="/questions" element={<Faq />} />
               <Route exact path="/success" element={<MercadoPagoSuccess />} />

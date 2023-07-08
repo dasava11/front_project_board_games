@@ -22,7 +22,7 @@ const ContactUs = () => {
 
     emailjs.sendForm(serviceId, templateId, form.current, publicId).then(
       (result) => {
-        toast.success("Message sent");
+        toast.success("We received your message!");
         setFormulario({
           user_name: "",
           user_email: "",
