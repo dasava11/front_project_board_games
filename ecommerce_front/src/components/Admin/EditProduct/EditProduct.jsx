@@ -69,13 +69,16 @@ export const EditProduct = () => {
   const handleCancel = () => {
     setOpen(false);
   };
-  //console.log(product.image);
-  console.log(product);
+
 
   return (
     <div className={style.editProductForm}>
       <HeaderAdmin />
+
+      <h1 className={style.titleEdit}>Edit Product</h1>
+
       <h1>Edit Product</h1>
+
       <table className={style.mainTable}>
         <thead className={style.titleTable}>
           <tr className={style.tr}>
@@ -189,6 +192,7 @@ export const EditProduct = () => {
             className={style.inputEdit}
           />
           <label htmlFor="image">Image</label>
+
           <button
             className={style.buttonCloudinary}
             onClick={() => showUploadWidget(setProduct, product, setError)}

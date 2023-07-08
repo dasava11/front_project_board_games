@@ -1,5 +1,3 @@
-// const CloudName = import.meta.env.VITE_CLOUDINARY_CLOUD_NAME;
-// const UploadPreset = import.meta.env.VITE_UPLOAD_PRESET;
 export const showUploadWidget = (setInput, input) => {
   window.cloudinary.openUploadWidget(
     {
@@ -37,13 +35,13 @@ export const showUploadWidget = (setInput, input) => {
     (err, info) => {
       if (!err) {
         if (info.event === "queues-end") {
-          let images = info.data.info.files.map(
+          let newImage = info.data.info.files.map(
             (img) => img.uploadInfo.secure_url
           );
 
           setInput({
             ...input,
-            image: images,
+            image: { ...input.image, newImage },
           });
         }
       }

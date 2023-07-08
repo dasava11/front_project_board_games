@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import style from "./FirstPage.module.css";
-import { showUploadWidget } from "../../Cloudinary/Cloudinary";
+import { showUploadWidget } from "../Cloudinary/Cloudinary";
 const FirsPage = (props) => {
   const { input, errors, handleChange, setError, setInput, error } = props;
+
   console.log(input.image);
   return (
     <div className={style.firstPageStyle}>

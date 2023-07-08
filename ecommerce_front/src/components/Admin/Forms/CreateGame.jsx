@@ -20,7 +20,7 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { Select } from "antd";
 import "./creategames.css";
-import FirsPage from "./FirstPage/FirsPage";
+import FirsPage from "../FirstPage/FirsPage";
 import { HeaderAdmin } from "../HeaderAdmin/HeaderAdmin";
 const { Option } = Select;
 
@@ -35,7 +35,7 @@ export default function CreateGame() {
     allLanguages,
   } = useSelector((state) => state);
 
-  const [input, setInput] = useState({});
+  const [input, setInput] = useState({ image: {} });
   const [modalCategories, setModalCategories] = useState(false);
   const [modalThematic, setModalThematic] = useState(false);
   const [modalAuthor, setModalAuthor] = useState(false);
@@ -130,13 +130,13 @@ export default function CreateGame() {
       image: [],
       weight: "",
       playing_time: 0,
-      author_name: [],
+      author_name: "",
       categories_name: [],
       designer_name: [],
-      editorial_name: [],
+      editorial_name: "",
       languages_name: [],
-      mechanic_name: [],
-      thematic_name: [],
+      mechanic_name: "",
+      thematic_name: "",
     });
     e.target.reset();
   };
@@ -148,6 +148,7 @@ export default function CreateGame() {
       setNext(true);
     }
   };
+  console.log(typeof input.image);
   return (
     <>
       <div className="maincontainer">
