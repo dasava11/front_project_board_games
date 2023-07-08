@@ -2,7 +2,6 @@ import "./App.css";
 import { Route, BrowserRouter, Routes } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
 import Home from "./components/Home/Home";
 import CreateGame from "./components/Admin/Forms/CreateGame";
 import Games from "./components/Games/Games";
@@ -23,7 +22,7 @@ import MercadoPagoSuccess from "./components/MercadoPagoSuccess/MercadoPagoSucce
 import MercadoPagoFailure from "./components/MercadoPagoFailure/MercadoPagoFailure";
 import MercadoPagoPending from "./components/MercadoPagoPending/MercadoPagoPending";
 
-const PAYPAL_TOKEN = import.meta.env.PAYPAL_TOKEN;
+const PAYPAL_TOKEN = import.meta.env.VITE_PAYPAL_TOKEN;
 import PayPalPaymentButton from "./components/Paypal/Paypal";
 
 function App() {
@@ -32,16 +31,10 @@ function App() {
       <BrowserRouter>
         <PayPalScriptProvider
           options={{
-
-            "client-id":
-              "AZF_WsZpFRtTjw6nRirMxga20RmU3isWNrl1BR_udWCxEtPh2MXQ0rXgPkAqAOnj5PHFWKckEsMmSnGm",
-
             "client-id": PAYPAL_TOKEN,
-
           }}
         >
           <ToastContainer />
-
           <AuthProvider>
             <Header />
             <Routes>
@@ -55,16 +48,13 @@ function App() {
               <Route path="/signup" element={<SignUp />} />
               <Route path="/paypal" element={<PayPalPaymentButton />} />
               <Route path="/checkout" element={<CheckOut />} />
-
               <Route path="/editproduct" element={<EditProduct />} />
-
               <Route path="/cart" element={<Cart />} />
               <Route path="/questions" element={<Faq />} />
               <Route exact path="/success" element={<MercadoPagoSuccess />} />
               <Route exact path="/failure" element={<MercadoPagoFailure />} />
               <Route exact path="/pending" element={<MercadoPagoPending />} />
             </Routes>
-
             <Footer />
           </AuthProvider>
         </PayPalScriptProvider>
