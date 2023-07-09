@@ -256,7 +256,7 @@ export const EditProduct = () => {
           {product.Languages &&
             product.Languages?.map((lan) => {
               return (
-                <input
+                <button
                   className={style.inputEdit}
                   key={lan.language_name}
                   value={lan.language_name}
