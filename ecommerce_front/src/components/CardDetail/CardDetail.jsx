@@ -4,10 +4,13 @@ import axios from "axios";
 import style from "../CardDetail/CardDetail.module.css";
 import heart from "../../Photos/heart.svg";
 import shoppingCart from "../../Photos/plusCart.svg";
+import star from "../../Photos/star.png";
 import MoreDetail from "../MoreDetail/MoreDetail";
 import { ChevronDownIcon, ChevronUpIcon } from "@chakra-ui/icons";
 import useLocalStorage from "../LocalStorage/useLocalStorage";
 import { toast } from "react-toastify";
+
+const VITE_URL_ALL_GAMES = import.meta.env.VITE_URL_ALL_GAMES;
 
 const CardDetail = () => {
   const { id } = useParams();
@@ -23,23 +26,21 @@ const CardDetail = () => {
           `https://backprojectboardgames-production.up.railway.app/games/id/${id}`
         );
         setGame(response.data);
-
         setLoading(false);
       } catch (error) {
         console.log(error);
       }
     };
-
     fetchGameDetail();
   }, [id]);
 
-  const handlerBtn = () => {
+  /*   const handlerBtn = () => {
     if (moreInfo) {
       setMoreInfo(false);
     } else {
       setMoreInfo(true);
     }
-  };
+  }; */
 
   const handleCart = () => {
     let duplicate = cart?.find((g) => g.game_id === game.game_id);
@@ -77,66 +78,63 @@ const CardDetail = () => {
             alt={game.name}
           />
         </div>
-        <div className={style.inforCardDeatail}>
-          <h1>{game.name}</h1>
-          <div className={style.ratingCd}>
-            <h3>Rating</h3>
-            {game.active ? (
-              <h3 className={style.availableCd}>available</h3>
-            ) : (
-              <h3 className={style.unavailableCd}>unavailable</h3>
-            )}
-          </div>
-          <h2>${game.price} USD</h2>
-          <div className={style.cardDBtns}>
-            <button className={style.cartBtn} onClick={handleCart}>
-              add to cart
+        <div className={style.gameDetail}>
+          <div className={style.inforCardDetail}>
+            <div className={style.titleGame}>
+              <h1 className={style.nameGame}>{game.name}</h1>
+              {game.stock === 0 ? (
+                <h3 className={style.unavailableCd}>unavailable</h3>
+              ) : (
+                <h3 className={style.availableCd}>available</h3>
+              )}
+            </div>
+            <div className={style.ratingCd}>
               <span>
-                <img src={shoppingCart} alt="cart" />
+                <img className={style.starRating} src={star} alt="star" />
+                <img className={style.starRating} src={star} alt="star" />
+                <img className={style.starRating} src={star} alt="star" />
+                <img className={style.starRating} src={star} alt="star" />
+                <img className={style.starRating} src={star} alt="star" />
               </span>
-            </button>
-            <button className={style.heartBtn}>
-              <img src={heart} alt="heart" />
-            </button>
-          </div>
-          <div className={style.cardDescription}>
-            <p>{game.Mechanic.description}</p>
-          </div>
-          <div className={style.characteristics}>
-            <div className={style.categoryCd}>
-              <h2>category</h2>
-              {game &&
-                game.Categories.map((category, index) => {
-                  return <h3 key={index}>{category.category_name}</h3>;
-                })}
             </div>
-            <hr />
-            <div className={style.playersCd}>
-              <h2>number of players</h2>
-              <h3>
-                {game.players_min} <span></span> {game.players_max}
-              </h3>
+            <h2 className={style.priceGame}>${game.price} USD</h2>
+            <div className={style.cardDBtns}>
+              <button className={style.cartBtn} onClick={handleCart}>
+                add to cart
+                <span>
+                  <img src={shoppingCart} alt="cart" />
+                </span>
+              </button>
+              <button className={style.heartBtn}>
+                <img className={style.heartImg} src={heart} alt="heart" />
+              </button>
             </div>
-            <hr />
-            <div className={style.timeCd}>
-              <h2>time to play</h2>
-              <h3>{game.playing_time} min per player</h3>
+            <div className={style.cardDescription}>
+              <p>{game.Mechanic.description}</p>
             </div>
-          </div>
-          <button className={style.seeMoreBtn} onClick={handlerBtn}>
-            {moreInfo ? (
-              <div>
-                less info
-                <ChevronUpIcon />
+            <div className={style.characteristics}>
+              <div className={style.categoryCd}>
+                <h2>category</h2>
+                {game &&
+                  game.Categories.map((category, index) => {
+                    return <h3 key={index}>{category.category_name}</h3>;
+                  })}
               </div>
-            ) : (
-              <div>
-                more info
-                <ChevronDownIcon />
+              <hr />
+              <div className={style.playersCd}>
+                <h2>number of players</h2>
+                <h3>
+                  {game.players_min} <span></span> {game.players_max}
+                </h3>
               </div>
-            )}
-          </button>
-          {moreInfo && <MoreDetail game={game} />}
+              <hr />
+              <div className={style.timeCd}>
+                <h2>time to play</h2>
+                <h3>{game.playing_time} min per player</h3>
+              </div>
+            </div>
+          </div>
+          <MoreDetail game={game} />
         </div>
       </div>
       <div className={style.reviewCardDetail}>
