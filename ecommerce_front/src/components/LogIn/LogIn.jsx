@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import "./login.css";
 import { FcGoogle } from "react-icons/fc";
+import { validateForm } from "./validate";
 
 export const LogIn = () => {
   const navigate = useNavigate();
@@ -14,6 +15,8 @@ export const LogIn = () => {
     password: "",
   });
   const [forgotPassword, setForgotPassword] = useState(false)
+  // const validForm = validateForm(user,error)
+  const validForm = error?.length === 0  &&  user.email?.length !== 0  &&  user.password?.length !== 0
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
   const { login, logInWithGoogle, resetPassword } = useAuth();
@@ -71,7 +74,11 @@ export const LogIn = () => {
   const handleUser = (e) => {
     const { name, value } = e.target;
     setUser({ ...user, [name]: value });
-    setError("");
+    if(name === 'email'  &&  !emailRegex.test(user.email)  &&  value.length !== 0){
+      setError("Invalid email.");
+    }else{
+      setError("");
+    }
   };
 
   const handleForgotPassword = () => {
@@ -81,51 +88,52 @@ export const LogIn = () => {
   return (
     <div className="container-login">
       <form className="login-form" >
-        <h2 className="title">Log In</h2>
-        <label htmlFor="user_name" className="label">
-          Email
-        </label>
-        <input
-          className="login-form-inputs"
-          type="email"
-          name="email"
-          id="email"
-          value={user.email}
-          onChange={handleUser}
-          placeholder="yourname@company.com"/>
+        <h1 className="login-title">Log In</h1>
+        <div className="div-inputs">
+          <label htmlFor="email" className="label">
+            Email
+          </label>
+          <input
+            className="login-form-inputs"
+            type="email"
+            name="email"
+            id="email"
+            value={user.email}
+            onChange={handleUser}/>
 
-        {error && <h6 className="error">{error}</h6>}
-        {forgotPassword && <button className="login-button" onClick={handleRecoverPassword}>Send</button>}
+          {error && <h6 className="login-input-error">{error}</h6>}
+          {forgotPassword && <button className="login-button" onClick={handleRecoverPassword}>Send</button>}
 
-        <label htmlFor="password" className={`label ${forgotPassword && "login-disabled"}`}>
-          Password
-        </label>
+          <label htmlFor="password" className={`label ${forgotPassword && "login-disabled"}`}>
+            Password
+          </label>
 
-        <input
-          className={`login-form-inputs ${forgotPassword && "login-disabled"}`}
-          type="password"
-          name="password"
-          email="email"
-          value={user.password}
-          onChange={handleUser}
-          placeholder="******"
-          disabled={forgotPassword}/>
+          <input
+            className={`login-form-inputs ${forgotPassword && "login-disabled"}`}
+            type="password"
+            name="password"
+            email="email"
+            id="password"
+            value={user.password}
+            onChange={handleUser}
+            disabled={forgotPassword}/>
+        </div>
 
-        <button className={`login-button ${forgotPassword && "login-disabled"}`} disabled={forgotPassword} onClick={handleSubmit}>
+        <button type="submit" className={`login-button ${forgotPassword && "login-disabled"}`} disabled={forgotPassword || !validForm} onClick={handleSubmit}>
           Log in
         </button>
+        <div className="form-body">
+          <button className={`login-button ${forgotPassword && "login-disabled"}`} onClick={handleGoogleSignIn} disabled={forgotPassword}>
+            Log in with <FcGoogle />
+          </button>
+          <h6 className="forgot-p" onClick={handleForgotPassword}>
+            Forgot your password?
+          </h6>
+          <span className="span-signup-p">
+            Don't have an account? <Link to="/signup" className="signup-p">Create one now</Link>
+          </span>
+        </div>
       </form>
-      <div className="form-body">
-        <button className={`login-button ${forgotPassword && "login-disabled"}`} onClick={handleGoogleSignIn} disabled={forgotPassword}>
-          Log in with <FcGoogle />
-        </button>
-        <h6 className="forgot-p" onClick={handleForgotPassword}>
-          Forgot your password?
-        </h6>
-        <span>
-          Don't have an account? <Link to="/signup">Create one now</Link>
-        </span>
-      </div>
     </div>
   );
 };

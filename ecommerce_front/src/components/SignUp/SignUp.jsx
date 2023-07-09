@@ -22,7 +22,6 @@ export const SignUp = () => {
 
   const validForm = validateForm(form,errors)
   const passDifficulty = passwordDifficulty(form.password);
-  // let passDifficulty = '';
 
   const { signup, controlarEmail } = useAuth();
 
@@ -33,10 +32,6 @@ export const SignUp = () => {
       ...form, [name]: value },
       errors,
       setErrors);
-      // if(name === "password"){
-      //   passDifficulty = passwordDifficulty(value);
-      //   console.log(passDifficulty)
-      // }
   };
 
   const handleSubmit = async (e) => {
@@ -64,49 +59,48 @@ export const SignUp = () => {
   return (
     <div className="signup-container">
       <form className="signup-form" onSubmit={handleSubmit}>
-        <h2 className="create-account">Create your account</h2>
+        <h1 className="create-account">Create your account</h1>
 
-<div className="div-inputs">
+        <div className="div-inputs">
+          <label htmlFor="name">Full Name:</label>
+          <input
+            className="inputs-signup"
+            type="text"
+            name="name"
+            id="name"
+            value={form.name}
+            onChange={handleChange}
+            />
+          <span className="inputs-errors">{errors.name}</span>
+          <label htmlFor="email">Email:</label>
+          <input
+            className="inputs-signup"
+            type="text"
+            name="email"
+            id="email"
+            value={form.email}
+            onChange={handleChange}
+            />
+          <span className="inputs-errors">{errors.email}</span>
 
-        <label htmlFor="name">Full Name:</label>
-        <input
-          className="inputs-signup"
-          type="text"
-          name="name"
-          id="name"
-          value={form.name}
-          onChange={handleChange}
-          />
-        <span className="inputs-errors">{errors.name}</span>
-        <label htmlFor="email">Email:</label>
-        <input
-          className="inputs-signup"
-          type="text"
-          name="email"
-          id="email"
-          value={form.email}
-          onChange={handleChange}
-          />
-        <span className="inputs-errors">{errors.email}</span>
-
-        <label htmlFor="password">Password:</label>
-        <input
-          className="inputs-signup"
-          type="password"
-          name="password"
-          id="password"
-          value={form.password}
-          onChange={handleChange}
-          />
-        <span className="inputs-errors">{errors.password}</span>
-        <p className={`signup-password-${passDifficulty}`}>{passDifficulty}</p>
-</div>
+          <label htmlFor="password">Password:</label>
+          <input
+            className="inputs-signup"
+            type="password"
+            name="password"
+            id="password"
+            value={form.password}
+            onChange={handleChange}
+            />
+          <span className="inputs-errors">{errors.password}</span>
+          <p className={`signup-password-${passDifficulty}`}>{passDifficulty}</p>
+        </div>
 
         <button type="submit" className="signup-button" disabled={!validForm}>
           Create Account
         </button>
         <span>
-          Already have an account? <Link to="/login">Log in</Link>
+          Already have an account? <Link to="/login" className="login-p">Log in</Link>
         </span>
       </form>
     </div>
