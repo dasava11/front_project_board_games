@@ -52,6 +52,14 @@
     color:white;
     border-radius: 4px;
 }
+.login-button:not([disabled="false"]):not([disabled]):hover{
+    background-color: #020266;
+  }
+  
+.login-button:not([disabled="false"]):not([disabled]):active {
+transform: scale(0.98);
+background-color: #29298b;
+}
 
 .error{
     color:red;
