@@ -4,7 +4,7 @@ import { showUploadWidget } from "../Cloudinary/Cloudinary";
 const FirsPage = (props) => {
   const { input, errors, handleChange, setError, setInput, error } = props;
 
-  console.log(input.image);
+  
   return (
     <div className={style.firstPageStyle}>
       <div className={style.formCreateDivFlex}>

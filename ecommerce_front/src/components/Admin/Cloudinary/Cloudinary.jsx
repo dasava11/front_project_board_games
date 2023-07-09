@@ -1,4 +1,7 @@
 export const showUploadWidget = (setInput, input) => {
+  
+  let arrAux = [];
+
   window.cloudinary.openUploadWidget(
     {
       cloudName: "dwqp5iaqw",
@@ -33,15 +36,29 @@ export const showUploadWidget = (setInput, input) => {
       },
     },
     (err, info) => {
+      
       if (!err) {
         if (info.event === "queues-end") {
-          let newImage = info.data.info.files[0].uploadInfo.secure_url;
+          arrAux.push(info.data.info.files[0].uploadInfo.secure_url);
+            // let images = info.data.info.files.map(
+            //   (img) => arrAux.push(img.uploadInfo.secure_url)
+            // );
+            console.log(arrAux);
 
-          setInput({
-            ...input,
-            image: input.image.push(newImage),
-          });
+            // setInput({
+            //   ...input,
+            //   image: arrAux,
+            // });
+            input.image = arrAux;
+  
         }
+        
+          // setInput({
+          //   ...input,
+          //   image: [...arrAux],
+          // });
+          console.log(input.image);
+        //}
       }
     }
   );
