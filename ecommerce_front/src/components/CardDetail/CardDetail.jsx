@@ -9,6 +9,8 @@ import MoreDetail from "../MoreDetail/MoreDetail";
 import { ChevronDownIcon, ChevronUpIcon } from "@chakra-ui/icons";
 import useLocalStorage from "../LocalStorage/useLocalStorage";
 import { toast } from "react-toastify";
+import DetailGameCarousel from "../DetailGameCarousel/DetailGameCarousel";
+import TableDetailGame from "../TableDetailGame/TableDetailGame";
 
 const VITE_URL_ALL_GAMES = import.meta.env.VITE_URL_ALL_GAMES;
 
@@ -33,14 +35,7 @@ const CardDetail = () => {
     };
     fetchGameDetail();
   }, [id]);
-
-  /*   const handlerBtn = () => {
-    if (moreInfo) {
-      setMoreInfo(false);
-    } else {
-      setMoreInfo(true);
-    }
-  }; */
+  console.log(game);
 
   const handleCart = () => {
     let duplicate = cart?.find((g) => g.game_id === game.game_id);
@@ -66,17 +61,17 @@ const CardDetail = () => {
       toast.success(`${game.name} added to cart`);
     }
   };
-
   return loading ? (
     <h1>Cargando...</h1>
   ) : (
     <div>
       <div className={style.firstFlexCd}>
         <div className={style.imgCardDetail}>
-          <img
-            src={game.image.url ? game.image.url : game.image[0]}
-            alt={game.name}
-          />
+          {game.image.url ? (
+            <img src={game.image.url} alt={game.name} />
+          ) : (
+            <DetailGameCarousel game={game} />
+          )}
         </div>
         <div className={style.gameDetail}>
           <div className={style.inforCardDetail}>
@@ -124,7 +119,7 @@ const CardDetail = () => {
               <div className={style.playersCd}>
                 <h2>number of players</h2>
                 <h3>
-                  {game.players_min} <span></span> {game.players_max}
+                  {game.players_min} <span>-</span> {game.players_max}
                 </h3>
               </div>
               <hr />
@@ -134,7 +129,8 @@ const CardDetail = () => {
               </div>
             </div>
           </div>
-          <MoreDetail game={game} />
+          <TableDetailGame game={game} />
+          {/* <MoreDetail game={game} /> */}
         </div>
       </div>
       <div className={style.reviewCardDetail}>
