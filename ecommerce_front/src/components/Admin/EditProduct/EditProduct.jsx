@@ -69,7 +69,9 @@ export const EditProduct = () => {
   const handleCancel = () => {
     setOpen(false);
   };
-  console.log(product);
+
+  const handleDelete = () => {};
+
   return (
     <div className={style.editProductForm}>
       <HeaderAdmin />
@@ -133,7 +135,7 @@ export const EditProduct = () => {
           </button>,
         ]}
       >
-        <form>
+        <form className={style}>
           <label>Game Name</label>
           <input
             name="name"
@@ -191,10 +193,17 @@ export const EditProduct = () => {
             className={style.inputEdit}
           />
           <label htmlFor="image">Image</label>
-
+          {product.image?.map((i) => (
+            <>
+              <button onClick={handleDelete} key={product.name}>
+                X
+              </button>
+              <img width={"100px"} src={i} />
+            </>
+          ))}
           <button
             className={style.buttonCloudinary}
-            onClick={() => showUploadWidget(setProduct, product, setError)}
+            onClick={() => handleTwoInOne(product, setProduct)}
           >
             Upload Image
           </button>
