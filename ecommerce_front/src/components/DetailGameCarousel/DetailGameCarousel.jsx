@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import arrowBack from "../../Photos/arrowBack96.png";
-import arrowNext from "../../Photos/arrowNext96.png";
+import arrowBack from "../../Photos/icons-back.png";
+import arrowNext from "../../Photos/icons-next.png";
 import styles from "../DetailGameCarousel/DetailGameCarousel.module.css";
 
 const DetailGameCarousel = ({ game }) => {
@@ -43,16 +43,12 @@ const DetailGameCarousel = ({ game }) => {
 
   return (
     <div className={styles.carouselDetail}>
-      <button className={styles.carButnLft}>
-        <img
-          src={arrowNext}
-          alt="arrowBack"
-          value="back"
-          onClick={handleClick}
-        />
+      <button className={styles.carButnLft} value="back" onClick={handleClick}>
+        {"<"}
       </button>
-      <button className={styles.carButnRig}>
-        <img src={arrowBack} alt="arroNext" value="go" onClick={handleClick} />
+      <button className={styles.carButnRig} value="go" onClick={handleClick}>
+        {">"}
+        {/* <img src={arrowNext} alt="arrownext" onClick={handleClick} /> */}
       </button>
       <img src={carouselGame[index]} alt={`imagen ${[index]}`} />
     </div>
