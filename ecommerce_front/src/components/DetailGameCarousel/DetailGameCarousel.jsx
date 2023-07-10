@@ -41,16 +41,51 @@ const DetailGameCarousel = ({ game }) => {
     }
   };
 
+  const handleImage = (event) => {
+    const { value } = event.target;
+    console.log(value);
+  };
+
   return (
-    <div className={styles.carouselDetail}>
-      <button className={styles.carButnLft} value="back" onClick={handleClick}>
-        {"<"}
-      </button>
-      <button className={styles.carButnRig} value="go" onClick={handleClick}>
-        {">"}
-        {/* <img src={arrowNext} alt="arrownext" onClick={handleClick} /> */}
-      </button>
-      <img src={carouselGame[index]} alt={`imagen ${[index]}`} />
+    <div className={styles.carouselDetailGame}>
+      <div className={styles.carouselDetail}>
+        <button
+          className={styles.carButnLft}
+          value="back"
+          onClick={handleClick}
+        >
+          {"<"}
+          {/* {<img src={arrowBack} alt="arrownext" />} */}
+        </button>
+        <button className={styles.carButnRig} value="go" onClick={handleClick}>
+          {">"}
+          {/* {<img src={arrowNext} alt="arrownext" />} */}
+        </button>
+        <img
+          className={styles.imageCorouselGame}
+          src={carouselGame[index]}
+          alt={`imagen ${[index]}`}
+        />
+      </div>
+      <div className={styles.photoRoll}>
+        {game.image.url ? (
+          <img src={game.image.url} alt={game.name} />
+        ) : (
+          game.image.map((i, indexC) => {
+            //console.log(indexC);
+            return (
+              <img
+                className={styles.imgPhotoRoll}
+                src={i}
+                key={indexC}
+                value={indexC}
+                alt={`imagen ${[indexC]}`}
+                onClick={(event) => handleImage(indexC)}
+              />
+            );
+          })
+        )}
+      </div>
     </div>
   );
 };
