@@ -80,7 +80,7 @@ const DetailGameCarousel = ({ game }) => {
                 key={indexC}
                 value={indexC}
                 alt={`imagen ${[indexC]}`}
-                onClick={(event) => handleImage(indexC)}
+                onClick={(event) => handleImage(event)}
               />
             );
           })

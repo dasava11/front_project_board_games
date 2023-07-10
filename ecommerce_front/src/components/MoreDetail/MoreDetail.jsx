@@ -52,6 +52,18 @@ const MoreDetail = (props) => {
           Editorial: <span>{game && game.Editorial.editorial_name}</span>
         </h2>
       </div>
+      <hr className={style.divisorInfo} />
+      <div className={style.moreInfoRow}>
+        <h2>
+          Languages:{" "}
+          <span>
+            {game &&
+              game.Languages.map((l) => {
+                return <span> - {l.language_name}</span>;
+              })}
+          </span>
+        </h2>
+      </div>
     </div>
   );
 };
