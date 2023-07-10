@@ -5,7 +5,6 @@ import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import "./login.css";
 import { FcGoogle } from "react-icons/fc";
-import { validateForm } from "./validate";
 
 export const LogIn = () => {
   const navigate = useNavigate();
@@ -15,7 +14,6 @@ export const LogIn = () => {
     password: "",
   });
   const [forgotPassword, setForgotPassword] = useState(false)
-  // const validForm = validateForm(user,error)
   const validForm = error?.length === 0  &&  user.email?.length !== 0  &&  user.password?.length !== 0
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 

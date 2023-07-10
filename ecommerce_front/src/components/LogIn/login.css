@@ -17,6 +17,8 @@
   height: min-content;
   padding: 20px;
   margin: 3rem;
+  margin-top: 65px;
+  margin-bottom: 65px;
 }
 
 .login-title{
@@ -97,6 +99,8 @@
 .login-input-error{
   color:red;
   font-size: 12px;
+  margin-top: 0px;
+  margin-bottom: 0px;
 }
 .form-body {
   width: 83%;
