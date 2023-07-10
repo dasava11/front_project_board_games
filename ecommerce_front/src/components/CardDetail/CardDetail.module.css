@@ -1,13 +1,15 @@
 .firstFlexCd{
     display: flex;
+    justify-content: center;
     padding: 5rem;
+    padding-bottom: 0;
     gap: 3rem;
-    width: 75%;
+    width: 90vw;
     margin: auto;
 }
 
 .imgCardDetail{
-    width: 700px;
+    width: 500px;
     height: 500px;
     display: flex;
     justify-content: center;
@@ -16,12 +18,30 @@
 
 .imgCardDetail img{
     height: 100%;
-    width: 75%;
+    width: 100%;
+}
+
+.nameGame{
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.titleGame{
+    display: flex;
+    flex-direction: row;
+    justify-content:space-between ;
+    align-items: center;
+   padding-bottom: 0;
 }
 
 .ratingCd{
     display: flex;
-    justify-content: space-around;
+    justify-content:start;
+    margin-top: 0; 
+}
+
+.starRating{
+    width: 25px;
 }
 
 .availableCd{
@@ -32,17 +52,24 @@
     color: red;
 }
 
+.priceGame{
+    color:hsla(240, 38%, 16%, 0.8);
+    margin-bottom: 4rem;
+}
+
 .cardDBtns{
     display: flex;
     justify-content: center;
+    align-items: center;
 }
 
 .cartBtn{
     border: 1px solid transparent;
     background-color: #37A0DB;
-    height: 60px;
-    width: 330px;
-    font-size: 28px;
+    height: 10%;
+    width: 50%;
+    padding: 0 1rem 0 1rem;
+    font-size: 22px;
     text-transform: capitalize;
     font-weight: bold;
     display: flex;
@@ -62,7 +89,11 @@
 }
 
 .heartBtn{
+    border-radius: 10rem;
+    align-items: center;
     border: none;
+    margin-left: 2rem;
+    background-color: transparent;
 }
 
 .heartBtn img:hover{
@@ -76,13 +107,13 @@
 
 .cardDescription p{
     text-align: center;
-    margin: 2rem;
-    padding: 0 3rem;
+    margin: 2rem 2rem;
+    padding: 2rem 0;
 }
 
 .characteristics{
     display: flex;
-    justify-content: space-between;
+    justify-content:center;
     align-items: center;
 }
 
@@ -95,10 +126,36 @@
 .characteristics h2{
     text-transform: capitalize;
     font-size: 1.8rem;
+    font-weight: normal;
 }
 
-.inforCardDeatail{
-    width: 50%;
+.categoryNameDetail{
+    margin: 0;
+}
+
+.timeCd{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 0 auto;
+}
+
+.playersCd{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 0 auto;
+}
+
+.categoryCd{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 0 auto;
+}
+
+.inforCardDetail{
+    width: 30vw;
     background-color: hsl(0, 0%, 100%, 70%);
     padding: 2rem;
     border-radius: 1rem;
@@ -125,7 +182,7 @@
 .reviewCardDetail{
     display: flex;
     flex-direction: column;
-    margin: 0 auto 5rem;
+    margin: 0 auto 2rem;
     gap: 1rem;
     width: 75%;
 }

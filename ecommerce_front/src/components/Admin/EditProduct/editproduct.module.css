@@ -68,3 +68,12 @@
     margin: 1rem;
 
 }
+
+.formModal{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+

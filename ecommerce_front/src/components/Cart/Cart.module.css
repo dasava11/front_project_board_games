@@ -2,13 +2,14 @@
     margin-top: 5rem;
     margin-bottom: 10rem;
     display: flex;
+    justify-content: center;
     width: 75%;
     margin: auto;
     height: 100%;
 }
 
 .cartComponentComplete{
-    min-height: 70vh;
+    min-height: 75vh;
 }
 .containerCartOrder{
     display: flex;
@@ -48,7 +49,6 @@
     width: 7%;
     height: 20rem;
 }
-
 
 .nameGameInOrder{
     font-size: larger;
