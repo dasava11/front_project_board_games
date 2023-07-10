@@ -13,11 +13,11 @@ const columns = [
   },
 ];
 
-const data = [
+let data = [
   {
     key: "1",
     Characteristic: "Author",
-    Description: "pepe",
+    Description: "",
   },
   {
     key: "2",

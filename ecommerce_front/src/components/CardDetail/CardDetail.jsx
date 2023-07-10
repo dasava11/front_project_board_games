@@ -112,7 +112,11 @@ const CardDetail = () => {
                 <h2>category</h2>
                 {game &&
                   game.Categories.map((category, index) => {
-                    return <h3 key={index}>{category.category_name}</h3>;
+                    return (
+                      <h3 className={style.categoryNameDetail} key={index}>
+                        {category.category_name}
+                      </h3>
+                    );
                   })}
               </div>
               <hr />
@@ -129,12 +133,12 @@ const CardDetail = () => {
               </div>
             </div>
           </div>
-          <TableDetailGame game={game} />
-          {/* <MoreDetail game={game} /> */}
+          {/* <TableDetailGame game={game} /> */}
+          <MoreDetail game={game} />
         </div>
       </div>
       <div className={style.reviewCardDetail}>
-        <h1>Review</h1>
+        <h2>Review</h2>
         <div className={style.textAreaDetail}>
           <textarea cols="30" rows="5"></textarea>
           <button>Send</button>
