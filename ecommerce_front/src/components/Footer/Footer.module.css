@@ -1,8 +1,8 @@
-.footerContainer{
-    height: 200px;
-    background-color: #000035;
-    display: flex;
-    flex-direction: column;
+.footerContainer {
+  height: 200px;
+  background-color: #000035;
+  display: flex;
+  flex-direction: column;
 }
 
 .upFooter {
@@ -39,33 +39,19 @@
   margin: 0;
 }
 
-<<<<<<< HEAD
 .footerRights {
   display: flex;
   justify-content: center;
   flex-direction: column;
   align-items: center;
   margin: auto;
+  gap: 0.5rem;
 }
 
 .footerRights img {
   width: 20px;
   margin: auto;
-=======
-.footerRights{
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    align-items: center;
-    margin: auto;
-    gap: 0.5rem;
-}
-
-.footerRights img{
-    width: 20px;
-    margin: auto;
-    height: 15px;
->>>>>>> 83c90380677f264cad13e75ed497fc77f8f086fc
+  height: 15px;
 }
 
 .footerInput h1 {
@@ -74,7 +60,6 @@
   text-transform: capitalize;
 }
 
-<<<<<<< HEAD
 .footerInput {
   display: flex;
   flex-direction: column;
@@ -82,16 +67,7 @@
   justify-content: center;
   padding: 1rem;
   width: 300px;
-=======
-.footerInput{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 1rem;
-    width: 300px;
-    gap: 0.5rem;
->>>>>>> 83c90380677f264cad13e75ed497fc77f8f086fc
+  gap: 0.5rem;
 }
 
 .footerInput input {
@@ -100,20 +76,20 @@
   height: 30px;
 }
 
-.buttomFooter{
-    display: flex;
-    background-color: #000035;
-    color: aliceblue;
-    border-radius: 5px;
-    margin: auto;
-    width: 30%;
-    border: 2px solid rgb(125, 122, 120);
-    padding: 0.5rem;
-    justify-content: center;
+.buttomFooter {
+  display: flex;
+  background-color: #000035;
+  color: aliceblue;
+  border-radius: 5px;
+  margin: auto;
+  width: 30%;
+  border: 2px solid rgb(125, 122, 120);
+  padding: 0.5rem;
+  justify-content: center;
 }
 
-.buttomFooter:hover{
-    cursor: pointer;
+.buttomFooter:hover {
+  cursor: pointer;
 }
 
 .inputEmail {
