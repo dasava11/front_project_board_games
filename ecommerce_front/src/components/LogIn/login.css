@@ -82,6 +82,19 @@
   border-radius: 4px;
 }
 
+.recover-password-button{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+  height: 40px;
+  margin-top:0.75rem;
+  background-color: #000035;
+  color:white;
+  border-radius: 4px;
+}
+
 .login-button:not([disabled="false"]):not([disabled]):hover{
   background-color: #020266;
 }
@@ -111,4 +124,18 @@
 
 .login-disabled{
   filter: blur(2px);
+}
+
+.recover-password-button:not([disabled="false"]):not([disabled]):hover{
+  background-color: #020266;
+}
+  
+.recover-password-button:not([disabled="false"]):not([disabled]):active {
+  transform: scale(0.98);
+  background-color: #29298b;
+}
+
+.recover-password-button:disabled{
+  background-color: rgba(0, 0, 53, 0.3);
+  color: #000035;
 }

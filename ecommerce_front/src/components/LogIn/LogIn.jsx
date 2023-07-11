@@ -14,11 +14,16 @@ export const LogIn = () => {
     password: "",
   });
   const [forgotPassword, setForgotPassword] = useState(false)
-  const validForm = error?.length === 0  &&  user.email?.length !== 0  &&  user.password?.length !== 0
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
   const { login, logInWithGoogle, resetPassword } = useAuth();
-
+  
+  const validForm = () => {
+    if(error?.length === 0  &&  user.email?.length !== 0  &&  user.password?.length !== 0){
+      return true;
+    }else{
+      return false;
+    }
+  }
   const handleGoogleSignIn = async (e) => {
     e.preventDefault();
     try {
@@ -74,7 +79,7 @@ export const LogIn = () => {
     setUser({ ...user, [name]: value });
     if(name === 'email'  &&  !emailRegex.test(user.email)  &&  value.length !== 0){
       setError("Invalid email.");
-    }else{
+    }else if(name === 'email' &&  emailRegex.test(user.email) || value.length === 0){
       setError("");
     }
   };
@@ -100,7 +105,7 @@ export const LogIn = () => {
             onChange={handleUser}/>
 
           {error && <h6 className="login-input-error">{error}</h6>}
-          {forgotPassword && <button className="login-button" onClick={handleRecoverPassword}>Send</button>}
+          {forgotPassword && <button className="recover-password-button" disabled={email?.length === 0 || !emailRegex.test(user.email) } onClick={handleRecoverPassword}>Send</button>}
 
           <label htmlFor="password" className={`label ${forgotPassword && "login-disabled"}`}>
             Password
@@ -117,7 +122,7 @@ export const LogIn = () => {
             disabled={forgotPassword}/>
         </div>
 
-        <button type="submit" className={`login-button ${forgotPassword && "login-disabled"}`} disabled={forgotPassword || !validForm} onClick={handleSubmit}>
+        <button type="submit" className={`login-button ${forgotPassword && "login-disabled"}`} disabled={forgotPassword || !validForm()} onClick={handleSubmit}>
           Log in
         </button>
         <div className="form-body">
