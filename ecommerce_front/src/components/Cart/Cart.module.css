@@ -50,6 +50,11 @@
     height: 20rem;
 }
 
+
+.imgInCart img{
+    width: 100%;
+}
+
 .nameGameInOrder{
     font-size: larger;
     font-weight: bold;
