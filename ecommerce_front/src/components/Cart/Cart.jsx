@@ -47,91 +47,100 @@ const Cart = () => {
       price: game.price,
       quantity: game.count,
     }));
-    navigate("/checkout", { state: { amount: suma.toString(), buys: gameDescriptions } });
+    navigate("/checkout", {
+      state: { amount: suma.toString(), buys: gameDescriptions },
+    });
   };
 
   return (
     <div className={styles.cartComponentComplete}>
-      <div className={styles.cartComponent} >
+      <div className={styles.cartComponent}>
         <div>
-        {order.length > 0 ?
-          order.map((game) => {
-            return (
-              <div
-                className={styles.containerCartOrder}
-                key={order.indexOf(game)}
-              >
-                <div className={styles.imgInCart}>
-                  <img src={game.image?.url} alt={game.name} />
+          {order && order.length > 0 ? (
+            order.map((game) => {
+              return (
+                <div
+                  className={styles.containerCartOrder}
+                  key={order.indexOf(game)}
+                >
+                  <div className={styles.imgInCart}>
+                    <img src={game.image?.url} alt={game.name} />
+                  </div>
+                  <div>
+                    <h1 className={styles.nameGameInOrder}>{game.name}</h1>
+                  </div>
+                  <div>
+                    <button
+                      className={styles.gameAmountBtn}
+                      value={`${game.game_id}_decrease`}
+                      disabled={game.count === 1 ? true : false}
+                      onClick={handleAmount}
+                    >
+                      -
+                    </button>
+                    <input
+                      disabled
+                      className={styles.countGameInOrder}
+                      type="text"
+                      placeholder={game.count}
+                    />
+                    <button
+                      className={styles.gameAmountBtn}
+                      value={`${game.game_id}_increase`}
+                      disabled={game.count >= game.stock ? true : false}
+                      onClick={handleAmount}
+                    >
+                      +
+                    </button>
+                  </div>
+                  <div>
+                    <button
+                      value={game.game_id}
+                      className={styles.gameDeleteByOrder}
+                      onClick={handleDelete}
+                    >
+                      delete
+                    </button>
+                  </div>
+                  <div>
+                    <h1 className={styles.priceOrder}>
+                      $ {(game.price * game.count).toFixed(2)} USD
+                    </h1>
+                  </div>
                 </div>
-                <div>
-                  <h1 className={styles.nameGameInOrder}>{game.name}</h1>
-                </div>
-                <div>
-                  <button
-                    className={styles.gameAmountBtn}
-                    value={`${game.game_id}_decrease`}
-                    disabled={game.count === 1 ? true : false}
-                    onClick={handleAmount}
-                  >
-                    -
-                  </button>
-                  <input
-                    disabled
-                    className={styles.countGameInOrder}
-                    type="text"
-                    placeholder={game.count}
-                  />
-                  <button
-                    className={styles.gameAmountBtn}
-                    value={`${game.game_id}_increase`}
-                    disabled={game.count >= game.stock ? true : false}
-                    onClick={handleAmount}
-                  >
-                    +
-                  </button>
-                </div>
-                <div>
-                  <button
-                    value={game.game_id}
-                    className={styles.gameDeleteByOrder}
-                    onClick={handleDelete}
-                  >
-                    delete
-                  </button>
-                </div>
-                <div>
-                  <h1 className={styles.priceOrder}>
-                    $ {(game.price * game.count).toFixed(2)} USD
-                  </h1>
-                </div>
-              </div>
-            );
-          }) : <div className={styles.emptyCart}>
-                <h1>Your cart is empty</h1>
-                <hr />
-                <h2>Check our catalog to add something to your cart</h2>
-              </div>}
-          </div>
-          {order.length > 0 ? 
+              );
+            })
+          ) : (
+            <div className={styles.emptyCart}>
+              <h1>Your cart is empty</h1>
+              <hr />
+              <h2>Check our catalog to add something to your cart</h2>
+            </div>
+          )}
+        </div>
+        {order && order.length > 0 ? (
           <div className={styles.checkoutContainer}>
-          <div className={styles.totalContainer}>
-            <h1 className={styles.total}>subtotal ({order.length} producto):</h1>
-            {order &&
-              order.map((game) => {
-                suma = suma + Number(game.price * game.count);
-              })}
-            <h1 className={styles.totalPriceOrder}>${suma.toFixed(2)} USD</h1>
+            <div className={styles.totalContainer}>
+              <h1 className={styles.total}>
+                subtotal ({order.length} producto):
+              </h1>
+              {order &&
+                order.map((game) => {
+                  suma = suma + Number(game.price * game.count);
+                })}
+              <h1 className={styles.totalPriceOrder}>${suma.toFixed(2)} USD</h1>
+            </div>
+            <button
+              //disabled={order.length < 1 ? true : false}
+              className={styles.gameDeleteByOrder}
+              onClick={() => handleCheckout()}
+            >
+              check out
+            </button>
           </div>
-          <button
-            //disabled={order.length < 1 ? true : false}
-            className={styles.gameDeleteByOrder}
-            onClick={() => handleCheckout()}
-          >
-            check out
-          </button>
-          </div> : ''}
-          
+        ) : (
+          ""
+        )}
       </div>
     </div>
   );

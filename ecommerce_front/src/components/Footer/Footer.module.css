@@ -1,89 +1,89 @@
-.footerContainer{
-    height: 150px;
-    background-color: #000035;
+.footerContainer {
+  height: 150px;
+  background-color: #000035;
+  margin-top: 30%;
 }
 
-.upFooter{
-    display: flex;
-    justify-content: space-between;
+.upFooter {
+  display: flex;
+  justify-content: space-between;
 }
 
-.footerContainer h1{
-    color: white;
+.footerContainer h1 {
+  color: white;
 }
 
-.footerSocial{
-    display: flex;
-    font-size: 10px;
-    padding: 1rem;
-    justify-content: center;
-    gap: 10px;
-    width: 280px;
-    align-items: center;
+.footerSocial {
+  display: flex;
+  font-size: 10px;
+  padding: 1rem;
+  justify-content: center;
+  gap: 10px;
+  width: 280px;
+  align-items: center;
 }
 
-.footerSocial img{
-    width: 25px;
+.footerSocial img {
+  width: 25px;
 }
 
-.footerSocial h1{
-    font-weight: 300;
+.footerSocial h1 {
+  font-weight: 300;
 }
 
-.footerRights h1{
-    font-weight: 300;
-    text-transform: capitalize;
-    font-size: 12px;
-    margin: 0;
+.footerRights h1 {
+  font-weight: 300;
+  text-transform: capitalize;
+  font-size: 12px;
+  margin: 0;
 }
 
-.footerRights{
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    align-items: center;
-    margin: auto;
+.footerRights {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  margin: auto;
 }
 
-.footerRights img{
-    width: 20px;
-    margin: auto;
+.footerRights img {
+  width: 20px;
+  margin: auto;
 }
 
-.footerInput h1{
-    font-size: 16px;
-    font-weight: 300;
-    text-transform: capitalize;
+.footerInput h1 {
+  font-size: 16px;
+  font-weight: 300;
+  text-transform: capitalize;
 }
 
-.footerInput{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 1rem;
-    width: 300px;
+.footerInput {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  width: 300px;
 }
 
-.footerInput input{
-    border: 1px solid transparent;
-    border-radius: 10px;
-    height: 30px;
+.footerInput input {
+  border: 1px solid transparent;
+  border-radius: 10px;
+  height: 30px;
 }
 
-.buttomFooter{
-    display: flex;
-    background-color: #000035;
-    color: aliceblue;
-    border-radius: 5px;
-    margin-top: 1vh;
-    width: 3vh;
-    border: 2px solid rgb(125, 122, 120);
-    
+.buttomFooter {
+  display: flex;
+  background-color: #000035;
+  color: aliceblue;
+  border-radius: 5px;
+  margin-top: 1vh;
+  width: 3vh;
+  border: 2px solid rgb(125, 122, 120);
 }
 
 .inputEmail {
-    font-style: oblique;
-    font-size: medium;
-    width:65%;
+  font-style: oblique;
+  font-size: medium;
+  width: 65%;
 }

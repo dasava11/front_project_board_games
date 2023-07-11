@@ -21,9 +21,9 @@ import Cart from "./components/Cart/Cart";
 import MercadoPagoSuccess from "./components/MercadoPagoSuccess/MercadoPagoSuccess";
 import MercadoPagoFailure from "./components/MercadoPagoFailure/MercadoPagoFailure";
 import MercadoPagoPending from "./components/MercadoPagoPending/MercadoPagoPending";
+import PayPalPaymentButton from "./components/Paypal/Paypal";
 
 const PAYPAL_TOKEN = import.meta.env.VITE_PAYPAL_TOKEN;
-import PayPalPaymentButton from "./components/Paypal/Paypal";
 
 function App() {
   return (
