@@ -21,9 +21,10 @@ import Cart from "./components/Cart/Cart";
 import MercadoPagoSuccess from "./components/MercadoPagoSuccess/MercadoPagoSuccess";
 import MercadoPagoFailure from "./components/MercadoPagoFailure/MercadoPagoFailure";
 import MercadoPagoPending from "./components/MercadoPagoPending/MercadoPagoPending";
+import PayPalPaymentButton from "./components/Paypal/Paypal";
+import NotFound from "./components/NotFound/NotFound";
 
 const PAYPAL_TOKEN = import.meta.env.VITE_PAYPAL_TOKEN;
-import PayPalPaymentButton from "./components/Paypal/Paypal";
 
 function App() {
   return (
@@ -50,6 +51,7 @@ function App() {
             <Route path="/editproduct" element={<EditProduct />} />
             <Route path="/cart" element={<Cart />} />
             <Route path="/questions" element={<Faq />} />
+            <Route path="*" element={<NotFound />} />
             <Route exact path="/success" element={<MercadoPagoSuccess />} />
             <Route exact path="/failure" element={<MercadoPagoFailure />} />
             <Route exact path="/pending" element={<MercadoPagoPending />} />
