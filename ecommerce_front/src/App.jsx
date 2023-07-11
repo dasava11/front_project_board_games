@@ -17,6 +17,7 @@ import { AuthProvider } from "./components/Auth/authContext";
 import CheckOut from "./components/CheckOut/CheckOut";
 import { PayPalScriptProvider } from "@paypal/react-paypal-js";
 import { EditProduct } from "./components/Admin/EditProduct/EditProduct";
+import { EditProductForm } from "./components/Admin/EditProduct/EditProductForm";
 import Cart from "./components/Cart/Cart";
 import MercadoPagoSuccess from "./components/MercadoPagoSuccess/MercadoPagoSuccess";
 import MercadoPagoFailure from "./components/MercadoPagoFailure/MercadoPagoFailure";
@@ -49,6 +50,7 @@ function App() {
             <Route path="/paypal" element={<PayPalPaymentButton />} />
             <Route path="/checkout" element={<CheckOut />} />
             <Route path="/editproduct" element={<EditProduct />} />
+            <Route path="/editproductform/:id" element={<EditProductForm />} />
             <Route path="/cart" element={<Cart />} />
             <Route path="/questions" element={<Faq />} />
             <Route path="*" element={<NotFound />} />
