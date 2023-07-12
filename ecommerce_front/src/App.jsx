@@ -25,6 +25,7 @@ import MercadoPagoFailure from "./components/MercadoPago/MercadoPagoFailure/Merc
 import MercadoPagoPending from "./components/MercadoPago/MercadoPagoPending/MercadoPagoPending";
 import PayPalPaymentButton from "./components/Paypal/Paypal";
 import NotFound from "./components/NotFound/NotFound";
+import {ProtectedRoutes} from "./components/Auth/ProtectedRoutes";
 
 const PAYPAL_TOKEN = import.meta.env.VITE_PAYPAL_TOKEN;
 
@@ -49,7 +50,9 @@ function App() {
             <Route path="/login" element={<LogIn />} />
             <Route path="/signup" element={<SignUp />} />
             <Route path="/paypal" element={<PayPalPaymentButton />} />
-            <Route path="/checkout" element={<CheckOut />} />
+            <Route element={<ProtectedRoutes/>}>
+              <Route path="/checkout" element={<CheckOut />} />
+            </Route>
             <Route path="/editproduct" element={<EditProduct />} />
             <Route path="/editproductform/:id" element={<EditProductForm />} />
             <Route path="/cart" element={<Cart />} />
