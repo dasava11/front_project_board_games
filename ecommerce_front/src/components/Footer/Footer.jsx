@@ -4,7 +4,7 @@ import Faceboock from "../../Photos/Faceboock.svg";
 import dados from "../../Photos/dados.png";
 import style from "../Footer/Footer.module.css";
 
-function Footer() {
+export const Footer = () => {
   const [email, setEmail] = useState("");
 
   const handleEmailChange = (event) => {
@@ -50,6 +50,5 @@ function Footer() {
       </div>
     </footer>
   );
-}
-
+};
 export default Footer;

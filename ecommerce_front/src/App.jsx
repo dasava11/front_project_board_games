@@ -25,7 +25,10 @@ import MercadoPagoFailure from "./components/MercadoPago/MercadoPagoFailure/Merc
 import MercadoPagoPending from "./components/MercadoPago/MercadoPagoPending/MercadoPagoPending";
 import PayPalPaymentButton from "./components/Paypal/Paypal";
 import NotFound from "./components/NotFound/NotFound";
-
+import Wrapper from "./components/Wrapper/Wrapper";
+import { WrapperAdmin } from "./components/Admin/WrapperAdmin/WrapperAdmin";
+import { Sales } from "./components/Admin/Sales/Sales";
+import UsersAdmin from "./components/Admin/UsersAdmin/UsersAdmin";
 const PAYPAL_TOKEN = import.meta.env.VITE_PAYPAL_TOKEN;
 
 function App() {
@@ -38,29 +41,33 @@ function App() {
       >
         <ToastContainer />
         <AuthProvider>
-          <Header />
           <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/createproduct" element={<CreateGame />} />
-            <Route path="/games" element={<Games />} />
-            <Route path="details/:id" element={<CardDetail />} />
-            <Route path="/contact" element={<ContactUs />} />
-            <Route path="/admin" element={<DashboardAdmin />} />
-            <Route path="/login" element={<LogIn />} />
-            <Route path="/signup" element={<SignUp />} />
-            <Route path="/paypal" element={<PayPalPaymentButton />} />
-            <Route path="/checkout" element={<CheckOut />} />
-            <Route path="/editproduct" element={<EditProduct />} />
-            <Route path="/editproductform/:id" element={<EditProductForm />} />
-            <Route path="/cart" element={<Cart />} />
-            <Route path="/questions" element={<Faq />} />
-            <Route path="*" element={<NotFound />} />
-            <Route exact path="/success" element={<MercadoPagoSuccess />} />
-            <Route exact path="/failure" element={<MercadoPagoFailure />} />
-            <Route exact path="/pending" element={<MercadoPagoPending />} />
-            <Route path="/user" element={<User />} />
+            <Route exact path="/" element={<Wrapper />}>
+              <Route index element={<Home />} />
+              <Route path="games" element={<Games />} />
+              <Route path="details/:id" element={<CardDetail />} />
+              <Route path="contact" element={<ContactUs />} />
+              <Route path="login" element={<LogIn />} />
+              <Route path="signup" element={<SignUp />} />
+              <Route path="paypal" element={<PayPalPaymentButton />} />
+              <Route path="checkout" element={<CheckOut />} />
+              <Route path="cart" element={<Cart />} />
+              <Route path="questions" element={<Faq />} />
+              <Route path="*" element={<NotFound />} />
+              <Route exact path="success" element={<MercadoPagoSuccess />} />
+              <Route exact path="failure" element={<MercadoPagoFailure />} />
+              <Route exact path="pending" element={<MercadoPagoPending />} />
+              <Route path="user" element={<User />} />
+            </Route>
+            <Route exact path="/admin" element={<WrapperAdmin />}>
+              <Route index element={<DashboardAdmin />} />
+              <Route path="createproduct" element={<CreateGame />} />
+              <Route path="editproduct" element={<EditProduct />} />
+              <Route path="editproductform/:id" element={<EditProductForm />} />
+              <Route path="sales" element={<Sales />} />
+              <Route path="usersadmin" element={<UsersAdmin />} />
+            </Route>
           </Routes>
-          <Footer />
         </AuthProvider>
       </PayPalScriptProvider>
     </div>

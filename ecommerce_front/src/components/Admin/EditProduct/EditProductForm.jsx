@@ -14,12 +14,13 @@ import {
   getThematics,
 } from "../../../Redux/actions_creators";
 import { toast } from "react-toastify";
-
+import { DeleteOutlined } from "@ant-design/icons";
 const { Option } = Select;
 
 export const EditProductForm = () => {
   const { id } = useParams();
   const [product, setProduct] = useState({});
+  const [checked, setChecked] = useState(true);
   const dispatch = useDispatch();
   const categories = useSelector((state) => state.allCategories);
   const filteredCategories = categories.filter(
@@ -98,13 +99,52 @@ export const EditProductForm = () => {
       setProduct({ ...product, [name]: value });
     }
   };
-  const handleChangeCategories = () => {};
-  const handleChangeDesigners = () => {};
-  const handleChangeLanguages = () => {};
-  const handleChangeThematic = () => {};
-  const handleChangeMechanic = () => {};
+  const handleChangeCategories = (values) => {
+    setProduct({
+      ...product,
+      Categories: values.map((cat) => ({ category_name: cat })),
+    });
+  };
+  const handleChangeDesigners = (values) => {
+    setProduct({
+      ...product,
+      Designers: values.map((des) => ({ designer_name: des })),
+    });
+  };
+  const handleChangeLanguages = (values) => {
+    setProduct({
+      ...product,
+      Languages: values.map((lan) => ({ language_name: lan })),
+    });
+  };
+  const handleChangeThematic = (values) => {
+    setProduct({
+      ...product,
+      Thematic: values.map((them) => ({ thematic_name: them })),
+    });
+  };
+  const handleChangeMechanic = (values) => {
+    setProduct({
+      ...product,
+      Mechanic: values.map((mec) => ({ mechanic_name: mec })),
+    });
+  };
 
-  const handleDelete = () => {};
+  const handleDelete = () => {
+    console.log("ANDA EL DELETE");
+  };
+
+  const handleSwitchOnSale = async (game_id) => {
+    await axios
+      .put(
+        `https://backprojectboardgames-production.up.railway.app/games/${game_id}`
+      )
+      .then((res) =>
+        res.status === 200 ? toast.success(res.data.message) : null
+      )
+      .catch((err) => toast.error(err));
+  };
+  console.log(product);
   return (
     <>
       <div className={style.mainContainer}>
@@ -113,97 +153,120 @@ export const EditProductForm = () => {
           <div className={style.switchButton}>
             <h6>Deactivate product</h6>
             <Switch
-              defaultChecked
+              checked
               onChange={() => {
                 handleSwitch(product.game_id);
               }}
             />
           </div>
         ) : (
-          <div>
+          <div className={style.switchButton}>
             <h6>Activate product</h6>
             <Switch
-              defaultChecked
+              checked={false}
               onChange={() => {
                 handleSwitch(product.game_id);
               }}
             />
           </div>
         )}
-
+        <br />
+        {product.on_sale === true ? (
+          <div className={style.switchButton}>
+            <h6>Deactivate OnSale</h6>
+            <Switch
+              checked
+              onChange={() => {
+                handleSwitchOnSale(product.game_id);
+              }}
+            />
+          </div>
+        ) : (
+          <div className={style.switchButton}>
+            <h6>Activate OnSale</h6>
+            <Switch
+              checked={false}
+              onChange={() => {
+                handleSwitchOnSale(product.game_id);
+              }}
+            />
+          </div>
+        )}
         {product && (
           <form className={style} onSubmit={handleSubmit}>
-            <label>Game Name</label>
+            <label className={style.labels}>Game Name</label>
             <input
               name="name"
               value={product.name}
               onChange={handleChange}
               className={style.inputEdit}
             />
-            <label>Date released (YYYY/MM/DD)</label>
+            <label className={style.labels}>Date released (YYYY/MM/DD)</label>
             <input
               name="released"
               value={product.released?.substring(0, 10)}
               onChange={handleChange}
               className={style.inputEdit}
             />
-            <label>Price U$D</label>
+            <label className={style.labels}>Price U$D</label>
             <input
               name="price"
               value={product.price}
               onChange={handleChange}
               className={style.inputEdit}
             />
-            <label>Recommended Age</label>
+            <label className={style.labels}>Recommended Age</label>
             <input
               name="age"
               value={product.age}
               onChange={handleChange}
               className={style.inputEdit}
             />
-            <label>Quantity min players</label>
+            <label className={style.labels}>Quantity min players</label>
             <input
               name="players_min"
               value={product.players_min}
               onChange={handleChange}
               className={style.inputEdit}
             />
-            <label>Quantity max players</label>
+            <label className={style.labels}>Quantity max players</label>
             <input
               name="playes_max"
               value={product.players_max}
               onChange={handleChange}
               className={style.inputEdit}
             />
-            <label>Stock </label>
+            <label className={style.labels}>Stock </label>
             <input
               name="stock"
               value={product.stock}
               onChange={handleChange}
               className={style.inputEdit}
             />
-            <label>On Sale?</label>
-            <input
-              name="on_sale"
-              value={product.on_sale}
-              onChange={handleChange}
-              className={style.inputEdit}
-            />
-            <label htmlFor="image">Image</label>
+
+            <label className={style.labels} htmlFor="image">
+              Image
+            </label>
 
             {Array.isArray(product.image) ? (
               product.image?.map((i) => (
                 <>
-                  <span key={product.name} onClick={handleDelete}>
-                    x
+                  <span key={product.name}>
+                    <DeleteOutlined
+                      style={{ marginLeft: "5px" }}
+                      onClick={() => handleDelete()}
+                    />
                   </span>
                   <img width={"100px"} src={i} alt={product.name} />
                 </>
               ))
             ) : (
               <>
-                <span key={product.name} onClick={handleDelete}>
-                  x
+                <span key={product.name}>
+                  <DeleteOutlined
+                    style={{ marginLeft: "5px" }}
+                    onClick={() => handleDelete()}
+                  />
                 </span>
                 <img
                   width={"100px"}
@@ -219,28 +282,28 @@ export const EditProductForm = () => {
               Upload Image
             </span>
             <br />
-            <label>Box weight</label>
+            <label className={style.labels}>Box weight</label>
             <input
               name="weight"
               value={product.weight}
               onChange={handleChange}
               className={style.inputEdit}
             />
-            <label>Estimated playing time</label>
+            <label className={style.labels}>Estimated playing time</label>
             <input
               name="playing_time"
               value={product.playing_time}
               onChange={handleChange}
               className={style.inputEdit}
             />
-            <label>Author</label>
+            <label className={style.labels}>Author</label>
             <input
               name="author_name"
               value={product.Author?.author_name}
               onChange={handleChange}
               className={style.inputEdit}
             />
-            <label>Categories</label>
+            <label className={style.labels}>Categories</label>
             <Select
               mode="multiple"
               onChange={(values) => handleChangeCategories(values)}
@@ -266,21 +329,25 @@ export const EditProductForm = () => {
               product.Categories?.map((cat) => (
                 <>
                   <span
-                    className={style.inputEdit}
+                    className={style.subInputEdit}
                     key={cat.category_name}
                     value={cat.category_name}
                     name="category_name"
                   >
                     {cat.category_name}
+
+                    <DeleteOutlined
+                      style={{ marginLeft: "5px" }}
+                      onClick={() => handleDelete()}
+                    />
                   </span>
-                  <span className={style.deleteButton}>x</span>
                 </>
               ))}
 
-            <label>Designers</label>
+            <label className={style.labels}>Designers</label>
             <Select
               mode="multiple"
-              onChange={handleChange}
+              onChange={(values) => handleChangeDesigners(values)}
               name="designer_name"
               style={{
                 width: "100%",
@@ -303,33 +370,31 @@ export const EditProductForm = () => {
               product.Designers?.map((des) => (
                 <>
                   <span
-                    className={style.inputEdit}
+                    className={style.subInputEdit}
                     key={des.designer_name}
                     value={des.designer_name}
                     name="designer_name"
-                    // onChange={handleChange}
                   >
                     {des.designer_name}
-                  </span>
-                  <span
-                    className={style.deleteButton}
-                    onClick={() => handleDelete("designer_name")}
-                  >
-                    x
+
+                    <DeleteOutlined
+                      style={{ marginLeft: "5px" }}
+                      onClick={() => handleDelete()}
+                    />
                   </span>
                 </>
               ))}
-            <label>Editorial</label>
+            <label className={style.labels}>Editorial</label>
             <input
               name="editorial_name"
               value={product.Editorial?.editorial_name || ""}
               onChange={handleChange}
               className={style.inputEdit}
             />
-            <label>Languages</label>
+            <label className={style.labels}>Languages</label>
             <Select
               mode="multiple"
-              onChange={handleChange}
+              onChange={(values) => handleChangeLanguages(values)}
               name="language_name"
               style={{
                 width: "100%",
@@ -352,20 +417,23 @@ export const EditProductForm = () => {
               product.Languages?.map((lan) => (
                 <>
                   <span
-                    className={style.inputEdit}
+                    className={style.subInputEdit}
                     key={lan.language_name}
                     value={lan.language_name}
                     name="language_name"
-                    // onChange={handleChange}
                   >
                     {lan.language_name}
+
+                    <DeleteOutlined
+                      style={{ marginLeft: "5px" }}
+                      onClick={() => handleDelete()}
+                    />
                   </span>
-                  <span className={style.deleteButton}>x</span>
                 </>
               ))}
-            <label>Mechanic</label>
+            <label className={style.labels}>Mechanic</label>
             <Select
-              onChange={handleChange}
+              onChange={(values) => handleChangeMechanic(values)}
               name="mechanic_name"
               style={{
                 width: "100%",
@@ -388,13 +456,16 @@ export const EditProductForm = () => {
               key={product.Mechanic?.mechanic_name}
               name="mechanic_name"
               value={product.Mechanic?.mechanic_name}
-              onChange={handleChange}
-              className={style.inputEdit}
+              className={style.subInputEdit}
             >
               {product.Mechanic?.mechanic_name}
+
+              <DeleteOutlined
+                style={{ marginLeft: "5px" }}
+                onClick={() => handleDelete()}
+              />
             </span>
-            <span className={style.deleteButton}>x</span>
-            <label>Description</label>
+            <label className={style.labels}>Description</label>
             <textarea
               className={style.inputDescription}
               value={product.Mechanic?.mechanic_description}
@@ -404,9 +475,9 @@ export const EditProductForm = () => {
               style={{ resize: "none" }}
             />
 
-            <label>Thematic</label>
+            <label className={style.labels}>Thematic</label>
             <Select
-              onChange={handleChange}
+              onChange={(values) => handleChangeThematic(values)}
               name="thematic_name"
               style={{
                 width: "100%",
@@ -431,11 +502,15 @@ export const EditProductForm = () => {
               name="thematic_name"
               value={product.Thematic?.thematic_name}
               onChange={handleChange}
-              className={style.inputEdit}
+              className={style.subInputEdit}
             >
               {product.Thematic?.thematic_name}
+
+              <DeleteOutlined
+                style={{ marginLeft: "5px" }}
+                onClick={() => handleDelete()}
+              />
             </span>
-            <span className={style.deleteButton}>x</span>
 
             <button type="submit" className={style.sendButton}>
               Send changes

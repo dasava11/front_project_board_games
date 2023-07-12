@@ -1,4 +1,4 @@
-export const showUploadWidget = (setInput, input, product) => {
+export const showUploadWidget = (setInput, input) => {
   let arrAux = [];
 
   window.cloudinary.openUploadWidget(
