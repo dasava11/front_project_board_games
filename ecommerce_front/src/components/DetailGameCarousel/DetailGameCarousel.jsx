@@ -21,8 +21,8 @@ const DetailGameCarousel = ({ game }) => {
   });
 
   const handleClick = (event) => {
-    const { value } = event.target;
-    let push = value;
+    
+    let push = event.target.alt
 
     if (push === "go") {
       if (index === carouselGame.length - 1) {
@@ -42,24 +42,18 @@ const DetailGameCarousel = ({ game }) => {
   };
 
   const handleImage = (event) => {
-    const { value } = event.target;
-    console.log(value);
+    
+    console.log(event.target.alt);
   };
 
   return (
     <div className={styles.carouselDetailGame}>
       <div className={styles.carouselDetail}>
-        <button
-          className={styles.carButnLft}
-          value="back"
-          onClick={handleClick}
-        >
-          {"<"}
-          {/* {<img src={arrowBack} alt="arrownext" />} */}
+        <button className={styles.carButnLft}>
+          <img src={arrowBack} alt="back" onClick={handleClick} />
         </button>
-        <button className={styles.carButnRig} value="go" onClick={handleClick}>
-          {">"}
-          {/* {<img src={arrowNext} alt="arrownext" />} */}
+        <button className={styles.carButnRig} >
+          <img src={arrowNext} alt="go" onClick={handleClick} />
         </button>
         <img
           className={styles.imageCorouselGame}
@@ -78,8 +72,7 @@ const DetailGameCarousel = ({ game }) => {
                 className={styles.imgPhotoRoll}
                 src={i}
                 key={indexC}
-                value={indexC}
-                alt={`imagen ${[indexC]}`}
+                alt={indexC}
                 onClick={(event) => handleImage(event)}
               />
             );
