@@ -11,6 +11,7 @@ import {
   GET_GAMES_BY_NAMES,
   SORT_GAMES,
   FILTER_GAMES,
+  FILTER_DELETE
 } from "../action-types/index";
 import { toast } from "react-toastify";
 
@@ -225,5 +226,12 @@ export const filterGames = (payload)=>{
   return{
     type: FILTER_GAMES,
     payload, 
+  }
+}
+
+export const filterDelete = (payload) => {
+  return {
+    type: FILTER_DELETE,
+    payload,
   }
 }

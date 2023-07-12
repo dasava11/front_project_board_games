@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllGames } from "../../Redux/actions_creators/index";
-//import useLocalStorage from "../LocalStorage/useLocalStorage";
+import { filterDelete } from "../../Redux/actions_creators/index";
 import style from "./Games.module.css";
 import promotionalBanner from "../../Photos/PromotionalBanner.png";
 import Filter from "../Filter/Filter";
@@ -16,13 +16,30 @@ const Games = () => {
   const [currentPage, SetCurrentPage] = useState(1);
   const [postPerPage, setPostPerPage] = useState(12);
   const [loading, setLoading] = useState(false);
+  const [filter, setFilter] = useState({
+    mechanic_name: "",
+    thematic_name: "",
+    category_name: "",
+  });
+
+  console.log(filter);
+  //let filterAux = []
   //const [currentGames, setCurrentGames] = useLocalStorage("currentGames", []);
+
+  
+      
 
   useEffect(() => {
     dispatch(getAllGames());
     /*     setCurrentGames(allGames);
     console.log(currentGames); */
   }, []);
+
+  const handleDelete = (e) => {
+    setFilter({...filter, [e.target.value]: ""})
+    dispatch(filterDelete({...filter, [e.target.value]: ""}))
+   }
+ 
 
   const lastPostIndex = currentPage * postPerPage;
   const firstPostIndex = lastPostIndex - postPerPage;
@@ -52,6 +69,8 @@ const Games = () => {
         <div className={style.filtersMain}>
           <div className={style.filters}>
             <Filter
+              filter = {filter}
+              setFilter = {setFilter}
               type={"categories"}
               nameType={"category_name"}
               SetCurrentPage={SetCurrentPage}
@@ -60,6 +79,8 @@ const Games = () => {
             />
             <Filter
               type={"mechanics"}
+              filter = {filter}
+              setFilter = {setFilter}
               nameType={"mechanic_name"}
               SetCurrentPage={SetCurrentPage}
               /* setCurrentGames={setCurrentGames}
@@ -67,6 +88,8 @@ const Games = () => {
             />
             <Filter
               type={"thematics"}
+              filter = {filter}
+              setFilter = {setFilter}
               nameType={"thematic_name"}
               SetCurrentPage={SetCurrentPage}
               /* setCurrentGames={setCurrentGames}
@@ -74,6 +97,15 @@ const Games = () => {
             />
           </div>
         </div>
+      </div>
+      <div>
+        {filter && Object.keys(filter).map((key) => {
+          if(filter[key] !== "") {
+          return (
+            <button key={key} value={key} onClick={(e) => handleDelete(e)}>{filter[key]}</button>
+          )
+          }
+        })}
       </div>
       <div className={style.gamePagination}>
         <Pagination

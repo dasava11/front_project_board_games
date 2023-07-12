@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import style from "./FirstPage.module.css";
 import { showUploadWidget } from "../Cloudinary/Cloudinary";
 const FirsPage = (props) => {
-  const { input, errors, handleChange, setError, setInput, error } = props;
+  const { input, errors, handleChange, setError, setInput } = props;
 
   
   return (

@@ -10,7 +10,7 @@ import { filterGames } from "../../Redux/actions_creators";
 const getAll = import.meta.env.VITE_GET;
 
 const Filter = (props) => {
-  const { type, nameType, SetCurrentPage } = props;
+  const { type, nameType, SetCurrentPage, filter, setFilter } = props;
   const dispatch = useDispatch()
   const [fields, setFields] = useState([]);
 
@@ -29,6 +29,7 @@ const Filter = (props) => {
 
   const handleFilters = (event) => {
     const { value } = event.target;
+    setFilter({...filter, [nameType]: value})
     dispatch(filterGames({value, nameType}))
     SetCurrentPage(1);
 
