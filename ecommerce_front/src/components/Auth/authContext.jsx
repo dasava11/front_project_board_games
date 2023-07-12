@@ -88,7 +88,7 @@ export const AuthProvider = ({ children }) => {
     await sendEmailVerification(auth.currentUser, configuration)
       .then(() => {
         console.log(
-          `Se ha enviado un correo electrónico de verificación a ${last_name}.`
+          `Se ha enviado un correo electrónico de verificación a ${name}.`
         );
       })
       .catch((error) => {
