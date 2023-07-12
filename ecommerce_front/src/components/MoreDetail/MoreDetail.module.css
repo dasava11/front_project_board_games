@@ -1,7 +1,7 @@
 .moreInfoDetail{
     display: flex;
     flex-direction: column;
-    margin: auto;
+    margin: 3rem auto;
 }
 
 .moreInfoRow{
@@ -45,4 +45,9 @@
 
 .moreInfoRow span{
     font-weight: 400;
+}
+
+.divisorInfo {
+    width: 100%;
+    margin-top: 2rem;
 }

@@ -1,3 +1,12 @@
+.carouselDetailGame{
+  display: flex;
+  flex-direction: column;
+  width: 600px;
+  height: 700px;
+  margin: auto;
+  position: relative;
+}
+
 .carouselDetail {
   display: flex;
   justify-content: center;
@@ -8,11 +17,13 @@
 }
 
 .carButnLft {
-  width: 80px;
-  height: 80px;
-  background-color: transparent;
+  width: 50px;
+  height: 50px;
+  background-color: rgba(255, 255, 255, 0.483);
   border: none;
-  border-radius: 50%;
+  font-size:xx-large;
+  color: rgba(25, 25, 249, 0.766);
+  /* border-radius: 50%; */
   position: absolute;
   left: 3%;
   top: 50%;
@@ -20,13 +31,36 @@
 }
 
 .carButnRig {
-  width: 80px;
-  height: 80px;
-  background-color: transparent;
+  width: 50px;
+  height: 50px;
+  background-color: rgba(255, 255, 255, 0.483);
   border: none;
-  border-radius: 50%;
+  font-size: xx-large;
+  color: rgba(25, 25, 249, 0.766);
+  /* border-radius: 50%; */
   position: absolute;
   right: 3%;
   top: 50%;
+  cursor: pointer;
+}
+
+.imageCorouselGame{
+  object-fit:cover;
+}
+
+.photoRoll{
+ display: flex;
+ flex-direction: row;
+ height: 110px;
+ width: 500px;
+ margin: 3rem 0;
+ background-color: hsl(0, 0%, 100%, 70%);
+ padding: 2rem;
+}
+
+.imgPhotoRoll{
+  width: 10%;
+  height: 10%;
+  margin: auto 1rem;
   cursor: pointer;
 }

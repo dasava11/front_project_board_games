@@ -1,6 +1,5 @@
 .card{
     width: 250px;
-    height: 250px;
     background-color: white;
     margin: 1rem;
     padding: 1rem;
@@ -34,6 +33,10 @@
     text-align: end;
     margin-bottom: 0;
     color: #07258F;
+}
+
+.card p:hover{
+    cursor: pointer;
 }
 
 .card img{

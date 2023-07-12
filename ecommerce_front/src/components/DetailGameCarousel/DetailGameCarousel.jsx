@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import arrowBack from "../../Photos/arrowBack96.png";
-import arrowNext from "../../Photos/arrowNext96.png";
+import arrowBack from "../../Photos/icons-back.png";
+import arrowNext from "../../Photos/icons-next.png";
 import styles from "../DetailGameCarousel/DetailGameCarousel.module.css";
 
 const DetailGameCarousel = ({ game }) => {
@@ -21,8 +21,8 @@ const DetailGameCarousel = ({ game }) => {
   });
 
   const handleClick = (event) => {
-    const { value } = event.target;
-    let push = value;
+    
+    let push = event.target.alt
 
     if (push === "go") {
       if (index === carouselGame.length - 1) {
@@ -41,20 +41,44 @@ const DetailGameCarousel = ({ game }) => {
     }
   };
 
+  const handleImage = (event) => {
+    
+    console.log(event.target.alt);
+  };
+
   return (
-    <div className={styles.carouselDetail}>
-      <button className={styles.carButnLft}>
+    <div className={styles.carouselDetailGame}>
+      <div className={styles.carouselDetail}>
+        <button className={styles.carButnLft}>
+          <img src={arrowBack} alt="back" onClick={handleClick} />
+        </button>
+        <button className={styles.carButnRig} >
+          <img src={arrowNext} alt="go" onClick={handleClick} />
+        </button>
         <img
-          src={arrowNext}
-          alt="arrowBack"
-          value="back"
-          onClick={handleClick}
+          className={styles.imageCorouselGame}
+          src={carouselGame[index]}
+          alt={`imagen ${[index]}`}
         />
-      </button>
-      <button className={styles.carButnRig}>
-        <img src={arrowBack} alt="arroNext" value="go" onClick={handleClick} />
-      </button>
-      <img src={carouselGame[index]} alt={`imagen ${[index]}`} />
+      </div>
+      <div className={styles.photoRoll}>
+        {game.image.url ? (
+          <img src={game.image.url} alt={game.name} />
+        ) : (
+          game.image.map((i, indexC) => {
+            //console.log(indexC);
+            return (
+              <img
+                className={styles.imgPhotoRoll}
+                src={i}
+                key={indexC}
+                alt={indexC}
+                onClick={(event) => handleImage(event)}
+              />
+            );
+          })
+        )}
+      </div>
     </div>
   );
 };
