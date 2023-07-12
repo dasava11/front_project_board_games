@@ -73,3 +73,19 @@
     flex-direction: column;
     margin: 5rem 0;
 }
+
+.notFound {
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(237, 237, 237);
+    border-radius: 6px;
+    width: 1200px;
+    height: 500px;
+    margin: 50px 30px 0;
+}
+
+.notFound span {
+    color:rgb(27, 27, 27);
+}

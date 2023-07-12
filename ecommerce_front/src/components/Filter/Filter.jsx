@@ -4,7 +4,8 @@ import {useDispatch} from "react-redux";
 import { Menu, MenuButton, MenuItem, MenuList } from "@chakra-ui/react";
 import { ChevronDownIcon } from "@chakra-ui/icons";
 import style from "./Filter.module.css";
-import { filterGames } from "../../Redux/actions_creators";
+import { filterDelete } from "../../Redux/actions_creators";
+//import { filterGames } from "../../Redux/actions_creators";
 //import useLocalSotorage from "../LocalStorage/useLocalStorage";
 
 const getAll = import.meta.env.VITE_GET;
@@ -30,7 +31,10 @@ const Filter = (props) => {
   const handleFilters = (event) => {
     const { value } = event.target;
     setFilter({...filter, [nameType]: value})
-    dispatch(filterGames({value, nameType}))
+    //dispatch(filterGames({value, nameType}))
+    //console.log(value);
+    //console.log(nameType);
+    dispatch(filterDelete({...filter, [nameType]: value}))
     SetCurrentPage(1);
 
   };

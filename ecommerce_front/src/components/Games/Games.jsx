@@ -22,22 +22,20 @@ const Games = () => {
     category_name: "",
   });
 
-  console.log(filter);
-  //let filterAux = []
   //const [currentGames, setCurrentGames] = useLocalStorage("currentGames", []);
 
   
       
 
   useEffect(() => {
-    dispatch(getAllGames());
-    /*     setCurrentGames(allGames);
-    console.log(currentGames); */
-  }, []);
+  //allGames.length === 0 && 
+  dispatch(getAllGames());
+   }, []);
 
   const handleDelete = (e) => {
     setFilter({...filter, [e.target.value]: ""})
     dispatch(filterDelete({...filter, [e.target.value]: ""}))
+    
    }
  
 
@@ -107,8 +105,8 @@ const Games = () => {
           }
         })}
       </div>
-      <div>
-        NOT FOUND
+      <div className={style.notFound}>
+        GAMES WERE NOT FOUND WITH THOSE FILTERS
       </div>
       </div>
     )
