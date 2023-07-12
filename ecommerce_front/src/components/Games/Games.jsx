@@ -36,7 +36,7 @@ const Games = () => {
       </div>
       <div className={style.gamesMain}>
         <div className={style.titleMain}>
-          <div>
+          <div className={style.gamesTitle}>
             <h1>Board Games</h1>
             <h3>Choose your favorite game</h3>
           </div>

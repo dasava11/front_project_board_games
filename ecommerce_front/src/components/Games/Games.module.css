@@ -4,6 +4,14 @@
     margin: 1rem;
 }
 
+.gamesTitle h1{
+    font-size: 3.5rem;
+}
+
+.gamesTitle h3{
+    font-size: 2rem;
+}
+
 .gamesMain{
     display: flex;
     align-items: center;

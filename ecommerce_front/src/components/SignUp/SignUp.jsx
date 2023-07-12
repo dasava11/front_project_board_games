@@ -4,20 +4,34 @@ import { Link } from "react-router-dom";
 import { useAuth } from "../Auth/authContext";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { passwordDifficulty, validateForm, validateInput } from "./validate";
 
 export const SignUp = () => {
   const navigate = useNavigate();
 
-  const [user, setUser] = useState({
+  const [form, setForm] = useState({
     name: "",
     email: "",
     password: "",
   });
+  const [errors, setErrors] =  useState({
+    name: "",
+    email: "",
+    password: "",
+  });
+
+  const validForm = validateForm(form,errors)
+  const passDifficulty = passwordDifficulty(form.password);
+
   const { signup, controlarEmail } = useAuth();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setUser({ ...user, [name]: value });
+    setForm({ ...form, [name]: value });
+    validateInput({
+      ...form, [name]: value },
+      errors,
+      setErrors);
   };
 
   const handleSubmit = async (e) => {
@@ -40,46 +54,53 @@ export const SignUp = () => {
 
     }
   };
+
+
   return (
     <div className="signup-container">
-      <form className="signup-form" onSubmit={(e) => handleSubmit(e)}>
-        <h2 className="create-account">Create your account</h2>
+      <form className="signup-form" onSubmit={handleSubmit}>
+        <h1 className="create-account">Create your account</h1>
 
-        <label htmlFor="name">Full Name:</label>
-        <input
-          className="inputs-signup"
-          type="text"
-          name="name"
-          id="name"
-          value={user.name}
-          onChange={handleChange}
-        ></input>
-        <label htmlFor="email">Email:</label>
-        <input
-          className="inputs-signup"
-          type="text"
-          name="email"
-          id="email"
-          value={user.email}
-          placeholder="youremail@yourcompany.com"
-          onChange={handleChange}
-        ></input>
+        <div className="div-inputs">
+          <label htmlFor="name">Full Name:</label>
+          <input
+            className="inputs-signup"
+            type="text"
+            name="name"
+            id="name"
+            value={form.name}
+            onChange={handleChange}
+            />
+          <span className="inputs-errors">{errors.name}</span>
+          <label htmlFor="email">Email:</label>
+          <input
+            className="inputs-signup"
+            type="text"
+            name="email"
+            id="email"
+            value={form.email}
+            onChange={handleChange}
+            />
+          <span className="inputs-errors">{errors.email}</span>
 
-        <label htmlFor="password">Password:</label>
-        <input
-          className="inputs-signup"
-          type="password"
-          name="password"
-          id="password"
-          value={user.password}
-          onChange={handleChange}
-        ></input>
+          <label htmlFor="password">Password:</label>
+          <input
+            className="inputs-signup"
+            type="password"
+            name="password"
+            id="password"
+            value={form.password}
+            onChange={handleChange}
+            />
+          <span className="inputs-errors">{errors.password}</span>
+          <p className={`signup-password-${passDifficulty}`}>{passDifficulty}</p>
+        </div>
 
-        <button type="submit" className="signup-button">
+        <button type="submit" className="signup-button" disabled={!validForm}>
           Create Account
         </button>
         <span>
-          Already have an account? <Link to="/login">Log in</Link>
+          Already have an account? <Link to="/login" className="login-p">Log in</Link>
         </span>
       </form>
     </div>

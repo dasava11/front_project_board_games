@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getAllGames } from "../../Redux/actions_creators";
 import style from "./SaleGames.module.css";
 import Card from "../Card/Card";
+import salesBanner from "../../Photos/salesBanner.jpg"
 
 const SaleGames = () => {
   const dispatch = useDispatch();
@@ -18,9 +19,13 @@ const SaleGames = () => {
     <div className={style.Grid}>
       <img
         className={style.imgSale}
-        src="https://marketplace.canva.com/EAE6uxzge6c/1/0/1600w/canva-yellow-and-white-minimalist-big-sale-banner-BjBIq-T_6j4.jpg"
+        src={salesBanner}
         alt="offer"
       />
+      <div className={style.salesTitle}>
+        <h1>Games on Sale</h1>
+        <h3>Take advantage of the discounts</h3>
+      </div>
       <div className={style.saleGames}>
         {allGames &&
           currentSale.map((game) => {

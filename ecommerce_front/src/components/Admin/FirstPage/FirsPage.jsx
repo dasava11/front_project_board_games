@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import style from "./FirstPage.module.css";
-import { showUploadWidget } from "../../Cloudinary/Cloudinary";
+import { showUploadWidget } from "../Cloudinary/Cloudinary";
 const FirsPage = (props) => {
-  const { input, errors, handleChange, setError, setInput } = props;
+  const { input, errors, handleChange, setError, setInput, error } = props;
 
+  
   return (
     <div className={style.firstPageStyle}>
       <div className={style.formCreateDivFlex}>
@@ -101,11 +102,11 @@ const FirsPage = (props) => {
       >
         Upload Image
       </p>
-      {errors && <h2>Not Uploaded</h2>}
-      {input.image > 0 && <h2>Uploaded</h2>}
+      {input.image?.length > 0 && <h2>Image Uploaded</h2>}
+
       <div className="formCreateDivFlex">
         <div className="formCreateDivFlexSub">
-           <input
+          <input
             className={style.inputsCreate}
             type="number"
             placeholder="Weight"
@@ -119,7 +120,7 @@ const FirsPage = (props) => {
           {errors.weight && <span>{errors.weight}</span>}
         </div>
         <div className="formCreateDivFlexSub">
-         <input
+          <input
             className={style.inputsCreate}
             type="number"
             placeholder="Playing time"
@@ -129,10 +130,9 @@ const FirsPage = (props) => {
             min={0}
           />
           {errors.playing_time && <span>{errors.playing_time}</span>}
-
         </div>
       </div>
-      </div> 
+    </div>
   );
 };
 

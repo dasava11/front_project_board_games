@@ -1,0 +1,30 @@
+.notFoundContainer {
+  display: flex;
+  flex-direction: column;
+  width: 90vw;
+  height: 90vh;
+  margin: 5rem auto;
+  align-items: center;
+}
+
+.notFoundImg {
+  border-radius: 2em;
+  height: 80vh;
+  width: 80vw;
+}
+
+.notFoundBtn {
+  background-color: #000031;
+  padding: 1rem;
+  color: white;
+  text-decoration: none;
+  border-radius: 1rem;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: 0.5s;
+}
+
+.notFoundBtn:hover {
+  background-color: #040461;
+  transform: scale(1.1);
+}

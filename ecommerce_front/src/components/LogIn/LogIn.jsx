@@ -13,27 +13,42 @@ export const LogIn = () => {
     email: "",
     password: "",
   });
-
+  const [forgotPassword, setForgotPassword] = useState(false)
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   const { login, logInWithGoogle, resetPassword } = useAuth();
-
-  const handleGoogleSignIn = async () => {
+  
+  const validForm = () => {
+    if(error?.length === 0  &&  user.email?.length !== 0  &&  user.password?.length !== 0){
+      return true;
+    }else{
+      return false;
+    }
+  }
+  const handleGoogleSignIn = async (e) => {
+    e.preventDefault();
     try {
       await logInWithGoogle();
       toast.success("A successfull log in with Google!");
       navigate("/");
     } catch (error) {
-      console.log('error')
-      console.log(error)
-      // toast.error("Oh! no! Something went wrong! Try again!");
       toast.error(error.message);
     }
   };
 
-  const handleForgotPassword = async () => {
-    if (!user.email) return setError("Please write your email");
+  const handleRecoverPassword = async (e) => {
+    e.preventDefault();
     try {
-      await resetPassword(user.email);
-      toast.success("We sent you an email to reset your password!");
+      if (!user.email || !emailRegex.test(user.email)){
+        setError("Please write a valid email");
+      } else {
+        await resetPassword(user.email);
+        toast.success("If your account exists, you will receive an email to reset your password.");
+        setForgotPassword(false);
+        setUser({
+          email: "",
+          password: "",
+        });
+      }
     } catch (error) {
       toast.error(error.mesage);
     }
@@ -58,56 +73,70 @@ export const LogIn = () => {
       }
     }
   };
+
   const handleUser = (e) => {
     const { name, value } = e.target;
     setUser({ ...user, [name]: value });
+    if(name === 'email'  &&  !emailRegex.test(user.email)  &&  value.length !== 0){
+      setError("Invalid email.");
+    }else if(name === 'email' &&  emailRegex.test(user.email) || value.length === 0){
+      setError("");
+    }
   };
+
+  const handleForgotPassword = () => {
+    setForgotPassword(true);
+  }
 
   return (
     <div className="container-login">
-      <form className="login-form" onSubmit={(e) => handleSubmit(e)}>
-        <h2 className="title">Log In</h2>
-        <label htmlFor="user_name" className="label">
-          Username
-        </label>
-        <input
-          className="login-form-inputs"
-          type="email"
-          name="email"
-          id="email"
-          value={user.email}
-          onChange={handleUser}
-          placeholder="yourname@company.com"
-        ></input>
-        {error && <h6 className="error">{error}</h6>}
-        <label htmlFor="password" className="label">
-          Password
-        </label>
-        <input
-          className="login-form-inputs"
-          type="password"
-          name="password"
-          email="email"
-          value={user.password}
-          onChange={handleUser}
-          placeholder="******"
-        ></input>
+      <form className="login-form" >
+        <h1 className="login-title">Log In</h1>
+        <div className="div-inputs">
+          <label htmlFor="email" className="label">
+            Email
+          </label>
+          <input
+            className="login-form-inputs"
+            type="email"
+            name="email"
+            id="email"
+            value={user.email}
+            onChange={handleUser}/>
 
-        <button type="submit" className="login-button">
+          {error && <h6 className="login-input-error">{error}</h6>}
+          {forgotPassword && <button className="recover-password-button" disabled={email?.length === 0 || !emailRegex.test(user.email) } onClick={handleRecoverPassword}>Send</button>}
+
+          <label htmlFor="password" className={`label ${forgotPassword && "login-disabled"}`}>
+            Password
+          </label>
+
+          <input
+            className={`login-form-inputs ${forgotPassword && "login-disabled"}`}
+            type="password"
+            name="password"
+            email="email"
+            id="password"
+            value={user.password}
+            onChange={handleUser}
+            disabled={forgotPassword}/>
+        </div>
+
+        <button type="submit" className={`login-button ${forgotPassword && "login-disabled"}`} disabled={forgotPassword || !validForm()} onClick={handleSubmit}>
           Log in
         </button>
+        <div className="form-body">
+          <button className={`login-button ${forgotPassword && "login-disabled"}`} onClick={handleGoogleSignIn} disabled={forgotPassword}>
+            Log in with <FcGoogle />
+          </button>
+          <h6 className="forgot-p" onClick={handleForgotPassword}>
+            Forgot your password?
+          </h6>
+          <span className="span-signup-p">
+            Don't have an account? <Link to="/signup" className="signup-p">Create one now</Link>
+          </span>
+        </div>
       </form>
-      <div className="form-body">
-        <button className="login-button" onClick={handleGoogleSignIn}>
-          Log in with <FcGoogle />
-        </button>
-        <h6 className="forgot-p" onClick={handleForgotPassword}>
-          Forgot your password?
-        </h6>
-        <span>
-          Don't have an account? <Link to="/signup">Create one now</Link>
-        </span>
-      </div>
     </div>
   );
 };

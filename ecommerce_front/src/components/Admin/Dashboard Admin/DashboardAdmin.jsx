@@ -1,59 +1,43 @@
 import React, { useEffect } from "react";
-import { EditProduct } from "../Forms/EditProduct/EditProduct";
+import { EditProduct } from "../EditProduct/EditProduct";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  getAllGames,
-  getCategories,
-  getAuthors,
-  getDesigners,
-  getLanguages,
-  getEditorials,
-  getThematics,
-  getMechanics,
-} from "../../../Redux/actions_creators";
+import { getAllGames } from "../../../Redux/actions_creators";
 import { Link } from "react-router-dom";
-import style from "./DashboardAdmin.module.css";
+import styles from "./test.module.css";
+import { HeaderAdmin } from "../HeaderAdmin/HeaderAdmin";
+import { LikeOutlined } from "@ant-design/icons";
+import { AntDesignOutlined } from "@ant-design/icons";
+import { Col, Row, Statistic, Avatar } from "antd";
+
 export const DashboardAdmin = () => {
   const dispatch = useDispatch();
   const games = useSelector((state) => state.allGames);
-  const categories = useSelector((state) => state.allCategories);
-  const authors = useSelector((state) => state.allAuthors);
-  const designers = useSelector((state) => state.allDesigners);
-  const languages = useSelector((state) => state.allLanguages);
-  const editorials = useSelector((state) => state.allEditorials);
-  const thematics = useSelector((state) => state.allThematics);
-  const mechanics = useSelector((state) => state.allMechanics);
 
   useEffect(() => {
     dispatch(getAllGames());
-    dispatch(getCategories());
-    dispatch(getAuthors());
-    dispatch(getDesigners());
-    dispatch(getLanguages());
-    dispatch(getEditorials());
-    dispatch(getThematics());
-    dispatch(getMechanics());
   }, []);
-  console.log(authors);
-  return (
-    <div className={style.containerAdmin}>
-      <br />
-      <h1>DASHBOARD ADMIN</h1>
-      <br />
-      <button className={style.buttonCreate}>
-        <Link to="/createproduct">Create New Game</Link>
-      </button>
 
-      <EditProduct
-        games={games}
-        categories={categories}
-        authors={authors}
-        designers={designers}
-        languages={languages}
-        editorials={editorials}
-        thematics={thematics}
-        mechanics={mechanics}
-      />
+  return (
+    <div className={styles.containerAdmin}>
+      <HeaderAdmin />
+      <div className={styles.dashBoardAd}>
+        <Row gutter={16}>
+          <Col span={12}>
+            <Statistic
+              title="Feedback"
+              value={1128}
+              prefix={<LikeOutlined />}
+            />
+          </Col>
+          <Col span={12}>
+            <Statistic title="Unmerged" value={93} suffix="/ 100" />
+          </Col>
+        </Row>
+        <Avatar
+          size={{ xs: 24, sm: 32, md: 40, lg: 64, xl: 80, xxl: 100 }}
+          icon={<AntDesignOutlined />}
+        />
+      </div>
     </div>
   );
 };
