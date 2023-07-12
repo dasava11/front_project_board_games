@@ -106,15 +106,13 @@ export default function CreateGame() {
   const handleChangeEditorial = (values) => {
     setInput({ ...input, editorial_name: values });
   };
-  const handleChangeMechanics = (value) => {
-    console.log("aca mechanic", value);
-    let mechanic = [value];
-    setInput({ ...input, mechanic_name: mechanic });
+  const handleChangeMechanics = (values) => {
+    // let mechanic = [value];
+    setInput({ ...input, mechanic_name: values });
   };
-  const handleChangeThematics = (value) => {
-    let thematic = [value];
-    setInput({ ...input, thematic_name: thematic });
-    console.log(thematic);
+  const handleChangeThematics = (values) => {
+    // let thematic = [value];
+    setInput({ ...input, thematic_name: values });
   };
   const handleChangeLanguages = (values) => {
     setInput({ ...input, languages_name: values });
@@ -152,7 +150,7 @@ export default function CreateGame() {
       setNext(true);
     }
   };
-  console.log(input);
+
   return (
     <>
       <div className="maincontainer">
