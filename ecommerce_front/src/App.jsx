@@ -9,7 +9,7 @@ import CardDetail from "./components/CardDetail/CardDetail";
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
 import MPsuccess from "./components/MPsuccess/MPsuccess";
-import User from './components/User/User'
+import User from "./components/User/User";
 import ContactUs from "./components/ContactUs/ContactUs";
 import { LogIn } from "./components/LogIn/LogIn";
 import { SignUp } from "./components/SignUp/SignUp";
@@ -21,9 +21,9 @@ import { PayPalScriptProvider } from "@paypal/react-paypal-js";
 import { EditProduct } from "./components/Admin/EditProduct/EditProduct";
 import { EditProductForm } from "./components/Admin/EditProduct/EditProductForm";
 import Cart from "./components/Cart/Cart";
-import MercadoPagoSuccess from "./components/MercadoPagoSuccess/MercadoPagoSuccess";
-import MercadoPagoFailure from "./components/MercadoPagoFailure/MercadoPagoFailure";
-import MercadoPagoPending from "./components/MercadoPagoPending/MercadoPagoPending";
+import MercadoPagoSuccess from "./components/MercadoPago/MercadoPagoSuccess/MercadoPagoSuccess";
+import MercadoPagoFailure from "./components/MercadoPago/MercadoPagoFailure/MercadoPagoFailure";
+import MercadoPagoPending from "./components/MercadoPago/MercadoPagoPending/MercadoPagoPending";
 import PayPalPaymentButton from "./components/Paypal/Paypal";
 import NotFound from "./components/NotFound/NotFound";
 
@@ -59,8 +59,7 @@ function App() {
             <Route exact path="/success" element={<MercadoPagoSuccess />} />
             <Route exact path="/failure" element={<MercadoPagoFailure />} />
             <Route exact path="/pending" element={<MercadoPagoPending />} />
-            <Route path="/user" element={<User/>}/>
-            <Route path='/mpsuccess' element={<MPsuccess/>}/>
+            <Route path="/user" element={<User />} />
           </Routes>
           <Footer />
         </AuthProvider>

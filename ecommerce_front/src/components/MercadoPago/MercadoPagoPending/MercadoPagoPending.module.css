@@ -1,0 +1,28 @@
+.mpPendingContainer {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  margin: 5rem auto;
+  align-items: center;
+  height: 70vh;
+  justify-content: space-around;
+  background-color: rgb(200, 200, 200);
+  border-radius: 5rem;
+  border: 1px solid black;
+}
+
+.mpPendingBtn {
+  background-color: #000031;
+  padding: 1rem;
+  color: white;
+  text-decoration: none;
+  border-radius: 1rem;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: 0.5s;
+}
+
+.mpPendingBtn:hover {
+  background-color: #040461;
+  transform: scale(1.1);
+}
