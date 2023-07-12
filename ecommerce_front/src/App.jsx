@@ -8,7 +8,6 @@ import Games from "./components/Games/Games";
 import CardDetail from "./components/CardDetail/CardDetail";
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
-import MPsuccess from "./components/MPsuccess/MPsuccess";
 import User from "./components/User/User";
 import ContactUs from "./components/ContactUs/ContactUs";
 import { LogIn } from "./components/LogIn/LogIn";
