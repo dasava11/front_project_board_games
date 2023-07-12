@@ -4,7 +4,6 @@ import { showUploadWidget } from "../Cloudinary/Cloudinary";
 const FirsPage = (props) => {
   const { input, errors, handleChange, setError, setInput } = props;
 
-  
   return (
     <div className={style.firstPageStyle}>
       <div className={style.formCreateDivFlex}>
@@ -49,7 +48,7 @@ const FirsPage = (props) => {
           <input
             className="inputs-create"
             type="text"
-            placeholder="Age"
+            placeholder="Minimum age"
             name="age"
             value={input.age}
             onChange={handleChange}
@@ -87,7 +86,7 @@ const FirsPage = (props) => {
       <input
         className={style.inputsCreate}
         type="number"
-        placeholder="Stock"
+        placeholder="Quantity available"
         name="stock"
         value={input.stock}
         onChange={handleChange}
@@ -109,7 +108,7 @@ const FirsPage = (props) => {
           <input
             className={style.inputsCreate}
             type="number"
-            placeholder="Weight"
+            placeholder="Difficulty(0-10)"
             name="weight"
             value={input.weight}
             onChange={handleChange}

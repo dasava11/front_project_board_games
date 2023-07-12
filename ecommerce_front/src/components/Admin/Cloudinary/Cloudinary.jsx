@@ -38,11 +38,24 @@ export const showUploadWidget = (setInput, input) => {
       if (!err) {
         if (info.event === "queues-end") {
           arrAux.push(info.data.info.files[0].uploadInfo.secure_url);
+          // let images = info.data.info.files.map(
+          //   (img) => arrAux.push(img.uploadInfo.secure_url)
+          // );
+          console.log(arrAux);
 
+          // setInput({
+          //   ...input,
+          //   image: arrAux,
+          // });
           input.image = arrAux;
         }
 
+        // setInput({
+        //   ...input,
+        //   image: [...arrAux],
+        // });
         console.log(input.image);
+        //}
       }
     }
   );
