@@ -16,4 +16,5 @@ export const POST_MECHANICS = "POST_MECHANICS";
 export const POST_THEMATICS = "POST_THEMATICS";
 export const POST_LANGUAGES = "POST_LANGUAGES";
 export const SORT_GAMES = "SORT_GAMES";
-export const FILTER_GAMES = "FILTER_GAMES";
+//export const FILTER_GAMES = "FILTER_GAMES";
+export const FILTER_DELETE = "FILTER_DELETE";
