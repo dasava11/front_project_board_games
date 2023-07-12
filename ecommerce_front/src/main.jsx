@@ -5,15 +5,12 @@ import App from "./App";
 import { Provider } from "react-redux";
 import store from "./Redux/store/index";
 import { BrowserRouter } from "react-router-dom";
-import { ChakraProvider } from "@chakra-ui/react";
 
 createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <BrowserRouter>
       <Provider store={store}>
-        <ChakraProvider>
-          <App />
-        </ChakraProvider>
+        <App />
       </Provider>
     </BrowserRouter>
   </React.StrictMode>

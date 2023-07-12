@@ -19,9 +19,9 @@ import { PayPalScriptProvider } from "@paypal/react-paypal-js";
 import { EditProduct } from "./components/Admin/EditProduct/EditProduct";
 import { EditProductForm } from "./components/Admin/EditProduct/EditProductForm";
 import Cart from "./components/Cart/Cart";
-import MercadoPagoSuccess from "./components/MercadoPagoSuccess/MercadoPagoSuccess";
-import MercadoPagoFailure from "./components/MercadoPagoFailure/MercadoPagoFailure";
-import MercadoPagoPending from "./components/MercadoPagoPending/MercadoPagoPending";
+import MercadoPagoSuccess from "./components/MercadoPago/MercadoPagoSuccess/MercadoPagoSuccess";
+import MercadoPagoFailure from "./components/MercadoPago/MercadoPagoFailure/MercadoPagoFailure";
+import MercadoPagoPending from "./components/MercadoPago/MercadoPagoPending/MercadoPagoPending";
 import PayPalPaymentButton from "./components/Paypal/Paypal";
 import NotFound from "./components/NotFound/NotFound";
 
