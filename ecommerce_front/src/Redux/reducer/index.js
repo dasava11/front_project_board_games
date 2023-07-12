@@ -118,7 +118,7 @@ const rootReducer = (state = initialState, action) => {
         }
 
         if (action.payload.nameType === "category_name") {
-          filterGames = state.games.filter((game)=>game.Categories?.some((c)=>c.category_name && c.category_name === action.payload.value))
+          filterGames = state.allGames.filter((game)=>game.Categories?.some((c)=>c.category_name && c.category_name === action.payload.value))
           
         }
       

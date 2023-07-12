@@ -45,7 +45,75 @@ const Games = () => {
   const firstPostIndex = lastPostIndex - postPerPage;
   const currentPosts = allGames.slice(firstPostIndex, lastPostIndex);
 
-  //console.log(currentPosts);
+  if(allGames.length === 0) {
+    return (
+      <div>
+        <div className={style.gamesBanner}>
+        <img src={promotionalBanner} alt="Banner" />
+      </div>
+      <div className={style.gamesMain}>
+        <div className={style.titleMain}>
+          <div className={style.gamesTitle}>
+            <h1>Board Games</h1>
+            <h3>Choose your favorite game</h3>
+          </div>
+          <div>
+            {
+              <SortGames
+                className={style.sortSelect}
+                SetCurrentPage={SetCurrentPage}
+              />
+            }
+          </div>
+        </div>
+        <div className={style.filtersMain}>
+          <div className={style.filters}>
+            <Filter
+              filter = {filter}
+              setFilter = {setFilter}
+              type={"categories"}
+              nameType={"category_name"}
+              SetCurrentPage={SetCurrentPage}
+              /* setCurrentGames={setCurrentGames}
+              currentGames={currentGames} */
+            />
+            <Filter
+              type={"mechanics"}
+              filter = {filter}
+              setFilter = {setFilter}
+              nameType={"mechanic_name"}
+              SetCurrentPage={SetCurrentPage}
+              /* setCurrentGames={setCurrentGames}
+              currentGames={currentGames} */
+            />
+            <Filter
+              type={"thematics"}
+              filter = {filter}
+              setFilter = {setFilter}
+              nameType={"thematic_name"}
+              SetCurrentPage={SetCurrentPage}
+              /* setCurrentGames={setCurrentGames}
+              currentGames={currentGames} */
+            />
+          </div>
+        </div>
+      </div>
+      <div>
+        {filter && Object.keys(filter).map((key) => {
+          if(filter[key] !== "") {
+          return (
+            <button key={key} value={key} onClick={(e) => handleDelete(e)}>{filter[key]}</button>
+          )
+          }
+        })}
+      </div>
+      <div>
+        NOT FOUND
+      </div>
+      </div>
+    )
+  } else {
+
   return (
     <div>
       <div className={style.gamesBanner}>
@@ -139,5 +207,5 @@ const Games = () => {
     </div>
   );
 };
-
+}
 export default Games;
