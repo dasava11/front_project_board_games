@@ -103,18 +103,16 @@ export default function CreateGame() {
   const handleChangeDesigners = (values) => {
     setInput({ ...input, designers_name: values });
   };
-  const handleChangeEditorial = (values) => {
-    setInput({ ...input, editorial_name: values });
+  const handleChangeEditorial = (value) => {
+    setInput({ ...input, editorial_name: value });
   };
-  const handleChangeMechanics = (value) => {
-    console.log("aca mechanic", value);
-    let mechanic = [value];
-    setInput({ ...input, mechanic_name: mechanic });
+  const handleChangeMechanics = (values) => {
+    // let mechanic = [value];
+    setInput({ ...input, mechanic_name: values });
   };
-  const handleChangeThematics = (value) => {
-    let thematic = [value];
-    setInput({ ...input, thematic_name: thematic });
-    console.log(thematic);
+  const handleChangeThematics = (values) => {
+    // let thematic = [value];
+    setInput({ ...input, thematic_name: values });
   };
   const handleChangeLanguages = (values) => {
     setInput({ ...input, languages_name: values });
@@ -155,9 +153,7 @@ export default function CreateGame() {
   console.log(input);
   return (
     <>
-      <div className="maincontainer">
-        <HeaderAdmin />
-      </div>
+      <div className="maincontainer"></div>
       <div className="form-container">
         <form onSubmit={(e) => handleSubmit(e)} className="form">
           <h2 className="title-form">Create Product</h2>
@@ -183,7 +179,7 @@ export default function CreateGame() {
                     border: "1px solid white",
                     borderRadius: "8px",
                   }}
-                  placeholder="Select authors"
+                  placeholder="Select Author"
                 >
                   {allAuthors &&
                     allAuthors.map((aut) => {
@@ -209,7 +205,7 @@ export default function CreateGame() {
                     fontSize: "medium",
                     height: "33px",
                   }}
-                  placeholder="Select categories"
+                  placeholder="Select Categories"
                 >
                   {allCategories &&
                     allCategories.map((cat) => {
@@ -242,7 +238,7 @@ export default function CreateGame() {
                     fontSize: "medium",
                     height: "33px",
                   }}
-                  placeholder="Select designers"
+                  placeholder="Select Designers"
                 >
                   {allDesigners &&
                     allDesigners.map((des) => {
@@ -273,7 +269,7 @@ export default function CreateGame() {
                     fontSize: "medium",
                     height: "33px",
                   }}
-                  placeholder="Select editorials"
+                  placeholder="Select Editorial"
                 >
                   {allEditorials &&
                     allEditorials.map((edit) => {
@@ -299,7 +295,7 @@ export default function CreateGame() {
                   mode="multiple"
                   onChange={(values) => handleChangeMechanics(values)}
                   name="mechanic_name"
-                  placeholder="Select mechanics"
+                  placeholder="Select Mechanics"
                   style={{
                     width: "100%",
                     margin: "0.5rem",
@@ -332,7 +328,7 @@ export default function CreateGame() {
                   mode="multiple"
                   onChange={(values) => handleChangeThematics(values)}
                   name="thematic_name"
-                  placeholder="Select thematics"
+                  placeholder="Select Thematics"
                   style={{
                     width: "100%",
                     margin: "0.5rem",
@@ -364,7 +360,7 @@ export default function CreateGame() {
                   onChange={(values) => handleChangeLanguages(values)}
                   name="languages_name"
                   mode="multiple"
-                  placeholder="Select Language"
+                  placeholder="Select Languages"
                   style={{
                     width: "100%",
                     margin: "0.5rem",
