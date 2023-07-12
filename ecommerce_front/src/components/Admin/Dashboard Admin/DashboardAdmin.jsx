@@ -8,6 +8,7 @@ import { HeaderAdmin } from "../HeaderAdmin/HeaderAdmin";
 import { LikeOutlined } from "@ant-design/icons";
 import { AntDesignOutlined } from "@ant-design/icons";
 import { Col, Row, Statistic, Avatar } from "antd";
+import { MailOutlined } from "@ant-design/icons";
 
 export const DashboardAdmin = () => {
   const dispatch = useDispatch();
@@ -19,8 +20,20 @@ export const DashboardAdmin = () => {
 
   return (
     <div className={styles.containerAdmin}>
-      <HeaderAdmin />
+      <h2>Administration Panel</h2>
       <div className={styles.dashBoardAd}>
+        <h3>Check Gmail Account</h3>
+        <Link to="https://accounts.google.com/">
+          <MailOutlined
+            style={{
+              fontSize: "30px",
+              margin: "1px",
+              padding: "7px",
+            }}
+          />
+        </Link>
+      </div>
+      <div>
         <Row gutter={16}>
           <Col span={12}>
             <Statistic

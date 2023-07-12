@@ -1,6 +1,68 @@
-.deleteButton{
-    border:1px solid black;
-    border-radius: 8px;
-    padding:2px;
+.mainContainer{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    background-color: #f5f5f5;
     
+}
+.subInputEdit{
+    padding: 0.5rem;
+    background-color:white;
+    margin:0px;
+    font-size: small;
+}
+.labels{
+    margin:4px;
+}
+.inputEdit{
+    height: 33px;
+    width: 90%;
+    margin: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+    font-size: medium;
+    border: 1px solid white;
+    border-radius: 8px;
+}
+
+.switchButton{
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    padding:5px;
+    border: 1px solid black;
+    border-radius: 8px;
+}
+.sendButton{
+    background-color: #000035;
+    font-size: 1.5rem;
+    color: white;
+    border-radius: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    height: 2.5rem;
+    padding: 1.5rem;
+    margin:2rem;
+}
+
+.buttonCloudinary{
+    background-color: #000035;
+    font-size: 1.5rem;
+    color: white;
+    border-radius: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    height: 2.5rem;
+    padding: 1.5rem;
+    margin:10px;
+    
+        
+}
+.inputDescription{
+    width: 80%;
+    font-size: 1.5rem;
 }

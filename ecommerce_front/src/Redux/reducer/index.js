@@ -9,7 +9,8 @@ import {
   GET_THEMATICS,
   GET_GAMES_BY_NAMES,
   SORT_GAMES,
-  FILTER_GAMES,
+  //FILTER_GAMES,
+  FILTER_DELETE
 } from "../action-types/index";
 
 const initialState = {
@@ -101,29 +102,61 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         allGames: sortsGames,
       };
-    case FILTER_GAMES:
+    // case FILTER_GAMES:
 
-        let filterGames = [];
+    //    let filterGames = [];
 
-        if (action.payload.nameType === "mechanic_name") {
-          filterGames = state.allGames.filter((game)=> game.Mechanic?.mechanic_name && game.Mechanic?.mechanic_name.includes(action.payload.value))
-        }
-        if (action.payload.nameType === "thematic_name") {
-          filterGames = state.allGames.filter((game)=>game.Thematic?.thematic_name && game.Thematic?.thematic_name.includes(action.payload.value))
-        }
+        
 
-        if (action.payload.nameType === "category_name") {
-          filterGames = state.games.filter((game)=>game.Categories?.some((c)=>c.category_name && c.category_name === action.payload.value))
+    //     if (action.payload.nameType === "mechanic_name") {
+    //       filterGames = state.allGames.filter((game)=> game.Mechanic?.mechanic_name && game.Mechanic?.mechanic_name.includes(action.payload.value))
           
-          console.log(action.payload.value);
-          console.log(filterGames);
+    //     }
+    //     if (action.payload.nameType === "thematic_name") {
+    //       filterGames = state.allGames.filter((game)=>game.Thematic?.thematic_name && game.Thematic?.thematic_name.includes(action.payload.value))
+         
+    //     }
+
+    //     if (action.payload.nameType === "category_name") {
+    //       filterGames = state.allGames.filter((game)=>game.Categories?.some((c)=>c.category_name && c.category_name === action.payload.value))
+          
+    //     }
+      
+    //     return{
+    //       ...state, 
+    //       allGames: filterGames
+
+    //     } 
+
+        case FILTER_DELETE:
+
+        let filterDeleted = [];
+        
+
+        filterDeleted = state.games
+        
+
+        if (action.payload.mechanic_name !== ""  ) {
+          filterDeleted = filterDeleted.filter((game)=> game.Mechanic?.mechanic_name && game.Mechanic?.mechanic_name.includes(action.payload.mechanic_name))
+          
+        }
+        if (action.payload.thematic_name !== "") {
+          filterDeleted = filterDeleted.filter((game)=>game.Thematic?.thematic_name && game.Thematic?.thematic_name.includes(action.payload.thematic_name))
+         
+        }
+
+        if (action.payload.category_name !== "") {
+          filterDeleted = filterDeleted.filter((game)=>game.Categories?.some((c)=>c.category_name && c.category_name === action.payload.category_name))
+          
         }
       
         return{
           ...state, 
-          allGames: filterGames
+          allGames: filterDeleted
 
         } 
+
+
     default:
       return state;
   }

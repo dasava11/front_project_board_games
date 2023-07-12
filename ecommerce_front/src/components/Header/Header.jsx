@@ -8,7 +8,7 @@ import style from "./Header.module.css";
 import Navbar from "../Navbar/Navbar";
 import { useAuth } from "../Auth/authContext";
 import { auth } from "../Auth/firebase";
-const Header = () => {
+export const Header = () => {
   const navigate = useNavigate();
   const { logOut } = useAuth();
   //const [isLogged, setIsLogged] = useState(false);

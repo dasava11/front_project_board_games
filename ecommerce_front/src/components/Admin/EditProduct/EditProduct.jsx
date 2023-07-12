@@ -23,7 +23,6 @@ export const EditProduct = () => {
 
   return (
     <div className={style.editProductForm}>
-      <HeaderAdmin />
       <h1 className={style.titleEdit}>All Products</h1>
       <table className={style.mainTable}>
         <thead className={style.titleTable}>
