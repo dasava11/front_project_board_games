@@ -9,7 +9,7 @@ import CardDetail from "./components/CardDetail/CardDetail";
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
 import MPsuccess from "./components/MPsuccess/MPsuccess";
-import User from './components/User/User'
+import User from "./components/User/User";
 import ContactUs from "./components/ContactUs/ContactUs";
 import { LogIn } from "./components/LogIn/LogIn";
 import { SignUp } from "./components/SignUp/SignUp";
@@ -59,8 +59,7 @@ function App() {
             <Route exact path="/success" element={<MercadoPagoSuccess />} />
             <Route exact path="/failure" element={<MercadoPagoFailure />} />
             <Route exact path="/pending" element={<MercadoPagoPending />} />
-            <Route path="/user" element={<User/>}/>
-            <Route path='/mpsuccess' element={<MPsuccess/>}/>
+            <Route path="/user" element={<User />} />
           </Routes>
           <Footer />
         </AuthProvider>
