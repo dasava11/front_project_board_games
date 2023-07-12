@@ -14,6 +14,7 @@ import {
 } from "../action-types/index";
 import { toast } from "react-toastify";
 
+// const VITE_URL_GAMES = "http://localhost:3001/games";
 const VITE_URL_GAMES = import.meta.env.VITE_URL_GAMES;
 const VITE_URL_CATEGORIES = import.meta.env.VITE_URL_CATEGORIES;
 const VITE_URL_AUTHORS = import.meta.env.VITE_URL_AUTHORS;
@@ -27,6 +28,7 @@ export const getAllGames = () => {
   return async (dispatch) => {
     try {
       const response = await axios.get(VITE_URL_GAMES);
+      console.log(response)
       dispatch({ type: GET_ALL_GAMES, payload: response.data });
     } catch (error) {
       console.error(error);

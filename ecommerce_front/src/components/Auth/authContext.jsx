@@ -93,7 +93,7 @@ export const AuthProvider = ({ children }) => {
       })
       .catch((error) => {
         console.error(
-          "Error al enviar el correo electrónico de verificación:",
+          "Error sending verification email.",
           error
         );
       });
