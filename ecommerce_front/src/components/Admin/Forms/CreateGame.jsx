@@ -134,13 +134,14 @@ export default function CreateGame() {
       playing_time: 0,
       author_name: "",
       categories_name: [],
-      designer_name: [],
+      designers_name: [],
       editorial_name: "",
       languages_name: [],
-      mechanic_name: [],
-      thematic_name: [],
+      mechanics_name: [],
+      thematics_name: [],
     });
     e.target.reset();
+    console.log(input);
   };
 
   const handleNext = () => {
@@ -150,7 +151,7 @@ export default function CreateGame() {
       setNext(true);
     }
   };
-  console.log(input);
+
   return (
     <>
       <div className="maincontainer"></div>
