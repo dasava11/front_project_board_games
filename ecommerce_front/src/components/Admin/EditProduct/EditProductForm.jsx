@@ -99,34 +99,35 @@ export const EditProductForm = () => {
       setProduct({ ...product, [name]: value });
     }
   };
+
   const handleChangeCategories = (values) => {
     setProduct({
       ...product,
-      Categories: values.map((cat) => ({ category_name: cat })),
+      Categories: values.map((cat) => ({ categories_name: cat })),
     });
   };
   const handleChangeDesigners = (values) => {
     setProduct({
       ...product,
-      Designers: values.map((des) => ({ designer_name: des })),
+      Designers: values.map((des) => ({ designers_name: des })),
     });
   };
   const handleChangeLanguages = (values) => {
     setProduct({
       ...product,
-      Languages: values.map((lan) => ({ language_name: lan })),
+      Languages: values.map((lan) => ({ languages_name: lan })),
     });
   };
   const handleChangeThematic = (values) => {
     setProduct({
       ...product,
-      Thematic: values.map((them) => ({ thematic_name: them })),
+      Thematic: values.map((them) => ({ thematics_name: them })),
     });
   };
   const handleChangeMechanic = (values) => {
     setProduct({
       ...product,
-      Mechanic: values.map((mec) => ({ mechanic_name: mec })),
+      Mechanic: values.map((mec) => ({ mechanics_name: mec })),
     });
   };
 

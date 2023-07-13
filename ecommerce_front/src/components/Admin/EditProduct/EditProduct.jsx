@@ -15,7 +15,7 @@ export const EditProduct = () => {
   const showInfo = (e) => {
     const { name, value } = e.target;
     console.log(value);
-    navigate(`/editproductform/${value}`);
+    navigate(`/admin/editproductform/${value}`);
   };
 
   return (

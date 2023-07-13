@@ -130,17 +130,6 @@ const FirsPage = (props) => {
           />
           {errors.playing_time && <span>{errors.playing_time}</span>}
         </div>
-        <div className="formCreateDivFlexSub">
-          <input
-            className={style.inputsCreate}
-            placeholder="Rating"
-            type="number"
-            name="rating"
-            value={input.rating}
-            onChange={handleChange}
-            max={10}
-          />
-        </div>
       </div>
     </div>
   );
