@@ -1,5 +1,5 @@
 //crear un estado por otro archivo, por fuera
-// import axios from "axios";
+import axios from "axios";
 import { createContext, useContext, useEffect, useState } from "react";
 import {
   createUserWithEmailAndPassword,
@@ -15,7 +15,8 @@ import {
 import { auth } from "../Auth/firebase";
 import { toast } from "react-toastify";
 export const authContext = createContext();
-// const userUrl = import.meta.env.VITE_URL_USERS;
+const userUrl = import.meta.env.VITE_URL_USERS;
+// const userUrl = 'http://localhost:3001/users';
 
 const URL_LOGIN = import.meta.env.VITE_URL_LOGIN;
 
@@ -30,6 +31,26 @@ export const AuthProvider = ({ children }) => {
   const signup = async (name, email, password) => {
     await createUserWithEmailAndPassword(auth, email, password).then(
       ({ user }) => {
+            axios
+              .post(userUrl, {
+                uid: user.uid,
+                email: user.email,
+                name: name})
+              .then((res) => {
+                // setUserAuth({
+                //   name: newUser.name,
+                //   email: newUser.email,
+                //   token: idToken,
+                // });
+                if (res.status === 201) {
+                  toast.success("User created succesully!");
+                } else if (res.status === 400 || res.status === 500) {
+                  toast.error(res.data.message);
+                }
+              })
+              .catch((err) => {
+                console.error(err);
+              });
         // user
         //   .getIdToken()
         //   .then((idToken) => {
@@ -67,12 +88,12 @@ export const AuthProvider = ({ children }) => {
     await sendEmailVerification(auth.currentUser, configuration)
       .then(() => {
         console.log(
-          `Se ha enviado un correo electrónico de verificación a ${last_name}.`
+          `Se ha enviado un correo electrónico de verificación a ${name}.`
         );
       })
       .catch((error) => {
         console.error(
-          "Error al enviar el correo electrónico de verificación:",
+          "Error sending verification email.",
           error
         );
       });
@@ -102,16 +123,23 @@ export const AuthProvider = ({ children }) => {
   };
 
   const login = async (email, password) => {
-    // console.log(auth);
+
     const credentials = await signInWithEmailAndPassword(auth, email, password);
     const { user } = credentials;
-
+    
+    setUserAuth({
+      name: user.name,
+      email: user.email,
+      token: user.accessToken,
+      emailVerified: user.emailVerified
+    });
+    
     if (!user.emailVerified) {
       await signOut(auth);
       window.localStorage.removeItem("token");
       throw new Error(
         "Verify the account with the link that we sent to your email"
-      );
+        );
     } else {
       if (window.localStorage.getItem("token")) {
         window.localStorage.removeItem("token");
@@ -135,14 +163,12 @@ export const AuthProvider = ({ children }) => {
 
     const userCredential = await signInWithPopup(auth, googleProvider);
     if (!userCredential.user.emailVerified) {
-      // console.log("loginWithGoogle no esta verificado");
       await signOut(auth);
       window.localStorage.removeItem("token");
       throw new Error(
         "Verify the account with the link that we sent to your email"
       );
     }
-    // return await signInWithPopup(auth, googleProvider);
   };
   useEffect(() => {
     onAuthStateChanged(auth, (currentUser) => {

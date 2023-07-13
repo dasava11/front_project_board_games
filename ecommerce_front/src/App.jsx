@@ -25,6 +25,7 @@ import MercadoPagoFailure from "./components/MercadoPago/MercadoPagoFailure/Merc
 import MercadoPagoPending from "./components/MercadoPago/MercadoPagoPending/MercadoPagoPending";
 import PayPalPaymentButton from "./components/Paypal/Paypal";
 import NotFound from "./components/NotFound/NotFound";
+import {ProtectedRoutes} from "./components/Auth/ProtectedRoutes";
 import Wrapper from "./components/Wrapper/Wrapper";
 import { WrapperAdmin } from "./components/Admin/WrapperAdmin/WrapperAdmin";
 import { Sales } from "./components/Admin/Sales/Sales";
@@ -50,7 +51,9 @@ function App() {
               <Route path="login" element={<LogIn />} />
               <Route path="signup" element={<SignUp />} />
               <Route path="paypal" element={<PayPalPaymentButton />} />
-              <Route path="checkout" element={<CheckOut />} />
+              <Route element={<ProtectedRoutes/>}>
+                <Route path="checkout" element={<CheckOut />} />
+              </Route>
               <Route path="cart" element={<Cart />} />
               <Route path="questions" element={<Faq />} />
               <Route path="*" element={<NotFound />} />
