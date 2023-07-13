@@ -49,6 +49,7 @@ export const getGamesByName = (name) => {
 };
 
 export const postGames = (data) => {
+  console.log(data)
   return async () => {
     try {
       await axios.post(VITE_URL_GAMES, data);

@@ -21,7 +21,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { Select } from "antd";
 import "./creategames.css";
 import FirsPage from "../FirstPage/FirsPage";
-import { HeaderAdmin } from "../HeaderAdmin/HeaderAdmin";
 const { Option } = Select;
 
 export default function CreateGame() {
@@ -107,12 +106,10 @@ export default function CreateGame() {
     setInput({ ...input, editorial_name: value });
   };
   const handleChangeMechanics = (values) => {
-    // let mechanic = [value];
-    setInput({ ...input, mechanic_name: values });
+    setInput({ ...input, mechanics_name: values });
   };
   const handleChangeThematics = (values) => {
-    // let thematic = [value];
-    setInput({ ...input, thematic_name: values });
+    setInput({ ...input, thematics_name: values });
   };
   const handleChangeLanguages = (values) => {
     setInput({ ...input, languages_name: values });
@@ -129,8 +126,9 @@ export default function CreateGame() {
       players_min: "",
       players_max: "",
       stock: 0,
+      rating: [],
       image: [],
-      weight: "",
+      weight: 0,
       playing_time: 0,
       author_name: "",
       categories_name: [],
@@ -295,7 +293,7 @@ export default function CreateGame() {
                 <Select
                   mode="multiple"
                   onChange={(values) => handleChangeMechanics(values)}
-                  name="mechanic_name"
+                  name="mechanics_name"
                   placeholder="Select Mechanics"
                   style={{
                     width: "100%",
@@ -328,7 +326,7 @@ export default function CreateGame() {
                 <Select
                   mode="multiple"
                   onChange={(values) => handleChangeThematics(values)}
-                  name="thematic_name"
+                  name="thematics_name"
                   placeholder="Select Thematics"
                   style={{
                     width: "100%",

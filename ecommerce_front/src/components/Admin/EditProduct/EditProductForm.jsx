@@ -99,34 +99,35 @@ export const EditProductForm = () => {
       setProduct({ ...product, [name]: value });
     }
   };
+
   const handleChangeCategories = (values) => {
     setProduct({
       ...product,
-      Categories: values.map((cat) => ({ category_name: cat })),
+      Categories: values.map((cat) => ({ categories_name: cat })),
     });
   };
   const handleChangeDesigners = (values) => {
     setProduct({
       ...product,
-      Designers: values.map((des) => ({ designer_name: des })),
+      Designers: values.map((des) => ({ designers_name: des })),
     });
   };
   const handleChangeLanguages = (values) => {
     setProduct({
       ...product,
-      Languages: values.map((lan) => ({ language_name: lan })),
+      Languages: values.map((lan) => ({ languages_name: lan })),
     });
   };
   const handleChangeThematic = (values) => {
     setProduct({
       ...product,
-      Thematic: values.map((them) => ({ thematic_name: them })),
+      Thematic: values.map((them) => ({ thematics_name: them })),
     });
   };
   const handleChangeMechanic = (values) => {
     setProduct({
       ...product,
-      Mechanic: values.map((mec) => ({ mechanic_name: mec })),
+      Mechanic: values.map((mec) => ({ mechanics_name: mec })),
     });
   };
 
@@ -434,7 +435,7 @@ export const EditProductForm = () => {
             <label className={style.labels}>Mechanic</label>
             <Select
               onChange={(values) => handleChangeMechanic(values)}
-              name="mechanic_name"
+              name="mechanics_name"
               style={{
                 width: "100%",
                 margin: "0.5rem",
@@ -452,19 +453,25 @@ export const EditProductForm = () => {
                   );
                 })}
             </Select>
-            <span
-              key={product.Mechanic?.mechanic_name}
-              name="mechanic_name"
-              value={product.Mechanic?.mechanic_name}
-              className={style.subInputEdit}
-            >
-              {product.Mechanic?.mechanic_name}
+            {product.Mechanics &&
+              product.Mechanics?.map((mec) => (
+                <>
+                  <span
+                    className={style.subInputEdit}
+                    key={mec.mechanic_name}
+                    value={mec.mechanic_name}
+                    name="mechanics_name"
+                  >
+                    {mec.mechanic_name}
 
-              <DeleteOutlined
-                style={{ marginLeft: "5px" }}
-                onClick={() => handleDelete()}
-              />
-            </span>
+                    <DeleteOutlined
+                      style={{ marginLeft: "5px" }}
+                      onClick={() => handleDelete()}
+                    />
+                  </span>
+                </>
+              ))}
+
             <label className={style.labels}>Description</label>
             <textarea
               className={style.inputDescription}
