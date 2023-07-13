@@ -13,7 +13,7 @@ const MoreDetail = (props) => {
       <hr className={style.divisorInfo} />
       <div className={style.moreInfoRow}>
         <h2>
-          Designers:
+          Designers:{" "}
           <span>
             {game &&
               game.Designers.map((d) => {
@@ -25,13 +25,25 @@ const MoreDetail = (props) => {
       <hr className={style.divisorInfo} />
       <div className={style.moreInfoRow}>
         <h2>
-          Mechanics: <span>{game && game.Mechanic.mechanic_name}</span>
+          Mechanics:{" "}
+          <span>
+            {game &&
+              game.Mechanics.map((m) => {
+                return <span> - {m.mechanic_name}</span>;
+              })}
+          </span>
         </h2>
       </div>
       <hr className={style.divisorInfo} />
       <div className={style.moreInfoRow}>
         <h2>
-          Themantics: <span>{game && game.Thematic.thematic_name}</span>
+          Thematics:{" "}
+          <span>
+            {game &&
+              game.Thematics.map((t) => {
+                return <span> - {t.thematic_name}</span>;
+              })}
+          </span>
         </h2>
       </div>
       <hr className={style.divisorInfo} />

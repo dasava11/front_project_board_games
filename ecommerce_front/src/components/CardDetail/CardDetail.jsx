@@ -67,11 +67,7 @@ const CardDetail = () => {
     <div>
       <div className={style.firstFlexCd}>
         <div className={style.imgCardDetail}>
-          {game.image.url ? (
-            <img src={game.image.url} alt={game.name} />
-          ) : (
-            <DetailGameCarousel game={game} />
-          )}
+          <DetailGameCarousel game={game} />
         </div>
         <div className={style.gameDetail}>
           <div className={style.inforCardDetail}>
@@ -105,7 +101,7 @@ const CardDetail = () => {
               </button>
             </div>
             <div className={style.cardDescription}>
-              <p>{game.Mechanic.description}</p>
+              <p>{game.Mechanics.description}</p>
             </div>
             <div className={style.characteristics}>
               <div className={style.categoryCd}>
@@ -133,7 +129,6 @@ const CardDetail = () => {
               </div>
             </div>
           </div>
-          {/* <TableDetailGame game={game} /> */}
           <MoreDetail game={game} />
         </div>
       </div>

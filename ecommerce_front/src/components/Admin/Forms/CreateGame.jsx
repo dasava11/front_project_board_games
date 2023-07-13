@@ -139,6 +139,7 @@ export default function CreateGame() {
       thematics_name: [],
     });
     e.target.reset();
+    console.log(input);
   };
 
   const handleNext = () => {
@@ -148,7 +149,7 @@ export default function CreateGame() {
       setNext(true);
     }
   };
-  console.log(input);
+
   return (
     <>
       <div className="maincontainer"></div>
