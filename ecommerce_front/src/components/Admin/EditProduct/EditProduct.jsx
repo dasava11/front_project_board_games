@@ -1,11 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import style from "./editproduct.module.css";
-
-import { FormOutlined } from "@ant-design/icons";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllGames } from "../../../Redux/actions_creators";
 import { useNavigate } from "react-router-dom";
-import { HeaderAdmin } from "../HeaderAdmin/HeaderAdmin";
 
 export const EditProduct = () => {
   const dispatch = useDispatch();
@@ -18,7 +15,7 @@ export const EditProduct = () => {
   const showInfo = (e) => {
     const { name, value } = e.target;
     console.log(value);
-    navigate(`/editproductform/${value}`);
+    navigate(`/admin/editproductform/${value}`);
   };
 
   return (

@@ -101,7 +101,7 @@ const FirsPage = (props) => {
       >
         Upload Image
       </p>
-      {input.image?.length > 0 && <h2>Image Uploaded</h2>}
+      {/* {input.image?.length > 0 && <h2>Image Uploaded</h2>} */}
 
       <div className="formCreateDivFlex">
         <div className="formCreateDivFlexSub">
