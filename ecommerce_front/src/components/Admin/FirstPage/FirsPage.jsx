@@ -101,7 +101,7 @@ const FirsPage = (props) => {
       >
         Upload Image
       </p>
-      {input.image?.length > 0 && <h2>Image Uploaded</h2>}
+      {/* {input.image?.length > 0 && <h2>Image Uploaded</h2>} */}
 
       <div className="formCreateDivFlex">
         <div className="formCreateDivFlexSub">
@@ -129,6 +129,17 @@ const FirsPage = (props) => {
             min={0}
           />
           {errors.playing_time && <span>{errors.playing_time}</span>}
+        </div>
+        <div className="formCreateDivFlexSub">
+          <input
+            className={style.inputsCreate}
+            placeholder="Rating"
+            type="number"
+            name="rating"
+            value={input.rating}
+            onChange={handleChange}
+            max={10}
+          />
         </div>
       </div>
     </div>
