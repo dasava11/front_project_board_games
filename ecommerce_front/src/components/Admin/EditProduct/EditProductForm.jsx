@@ -435,7 +435,7 @@ export const EditProductForm = () => {
             <label className={style.labels}>Mechanic</label>
             <Select
               onChange={(values) => handleChangeMechanic(values)}
-              name="mechanic_name"
+              name="mechanics_name"
               style={{
                 width: "100%",
                 margin: "0.5rem",
@@ -453,19 +453,25 @@ export const EditProductForm = () => {
                   );
                 })}
             </Select>
-            <span
-              key={product.Mechanic?.mechanic_name}
-              name="mechanic_name"
-              value={product.Mechanic?.mechanic_name}
-              className={style.subInputEdit}
-            >
-              {product.Mechanic?.mechanic_name}
+            {product.Mechanics &&
+              product.Mechanics?.map((mec) => (
+                <>
+                  <span
+                    className={style.subInputEdit}
+                    key={mec.mechanic_name}
+                    value={mec.mechanic_name}
+                    name="mechanics_name"
+                  >
+                    {mec.mechanic_name}
 
-              <DeleteOutlined
-                style={{ marginLeft: "5px" }}
-                onClick={() => handleDelete()}
-              />
-            </span>
+                    <DeleteOutlined
+                      style={{ marginLeft: "5px" }}
+                      onClick={() => handleDelete()}
+                    />
+                  </span>
+                </>
+              ))}
+
             <label className={style.labels}>Description</label>
             <textarea
               className={style.inputDescription}
