@@ -101,34 +101,41 @@ export const EditProductForm = () => {
   };
 
   const handleChangeCategories = (values) => {
-    setProduct({
-      ...product,
-      Categories: values.map((cat) => ({ categories_name: cat })),
-    });
+    // if (name === "c_name") {
+    //   setProduct({
+    //     ...product,
+    //     category_name: values,
+    //   });
+    // } else if (name === "category_name") {
+    //   let aux = product.Categories.filter((c) => c.category_name !== value);
+    //   setProduct({ ...product, category_name: aux });
+    // }
   };
+
   const handleChangeDesigners = (values) => {
-    setProduct({
-      ...product,
-      Designers: values.map((des) => ({ designers_name: des })),
-    });
+    // setProduct({
+    //   ...product,
+    //   Designers: [{ ...product.Languages, designers_name: values }],
+    // });
   };
   const handleChangeLanguages = (values) => {
-    setProduct({
-      ...product,
-      Languages: values.map((lan) => ({ languages_name: lan })),
-    });
+    // setProduct({
+    //   ...product,
+    //   Languages: [{ ...product.Languages, languages_name: values }],
+    // });
   };
   const handleChangeThematic = (values) => {
-    setProduct({
-      ...product,
-      Thematic: values.map((them) => ({ thematics_name: them })),
-    });
+    // setProduct({
+    //   ...product,
+    //   Thematic: [{ ...product.Thematics, thematics_name: values }],
+    // });
   };
+
   const handleChangeMechanic = (values) => {
-    setProduct({
-      ...product,
-      Mechanic: values.map((mec) => ({ mechanics_name: mec })),
-    });
+    // setProduct({
+    //   ...product,
+    //   Mechanics: [{ ...product.Mechanics, mechanic_name: values }],
+    // });
   };
 
   const handleDelete = () => {
@@ -145,7 +152,8 @@ export const EditProductForm = () => {
       )
       .catch((err) => toast.error(err));
   };
-  console.log(product);
+
+  console.log(product.Categories);
   return (
     <>
       <div className={style.mainContainer}>
@@ -307,8 +315,8 @@ export const EditProductForm = () => {
             <label className={style.labels}>Categories</label>
             <Select
               mode="multiple"
-              onChange={(values) => handleChangeCategories(values)}
-              name="category_name"
+              onChange={handleChangeCategories}
+              name="c_name"
               style={{
                 width: "100%",
                 margin: "0.5rem",
@@ -320,9 +328,11 @@ export const EditProductForm = () => {
               {filteredCategories &&
                 filteredCategories.map((cat) => {
                   return (
-                    <Option key={cat.category_name} value={cat.category_name}>
-                      {cat.category_name}
-                    </Option>
+                    <>
+                      <Option key={cat.category_name} value={cat.category_name}>
+                        {cat.category_name}
+                      </Option>
+                    </>
                   );
                 })}
             </Select>
@@ -434,6 +444,7 @@ export const EditProductForm = () => {
               ))}
             <label className={style.labels}>Mechanic</label>
             <Select
+              mode="multiple"
               onChange={(values) => handleChangeMechanic(values)}
               name="mechanics_name"
               style={{
@@ -472,18 +483,9 @@ export const EditProductForm = () => {
                 </>
               ))}
 
-            <label className={style.labels}>Description</label>
-            <textarea
-              className={style.inputDescription}
-              value={product.Mechanic?.mechanic_description}
-              name="mechanic_description"
-              onChange={handleChange}
-              maxLength={300}
-              style={{ resize: "none" }}
-            />
-
             <label className={style.labels}>Thematic</label>
             <Select
+              mode="multiple"
               onChange={(values) => handleChangeThematic(values)}
               name="thematic_name"
               style={{
@@ -504,20 +506,24 @@ export const EditProductForm = () => {
                 })}
             </Select>
 
-            <span
-              key={product.Thematic?.thematic_name}
-              name="thematic_name"
-              value={product.Thematic?.thematic_name}
-              onChange={handleChange}
-              className={style.subInputEdit}
-            >
-              {product.Thematic?.thematic_name}
+            {product.Thematics &&
+              product.Thematics?.map((t) => (
+                <>
+                  <span
+                    className={style.subInputEdit}
+                    key={t.thematic_name}
+                    value={t.thematic_name}
+                    name="thematic_name"
+                  >
+                    {t.thematic_name}
 
-              <DeleteOutlined
-                style={{ marginLeft: "5px" }}
-                onClick={() => handleDelete()}
-              />
-            </span>
+                    <DeleteOutlined
+                      style={{ marginLeft: "5px" }}
+                      onClick={() => handleDelete()}
+                    />
+                  </span>
+                </>
+              ))}
 
             <button type="submit" className={style.sendButton}>
               Send changes
