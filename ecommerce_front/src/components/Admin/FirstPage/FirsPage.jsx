@@ -86,7 +86,7 @@ const FirsPage = (props) => {
       <input
         className={style.inputsCreate}
         type="number"
-        placeholder="Quantity available"
+        placeholder="Available stock"
         name="stock"
         value={input.stock}
         onChange={handleChange}
@@ -108,13 +108,13 @@ const FirsPage = (props) => {
           <input
             className={style.inputsCreate}
             type="number"
-            placeholder="Difficulty(0-10)"
+            placeholder="Difficulty(1-5)"
             name="weight"
             value={input.weight}
             onChange={handleChange}
             step=".01"
-            min={0}
-            max={10}
+            min={1}
+            max={5}
           />
           {errors.weight && <span>{errors.weight}</span>}
         </div>
@@ -122,7 +122,7 @@ const FirsPage = (props) => {
           <input
             className={style.inputsCreate}
             type="number"
-            placeholder="Playing time"
+            placeholder="Playing time (minutes)"
             name="playing_time"
             value={input.playing_time}
             onChange={handleChange}
