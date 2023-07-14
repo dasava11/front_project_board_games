@@ -140,7 +140,6 @@ export default function CreateGame() {
       thematics_name: [],
     });
     e.target.reset();
-    navigate("/admin/createproduct");
     console.log(input);
   };
 
@@ -396,7 +395,11 @@ export default function CreateGame() {
               Next
             </a>
           ) : (
-            <button type="submit" className="submit-button">
+            <button
+              type="submit"
+              className="submit-button"
+              onClick={() => navigate("/admin/createproduct")}
+            >
               Submit
             </button>
           )}
