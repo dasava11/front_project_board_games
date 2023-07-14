@@ -9,7 +9,6 @@ import {
   GET_THEMATICS,
   GET_GAMES_BY_NAMES,
   SORT_GAMES,
-  //FILTER_GAMES,
   FILTER_DELETE,
   GET_ALL_USERS
 } from "../action-types/index";
@@ -24,7 +23,12 @@ const initialState = {
   allLanguages: [],
   allMechanics: [],
   allThematics: [],
-  allUsers:[]
+  allUsers:[],
+  filter: {
+    mechanic_name: "",
+    thematic_name: "",
+    category_name: ""
+  }
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -139,17 +143,29 @@ const rootReducer = (state = initialState, action) => {
         
 
         if (action.payload.mechanic_name !== ""  ) {
-          filterDeleted = filterDeleted.filter((game)=> game.Mechanic?.mechanic_name && game.Mechanic?.mechanic_name.includes(action.payload.mechanic_name))
-          
+          filterDeleted = filterDeleted.filter((game)=> game.Mechanics?.some((c)=>c.mechanic_name && c.mechanic_name === action.payload.mechanic_name));
+          state.filter = {...state.filter, mechanic_name : action.payload.mechanic_name};
+          console.log(state.filter);
+        } else {
+          state.filter = {...state.filter, mechanic_name : action.payload.mechanic_name};
+          console.log(state.filter);
         }
         if (action.payload.thematic_name !== "") {
-          filterDeleted = filterDeleted.filter((game)=>game.Thematic?.thematic_name && game.Thematic?.thematic_name.includes(action.payload.thematic_name))
-         
+          filterDeleted = filterDeleted.filter((game)=>game.Thematics?.some((c)=>c.thematic_name && c.thematic_name === action.payload.thematic_name));
+          state.filter = {...state.filter, thematic_name : action.payload.thematic_name};         
+          console.log(state.filter);
+        } else {
+          state.filter = {...state.filter, thematic_name : action.payload.thematic_name};
+          console.log(state.filter);
         }
 
         if (action.payload.category_name !== "") {
-          filterDeleted = filterDeleted.filter((game)=>game.Categories?.some((c)=>c.category_name && c.category_name === action.payload.category_name))
-          
+          filterDeleted = filterDeleted.filter((game)=>game.Categories?.some((c)=>c.category_name && c.category_name === action.payload.category_name));
+          state.filter = {...state.filter, category_name : action.payload.category_name};         
+          console.log(state.filter);
+        } else {
+          state.filter = {...state.filter, category_name : action.payload.category_name};
+          console.log(state.filter);
         }
       
         return{
