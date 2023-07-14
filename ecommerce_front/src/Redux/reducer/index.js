@@ -10,7 +10,8 @@ import {
   GET_GAMES_BY_NAMES,
   SORT_GAMES,
   //FILTER_GAMES,
-  FILTER_DELETE
+  FILTER_DELETE,
+  GET_ALL_USERS
 } from "../action-types/index";
 
 const initialState = {
@@ -23,6 +24,7 @@ const initialState = {
   allLanguages: [],
   allMechanics: [],
   allThematics: [],
+  allUsers:[]
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -156,7 +158,11 @@ const rootReducer = (state = initialState, action) => {
 
         } 
 
-
+  case GET_ALL_USERS:
+    return{
+     ...state,
+     allUsers:action.payload
+    }
     default:
       return state;
   }
