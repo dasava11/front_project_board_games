@@ -146,7 +146,7 @@ const CardDetail = () => {
       <div className={style.reviewCardDetail}>
         <h2>Review</h2>
         <div className={style.textAreaDetail}>
-          <textarea cols="30" rows="5"></textarea>
+          <textarea></textarea>
           <button>Send</button>
         </div>
       </div>

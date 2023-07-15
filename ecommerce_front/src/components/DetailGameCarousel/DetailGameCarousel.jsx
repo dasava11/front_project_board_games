@@ -41,7 +41,8 @@ const DetailGameCarousel = ({ game }) => {
   };
 
   const handleImage = (event) => {
-    console.log(event.target.alt);
+    const { alt } = event.target;
+    setIndex(Number(alt));
   };
 
   return (

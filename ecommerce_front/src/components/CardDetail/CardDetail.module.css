@@ -211,6 +211,7 @@
 
 .reviewCardDetail{
     display: flex;
+    justify-content: center;
     flex-direction: column;
     margin: 0 auto 2rem;
     gap: 1rem;
