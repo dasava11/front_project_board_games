@@ -18,7 +18,7 @@ export const authContext = createContext();
 const userUrl = import.meta.env.VITE_URL_USERS;
 // const userUrl = 'http://localhost:3001/users';
 
-const URL_LOGIN = import.meta.env.VITE_URL_LOGIN;
+const URL_LOGIN ="https://front-project-board-games.vercel.app/login";
 
 export const useAuth = () => {
   const context = useContext(authContext);
@@ -126,6 +126,9 @@ export const AuthProvider = ({ children }) => {
 
     const credentials = await signInWithEmailAndPassword(auth, email, password);
     const { user } = credentials;
+
+    console.log('user')
+    console.log(user)
     
     setUserAuth({
       name: user.name,
@@ -145,8 +148,24 @@ export const AuthProvider = ({ children }) => {
         window.localStorage.removeItem("token");
       }
       window.localStorage.setItem("token", user.accessToken);
+
+      await getRole(user.uid);
     }
   };
+
+  const getRole = async (uid) => {
+    try {
+      const {data} = await axios.get(`${userUrl}/${uid}`);
+      const {Role:{role_name}} = data;
+
+      setUserAuth({
+        ...userAuth,
+        role_name: role_name,
+      });
+    } catch ({message}) {
+      console.log(message);
+    }
+  }
 
   const logOut = async () => {
     try {
@@ -170,6 +189,9 @@ export const AuthProvider = ({ children }) => {
       );
     }
   };
+
+
+
   useEffect(() => {
     onAuthStateChanged(auth, (currentUser) => {
       setUserAuth(currentUser);
