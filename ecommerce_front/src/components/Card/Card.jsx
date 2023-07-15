@@ -21,9 +21,10 @@ const Card = (props) => {
         <div className={style.imgContainer}>
           <img
             src={
+              /* 
               image.length === 0
                 ? "https://res.cloudinary.com/dwqp5iaqw/image/upload/v1689282470/boduDefaultImg_n0nim4.jpg"
-                : image[0]
+                : */ image[0]
             }
             alt={name}
           />
