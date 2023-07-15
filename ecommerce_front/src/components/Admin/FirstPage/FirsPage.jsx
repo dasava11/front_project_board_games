@@ -41,6 +41,7 @@ const FirsPage = (props) => {
             onChange={handleChange}
             step=".01"
             min={0}
+            max={9999}
           />
           {errors.price && <span>{errors.price}</span>}
         </div>
@@ -86,7 +87,7 @@ const FirsPage = (props) => {
       <input
         className={style.inputsCreate}
         type="number"
-        placeholder="Quantity available"
+        placeholder="Available stock"
         name="stock"
         value={input.stock}
         onChange={handleChange}
@@ -99,22 +100,26 @@ const FirsPage = (props) => {
         className={style.buttonCloudinary}
         onClick={() => showUploadWidget(setInput, input, setError)}
       >
-        Upload Image
+        Upload Images
       </p>
-      {input.image?.length > 0 && <h2>Image Uploaded</h2>}
+      {input.image.length === 0 ? (
+        <h4 className={style.uploadImError}>Not uploaded</h4>
+      ) : (
+        <h4 className={style.uploadIm}>Image Uploaded</h4>
+      )}
 
       <div className="formCreateDivFlex">
         <div className="formCreateDivFlexSub">
           <input
             className={style.inputsCreate}
             type="number"
-            placeholder="Difficulty(0-10)"
+            placeholder="Difficulty(1-5)"
             name="weight"
             value={input.weight}
             onChange={handleChange}
             step=".01"
-            min={0}
-            max={10}
+            min={1}
+            max={5}
           />
           {errors.weight && <span>{errors.weight}</span>}
         </div>
@@ -122,7 +127,7 @@ const FirsPage = (props) => {
           <input
             className={style.inputsCreate}
             type="number"
-            placeholder="Playing time"
+            placeholder="Playing time (minutes)"
             name="playing_time"
             value={input.playing_time}
             onChange={handleChange}

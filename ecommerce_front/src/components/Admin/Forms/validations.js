@@ -25,7 +25,7 @@ const validations = (input) => {
   }
 
   if (!input.weight) {
-    errors.weight = "Weight is required";
+    errors.weight = "Difficulty is required";
   } else if (!regexNumberDecimal.test(input.weight)) {
     errors.weight = "Weight must be a number";
   }

@@ -12,15 +12,19 @@ import SortGames from "../SortGames/SortGames";
 const Games = () => {
   const dispatch = useDispatch();
   let allGames = useSelector((state) => state.allGames);
+  let filters = useSelector((state) => state.filter);
 
   const [currentPage, SetCurrentPage] = useState(1);
   const [postPerPage, setPostPerPage] = useState(12);
   const [loading, setLoading] = useState(false);
-  const [filter, setFilter] = useState({
-    mechanic_name: "",
-    thematic_name: "",
-    category_name: "",
-  });
+  // const [filter, setFilter] = useState({
+  //   mechanic_name: "",
+  //   thematic_name: "",
+  //   category_name: "",
+  // });
+  const [filter, setFilter] = useState(filters);
+
+
 
   //const [currentGames, setCurrentGames] = useLocalStorage("currentGames", []);
 
@@ -28,7 +32,7 @@ const Games = () => {
       
 
   useEffect(() => {
-  //allGames.length === 0 && 
+  allGames.length === 0 && 
   dispatch(getAllGames());
    }, []);
 

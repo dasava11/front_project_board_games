@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { postGames } from "../../../Redux/actions_creators/index";
 import validations from "./validations";
 import { CreateCategories } from "./CreateCategories";
@@ -21,7 +22,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { Select } from "antd";
 import "./creategames.css";
 import FirsPage from "../FirstPage/FirsPage";
-import { HeaderAdmin } from "../HeaderAdmin/HeaderAdmin";
 const { Option } = Select;
 
 export default function CreateGame() {
@@ -34,7 +34,7 @@ export default function CreateGame() {
     allThematics,
     allLanguages,
   } = useSelector((state) => state);
-
+  const navigate = useNavigate();
   const [input, setInput] = useState({ image: [] });
   const [modalCategories, setModalCategories] = useState(false);
   const [modalThematic, setModalThematic] = useState(false);
@@ -107,12 +107,10 @@ export default function CreateGame() {
     setInput({ ...input, editorial_name: value });
   };
   const handleChangeMechanics = (values) => {
-    // let mechanic = [value];
-    setInput({ ...input, mechanic_name: values });
+    setInput({ ...input, mechanics_name: values });
   };
   const handleChangeThematics = (values) => {
-    // let thematic = [value];
-    setInput({ ...input, thematic_name: values });
+    setInput({ ...input, thematics_name: values });
   };
   const handleChangeLanguages = (values) => {
     setInput({ ...input, languages_name: values });
@@ -129,18 +127,20 @@ export default function CreateGame() {
       players_min: "",
       players_max: "",
       stock: 0,
+      rating: [],
       image: [],
-      weight: "",
+      weight: 0,
       playing_time: 0,
       author_name: "",
       categories_name: [],
-      designer_name: [],
+      designers_name: [],
       editorial_name: "",
       languages_name: [],
-      mechanic_name: [],
-      thematic_name: [],
+      mechanics_name: [],
+      thematics_name: [],
     });
     e.target.reset();
+    console.log(input);
   };
 
   const handleNext = () => {
@@ -150,7 +150,7 @@ export default function CreateGame() {
       setNext(true);
     }
   };
-  console.log(input);
+
   return (
     <>
       <div className="maincontainer"></div>
@@ -197,6 +197,38 @@ export default function CreateGame() {
               <div className="selectFlexCreate">
                 <Select
                   mode="multiple"
+                  onChange={(values) => handleChangeDesigners(values)}
+                  name="designers_name"
+                  style={{
+                    width: "100%",
+                    margin: "0.5rem",
+                    fontSize: "medium",
+                    height: "33px",
+                  }}
+                  placeholder="Select Designers"
+                >
+                  {allDesigners &&
+                    allDesigners.map((des) => {
+                      return (
+                        <Option
+                          key={des.designer_name}
+                          value={des.designer_name}
+                        >
+                          {des.designer_name}
+                        </Option>
+                      );
+                    })}
+                </Select>
+                <p
+                  className="create-button"
+                  onClick={handleModalCreateDesigner}
+                >
+                  Create
+                </p>
+              </div>
+              <div className="selectFlexCreate">
+                <Select
+                  mode="multiple"
                   onChange={(values) => handleChangeCategories(values)}
                   name="categories_name"
                   style={{
@@ -223,38 +255,6 @@ export default function CreateGame() {
                 <p
                   className="create-button"
                   onClick={handleModalCreateCategories}
-                >
-                  Create
-                </p>
-              </div>
-              <div className="selectFlexCreate">
-                <Select
-                  mode="multiple"
-                  onChange={(values) => handleChangeDesigners(values)}
-                  name="designers_name"
-                  style={{
-                    width: "100%",
-                    margin: "0.5rem",
-                    fontSize: "medium",
-                    height: "33px",
-                  }}
-                  placeholder="Select Designers"
-                >
-                  {allDesigners &&
-                    allDesigners.map((des) => {
-                      return (
-                        <Option
-                          key={des.designer_name}
-                          value={des.designer_name}
-                        >
-                          {des.designer_name}
-                        </Option>
-                      );
-                    })}
-                </Select>
-                <p
-                  className="create-button"
-                  onClick={handleModalCreateDesigner}
                 >
                   Create
                 </p>
@@ -294,7 +294,7 @@ export default function CreateGame() {
                 <Select
                   mode="multiple"
                   onChange={(values) => handleChangeMechanics(values)}
-                  name="mechanic_name"
+                  name="mechanics_name"
                   placeholder="Select Mechanics"
                   style={{
                     width: "100%",
@@ -327,7 +327,7 @@ export default function CreateGame() {
                 <Select
                   mode="multiple"
                   onChange={(values) => handleChangeThematics(values)}
-                  name="thematic_name"
+                  name="thematics_name"
                   placeholder="Select Thematics"
                   style={{
                     width: "100%",
@@ -395,7 +395,11 @@ export default function CreateGame() {
               Next
             </a>
           ) : (
-            <button type="submit" className="submit-button">
+            <button
+              type="submit"
+              className="submit-button"
+              onClick={() => navigate("/admin/createproduct")}
+            >
               Submit
             </button>
           )}

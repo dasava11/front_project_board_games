@@ -64,7 +64,7 @@ const Cart = () => {
                   key={order.indexOf(game)}
                 >
                   <div className={styles.imgInCart}>
-                    <img src={game.image?.url} alt={game.name} />
+                    <img src={game.image[0]} alt={game.name} />
                   </div>
                   <div>
                     <h1 className={styles.nameGameInOrder}>{game.name}</h1>

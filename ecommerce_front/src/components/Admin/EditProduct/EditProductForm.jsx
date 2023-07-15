@@ -14,7 +14,6 @@ import {
   getThematics,
 } from "../../../Redux/actions_creators";
 import { toast } from "react-toastify";
-import { DeleteOutlined } from "@ant-design/icons";
 const { Option } = Select;
 
 export const EditProductForm = () => {
@@ -62,15 +61,38 @@ export const EditProductForm = () => {
       .get(
         `https://backprojectboardgames-production.up.railway.app/games/id/${id}`
       )
-      .then((res) => setProduct(res.data));
+      .then((res) => setProduct(res.data))
+      .catch((err) => {
+        console.log(err);
+      });
   }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await axios.put(
-      "https://backprojectboardgames-production.up.railway.app/games",
-      product
-    );
+    const newProduct = {
+      ...product,
+      game_id: product.game_id,
+      author_name: product.Author.author_name,
+      editorial_name: product.Editorial.editorial_name,
+      categories_name: product.Categories.map((cat) => cat.category_name),
+      designers_name: product.Designers.map((des) => des.designer_name),
+      mechanics_name: product.Mechanics.map((mec) => mec.mechanic_name),
+      thematics_name: product.Thematics.map((t) => t.thematic_name),
+      languages_name: product.Languages.map((lan) => lan.language_name),
+    };
+
+    await axios
+      .put(
+        "https://backprojectboardgames-production.up.railway.app/games",
+        newProduct
+      )
+      .then((res) =>
+        res.status === 200 ? toast.success(res.data.message) : null
+      )
+      .catch((err) => {
+        console.log(err);
+      });
+    setProduct({ [e.target.name]: "" });
   };
 
   const handleSwitch = async (game_id) => {
@@ -83,55 +105,105 @@ export const EditProductForm = () => {
       )
       .catch((err) => toast.error(err));
   };
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     if (name === "author_name") {
-      setProduct({
-        ...product,
-        Author: { ...product.Author, author_name: value },
-      });
+      setProduct({ ...product, Author: { author_name: value } });
     } else if (name === "editorial_name") {
       setProduct({
         ...product,
-        Editorial: { ...product.Editorial, editorial_name: value },
+        Editorial: { editorial_name: value },
       });
     } else {
       setProduct({ ...product, [name]: value });
     }
   };
+
   const handleChangeCategories = (values) => {
-    setProduct({
+    setProduct((product) => ({
       ...product,
-      Categories: values.map((cat) => ({ category_name: cat })),
-    });
-  };
-  const handleChangeDesigners = (values) => {
-    setProduct({
-      ...product,
-      Designers: values.map((des) => ({ designer_name: des })),
-    });
-  };
-  const handleChangeLanguages = (values) => {
-    setProduct({
-      ...product,
-      Languages: values.map((lan) => ({ language_name: lan })),
-    });
-  };
-  const handleChangeThematic = (values) => {
-    setProduct({
-      ...product,
-      Thematic: values.map((them) => ({ thematic_name: them })),
-    });
-  };
-  const handleChangeMechanic = (values) => {
-    setProduct({
-      ...product,
-      Mechanic: values.map((mec) => ({ mechanic_name: mec })),
-    });
+      Categories: [
+        ...product.Categories,
+        ...values.map((cat) => ({ category_name: cat })),
+      ],
+    }));
   };
 
-  const handleDelete = () => {
-    console.log("ANDA EL DELETE");
+  const handleChangeDesigners = (values) => {
+    setProduct((product) => ({
+      ...product,
+      Designers: [
+        ...product.Designers,
+        ...values.map((des) => ({ designer_name: des })),
+      ],
+    }));
+  };
+
+  const handleChangeLanguages = (values) => {
+    setProduct((product) => ({
+      ...product,
+      Languages: [
+        ...product.Languages,
+        ...values.map((lan) => ({ language_name: lan })),
+      ],
+    }));
+  };
+  const handleChangeThematic = (values) => {
+    setProduct((product) => ({
+      ...product,
+      Thematics: [
+        ...product.Thematics,
+        ...values.map((t) => ({ thematic_name: t })),
+      ],
+    }));
+  };
+
+  const handleChangeMechanic = (values) => {
+    setProduct((product) => ({
+      ...product,
+      Mechanics: [
+        ...product.Mechanics,
+        ...values.map((m) => ({ mechanic_name: m })),
+      ],
+    }));
+  };
+
+  const handleDelete = (e) => {
+    if (e.target.name === "category_name") {
+      let newCat = product.Categories.filter(
+        (cat) => cat.category_name !== e.target.value
+      );
+      setProduct({ ...product, Categories: newCat });
+    }
+    if (e.target.name === "designer_name") {
+      let newDes = product.Designers.filter(
+        (des) => des.designer_name !== e.target.value
+      );
+      setProduct({ ...product, Designers: newDes });
+    }
+    if (e.target.name === "language_name") {
+      let newLan = product.Languages.filter(
+        (lan) => lan.language_name !== e.target.value
+      );
+      setProduct({ ...product, Languages: newLan });
+    }
+    if (e.target.name === "mechanics_name") {
+      let newMech = product.Mechanics.filter(
+        (mec) => mec.mechanic_name !== e.target.value
+      );
+      setProduct({ ...product, Mechanics: newMech });
+    }
+    if (e.target.name === "thematic_name") {
+      let newThem = product.Thematics.filter(
+        (t) => t.thematic_name !== e.target.value
+      );
+      setProduct({ ...product, Thematics: newThem });
+    }
+    if (e.target.name === "image") {
+      let newImage = product.image.filter((i) => i.image !== e.target.alt);
+      setProduct({ ...product, image: newImage });
+    }
   };
 
   const handleSwitchOnSale = async (game_id) => {
@@ -144,54 +216,57 @@ export const EditProductForm = () => {
       )
       .catch((err) => toast.error(err));
   };
-  console.log(product);
+
   return (
     <>
       <div className={style.mainContainer}>
         <h1>Edit Product</h1>
-        {product.active === true ? (
-          <div className={style.switchButton}>
-            <h6>Deactivate product</h6>
-            <Switch
-              checked
-              onChange={() => {
-                handleSwitch(product.game_id);
-              }}
-            />
-          </div>
-        ) : (
-          <div className={style.switchButton}>
-            <h6>Activate product</h6>
-            <Switch
-              checked={false}
-              onChange={() => {
-                handleSwitch(product.game_id);
-              }}
-            />
-          </div>
-        )}
-        <br />
-        {product.on_sale === true ? (
-          <div className={style.switchButton}>
-            <h6>Deactivate OnSale</h6>
-            <Switch
-              checked
-              onChange={() => {
-                handleSwitchOnSale(product.game_id);
-              }}
-            />
-          </div>
-        ) : (
-          <div className={style.switchButton}>
-            <h6>Activate OnSale</h6>
-            <Switch
-              checked={false}
-              onChange={() => {
-                handleSwitchOnSale(product.game_id);
-              }}
-            />
-          </div>
-        )}
+        <div className={style.buttonEdition}>
+          {product.active === true ? (
+            <div className={style.switchButton}>
+              <h6>Deactivate product</h6>
+              <Switch
+                checked
+                onChange={() => {
+                  handleSwitch(product.game_id);
+                }}
+              />
+            </div>
+          ) : (
+            <div className={style.switchButton}>
+              <h6>Activate product</h6>
+              <Switch
+                checked={false}
+                onChange={() => {
+                  handleSwitch(product.game_id);
+                }}
+              />
+            </div>
+          )}
+          <br />
+          {product.on_sale === true ? (
+            <div className={style.switchButton}>
+              <h6>Deactivate OnSale</h6>
+              <Switch
+                checked
+                onChange={() => {
+                  handleSwitchOnSale(product.game_id);
+                }}
+              />
+            </div>
+          ) : (
+            <div className={style.switchButton}>
+              <h6>Activate OnSale</h6>
+              <Switch
+                checked={false}
+                onChange={() => {
+                  handleSwitchOnSale(product.game_id);
+                }}
+              />
+            </div>
+          )}
+        </div>
+
         {product && (
           <form className={style} onSubmit={handleSubmit}>
             <label className={style.labels}>Game Name</label>
@@ -243,38 +318,28 @@ export const EditProductForm = () => {
               onChange={handleChange}
               className={style.inputEdit}
             />
-
             <label className={style.labels} htmlFor="image">
               Image
             </label>
-
-            {Array.isArray(product.image) ? (
+            {product.image &&
               product.image?.map((i) => (
                 <>
-                  <span key={product.name}>
-                    <DeleteOutlined
-                      style={{ marginLeft: "5px" }}
-                      onClick={() => handleDelete()}
-                    />
-                  </span>
-                  <img width={"100px"} src={i} alt={product.name} />
-                </>
-              ))
-            ) : (
-              <>
-                <span key={product.name}>
-                  <DeleteOutlined
-                    style={{ marginLeft: "5px" }}
-                    onClick={() => handleDelete()}
+                  <button
+                    type="button"
+                    key={product.image}
+                    value={product.image}
+                    name="image"
+                  >
+                    X
+                  </button>
+                  <img
+                    width={"100px"}
+                    src={i}
+                    alt={i}
+                    onClick={(e) => handleDelete(e)}
                   />
-                </span>
-                <img
-                  width={"100px"}
-                  src={product.image?.url}
-                  alt={product.name}
-                />
-              </>
-            )}
+                </>
+              ))}
             <span
               className={style.buttonCloudinary}
               onClick={() => showUploadWidget(product, setProduct)}
@@ -306,7 +371,7 @@ export const EditProductForm = () => {
             <label className={style.labels}>Categories</label>
             <Select
               mode="multiple"
-              onChange={(values) => handleChangeCategories(values)}
+              onChange={handleChangeCategories}
               name="category_name"
               style={{
                 width: "100%",
@@ -319,31 +384,29 @@ export const EditProductForm = () => {
               {filteredCategories &&
                 filteredCategories.map((cat) => {
                   return (
-                    <Option key={cat.category_name} value={cat.category_name}>
-                      {cat.category_name}
-                    </Option>
+                    <>
+                      <Option key={cat.category_name} value={cat.category_name}>
+                        {cat.category_name}
+                      </Option>
+                    </>
                   );
                 })}
             </Select>
             {product.Categories &&
               product.Categories?.map((cat) => (
                 <>
-                  <span
+                  <button
+                    type="button"
                     className={style.subInputEdit}
                     key={cat.category_name}
                     value={cat.category_name}
                     name="category_name"
+                    onClick={(e) => handleDelete(e)}
                   >
-                    {cat.category_name}
-
-                    <DeleteOutlined
-                      style={{ marginLeft: "5px" }}
-                      onClick={() => handleDelete()}
-                    />
-                  </span>
+                    {cat.category_name}X
+                  </button>
                 </>
               ))}
-
             <label className={style.labels}>Designers</label>
             <Select
               mode="multiple"
@@ -369,25 +432,22 @@ export const EditProductForm = () => {
             {product.Designers &&
               product.Designers?.map((des) => (
                 <>
-                  <span
+                  <button
+                    type="button"
                     className={style.subInputEdit}
                     key={des.designer_name}
                     value={des.designer_name}
                     name="designer_name"
+                    onClick={(e) => handleDelete(e)}
                   >
-                    {des.designer_name}
-
-                    <DeleteOutlined
-                      style={{ marginLeft: "5px" }}
-                      onClick={() => handleDelete()}
-                    />
-                  </span>
+                    {des.designer_name}X
+                  </button>
                 </>
               ))}
             <label className={style.labels}>Editorial</label>
             <input
               name="editorial_name"
-              value={product.Editorial?.editorial_name || ""}
+              value={product.Editorial?.editorial_name}
               onChange={handleChange}
               className={style.inputEdit}
             />
@@ -416,25 +476,23 @@ export const EditProductForm = () => {
             {product.Languages &&
               product.Languages?.map((lan) => (
                 <>
-                  <span
+                  <button
+                    type="button"
                     className={style.subInputEdit}
                     key={lan.language_name}
                     value={lan.language_name}
                     name="language_name"
+                    onClick={(e) => handleDelete(e)}
                   >
-                    {lan.language_name}
-
-                    <DeleteOutlined
-                      style={{ marginLeft: "5px" }}
-                      onClick={() => handleDelete()}
-                    />
-                  </span>
+                    {lan.language_name}X
+                  </button>
                 </>
               ))}
             <label className={style.labels}>Mechanic</label>
             <Select
+              mode="multiple"
               onChange={(values) => handleChangeMechanic(values)}
-              name="mechanic_name"
+              name="mechanics_name"
               style={{
                 width: "100%",
                 margin: "0.5rem",
@@ -452,31 +510,24 @@ export const EditProductForm = () => {
                   );
                 })}
             </Select>
-            <span
-              key={product.Mechanic?.mechanic_name}
-              name="mechanic_name"
-              value={product.Mechanic?.mechanic_name}
-              className={style.subInputEdit}
-            >
-              {product.Mechanic?.mechanic_name}
-
-              <DeleteOutlined
-                style={{ marginLeft: "5px" }}
-                onClick={() => handleDelete()}
-              />
-            </span>
-            <label className={style.labels}>Description</label>
-            <textarea
-              className={style.inputDescription}
-              value={product.Mechanic?.mechanic_description}
-              name="mechanic_description"
-              onChange={handleChange}
-              maxLength={300}
-              style={{ resize: "none" }}
-            />
-
+            {product.Mechanics &&
+              product.Mechanics?.map((mec) => (
+                <>
+                  <button
+                    type="button"
+                    className={style.subInputEdit}
+                    key={mec.mechanic_name}
+                    value={mec.mechanic_name}
+                    name="mechanics_name"
+                    onClick={(e) => handleDelete(e)}
+                  >
+                    {mec.mechanic_name}X
+                  </button>
+                </>
+              ))}
             <label className={style.labels}>Thematic</label>
             <Select
+              mode="multiple"
               onChange={(values) => handleChangeThematic(values)}
               name="thematic_name"
               style={{
@@ -496,22 +547,21 @@ export const EditProductForm = () => {
                   );
                 })}
             </Select>
-
-            <span
-              key={product.Thematic?.thematic_name}
-              name="thematic_name"
-              value={product.Thematic?.thematic_name}
-              onChange={handleChange}
-              className={style.subInputEdit}
-            >
-              {product.Thematic?.thematic_name}
-
-              <DeleteOutlined
-                style={{ marginLeft: "5px" }}
-                onClick={() => handleDelete()}
-              />
-            </span>
-
+            {product.Thematics &&
+              product.Thematics?.map((t) => (
+                <>
+                  <button
+                    type="button"
+                    className={style.subInputEdit}
+                    key={t.thematic_name}
+                    value={t.thematic_name}
+                    name="thematic_name"
+                    onClick={(e) => handleDelete(e)}
+                  >
+                    {t.thematic_name}X
+                  </button>
+                </>
+              ))}
             <button type="submit" className={style.sendButton}>
               Send changes
             </button>
