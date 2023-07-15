@@ -41,6 +41,7 @@ const FirsPage = (props) => {
             onChange={handleChange}
             step=".01"
             min={0}
+            max={9999}
           />
           {errors.price && <span>{errors.price}</span>}
         </div>
@@ -99,9 +100,13 @@ const FirsPage = (props) => {
         className={style.buttonCloudinary}
         onClick={() => showUploadWidget(setInput, input, setError)}
       >
-        Upload Image
+        Upload Images
       </p>
-      {/* {input.image?.length > 0 && <h2>Image Uploaded</h2>} */}
+      {input.image.length === 0 ? (
+        <h4 className={style.uploadImError}>Not uploaded</h4>
+      ) : (
+        <h4 className={style.uploadIm}>Image Uploaded</h4>
+      )}
 
       <div className="formCreateDivFlex">
         <div className="formCreateDivFlexSub">
