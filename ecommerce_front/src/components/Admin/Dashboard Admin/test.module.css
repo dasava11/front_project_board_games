@@ -16,6 +16,21 @@
 
 .dashBoardAd{
 display: flex;
-flex-direction: column;
+flex-direction: row;
 justify-content: space-evenly;
+align-items: center;
+padding: 1rem;
+border-radius: 7px;
 }
+.checkMail{
+    border-radius: 7px;
+    display: flex;
+    align-items: center;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.244);
+}
+.checkMail:hover{
+    cursor: pointer;
+    background-color: darkgray;
+}
+

@@ -24,6 +24,8 @@
     color: azure;
     width: 150px;
     border-radius: 4px;
+    margin: 0%;
+    text-align: center;
 }
 
 .buttonCloudinary:hover {
@@ -31,4 +33,14 @@
     background-color: blue;
 
     padding: 1rem;
+}
+.uploadIm{
+   color: green;
+   font-size: small;
+   text-align: end;
+}
+.uploadImError{
+    color:red;
+    font-size: small;
+    text-align: end;
 }
