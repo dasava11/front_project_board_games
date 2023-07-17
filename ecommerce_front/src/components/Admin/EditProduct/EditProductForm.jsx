@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
-import { showUploadWidget } from "../Cloudinary/Cloudinary";
+import { opUploadWidget } from "../Cloudinary/ClodinaryEdit";
 import { Switch } from "antd";
 import style from "./editform.module.css";
 import axios from "axios";
@@ -14,8 +14,9 @@ import {
   getThematics,
 } from "../../../Redux/actions_creators";
 import { toast } from "react-toastify";
-const { Option } = Select;
 
+const { Option } = Select;
+const VITE_GET_ALL_GAMES = import.meta.env.VITE_GET_ALL_GAMES;
 export const EditProductForm = () => {
   const { id } = useParams();
   const [product, setProduct] = useState({});
@@ -71,6 +72,7 @@ export const EditProductForm = () => {
     e.preventDefault();
     const newProduct = {
       ...product,
+      image: product.image,
       game_id: product.game_id,
       author_name: product.Author.author_name,
       editorial_name: product.Editorial.editorial_name,
@@ -82,10 +84,7 @@ export const EditProductForm = () => {
     };
 
     await axios
-      .put(
-        "https://backprojectboardgames-production.up.railway.app/games",
-        newProduct
-      )
+      .put(VITE_GET_ALL_GAMES, newProduct)
       .then((res) =>
         res.status === 200 ? toast.success(res.data.message) : null
       )
@@ -201,8 +200,8 @@ export const EditProductForm = () => {
       setProduct({ ...product, Thematics: newThem });
     }
     if (e.target.name === "image") {
-      let newImage = product.image.filter((i) => i.image !== e.target.alt);
-      setProduct({ ...product, image: newImage });
+      let resetImage = product.image.filter((i) => i !== e.target.alt);
+      setProduct({ ...product, image: resetImage });
     }
   };
 
@@ -216,7 +215,8 @@ export const EditProductForm = () => {
       )
       .catch((err) => toast.error(err));
   };
-
+  console.log(typeof product.image);
+  console.log(product.image);
   return (
     <>
       <div className={style.mainContainer}>
@@ -324,28 +324,25 @@ export const EditProductForm = () => {
             {product.image &&
               product.image?.map((i) => (
                 <>
-                  <button
-                    type="button"
-                    key={product.image}
-                    value={product.image}
-                    name="image"
-                  >
-                    X
-                  </button>
+                  <h3>x</h3>
                   <img
                     width={"100px"}
                     src={i}
                     alt={i}
+                    key={product.image}
+                    value={i}
+                    name="image"
                     onClick={(e) => handleDelete(e)}
                   />
                 </>
               ))}
-            <span
+            <button
+              type="button"
               className={style.buttonCloudinary}
-              onClick={() => showUploadWidget(product, setProduct)}
+              onClick={() => opUploadWidget(product, setProduct)}
             >
               Upload Image
-            </span>
+            </button>
             <br />
             <label className={style.labels}>Box weight</label>
             <input
