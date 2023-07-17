@@ -3,6 +3,7 @@ import style from "./Navbar.module.css";
 import { NavLink, useNavigate } from "react-router-dom";
 import heartIcon from "../../Photos/heartIconEmpty.svg";
 import shoppingCart from "../../Photos/shoppingCart.svg";
+import userIcon from "../../Photos/icons8-user.png";
 
 const Navbar = () => {
   const navigate = useNavigate();
@@ -52,6 +53,15 @@ const Navbar = () => {
         </li>
       </ul>
       <div className={style.navBarIcons}>
+        <button>
+          <img
+            src={userIcon}
+            alt="userIcon"
+            width="40px"
+            height="40px"
+            onClick={() => navigate("/user")}
+          />
+        </button>
         <button className={style.heartIcon}>
           <img src={heartIcon} alt="heart Icon" width="30px" height="30px" />
         </button>
