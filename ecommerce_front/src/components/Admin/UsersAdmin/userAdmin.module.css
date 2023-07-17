@@ -22,3 +22,19 @@
 
 .tr{}
 .th{}
+
+.searchContainer {
+    display: flex;
+    background-color: white;
+    justify-content: center;
+    align-items: center;
+    padding: 3px;
+    border-radius: 1rem;
+    gap: 1rem;
+}
+
+.inputSearch {
+    border: 1px solid transparent;
+    border-radius: 10px;
+    height: 30px;
+}

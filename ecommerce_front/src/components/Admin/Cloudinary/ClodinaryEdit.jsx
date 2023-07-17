@@ -1,4 +1,4 @@
-export const showUploadWidget = (setInput, input) => {
+export const opUploadWidget = (setProduct, product) => {
   let arrAux = [];
 
   window.cloudinary.openUploadWidget(
@@ -38,9 +38,9 @@ export const showUploadWidget = (setInput, input) => {
       if (!err) {
         if (info.event === "queues-end") {
           arrAux.push(info.data.info.files[0].uploadInfo.secure_url);
-          input.image = arrAux;
+          product.image = arrAux;
         }
-        console.log(input.image);
+        console.log(product.image);
       }
     }
   );
