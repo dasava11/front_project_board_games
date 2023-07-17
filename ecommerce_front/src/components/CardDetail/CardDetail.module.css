@@ -241,3 +241,17 @@
     align-items: flex-end;
     gap: 2rem;
 }
+
+.prices{
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+}
+
+.gameSale{
+    display: flex;
+    text-decoration: line-through;
+    align-items: center;
+    font-size:large ;
+    color: hsla(240, 38%, 16%, 0.8);
+}
