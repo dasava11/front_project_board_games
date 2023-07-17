@@ -30,7 +30,10 @@ const Card = (props) => {
         </div>
       </Link>
       <h1>{name}</h1>
-      <h2>${price} USD</h2>
+      <h2 className={onSale === true ? style.priceSale : style.priceFull}>
+        ${price} USD
+      </h2>
+      {onSale === true ? <h2>${(price * 0.8).toFixed(2)} USD</h2> : null}
       <div className={onSale === true ? style.cardInfo : ""}>
         {onSale === true ? <span className={style.cardSale}>sale</span> : ""}
         {isFav ? (
