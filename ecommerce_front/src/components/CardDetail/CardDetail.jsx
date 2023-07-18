@@ -98,17 +98,15 @@ const CardDetail = () => {
               ) : null}
             </div>
             <div className={style.butonShop}>
-              <div className={style.cardDBtns}>
-                <button className={style.cartBtn} onClick={handleCart}>
-                  add to cart
-                  <span>
-                    <img src={shoppingCart} alt="cart" />
-                  </span>
-                </button>
-                <button className={style.heartBtn}>
-                  <img className={style.heartImg} src={heart} alt="heart" />
-                </button>
-              </div>
+              <button className={style.cartBtn} onClick={handleCart}>
+                add to cart
+                <span>
+                  <img src={shoppingCart} alt="cart" />
+                </span>
+              </button>
+              <button className={style.heartBtn}>
+                <img className={style.heartImg} src={heart} alt="heart" />
+              </button>
               <div className={style.backGames}>
                 <button
                   className={style.continueShop}
