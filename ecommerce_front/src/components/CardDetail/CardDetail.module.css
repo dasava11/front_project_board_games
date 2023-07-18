@@ -1,243 +1,266 @@
-.firstFlexCd{
-    display: flex;
-    justify-content: center;
-    padding: 5rem;
-    padding-bottom: 0;
-    gap: 3rem;
-    width: 90vw;
-    margin: auto;
+.firstFlexCd {
+  display: flex;
+  justify-content: center;
+  padding: 5rem;
+  padding-bottom: 0;
+  gap: 3rem;
+  width: 90vw;
+  margin: auto;
 }
 
-.imgCardDetail{
-    width: 500px;
-    height: 500px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.imgCardDetail {
+  width: 500px;
+  height: 500px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.imgCardDetail img{
-    height: 100%;
-    width: 100%;
+.imgCardDetail img {
+  height: 100%;
+  width: 100%;
 }
 
-.nameGame{
-    margin-bottom: 0;
-    padding-bottom: 0;
+.nameGame {
+  margin-bottom: 0;
+  padding-bottom: 0;
 }
 
-.titleGame{
-    display: flex;
-    flex-direction: row;
-    justify-content:space-between ;
-    align-items: center;
-   padding-bottom: 0;
+.titleGame {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 0;
 }
 
-.ratingCd{
-    display: flex;
-    justify-content:start;
-    margin-top: 0; 
+.ratingCd {
+  display: flex;
+  justify-content: start;
+  margin-top: 0;
 }
 
-.starRating{
-    width: 25px;
+.starRating {
+  width: 25px;
 }
 
-.availableCd{
-    color: #00801C;
+.availableCd {
+  color: #00801c;
 }
 
-.unavailableCd{
-    color: red;
+.unavailableCd {
+  color: red;
 }
 
-.priceGame{
-    color:hsla(240, 38%, 16%, 0.8);
-    margin-bottom: 4rem;
+.priceGame {
+  color: hsla(240, 38%, 16%, 0.8);
+  margin-bottom: 4rem;
 }
 
-.cardDBtns{
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.cartBtn {
+  border: 1px solid transparent;
+  background-color: #37a0db;
+  height: 10%;
+  width: 50%;
+  padding: 0 1rem 0 1rem;
+  font-size: 22px;
+  text-transform: capitalize;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 3rem;
+  border-radius: 1rem;
+  font-size: 1.5rem;
 }
 
-.cartBtn{
-    border: 1px solid transparent;
-    background-color: #37A0DB;
-    height: 10%;
-    width: 50%;
-    padding: 0 1rem 0 1rem;
-    font-size: 22px;
-    text-transform: capitalize;
-    font-weight: bold;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 3rem;
-    border-radius: 1rem;
+.cartBtn span img {
+  width: 40px;
 }
 
-.cartBtn span img{
-    width: 40px;
+.cartBtn:hover {
+  cursor: pointer;
+  background-color: #2875a2;
 }
 
-.cartBtn:hover{
-    cursor: pointer;
-    background-color: #2875a2;
+.heartBtn {
+  border-radius: 10rem;
+  align-items: center;
+  border: none;
+  margin-left: 2rem;
+  background-color: transparent;
 }
 
-.heartBtn{
-    border-radius: 10rem;
-    align-items: center;
-    border: none;
-    margin-left: 2rem;
-    background-color: transparent;
+.heartBtn img:hover {
+  cursor: pointer;
+  background-color: hwb(240 0% 79%, 70%);
 }
 
-.heartBtn img:hover{
-    cursor: pointer;
-    background-color: hwb(240 0% 79%, 70%);
+.heartBtn img {
+  width: 50px;
 }
 
-.heartBtn img{
-    width: 50px;
+.butonShop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.backGames {
+  display: flex;
+  justify-content: center;
+  font-size: 1.5rem;
 }
 
-.butonShop{
-    display: flex;
-    flex-direction: column;
-}
-.backGames{
-    display: flex;
-    justify-content:center ;
-}
-
-.continueShop{
-    border: 1px solid transparent;
-    background-color: #FADA5C;
-    height: 10%;
-    width: 30%;
-    padding: 0 1rem 0 1rem;
-    font-size: 16px;
-    text-transform: capitalize;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 0.5rem;    
+.continueShop {
+  border: 1px solid transparent;
+  background-color: #fada5c;
+  height: 10%;
+  width: 100%;
+  padding: 0.5rem 1rem 0.5rem 1rem;
+  font-size: 16px;
+  text-transform: capitalize;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 0.5rem;
 }
 
 .continueShop:hover {
-    cursor: pointer;
-    background-color: #E3C652;
-    font-weight: bold;
+  cursor: pointer;
+  background-color: #e3c652;
 }
 
-
-.cardDescription p{
-    text-align: center;
-    margin: 2rem 2rem;
-    padding: 2rem 0;
+.cardDescription p {
+  text-align: center;
+  margin: 2rem 2rem;
+  padding: 2rem 0;
 }
 
-.characteristics{
-    display: flex;
-    justify-content:center;
-    align-items: center;
+.characteristics {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
 }
 
-.characteristics hr{
-    height: 80px;
-    width: 3px;
-    background-color: #000035;
+.characteristics hr {
+  height: 150px;
+  width: 3px;
+  background-color: #000035;
 }
 
-.characteristics h2{
-    text-transform: capitalize;
-    font-size: 1.8rem;
-    font-weight: normal;
+.characteristics h2 {
+  text-transform: capitalize;
+  font-size: 1.8rem;
+  font-weight: normal;
+  text-align: center;
 }
 
-.categoryNameDetail{
-    margin: 0;
+.categoryNameDetail {
+  margin: 0;
 }
 
-.timeCd{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    margin: 0 auto;
+.timeCd {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 0 auto;
+  align-items: center;
+  width: 33%;
+  height: 100%;
 }
 
-.playersCd{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    margin: 0 auto;
+.timeCd h3 {
+  text-align: center;
 }
 
-.categoryCd{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    margin: 0 auto;
+.playersCd {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 0 auto;
+  align-items: center;
+  width: 33%;
+  height: 100%;
 }
 
-.inforCardDetail{
-    width: 30vw;
-    background-color: hsl(0, 0%, 100%, 70%);
-    padding: 2rem;
-    border-radius: 1rem;
+.categoryCd {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  width: 33%;
+  height: 100%;
 }
 
-.playersCd h3{
-    text-align: center;
+.inforCardDetail {
+  width: 30vw;
+  background-color: hsl(0, 0%, 100%, 70%);
+  padding: 2rem;
+  border-radius: 1rem;
 }
 
-.seeMoreBtn{
-    display: flex;
-    margin: auto;
-    background-color: transparent;
-    border: 1px solid transparent;
-    color: #000035;
-    text-transform: capitalize;
+.playersCd h3 {
+  text-align: center;
 }
 
-.seeMoreBtn:hover{
-    text-decoration: underline;
-    cursor: pointer;
+.seeMoreBtn {
+  display: flex;
+  margin: auto;
+  background-color: transparent;
+  border: 1px solid transparent;
+  color: #000035;
+  text-transform: capitalize;
 }
 
-.reviewCardDetail{
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    margin: 0 auto 2rem;
-    gap: 1rem;
-    width: 75%;
+.seeMoreBtn:hover {
+  text-decoration: underline;
+  cursor: pointer;
 }
 
-.textAreaDetail button{
-    display: flex;
-    width: 100px;
-    height: 30px;
-    justify-content: center;
-    align-items: center;
-    background-color: #000035;
-    color: white;
-    border: 1px solid transparent;
-    border-radius: 1rem;
+.reviewCardDetail {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  margin: 0 auto 2rem;
+  gap: 1rem;
+  width: 971px;
 }
 
-.textAreaDetail button:hover{
-    cursor: pointer;
-    background-color: #000076;
+.textAreaDetail button {
+  display: flex;
+  width: 100px;
+  height: 30px;
+  justify-content: center;
+  align-items: center;
+  background-color: #000035;
+  color: white;
+  border: 1px solid transparent;
+  border-radius: 1rem;
 }
 
-.textAreaDetail{
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    gap: 2rem;
+.textAreaDetail button:hover {
+  cursor: pointer;
+  background-color: #000076;
+}
+
+.textAreaDetail {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 2rem;
+}
+
+.prices {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+}
+
+.gameSale {
+  display: flex;
+  text-decoration: line-through;
+  align-items: center;
+  font-size: large;
+  color: hsla(240, 38%, 16%, 0.8);
 }

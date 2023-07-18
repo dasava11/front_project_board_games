@@ -1,0 +1,28 @@
+.mainContainerUser{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border:1px solid #ffffff;
+    background-color: #ffffff;
+    width:40%;
+    padding:50px;
+    border-radius: 7px;
+    margin: 40px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+
+.containerUser{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.activeBtn{
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+.titleUser{
+  display: flex;
+  justify-content: center;
+}

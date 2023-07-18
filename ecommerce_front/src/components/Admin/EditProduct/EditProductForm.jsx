@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
-import { showUploadWidget } from "../Cloudinary/Cloudinary";
+import { opUploadWidget } from "../Cloudinary/ClodinaryEdit";
 import { Switch } from "antd";
 import style from "./editform.module.css";
 import axios from "axios";
+import validationsEdit from "./validationsEdit";
 import { Select } from "antd";
 import {
   getCategories,
@@ -12,14 +13,40 @@ import {
   getLanguages,
   getMechanics,
   getThematics,
+  getAuthors,
+  getEditorials,
 } from "../../../Redux/actions_creators";
 import { toast } from "react-toastify";
+import { ModifyOnSale } from "./ModifyOnSale";
+
 const { Option } = Select;
+const VITE_GET_ALL_GAMES = import.meta.env.VITE_GET_ALL_GAMES;
+const VITE_URL_GAMES_DELETE = import.meta.env.VITE_URL_GAMES_DELETE;
 
 export const EditProductForm = () => {
   const { id } = useParams();
   const [product, setProduct] = useState({});
   const [checked, setChecked] = useState(true);
+  const [error, setError] = useState({
+    name: "",
+    released: "",
+    price: "",
+    age: "",
+    players_min: "",
+    players_max: "",
+    stock: "",
+    weight: "",
+    playing_time: "",
+    image: "",
+    Author: "",
+    Categories: "",
+    Designers: "",
+    editorial: "",
+    Languages: "",
+    Mechanics: "",
+    Thematics: "",
+  });
+
   const dispatch = useDispatch();
   const categories = useSelector((state) => state.allCategories);
   const filteredCategories = categories.filter(
@@ -50,13 +77,22 @@ export const EditProductForm = () => {
   const filteredTematics = thematics.filter(
     (thematic) => thematic.thematic_name !== product.Thematic?.thematic_name
   );
-
+  const authors = useSelector((state) => state.allAuthors);
+  const filteredAuthors = authors.filter(
+    (aut) => aut.author_name !== product.Author?.author_name
+  );
+  const editorials = useSelector((state) => state.allEditorials);
+  const filteredEditorials = editorials.filter(
+    (edit) => edit.editorial_name !== product.Editorial?.editorial_name
+  );
   useEffect(() => {
     dispatch(getCategories());
     dispatch(getDesigners());
     dispatch(getMechanics());
     dispatch(getThematics());
     dispatch(getLanguages());
+    dispatch(getAuthors());
+    dispatch(getEditorials());
     axios
       .get(
         `https://backprojectboardgames-production.up.railway.app/games/id/${id}`
@@ -71,6 +107,7 @@ export const EditProductForm = () => {
     e.preventDefault();
     const newProduct = {
       ...product,
+      image: product.image,
       game_id: product.game_id,
       author_name: product.Author.author_name,
       editorial_name: product.Editorial.editorial_name,
@@ -82,10 +119,7 @@ export const EditProductForm = () => {
     };
 
     await axios
-      .put(
-        "https://backprojectboardgames-production.up.railway.app/games",
-        newProduct
-      )
+      .put(VITE_GET_ALL_GAMES, newProduct)
       .then((res) =>
         res.status === 200 ? toast.success(res.data.message) : null
       )
@@ -97,9 +131,7 @@ export const EditProductForm = () => {
 
   const handleSwitch = async (game_id) => {
     await axios
-      .put(
-        `https://backprojectboardgames-production.up.railway.app/games/delete/${game_id}`
-      )
+      .put(VITE_URL_GAMES_DELETE`${game_id}`)
       .then((res) =>
         res.status === 200 ? toast.success(res.data.message) : null
       )
@@ -107,19 +139,18 @@ export const EditProductForm = () => {
   };
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    if (name === "author_name") {
-      setProduct({ ...product, Author: { author_name: value } });
-    } else if (name === "editorial_name") {
-      setProduct({
-        ...product,
-        Editorial: { editorial_name: value },
-      });
-    } else {
-      setProduct({ ...product, [name]: value });
-    }
+    setProduct({ ...product, [e.target.name]: e.target.value });
+    setError(validationsEdit(product));
   };
 
+  const handleChangeAuthor = (value) => {
+    setProduct({ ...product, Author: { author_name: value } });
+    setError(validationsEdit(product));
+  };
+  const handleChangeEditorial = (value) => {
+    setProduct({ ...product, Editorial: { editorial_name: value } });
+    setError(validationsEdit(product));
+  };
   const handleChangeCategories = (values) => {
     setProduct((product) => ({
       ...product,
@@ -128,6 +159,7 @@ export const EditProductForm = () => {
         ...values.map((cat) => ({ category_name: cat })),
       ],
     }));
+    setError(validationsEdit(product));
   };
 
   const handleChangeDesigners = (values) => {
@@ -138,6 +170,7 @@ export const EditProductForm = () => {
         ...values.map((des) => ({ designer_name: des })),
       ],
     }));
+    setError(validationsEdit(product));
   };
 
   const handleChangeLanguages = (values) => {
@@ -148,6 +181,7 @@ export const EditProductForm = () => {
         ...values.map((lan) => ({ language_name: lan })),
       ],
     }));
+    setError(validationsEdit(product));
   };
   const handleChangeThematic = (values) => {
     setProduct((product) => ({
@@ -157,6 +191,7 @@ export const EditProductForm = () => {
         ...values.map((t) => ({ thematic_name: t })),
       ],
     }));
+    setError(validationsEdit(product));
   };
 
   const handleChangeMechanic = (values) => {
@@ -167,6 +202,7 @@ export const EditProductForm = () => {
         ...values.map((m) => ({ mechanic_name: m })),
       ],
     }));
+    setError(validationsEdit(product));
   };
 
   const handleDelete = (e) => {
@@ -201,16 +237,22 @@ export const EditProductForm = () => {
       setProduct({ ...product, Thematics: newThem });
     }
     if (e.target.name === "image") {
-      let newImage = product.image.filter((i) => i.image !== e.target.alt);
-      setProduct({ ...product, image: newImage });
+      let resetImage = product.image.filter((i) => i !== e.target.alt);
+      setProduct({ ...product, image: resetImage });
+    }
+    if (e.target.name === "author_name") {
+      product.Author.author_name = "";
+      setProduct({ ...product, Author: { author_name: "" } });
+    }
+    if (e.target.name === "editorial_name") {
+      product.Editorial.editorial_name = "";
+      setProduct({ ...product, Editorial: { editorial_name: "" } });
     }
   };
 
   const handleSwitchOnSale = async (game_id) => {
     await axios
-      .put(
-        `https://backprojectboardgames-production.up.railway.app/games/${game_id}`
-      )
+      .put(VITE_GET_ALL_GAMES`${game_id}`)
       .then((res) =>
         res.status === 200 ? toast.success(res.data.message) : null
       )
@@ -218,356 +260,466 @@ export const EditProductForm = () => {
   };
 
   return (
-    <>
-      <div className={style.mainContainer}>
-        <h1>Edit Product</h1>
-        <div className={style.buttonEdition}>
-          {product.active === true ? (
-            <div className={style.switchButton}>
-              <h6>Deactivate product</h6>
-              <Switch
-                checked
-                onChange={() => {
-                  handleSwitch(product.game_id);
+    <div>
+      <h1 className={style.title}>Edit Product</h1>
+      <div className={style.formContainerEdit}>
+        <ModifyOnSale
+          product={product}
+          setProduct={setProduct}
+          handleSwitch={handleSwitch}
+          handleSwitchOnSale={handleSwitchOnSale}
+        />
+        <div className={style.mainContainer}>
+          {product && (
+            <form className={style} onSubmit={handleSubmit}>
+              <div className={style.nameContainer}>
+                <label className={style.labels}>Game Name</label>
+                <input
+                  name="name"
+                  value={product.name}
+                  onChange={handleChange}
+                  className={style.inputEditName}
+                />
+                {error.name && (
+                  <span className={style.errorEdit}>{error.name}</span>
+                )}
+              </div>
+
+              <div className={style.formCreateDivFlexTwo}>
+                <div className={style.subDivTwo}>
+                  <label className={style.labels}>Released (YYYY/MM/DD)</label>
+                  <input
+                    name="released"
+                    value={product.released?.substring(0, 10)}
+                    onChange={handleChange}
+                    className={style.inputEdit}
+                  />
+                  {error.released && (
+                    <span className={style.errorEdit}>{error.released}</span>
+                  )}
+                </div>
+                <div className={style.subDivTwo}>
+                  <label className={style.labels}>Price U$D</label>
+                  <input
+                    name="price"
+                    value={product.price}
+                    onChange={handleChange}
+                    className={style.inputEdit}
+                  />
+                  {error.price && (
+                    <span className={style.errorEdit}>{error.price}</span>
+                  )}
+                </div>
+              </div>
+              <div className={style.formCreateDivFlexThree}>
+                <div className={style.subDivThree}>
+                  <label className={style.labels}>Recommended Age</label>
+                  <input
+                    name="age"
+                    value={product.age}
+                    onChange={handleChange}
+                    className={style.inputEdit}
+                  />
+                  {error.age && (
+                    <span className={style.errorEdit}>{error.age}</span>
+                  )}
+                </div>
+                <div className={style.subDivThree}>
+                  <label className={style.labels}>Quantity min players</label>
+                  <input
+                    name="players_min"
+                    value={product.players_min}
+                    onChange={handleChange}
+                    className={style.inputEdit}
+                  />
+                  {error.players_min && (
+                    <span className={style.errorEdit}>{error.players_min}</span>
+                  )}
+                </div>
+                <div className={style.subDivThree}>
+                  <label className={style.labels}>Quantity max players</label>
+                  <input
+                    name="players_max"
+                    value={product.players_max}
+                    onChange={handleChange}
+                    className={style.inputEdit}
+                  />
+                  {error.players_max && (
+                    <span className={style.errorEdit}>{error.players_max}</span>
+                  )}
+                </div>
+              </div>
+              <div className={style.formCreateDivFlexThree}>
+                <div className={style.subDivThree}>
+                  <label className={style.labels}>Stock </label>
+                  <input
+                    name="stock"
+                    value={product.stock}
+                    onChange={handleChange}
+                    className={style.inputEdit}
+                  />
+                  {error.stock && (
+                    <span className={style.errorEdit}>{error.stock}</span>
+                  )}
+                </div>
+                <div className={style.subDivThree}>
+                  <label className={style.labels}>
+                    Game's Difficulty (1-5)
+                  </label>
+                  <input
+                    name="weight"
+                    value={product.weight}
+                    onChange={handleChange}
+                    className={style.inputEdit}
+                  />
+                  {error.weight && (
+                    <span className={style.errorEdit}>{error.weight}</span>
+                  )}
+                </div>
+                <div className={style.subDivThree}>
+                  <label className={style.labels}>Playing time</label>
+                  <input
+                    name="playing_time"
+                    value={product.playing_time}
+                    onChange={handleChange}
+                    className={style.inputEdit}
+                  />
+                  {error.playing_time && (
+                    <span className={style.errorEdit}>
+                      {error.playing_time}
+                    </span>
+                  )}
+                </div>
+              </div>
+              <div className={style.imageSt}>
+                <label className={style.labels} htmlFor="image">
+                  Image
+                </label>
+                {product.image &&
+                  product.image?.map((i) => (
+                    <div className={style.imageX}>
+                      <img
+                        className={style.imageGame}
+                        width={"100px"}
+                        src={i}
+                        alt={i}
+                        key={product.image}
+                        value={i}
+                        name="image"
+                        onClick={(e) => handleDelete(e)}
+                      />
+                      <h3 className={style.overlay}>x</h3>
+                    </div>
+                  ))}
+                <button
+                  type="button"
+                  className={style.buttonCloudinary}
+                  onClick={() => opUploadWidget(product, setProduct)}
+                >
+                  Upload Image
+                </button>
+                {error.image && (
+                  <span className={style.errorEdit}>{error.image}</span>
+                )}
+              </div>
+              <br />
+              <label className={style.labels}>Author</label>
+              <Select
+                key={"author_id"}
+                onChange={(value) => handleChangeAuthor(value)}
+                name="author_name"
+                style={{
+                  width: "50%",
+                  margin: "0.5rem",
+                  fontSize: "medium",
+                  height: "33px",
                 }}
-              />
-            </div>
-          ) : (
-            <div className={style.switchButton}>
-              <h6>Activate product</h6>
-              <Switch
-                checked={false}
-                onChange={() => {
-                  handleSwitch(product.game_id);
+                placeholder="Select Author"
+              >
+                {filteredAuthors &&
+                  filteredAuthors.map((fAuth) => {
+                    return (
+                      <>
+                        <Option
+                          key={fAuth.author_name}
+                          value={fAuth.author_name}
+                        >
+                          {fAuth.author_name}
+                        </Option>
+                      </>
+                    );
+                  })}
+              </Select>
+              <>
+                <button
+                  type="button"
+                  className={style.subInputEdit}
+                  key={"author_name"}
+                  value={product.Author?.author_name}
+                  name="author_name"
+                  onClick={(e) => handleDelete(e)}
+                >
+                  {product.Author?.author_name}X
+                </button>
+                {error.Author && (
+                  <span className={style.errorEdit}>{error.Author}</span>
+                )}
+              </>
+              <label className={style.labels}>Categories</label>
+              <Select
+                key={"category_id"}
+                mode="multiple"
+                onChange={handleChangeCategories}
+                name="category_name"
+                style={{
+                  width: "50%",
+                  margin: "0.5rem",
+                  fontSize: "medium",
+                  height: "33px",
                 }}
-              />
-            </div>
-          )}
-          <br />
-          {product.on_sale === true ? (
-            <div className={style.switchButton}>
-              <h6>Deactivate OnSale</h6>
-              <Switch
-                checked
-                onChange={() => {
-                  handleSwitchOnSale(product.game_id);
+                placeholder="Select categories"
+              >
+                {filteredCategories &&
+                  filteredCategories.map((cat) => {
+                    return (
+                      <>
+                        <Option
+                          key={cat.category_name}
+                          value={cat.category_name}
+                        >
+                          {cat.category_name}
+                        </Option>
+                      </>
+                    );
+                  })}
+              </Select>
+              {product.Categories &&
+                product.Categories?.map((cat) => (
+                  <>
+                    <button
+                      type="button"
+                      className={style.subInputEdit}
+                      key={cat.category_name}
+                      value={cat.category_name}
+                      name="category_name"
+                      onClick={(e) => handleDelete(e)}
+                    >
+                      {cat.category_name}x
+                    </button>
+                  </>
+                ))}
+              {error.Categories && (
+                <span className={style.errorEdit}>{error.Categories}</span>
+              )}
+              <label className={style.labels}>Designers</label>
+              <Select
+                mode="multiple"
+                onChange={(values) => handleChangeDesigners(values)}
+                name="designer_name"
+                style={{
+                  width: "50%",
+                  margin: "0.5rem",
+                  fontSize: "medium",
+                  height: "33px",
                 }}
-              />
-            </div>
-          ) : (
-            <div className={style.switchButton}>
-              <h6>Activate OnSale</h6>
-              <Switch
-                checked={false}
-                onChange={() => {
-                  handleSwitchOnSale(product.game_id);
+                placeholder="Select Designer"
+              >
+                {filteredDesigners &&
+                  filteredDesigners.map((des) => {
+                    return (
+                      <Option key={des.designer_name} value={des.designer_name}>
+                        {des.designer_name}
+                      </Option>
+                    );
+                  })}
+              </Select>
+              {product.Designers &&
+                product.Designers?.map((des) => (
+                  <>
+                    <button
+                      type="button"
+                      className={style.subInputEdit}
+                      key={des.designer_name}
+                      value={des.designer_name}
+                      name="designer_name"
+                      onClick={(e) => handleDelete(e)}
+                    >
+                      {des.designer_name}x
+                    </button>
+                  </>
+                ))}
+              {error.Designers && (
+                <span className={style.errorEdit}>{error.Designers}</span>
+              )}
+              <label className={style.labels}>Editorial</label>
+              <Select
+                onChange={(value) => handleChangeEditorial(value)}
+                name="editorial_name"
+                style={{
+                  width: "50%",
+                  margin: "0.5rem",
+                  fontSize: "medium",
+                  height: "33px",
                 }}
-              />
-            </div>
+                placeholder="Select Editorial"
+              >
+                {filteredEditorials &&
+                  filteredEditorials.map((fEdit) => {
+                    return (
+                      <Option
+                        key={fEdit.editorial_name}
+                        value={fEdit.editorial_name}
+                      >
+                        {fEdit.editorial_name}
+                      </Option>
+                    );
+                  })}
+              </Select>
+              <>
+                <button
+                  type="button"
+                  className={style.subInputEdit}
+                  key={"editorial_name"}
+                  value={product.Editorial?.editorial_name}
+                  name="editorial_name"
+                  onClick={(e) => handleDelete(e)}
+                >
+                  {product.Editorial?.editorial_name}X
+                </button>
+                {error.editorial && (
+                  <span className={style.errorEdit}>{error.editorial}</span>
+                )}
+              </>
+              <label className={style.labels}>Languages</label>
+              <Select
+                mode="multiple"
+                onChange={(values) => handleChangeLanguages(values)}
+                name="language_name"
+                style={{
+                  width: "50%",
+                  margin: "0.5rem",
+                  fontSize: "medium",
+                  height: "33px",
+                }}
+                placeholder="Select Language"
+              >
+                {filteredLanguages &&
+                  filteredLanguages.map((lan) => {
+                    return (
+                      <Option key={lan.language_name} value={lan.language_name}>
+                        {lan.language_name}
+                      </Option>
+                    );
+                  })}
+              </Select>
+              {product.Languages &&
+                product.Languages?.map((lan) => (
+                  <>
+                    <button
+                      type="button"
+                      className={style.subInputEdit}
+                      key={lan.language_name}
+                      value={lan.language_name}
+                      name="language_name"
+                      onClick={(e) => handleDelete(e)}
+                    >
+                      {lan.language_name}X
+                    </button>
+                  </>
+                ))}
+              {error.Languages && (
+                <span className={style.errorEdit}>{error.Languages}</span>
+              )}
+              <label className={style.labels}>Mechanic</label>
+              <Select
+                mode="multiple"
+                onChange={(values) => handleChangeMechanic(values)}
+                name="mechanics_name"
+                style={{
+                  width: "50%",
+                  margin: "0.5rem",
+                  fontSize: "medium",
+                  height: "33px",
+                }}
+                placeholder="Select Mechanic"
+              >
+                {filteredMechanics &&
+                  filteredMechanics.map((mec) => {
+                    return (
+                      <Option key={mec.mechanic_name} value={mec.mechanic_name}>
+                        {mec.mechanic_name}
+                      </Option>
+                    );
+                  })}
+              </Select>
+              {product.Mechanics &&
+                product.Mechanics?.map((mec) => (
+                  <>
+                    <button
+                      type="button"
+                      className={style.subInputEdit}
+                      key={mec.mechanic_name}
+                      value={mec.mechanic_name}
+                      name="mechanics_name"
+                      onClick={(e) => handleDelete(e)}
+                    >
+                      {mec.mechanic_name}X
+                    </button>
+                  </>
+                ))}
+              {error.Mechanics && (
+                <span className={style.errorEdit}>{error.Mechanics}</span>
+              )}
+              <label className={style.labels}>Thematic</label>
+              <Select
+                mode="multiple"
+                onChange={(values) => handleChangeThematic(values)}
+                name="thematic_name"
+                style={{
+                  width: "50%",
+                  margin: "0.5rem",
+                  fontSize: "medium",
+                  height: "33px",
+                }}
+                placeholder="Select Thematic"
+              >
+                {filteredTematics &&
+                  filteredTematics.map((them) => {
+                    return (
+                      <Option
+                        key={them.thematic_name}
+                        value={them.thematic_name}
+                      >
+                        {them.thematic_name}
+                      </Option>
+                    );
+                  })}
+              </Select>
+              {product.Thematics &&
+                product.Thematics?.map((t) => (
+                  <>
+                    <button
+                      type="button"
+                      className={style.subInputEdit}
+                      key={t.thematic_name}
+                      value={t.thematic_name}
+                      name="thematic_name"
+                      onClick={(e) => handleDelete(e)}
+                    >
+                      {t.thematic_name}X
+                    </button>
+                  </>
+                ))}
+              {error.Thematics && (
+                <span className={style.errorEdit}>{error.Thematics}</span>
+              )}
+              <button type="submit" className={style.sendButton}>
+                Send changes
+              </button>
+            </form>
           )}
         </div>
-
-        {product && (
-          <form className={style} onSubmit={handleSubmit}>
-            <label className={style.labels}>Game Name</label>
-            <input
-              name="name"
-              value={product.name}
-              onChange={handleChange}
-              className={style.inputEdit}
-            />
-            <label className={style.labels}>Date released (YYYY/MM/DD)</label>
-            <input
-              name="released"
-              value={product.released?.substring(0, 10)}
-              onChange={handleChange}
-              className={style.inputEdit}
-            />
-            <label className={style.labels}>Price U$D</label>
-            <input
-              name="price"
-              value={product.price}
-              onChange={handleChange}
-              className={style.inputEdit}
-            />
-            <label className={style.labels}>Recommended Age</label>
-            <input
-              name="age"
-              value={product.age}
-              onChange={handleChange}
-              className={style.inputEdit}
-            />
-            <label className={style.labels}>Quantity min players</label>
-            <input
-              name="players_min"
-              value={product.players_min}
-              onChange={handleChange}
-              className={style.inputEdit}
-            />
-            <label className={style.labels}>Quantity max players</label>
-            <input
-              name="playes_max"
-              value={product.players_max}
-              onChange={handleChange}
-              className={style.inputEdit}
-            />
-            <label className={style.labels}>Stock </label>
-            <input
-              name="stock"
-              value={product.stock}
-              onChange={handleChange}
-              className={style.inputEdit}
-            />
-            <label className={style.labels} htmlFor="image">
-              Image
-            </label>
-            {product.image &&
-              product.image?.map((i) => (
-                <>
-                  <button
-                    type="button"
-                    key={product.image}
-                    value={product.image}
-                    name="image"
-                  >
-                    X
-                  </button>
-                  <img
-                    width={"100px"}
-                    src={i}
-                    alt={i}
-                    onClick={(e) => handleDelete(e)}
-                  />
-                </>
-              ))}
-            <span
-              className={style.buttonCloudinary}
-              onClick={() => showUploadWidget(product, setProduct)}
-            >
-              Upload Image
-            </span>
-            <br />
-            <label className={style.labels}>Box weight</label>
-            <input
-              name="weight"
-              value={product.weight}
-              onChange={handleChange}
-              className={style.inputEdit}
-            />
-            <label className={style.labels}>Estimated playing time</label>
-            <input
-              name="playing_time"
-              value={product.playing_time}
-              onChange={handleChange}
-              className={style.inputEdit}
-            />
-            <label className={style.labels}>Author</label>
-            <input
-              name="author_name"
-              value={product.Author?.author_name}
-              onChange={handleChange}
-              className={style.inputEdit}
-            />
-            <label className={style.labels}>Categories</label>
-            <Select
-              mode="multiple"
-              onChange={handleChangeCategories}
-              name="category_name"
-              style={{
-                width: "100%",
-                margin: "0.5rem",
-                fontSize: "medium",
-                height: "33px",
-              }}
-              placeholder="Select categories"
-            >
-              {filteredCategories &&
-                filteredCategories.map((cat) => {
-                  return (
-                    <>
-                      <Option key={cat.category_name} value={cat.category_name}>
-                        {cat.category_name}
-                      </Option>
-                    </>
-                  );
-                })}
-            </Select>
-            {product.Categories &&
-              product.Categories?.map((cat) => (
-                <>
-                  <button
-                    type="button"
-                    className={style.subInputEdit}
-                    key={cat.category_name}
-                    value={cat.category_name}
-                    name="category_name"
-                    onClick={(e) => handleDelete(e)}
-                  >
-                    {cat.category_name}X
-                  </button>
-                </>
-              ))}
-            <label className={style.labels}>Designers</label>
-            <Select
-              mode="multiple"
-              onChange={(values) => handleChangeDesigners(values)}
-              name="designer_name"
-              style={{
-                width: "100%",
-                margin: "0.5rem",
-                fontSize: "medium",
-                height: "33px",
-              }}
-              placeholder="Select Designer"
-            >
-              {filteredDesigners &&
-                filteredDesigners.map((des) => {
-                  return (
-                    <Option key={des.designer_name} value={des.designer_name}>
-                      {des.designer_name}
-                    </Option>
-                  );
-                })}
-            </Select>
-            {product.Designers &&
-              product.Designers?.map((des) => (
-                <>
-                  <button
-                    type="button"
-                    className={style.subInputEdit}
-                    key={des.designer_name}
-                    value={des.designer_name}
-                    name="designer_name"
-                    onClick={(e) => handleDelete(e)}
-                  >
-                    {des.designer_name}X
-                  </button>
-                </>
-              ))}
-            <label className={style.labels}>Editorial</label>
-            <input
-              name="editorial_name"
-              value={product.Editorial?.editorial_name}
-              onChange={handleChange}
-              className={style.inputEdit}
-            />
-            <label className={style.labels}>Languages</label>
-            <Select
-              mode="multiple"
-              onChange={(values) => handleChangeLanguages(values)}
-              name="language_name"
-              style={{
-                width: "100%",
-                margin: "0.5rem",
-                fontSize: "medium",
-                height: "33px",
-              }}
-              placeholder="Select Language"
-            >
-              {filteredLanguages &&
-                filteredLanguages.map((lan) => {
-                  return (
-                    <Option key={lan.language_name} value={lan.language_name}>
-                      {lan.language_name}
-                    </Option>
-                  );
-                })}
-            </Select>
-            {product.Languages &&
-              product.Languages?.map((lan) => (
-                <>
-                  <button
-                    type="button"
-                    className={style.subInputEdit}
-                    key={lan.language_name}
-                    value={lan.language_name}
-                    name="language_name"
-                    onClick={(e) => handleDelete(e)}
-                  >
-                    {lan.language_name}X
-                  </button>
-                </>
-              ))}
-            <label className={style.labels}>Mechanic</label>
-            <Select
-              mode="multiple"
-              onChange={(values) => handleChangeMechanic(values)}
-              name="mechanics_name"
-              style={{
-                width: "100%",
-                margin: "0.5rem",
-                fontSize: "medium",
-                height: "33px",
-              }}
-              placeholder="Select Mechanic"
-            >
-              {filteredMechanics &&
-                filteredMechanics.map((mec) => {
-                  return (
-                    <Option key={mec.mechanic_name} value={mec.mechanic_name}>
-                      {mec.mechanic_name}
-                    </Option>
-                  );
-                })}
-            </Select>
-            {product.Mechanics &&
-              product.Mechanics?.map((mec) => (
-                <>
-                  <button
-                    type="button"
-                    className={style.subInputEdit}
-                    key={mec.mechanic_name}
-                    value={mec.mechanic_name}
-                    name="mechanics_name"
-                    onClick={(e) => handleDelete(e)}
-                  >
-                    {mec.mechanic_name}X
-                  </button>
-                </>
-              ))}
-            <label className={style.labels}>Thematic</label>
-            <Select
-              mode="multiple"
-              onChange={(values) => handleChangeThematic(values)}
-              name="thematic_name"
-              style={{
-                width: "100%",
-                margin: "0.5rem",
-                fontSize: "medium",
-                height: "33px",
-              }}
-              placeholder="Select Thematic"
-            >
-              {filteredTematics &&
-                filteredTematics.map((them) => {
-                  return (
-                    <Option key={them.thematic_name} value={them.thematic_name}>
-                      {them.thematic_name}
-                    </Option>
-                  );
-                })}
-            </Select>
-            {product.Thematics &&
-              product.Thematics?.map((t) => (
-                <>
-                  <button
-                    type="button"
-                    className={style.subInputEdit}
-                    key={t.thematic_name}
-                    value={t.thematic_name}
-                    name="thematic_name"
-                    onClick={(e) => handleDelete(e)}
-                  >
-                    {t.thematic_name}X
-                  </button>
-                </>
-              ))}
-            <button type="submit" className={style.sendButton}>
-              Send changes
-            </button>
-          </form>
-        )}
       </div>
-    </>
+    </div>
   );
 };

@@ -25,11 +25,13 @@ import MercadoPagoFailure from "./components/MercadoPago/MercadoPagoFailure/Merc
 import MercadoPagoPending from "./components/MercadoPago/MercadoPagoPending/MercadoPagoPending";
 import PayPalPaymentButton from "./components/Paypal/Paypal";
 import NotFound from "./components/NotFound/NotFound";
-import {ProtectedRoutes} from "./components/Auth/ProtectedRoutes";
+import { ProtectedRoutes } from "./components/Auth/ProtectedRoutes";
 import Wrapper from "./components/Wrapper/Wrapper";
 import { WrapperAdmin } from "./components/Admin/WrapperAdmin/WrapperAdmin";
 import { Sales } from "./components/Admin/Sales/Sales";
 import UsersAdmin from "./components/Admin/UsersAdmin/UsersAdmin";
+import { UserAdminEdit } from "./components/Admin/UserAdminEdit/UserAdminEdit";
+import { UserId } from "./components/Admin/UsersAdmin/UserId";
 const PAYPAL_TOKEN = import.meta.env.VITE_PAYPAL_TOKEN;
 
 function App() {
@@ -51,7 +53,7 @@ function App() {
               <Route path="login" element={<LogIn />} />
               <Route path="signup" element={<SignUp />} />
               <Route path="paypal" element={<PayPalPaymentButton />} />
-              <Route element={<ProtectedRoutes/>}>
+              <Route element={<ProtectedRoutes />}>
                 <Route path="checkout" element={<CheckOut />} />
               </Route>
               <Route path="cart" element={<Cart />} />
@@ -69,6 +71,8 @@ function App() {
               <Route path="editproductform/:id" element={<EditProductForm />} />
               <Route path="sales" element={<Sales />} />
               <Route path="usersadmin" element={<UsersAdmin />} />
+              <Route path="edituser" element={<UserAdminEdit />} />
+              <Route path="userid/:id" element={<UserId />} />
             </Route>
           </Routes>
         </AuthProvider>

@@ -71,3 +71,12 @@
     display: flex;
     justify-content: space-between;
 }
+
+.priceSale{
+    text-decoration: line-through;
+    font-weight: normal;
+}
+
+.priceFull{
+    text-decoration:none;
+}

@@ -12,7 +12,9 @@ import {
   SORT_GAMES,
   //FILTER_GAMES,
   FILTER_DELETE,
-  GET_ALL_USERS
+  GET_ALL_USERS,
+  GET_ALL_PURCHASES,
+  GET_USER_BY_ID
 } from "../action-types/index";
 import { toast } from "react-toastify";
 
@@ -26,6 +28,7 @@ const VITE_URL_EDITORIALS = import.meta.env.VITE_URL_EDITORIALS;
 const VITE_URL_MECHANICS = import.meta.env.VITE_URL_MECHANICS;
 const VITE_URL_THEMATICS = import.meta.env.VITE_URL_THEMATICS;
 const VITE_URL_USERS= import.meta.env.VITE_URL_USERS
+const VITE_URL_GET_PURCHASES=import.meta.env.VITE_URL_GET_PURCHASES;
 export const getAllGames = () => {
   return async (dispatch) => {
     try {
@@ -244,9 +247,30 @@ export const getAllUsers =()=>{
   return async (dispatch) => {
     try {
       const response = await axios.get(VITE_URL_USERS);
-      dispatch({ type: GET_ALL_USERS, payload: response.data });
+      dispatch({ type: GET_ALL_USERS, payload: response.data.users });
     } catch (error) {
       console.error(error);
     }
   };
 }
+
+export const getAllPurchases =()=>{
+ return async (dispatch)=>{
+  try {
+    const resp=await axios.get(VITE_URL_GET_PURCHASES)
+    dispatch({ type: GET_ALL_PURCHASES, payload: response.data})
+  } catch(err){
+    console.error(err)
+  }
+ }
+}
+export const getUserById=(id)=>{
+  return async (dispatch)=>{
+ try {
+  const resp = await axios.get(`${VITE_URL_USERS}/${id}`)
+  dispatch({type: GET_USER_BY_ID, payload: resp.data})
+ } catch (error) {
+  console.error(error)
+ }
+  }
+ }

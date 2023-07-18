@@ -1,6 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import searchIcon from "../../../Photos/search_icon.svg";
 import style from "./sales.module.css";
 export const Sales = () => {
+  const dispatch = useDispatch();
+  const sales = useSelector((state) => state.allPurchases);
   const [search, setSearch] = useState();
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -9,36 +13,41 @@ export const Sales = () => {
     const { name, value } = e.target;
     setSearch({ ...search, [name]: value });
   };
+
   return (
-    <div>
+    <div className={style.mainFormPurchase}>
       <h1>All Sales</h1>
-      <form onSubmit={() => handleSubmit(e)}>
+      <div className={style.searchContainer}>
+        <img src={searchIcon} alt="search button" width="15px" height="15px" />
+        <hr />
         <input
-          value={search}
-          name="search"
-          className={style.searchInput}
-          type="text"
-          placeholder="Search User/Games "
-          onChange={handleChange}
+          className={style.inputSearch}
+          type="search"
+          placeholder="Search by ID"
+          onChange={handleSubmit}
         />
-        {/* <button type="submit">Search</button> */}
-      </form>
-      <table>
-        <thead>
-          <tr>
-            <th>Purchase Id</th>
-            <th>Name</th>
-            <th>Purchase Status</th>
-            <th>Products purchased </th>
-            <th>Amount</th>
+      </div>
+      <table className={style.purchaseTable}>
+        <thead className={style.purchaseHead}>
+          <tr className={style.purchTr}>
+            <th className={style.tH}>Purchase Id</th>
+            <th className={style.tH}>Username</th>
+            <th className={style.tH}>Products purchased</th>
+            <th className={style.tH}>Amount</th>
           </tr>
         </thead>
-        <tbody>
-          <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-          </tr>
+        <tbody className={style.purchaseBody}>
+          {sales &&
+            sales.map((sale) => {
+              return (
+                <tr className={style.purchTr}>
+                  <td claseName={style.tH}>{sale.purchase_id}</td>
+                  <td claseName={style.tH}>{sale.username}</td>
+                  <td claseName={style.tH}>{sale.description}</td>
+                  <td claseName={style.tH}>{sale.amount}</td>
+                </tr>
+              );
+            })}
         </tbody>
       </table>
     </div>
