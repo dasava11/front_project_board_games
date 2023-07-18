@@ -118,7 +118,7 @@ export const EditProductForm = () => {
   };
 
   const handleChange = (e) => {
-    setProduct({ ...product, [e.tagret.name]: e.target.value });
+    setProduct({ ...product, [e.target.name]: e.target.value });
   };
 
   const handleChangeAuthor = (value) => {
