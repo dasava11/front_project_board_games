@@ -141,6 +141,7 @@ export const EditProductForm = () => {
   const handleChange = (e) => {
     setProduct({ ...product, [e.target.name]: e.target.value });
     setError(validationsEdit(product));
+
   };
 
   const handleChangeAuthor = (value) => {
