@@ -42,14 +42,6 @@
   gap: 3rem;
 }
 
-.darkTitleMain {
-  color: #dbdbdb;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 3rem;
-}
-
 .titleMain h1 {
   margin: 5px 0;
   display: flex;
