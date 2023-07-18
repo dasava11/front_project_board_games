@@ -105,6 +105,36 @@
     width: 50px;
 }
 
+.butonShop{
+    display: flex;
+    flex-direction: column;
+}
+.backGames{
+    display: flex;
+    justify-content:center ;
+}
+
+.continueShop{
+    border: 1px solid transparent;
+    background-color: #FADA5C;
+    height: 10%;
+    width: 30%;
+    padding: 0 1rem 0 1rem;
+    font-size: 16px;
+    text-transform: capitalize;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 0.5rem;    
+}
+
+.continueShop:hover {
+    cursor: pointer;
+    background-color: #E3C652;
+    font-weight: bold;
+}
+
+
 .cardDescription p{
     text-align: center;
     margin: 2rem 2rem;
@@ -181,6 +211,7 @@
 
 .reviewCardDetail{
     display: flex;
+    justify-content: center;
     flex-direction: column;
     margin: 0 auto 2rem;
     gap: 1rem;
@@ -209,4 +240,18 @@
     flex-direction: column;
     align-items: flex-end;
     gap: 2rem;
+}
+
+.prices{
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+}
+
+.gameSale{
+    display: flex;
+    text-decoration: line-through;
+    align-items: center;
+    font-size:large ;
+    color: hsla(240, 38%, 16%, 0.8);
 }

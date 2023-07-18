@@ -18,3 +18,5 @@ export const POST_LANGUAGES = "POST_LANGUAGES";
 export const SORT_GAMES = "SORT_GAMES";
 //export const FILTER_GAMES = "FILTER_GAMES";
 export const FILTER_DELETE = "FILTER_DELETE";
+export const GET_ALL_USERS="GET_ALL_USERS"
+export const GET_ALL_PURCHASES="GET_ALL_PURCHASES"

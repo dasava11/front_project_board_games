@@ -20,14 +20,30 @@
 .titleTable{
     background-color: grey;
     color: #ffffff;
-    text-align: middle;
+    text-align:justify;
 }
 
 
 .th{
-    padding: 10px 13px;
+    padding: 16px;
+    margin: 9px;
 }
-
+.tr{
+    padding: 10px 13px;
+    margin: 0px;
+}
+.thG{
+    padding-left: 16px;
+   
+}
+.trb{
+    padding: 2rem;
+    margin:3rem;
+}
+.thb{
+    padding: 0.5rem;
+    
+}
 .inputEdit{
     border:1px solid grey;
     border-radius: 4px;
@@ -75,5 +91,4 @@
     flex-direction: column;
     align-items: flex-start;
 }
-
 

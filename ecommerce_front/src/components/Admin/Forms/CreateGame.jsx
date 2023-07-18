@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { postGames } from "../../../Redux/actions_creators/index";
 import validations from "./validations";
 import { CreateCategories } from "./CreateCategories";
@@ -33,7 +34,7 @@ export default function CreateGame() {
     allThematics,
     allLanguages,
   } = useSelector((state) => state);
-
+  const navigate = useNavigate();
   const [input, setInput] = useState({ image: [] });
   const [modalCategories, setModalCategories] = useState(false);
   const [modalThematic, setModalThematic] = useState(false);
@@ -196,6 +197,38 @@ export default function CreateGame() {
               <div className="selectFlexCreate">
                 <Select
                   mode="multiple"
+                  onChange={(values) => handleChangeDesigners(values)}
+                  name="designers_name"
+                  style={{
+                    width: "100%",
+                    margin: "0.5rem",
+                    fontSize: "medium",
+                    height: "33px",
+                  }}
+                  placeholder="Select Designers"
+                >
+                  {allDesigners &&
+                    allDesigners.map((des) => {
+                      return (
+                        <Option
+                          key={des.designer_name}
+                          value={des.designer_name}
+                        >
+                          {des.designer_name}
+                        </Option>
+                      );
+                    })}
+                </Select>
+                <p
+                  className="create-button"
+                  onClick={handleModalCreateDesigner}
+                >
+                  Create
+                </p>
+              </div>
+              <div className="selectFlexCreate">
+                <Select
+                  mode="multiple"
                   onChange={(values) => handleChangeCategories(values)}
                   name="categories_name"
                   style={{
@@ -222,38 +255,6 @@ export default function CreateGame() {
                 <p
                   className="create-button"
                   onClick={handleModalCreateCategories}
-                >
-                  Create
-                </p>
-              </div>
-              <div className="selectFlexCreate">
-                <Select
-                  mode="multiple"
-                  onChange={(values) => handleChangeDesigners(values)}
-                  name="designers_name"
-                  style={{
-                    width: "100%",
-                    margin: "0.5rem",
-                    fontSize: "medium",
-                    height: "33px",
-                  }}
-                  placeholder="Select Designers"
-                >
-                  {allDesigners &&
-                    allDesigners.map((des) => {
-                      return (
-                        <Option
-                          key={des.designer_name}
-                          value={des.designer_name}
-                        >
-                          {des.designer_name}
-                        </Option>
-                      );
-                    })}
-                </Select>
-                <p
-                  className="create-button"
-                  onClick={handleModalCreateDesigner}
                 >
                   Create
                 </p>
@@ -394,7 +395,11 @@ export default function CreateGame() {
               Next
             </a>
           ) : (
-            <button type="submit" className="submit-button">
+            <button
+              type="submit"
+              className="submit-button"
+              onClick={() => navigate("/admin/createproduct")}
+            >
               Submit
             </button>
           )}

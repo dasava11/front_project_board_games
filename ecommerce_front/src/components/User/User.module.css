@@ -8,6 +8,8 @@
   border-radius: 5px;
   background-color: hsl(0, 0%, 96%);
   width: 800px;
+  min-height: 50vh;
+  margin-bottom: 17rem;
 }
 
 .userImg {

@@ -18,7 +18,7 @@
     flex-direction: column;
     align-items: flex-start;
     font-size: 1.4rem;
-    margin: 0;
+    margin: 1rem 0;
     color: #000031;
 }
 
@@ -48,7 +48,7 @@
 .imgContainer{
     display: flex;
     width: 100%;
-    height: 130px;
+    height: 220px;
     margin: auto;
 }
 
@@ -70,4 +70,13 @@
 .cardInfo{
     display: flex;
     justify-content: space-between;
+}
+
+.priceSale{
+    text-decoration: line-through;
+    font-weight: normal;
+}
+
+.priceFull{
+    text-decoration:none;
 }

@@ -1,5 +1,5 @@
 import { createElement, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import style from "../CardDetail/CardDetail.module.css";
 import heart from "../../Photos/heart.svg";
@@ -20,6 +20,7 @@ const CardDetail = () => {
   const [loading, setLoading] = useState(true);
   const [moreInfo, setMoreInfo] = useState(false);
   const [cart, setCart] = useLocalStorage("cart", []);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchGameDetail = async () => {
@@ -88,17 +89,34 @@ const CardDetail = () => {
                 <img className={style.starRating} src={star} alt="star" />
               </span>
             </div>
-            <h2 className={style.priceGame}>${game.price} USD</h2>
-            <div className={style.cardDBtns}>
-              <button className={style.cartBtn} onClick={handleCart}>
-                add to cart
-                <span>
-                  <img src={shoppingCart} alt="cart" />
-                </span>
-              </button>
-              <button className={style.heartBtn}>
-                <img className={style.heartImg} src={heart} alt="heart" />
-              </button>
+            <div className={style.prices}>
+              <h2 className={game.on_sale ? style.gameSale : style.priceGame}>
+                ${game.price} USD
+              </h2>
+              {game.on_sale === true ? (
+                <h2>${(game.price * 0.8).toFixed(2)} USD</h2>
+              ) : null}
+            </div>
+            <div className={style.butonShop}>
+              <div className={style.cardDBtns}>
+                <button className={style.cartBtn} onClick={handleCart}>
+                  add to cart
+                  <span>
+                    <img src={shoppingCart} alt="cart" />
+                  </span>
+                </button>
+                <button className={style.heartBtn}>
+                  <img className={style.heartImg} src={heart} alt="heart" />
+                </button>
+              </div>
+              <div className={style.backGames}>
+                <button
+                  className={style.continueShop}
+                  onClick={() => navigate("/games")}
+                >
+                  continue shopping
+                </button>
+              </div>
             </div>
             <div className={style.cardDescription}>
               <p>{game.Mechanics.description}</p>
@@ -135,7 +153,7 @@ const CardDetail = () => {
       <div className={style.reviewCardDetail}>
         <h2>Review</h2>
         <div className={style.textAreaDetail}>
-          <textarea cols="30" rows="5"></textarea>
+          <textarea></textarea>
           <button>Send</button>
         </div>
       </div>

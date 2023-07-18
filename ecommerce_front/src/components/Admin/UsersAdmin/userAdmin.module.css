@@ -1,0 +1,40 @@
+.mainContainerUser{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.tableUser{
+    height: 100px;
+        width: 80%;
+        border-collapse: collapse;
+        margin: 20px 80px;
+        font-size: 1em;
+        font-family: sans-serif;
+        min-width: 350px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+.titleUser{
+    background-color: grey;
+        color: #ffffff;
+        text-align: middle;
+}
+
+.tr{}
+.th{}
+
+.searchContainer {
+    display: flex;
+    background-color: white;
+    justify-content: center;
+    align-items: center;
+    padding: 3px;
+    border-radius: 1rem;
+    gap: 1rem;
+}
+
+.inputSearch {
+    border: 1px solid transparent;
+    border-radius: 10px;
+    height: 30px;
+}
