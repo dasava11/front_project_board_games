@@ -9,6 +9,7 @@ const VITE_URL_USERS = import.meta.env.VITE_URL_USERS;
 
 export const UserId = () => {
   const userIdInfo = useSelector((state) => state.userDetail);
+  const [user, setUser] = useState({});
   const [checked, setChecked] = useState(true);
   const { id } = useParams();
   const dispatch = useDispatch();
@@ -19,10 +20,13 @@ export const UserId = () => {
   useEffect(() => {
     dispatch(getUserById(id));
   }, []);
-
+  const handleChange = (e) => {
+    setUser({ ...user, [e.target.name]: e.target.value });
+  };
+  console.log(userIdInfo);
   return (
     <>
-      <h1>User's Information</h1>
+      <h1 className={styles.titleUser}>User's Information</h1>
       <div className={styles.mainContainerUser}>
         <div className={styles.activeBtn}>
           {userIdInfo.active === true ? (
@@ -39,32 +43,48 @@ export const UserId = () => {
             <>
               <h5>Activate User</h5>
               <Switch
-                setChecked={false}
+                checked={false}
                 onChange={() => {
                   handleSwitch(userIdInfo.active);
                 }}
               />
             </>
           )}
-          <div>
-            <h5>Current User's Role</h5>
-          </div>
         </div>
         <div className={styles.containerUser}>
           <h2>{userIdInfo.name}</h2>
-          <label>Need to change information about this user?</label>
-          <button>
-            <Link to="/admin/edituser">Click here</Link>
-          </button>
+          <div>
+            <label>User ID</label>
+            <input
+              value={userIdInfo.user_id}
+              type="text"
+              name="user_id"
+              onChange={handleChange}
+            />
+          </div>
+          <div>
+            <label>Full Name:</label>
+            <input
+              value={userIdInfo.name}
+              type="text"
+              name="name"
+              onChange={handleChange}
+            />
+          </div>
           <div>
             <label>Email: </label>
-            <h4>{userIdInfo.email}</h4>
+            <input
+              value={userIdInfo.email}
+              type="text"
+              name="email"
+              onChange={handleChange}
+            />
           </div>
           <div>
             <label>Address:</label>
             <h4>
               {userIdInfo.street === null ? (
-                <h5>No address registered</h5>
+                <h4>No address registered</h4>
               ) : (
                 userIdInfo.street
               )}
@@ -90,14 +110,16 @@ export const UserId = () => {
           </div>
           <div>
             <label>Whishlist</label>
-            <h5>
+            {/* <h5>
               {userIdInfo.wish_list.length > 0 ? (
                 userIdInfo.wish_list.map((w) => <h4>w.name</h4>)
               ) : (
                 <h5> Wishing list is empty</h5>
               )}
-            </h5>
+            </h5> */}
           </div>
+          <label>Current Role</label>
+          <input>{userIdInfo.Role.role_name}</input>
         </div>
       </div>
     </>
