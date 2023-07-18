@@ -1,22 +1,47 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useAuth } from "../Auth/authContext";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { Link } from "react-router-dom";
+import axios from "axios";
 import { toast } from "react-toastify";
 import "./login.css";
 import { FcGoogle } from "react-icons/fc";
 
 export const LogIn = () => {
+
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const [forgotPassword, setForgotPassword] = useState(false)
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  const { login, logInWithGoogle, resetPassword, userAuth, setUserAuth } = useAuth();
+
+  useEffect(()=> {
+    if(searchParams.get('verify')){
+      axios
+      // .put(`http://localhost:3001/users/verifyemail/${searchParams.get('verify')}`)
+      .put(`https://backprojectboardgames-production.up.railway.app/users/verifyemail/${searchParams.get('verify')}`)
+        .then((res) => {
+          if (res.status === 200) {
+            setUserAuth({...userAuth, emailVerified: true})
+            toast.success("Email verified!");
+          } else if (res.status === 400 || res.status === 500) {
+            toast.error(res.data.message);
+          }
+          navigate('/login');
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+    }
+  },[])
+
+
   const [error, setError] = useState();
   const [user, setUser] = useState({
     email: "",
     password: "",
   });
-  const [forgotPassword, setForgotPassword] = useState(false)
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  const { login, logInWithGoogle, resetPassword } = useAuth();
-  
+
   const validForm = () => {
     if(error?.length === 0  &&  user.email?.length !== 0  &&  user.password?.length !== 0){
       return true;
