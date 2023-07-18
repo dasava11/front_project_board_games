@@ -13,7 +13,8 @@ import {
   //FILTER_GAMES,
   FILTER_DELETE,
   GET_ALL_USERS,
-  GET_ALL_PURCHASES
+  GET_ALL_PURCHASES,
+  GET_USER_BY_ID
 } from "../action-types/index";
 import { toast } from "react-toastify";
 
@@ -252,7 +253,7 @@ export const getAllUsers =()=>{
     }
   };
 }
- 
+
 export const getAllPurchases =()=>{
  return async (dispatch)=>{
   try {
@@ -263,3 +264,13 @@ export const getAllPurchases =()=>{
   }
  }
 }
+export const getUserById=(id)=>{
+  return async (dispatch)=>{
+ try {
+  const resp = await axios.get(`${VITE_URL_USERS}/${id}`)
+  dispatch({type: GET_USER_BY_ID, payload: resp.data})
+ } catch (error) {
+  console.error(error)
+ }
+  }
+ }

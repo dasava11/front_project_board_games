@@ -89,19 +89,24 @@ const CardDetail = () => {
                 <img className={style.starRating} src={star} alt="star" />
               </span>
             </div>
-            <h2 className={style.priceGame}>${game.price} USD</h2>
+            <div className={style.prices}>
+              <h2 className={game.on_sale ? style.gameSale : style.priceGame}>
+                ${game.price} USD
+              </h2>
+              {game.on_sale === true ? (
+                <h2>${(game.price * 0.8).toFixed(2)} USD</h2>
+              ) : null}
+            </div>
             <div className={style.butonShop}>
-              <div className={style.cardDBtns}>
-                <button className={style.cartBtn} onClick={handleCart}>
-                  add to cart
-                  <span>
-                    <img src={shoppingCart} alt="cart" />
-                  </span>
-                </button>
-                <button className={style.heartBtn}>
-                  <img className={style.heartImg} src={heart} alt="heart" />
-                </button>
-              </div>
+              <button className={style.cartBtn} onClick={handleCart}>
+                add to cart
+                <span>
+                  <img src={shoppingCart} alt="cart" />
+                </span>
+              </button>
+              <button className={style.heartBtn}>
+                <img className={style.heartImg} src={heart} alt="heart" />
+              </button>
               <div className={style.backGames}>
                 <button
                   className={style.continueShop}

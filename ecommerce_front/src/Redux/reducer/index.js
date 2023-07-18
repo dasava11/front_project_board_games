@@ -11,7 +11,8 @@ import {
   SORT_GAMES,
   FILTER_DELETE,
   GET_ALL_USERS,
-  GET_ALL_PURCHASES
+  GET_ALL_PURCHASES,
+  GET_USER_BY_ID
 } from "../action-types/index";
 
 const initialState = {
@@ -30,7 +31,8 @@ const initialState = {
     thematic_name: "",
     category_name: ""
   },
-  allPurchases:[]
+  allPurchases:[],
+  userDetail:{},
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -186,6 +188,11 @@ case GET_ALL_PURCHASES:
     ...state,
     allPurchases:action.payload
   }
+  case GET_USER_BY_ID:
+    return {
+      ...state,
+      userDetail:action.payload
+    }
     default:
       return state;
   }
