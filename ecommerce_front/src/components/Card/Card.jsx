@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import style from "./Card.module.css";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const Card = (props) => {
   const { name, image, price, id, onSale } = props;
   const [isFav, setIsFav] = useState(false);
+  const darkMode = useSelector((state) => state.darkMode);
 
   const handleFavorite = (e) => {
     console.log(e.target.value);
@@ -16,7 +18,7 @@ const Card = (props) => {
     }
   };
   return (
-    <div className={style.card}>
+    <div className={darkMode === true ? style.darkCard : style.card}>
       <Link to={`/details/${id}`}>
         <div className={style.imgContainer}>
           <img

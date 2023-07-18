@@ -1,15 +1,16 @@
 import React from "react";
 import style from "./Navbar.module.css";
 import { NavLink, useNavigate } from "react-router-dom";
-import heartIcon from "../../Photos/heartIconEmpty.svg";
+import { useSelector } from "react-redux/es/hooks/useSelector";
 import shoppingCart from "../../Photos/shoppingCart.svg";
 import userIcon from "../../Photos/icons8-user.png";
 
 const Navbar = () => {
   const navigate = useNavigate();
+  const darkMode = useSelector((state) => state.darkMode);
 
   return (
-    <div className={style.navBar}>
+    <div className={darkMode === true ? style.darkNavBar : style.navBar}>
       <ul className={style.listFlex}>
         <li>
           <NavLink
@@ -61,9 +62,6 @@ const Navbar = () => {
             height="40px"
             onClick={() => navigate("/user")}
           />
-        </button>
-        <button className={style.heartIcon}>
-          <img src={heartIcon} alt="heart Icon" width="30px" height="30px" />
         </button>
         <button>
           <img

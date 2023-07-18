@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import logo from "../../Photos/logo.png";
 import dice1 from "../../Photos/dice_1.svg";
 import dice4 from "../../Photos/dice_4.svg";
@@ -8,10 +9,14 @@ import style from "./Header.module.css";
 import Navbar from "../Navbar/Navbar";
 import { useAuth } from "../Auth/authContext";
 import { auth } from "../Auth/firebase";
+import { Switch } from "antd";
+import { setDarkMode } from "../../Redux/actions_creators";
 export const Header = () => {
   const navigate = useNavigate();
   const { logOut } = useAuth();
   //const [isLogged, setIsLogged] = useState(false);
+  const dispatch = useDispatch();
+  const darkMode = useSelector((state) => state.darkMode);
 
   const handleLogOut = async () => {
     try {
@@ -24,17 +29,32 @@ export const Header = () => {
   useEffect(() => {
     const token = window.localStorage.getItem("token");
   }, []);
-  // console.log(auth);
+
+  const handleSwitch = (e) => {
+    dispatch(setDarkMode(e));
+    document.body.classList.toggle("dark");
+  };
+
   return (
     <div>
-      <div className={style.headerFlex}>
+      <div
+        id="headerFlex"
+        className={darkMode === true ? style.darkHeaderFlex : style.headerFlex}
+      >
         <img
           src={logo}
           alt="logo"
           className={style.logoHead}
           onClick={() => navigate("/")}
         />
+
         <div className={style.inputsSB}>
+          <div className={style.darkMode}>
+            <div className={style.switchDiv}>
+              <Switch onChange={handleSwitch} />
+            </div>
+          </div>
+
           <SearchBar />
 
           {!auth.currentUser && (

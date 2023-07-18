@@ -1,27 +1,28 @@
-
 html {
   font-size: 62.5%;
   box-sizing: border-box;
   scroll-padding-top: 0rem;
 }
-*, 
+*,
 *:before,
 *:after {
   box-sizing: inherit;
 }
 
-
 body {
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
   font-size: 1.6rem;
   margin: 0;
   background-color: hsl(240, 100%, 10%, 5%);
 
   &.fijar-body {
-      overflow: hidden;
+    overflow: hidden;
   }
   &.body-scroll {
-      padding-top: 8.6rem;
+    padding-top: 8.6rem;
   }
-  
+}
+
+body.dark {
+  background-color: hsl(240, 100%, 10%, 45%);
 }
