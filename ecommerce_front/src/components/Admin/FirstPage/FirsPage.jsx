@@ -27,7 +27,6 @@ const FirsPage = (props) => {
             value={input.released}
             onChange={handleChange}
           />
-          {/* {errors.released && <span>{errors.released}</span>} */}
         </div>
       </div>
       <div className="formCreateDivFlex">

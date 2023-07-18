@@ -22,3 +22,7 @@
     align-items: center;
     justify-content: flex-end;
 }
+.titleUser{
+  display: flex;
+  justify-content: center;
+}
