@@ -3,9 +3,12 @@ import style from "./Navbar.module.css";
 import { NavLink, useNavigate } from "react-router-dom";
 import heartIcon from "../../Photos/heartIconEmpty.svg";
 import shoppingCart from "../../Photos/shoppingCart.svg";
+import { useAuth } from "../Auth/authContext";
+
 
 const Navbar = () => {
   const navigate = useNavigate();
+  const { userAuth } = useAuth();
 
   return (
     <div className={style.navBar}>
