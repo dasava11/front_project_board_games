@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { img1, img2, img3 } from "./images";
+import { img1, img2, img3, img4, img5 } from "./images";
+import arrowBack from "../../Photos/arrowback.png";
+import arrowGo from "../../Photos/arrowGo.png";
 import styles from "./CarouselLanding.module.css";
 
 const CarouselLanding = () => {
-  const carousel = [img1, img2, img3];
+  const carousel = [img1, img2, img3, img4, img5];
 
   const navigate = useNavigate();
 
@@ -23,8 +25,8 @@ const CarouselLanding = () => {
   });
 
   const handleClick = (event) => {
-    const { value } = event.target;
-    let push = value;
+    const { alt } = event.target;
+    let push = alt;
 
     if (push === "go") {
       if (index === carousel.length - 1) {
@@ -45,21 +47,14 @@ const CarouselLanding = () => {
 
   return (
     <div className={styles.carouselContainer}>
-      <button
-        className={styles.carouselBtnLft}
-        value="back"
-        onClick={handleClick}
-      >
-        {"<"}
+      <button className={styles.carouselBtnLft}>
+        <img src={arrowBack} alt="back" onClick={handleClick} />
       </button>
-      <button
-        className={styles.carouselBtnRig}
-        value="go"
-        onClick={handleClick}
-      >
-        {">"}
+      <button className={styles.carouselBtnRig}>
+        <img src={arrowGo} alt="go" onClick={handleClick} />
       </button>
       <img
+        className={styles.carouselBanner}
         src={carousel[index]}
         alt={`imagen ${[index]}`}
         onClick={() => navigate("/games")}

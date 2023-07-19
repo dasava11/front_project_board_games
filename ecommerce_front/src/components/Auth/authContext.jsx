@@ -11,7 +11,6 @@ import {
   signInWithPopup,
   sendPasswordResetEmail,
   fetchSignInMethodsForEmail,
-  sendEmailVerification,
 } from "firebase/auth";
 import { auth } from "../Auth/firebase";
 import { toast } from "react-toastify";
@@ -44,6 +43,7 @@ export const AuthProvider = ({ children }) => {
             name: name,
           })
           .then((res) => {
+
             // setUserAuth({
             //   uid: user.uid,
             //   name: user.name,
@@ -51,6 +51,7 @@ export const AuthProvider = ({ children }) => {
             //   token: user.accessToken,
             //   emailVerified: user.emailVerified
             // });
+
             if (res.status === 201) {
               toast.success("User created succesully!");
             } else if (res.status === 400 || res.status === 500) {
@@ -60,6 +61,7 @@ export const AuthProvider = ({ children }) => {
           .catch((err) => {
             console.error(err);
           });
+
         // user
         //   .getIdToken()
         //   .then((idToken) => {
@@ -88,14 +90,10 @@ export const AuthProvider = ({ children }) => {
         //       });
         //   })
         //   .catch((err) => console.error(err));
+
       }
     );
-    // const configuration = {
-    //   url: URL_LOGIN,
-    // };
-
     sendEmail(name, auth.currentUser.email, auth.currentUser.uid);
-
     await signOut(auth);
     window.localStorage.removeItem("token");
   };
@@ -113,9 +111,11 @@ export const AuthProvider = ({ children }) => {
     };
 
     emailjs.send(serviceId, templateId, templateParams, publicId).then(
+
       function (response) {
         // console.log('SUCCESS!', response.status, response.text);
       },
+
       function (error) {
         console.log("FAILED...", error);
       }
@@ -144,20 +144,14 @@ export const AuthProvider = ({ children }) => {
 
   const login = async (email, password) => {
     const credentials = await signInWithEmailAndPassword(auth, email, password);
+
     const { user } = credentials;
     let role = "";
 
-    // setUserAuth({
-    //   ...userAuth,
-    //   uid: user.uid,
-    //   name: user.name,
-    //   email: user.email,
-    //   token: user.accessToken,
-    //   emailVerified: user.emailVerified
-    // });
-
     if (!user.emailVerified) {
+
       console.log("el email no esta verificado authContext 161");
+
       await signOut(auth);
       window.localStorage.removeItem("token");
       throw new Error(
@@ -171,6 +165,7 @@ export const AuthProvider = ({ children }) => {
 
       role = await getRole(user.uid);
     }
+
     setUserAuth({
       ...userAuth,
       uid: user.uid,
@@ -182,9 +177,11 @@ export const AuthProvider = ({ children }) => {
     });
   };
 
-  const getRole = async (uid) => {
+  const getRole = async (user_id) => {
     try {
-      const { data } = await axios.get(`${userUrl}/${uid}`);
+
+      const { data } = await axios.get(`${userUrl}/${user_id}`);
+
       const {
         Role: { role_name },
       } = data;
@@ -211,15 +208,24 @@ export const AuthProvider = ({ children }) => {
 
   const logInWithGoogle = async () => {
     const googleProvider = new GoogleAuthProvider();
-
-    const userCredential = await signInWithPopup(auth, googleProvider);
-    if (!userCredential.user.emailVerified) {
-      await signOut(auth);
-      window.localStorage.removeItem("token");
-      throw new Error(
-        "Verify the account with the link that we sent to your email"
-      );
-    }
+    // const userCredential = await signInWithPopup(auth, googleProvider);
+    signInWithPopup(auth, googleProvider).then(({ user }) => {
+      axios
+        .post(userUrl, {
+          user_id: user.uid,
+          email: user.email,
+          name: user.displayName,
+          email_verified: true,
+        })
+        .then((res) => {
+          if (res.status === 400 || res.status === 500) {
+            toast.error(res.data.message);
+          }
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+    });
   };
 
   useEffect(() => {

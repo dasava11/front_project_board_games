@@ -9,11 +9,17 @@ import {
   TabIndicator,
 } from "@chakra-ui/react";
 
-const UserMenu = () => {
+const UserMenu = (props) => {
+  const { darkMode } = props;
+
   return (
     <div className={style.userMenuContainer}>
       <Tabs className={style.menuTabs} position="relative">
-        <TabList className={style.menuTablist}>
+        <TabList
+          className={
+            darkMode === true ? style.darkMenuTabList : style.menuTablist
+          }
+        >
           <Tab>Edit info</Tab>
           <Tab>Purchase History</Tab>
           <Tab>My wishlist</Tab>

@@ -1,91 +1,110 @@
-.gamesBanner{
-    display: flex;
-    justify-content: center;
-    margin: 1rem;
+.gamesBanner {
+  display: flex;
+  justify-content: center;
+  margin: 1rem;
 }
 
-.gamesTitle h1{
-    font-size: 3.5rem;
+.gamesTitle h1 {
+  font-size: 3.5rem;
 }
 
-.gamesTitle h3{
-    font-size: 2rem;
+.gamesTitle h3 {
+  font-size: 2rem;
 }
 
-.gamesMain{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 5rem 8rem;
+.gamesMain {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 5rem 8rem;
 }
 
-.filtersMain{
-    display: flex;
-    justify-content:space-evenly;
-    gap: 2rem;
+.filtersMain {
+  display: flex;
+  justify-content: space-evenly;
+  gap: 2rem;
 }
 
-.filters{
-    display: flex;
-    gap: 2rem;
+.filters {
+  display: flex;
+  gap: 2rem;
 }
 
-.sortSelect{
-    margin: 0 auto;
+.sortSelect {
+  margin: 0 auto;
 }
 
-.titleMain{
-    color: #000035;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 3rem;
+.titleMain {
+  color: #000035;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 3rem;
 }
 
-.titleMain h1{
-    margin: 5px 0;
-    display: flex;
-    flex-direction: column;
+.darkTitleMain {
+  color: #d6d6d6;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 3rem;
 }
 
-.gamesContainer{
-    width: 75%;
-    margin: auto;
-    height: 100%;
-/*  display: flex;
+.titleMain h1 {
+  margin: 5px 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.darkTitleMain h1 {
+  margin: 5px 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.gamesContainer {
+  width: 75%;
+  margin: auto;
+  height: 100%;
+  /*  display: flex;
     flex-wrap: wrap;
     justify-content: center;
     align-items: center; */
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 1rem;
-    margin-top: 15px;
-    margin-bottom: 15px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  margin-top: 15px;
+  margin-bottom: 15px;
 }
 
-.titleMain h3{
-    font-weight: lighter;
-    margin: 5px 0;
+.titleMain h3 {
+  font-weight: lighter;
+  margin: 5px 0;
 }
 
-.gamePagination{
-    display: flex;
-    flex-direction: column;
-    margin: 5rem 0;
+.darkTitleMain h3 {
+  font-weight: lighter;
+  margin: 5px 0;
+}
+
+.gamePagination {
+  display: flex;
+  flex-direction: column;
+  margin: 5rem 0;
 }
 
 .notFound {
-    display:flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    background-color: rgb(237, 237, 237);
-    border-radius: 6px;
-    width: 1200px;
-    height: 500px;
-    margin: 50px 30px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: rgb(237, 237, 237);
+  border-radius: 6px;
+  width: 1200px;
+  height: 500px;
+  margin: 50px 30px 0;
 }
 
 .notFound span {
-    color:rgb(27, 27, 27);
+  color: rgb(27, 27, 27);
 }
