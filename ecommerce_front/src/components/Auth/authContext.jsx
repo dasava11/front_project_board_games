@@ -19,7 +19,7 @@ const userUrl = import.meta.env.VITE_URL_USERS;
 // const userUrl = 'http://localhost:3001/users';
 // const userUrlVerifyEmail = 'http://localhost:3001/users/verifyemail';
 
-// const URL_LOGIN ="https://front-project-board-games.vercel.app/login";
+const URL_LOGIN ="https://front-project-board-games.vercel.app/login";
 
 const serviceId = import.meta.env.VITE_SERVICE_ID;
 const templateId = import.meta.env.VITE_TEMPLATE_ID_EMAIL_VERIFICATION;
