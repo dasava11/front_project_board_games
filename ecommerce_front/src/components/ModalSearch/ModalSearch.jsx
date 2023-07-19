@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { getAllGames, getGamesByName } from "../../../Redux/actions_creators";
+import { getAllGames, getGamesByName } from "../../Redux/actions_creators";
 import { Modal } from "antd";
 import { useDispatch } from "react-redux";
 
@@ -16,7 +16,7 @@ const ModalSearch = () => {
   const [search, setSearch] = useState("");
   const [error, setError] = useState("");
   const dispatch = useDispatch();
-  
+
   const handleSearch = (event) => {
     const { value } = event.target;
     setSearch(value);
@@ -39,29 +39,29 @@ const ModalSearch = () => {
       }
     }
 
-  return (
-    <Modal
-      open={setIsOpen.isOpen}
-      title="Create Information"
-      onOk={handleOk}
-      onCancel={setIsOpen.setIsOpen}
-      footer={""}
-    >
-      <h3>Create Language</h3>
-      <form onSubmit={(e) => handleSubmitLanguage(e)}>
-        <input
-          className="inputs"
-          type="text"
-          placeholder="Language"
-          onChange={handleChange}
-          name="language_name"
-        />
-        <button className="submit-button-modal" type="submit">
-          Create
-        </button>
-      </form>
-    </Modal>
-  );
+    return (
+      <Modal
+        open={setIsOpen.isOpen}
+        title="Create Information"
+        onOk={handleOk}
+        onCancel={setIsOpen.setIsOpen}
+        footer={""}
+      >
+        <h3>Create Language</h3>
+        <form onSubmit={(e) => handleSubmitLanguage(e)}>
+          <input
+            className="inputs"
+            type="text"
+            placeholder="Language"
+            onChange={handleChange}
+            name="language_name"
+          />
+          <button className="submit-button-modal" type="submit">
+            Create
+          </button>
+        </form>
+      </Modal>
+    );
+  };
 };
-
 export default ModalSearch;

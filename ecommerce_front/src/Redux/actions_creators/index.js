@@ -10,17 +10,12 @@ import {
   GET_THEMATICS,
   GET_GAMES_BY_NAMES,
   SORT_GAMES,
-  //FILTER_GAMES,
   FILTER_DELETE,
   GET_ALL_USERS,
   GET_ALL_PURCHASES,
-
   GET_USER_BY_ID,
-  GET_ROLES
-
-  SET_DARK_MODE,
-  GET_USER_BY_ID,
-
+  GET_ROLES,
+  SET_DARK_MODE
 } from "../action-types/index";
 import { toast } from "react-toastify";
 
