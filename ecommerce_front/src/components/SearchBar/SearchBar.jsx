@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { getAllGames, getGamesByName } from "../../Redux/actions_creators";
+import { Modal } from "antd";
 import style from "./SearchBar.module.css";
 import searchIcon from "../../Photos/search_icon.svg";
+import ModalSearch from "../ModalSearch/ModalSearch";
 
 const regexNumber = /^[0-9]+$/;
 
