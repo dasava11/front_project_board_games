@@ -3,11 +3,13 @@ import style from "./Navbar.module.css";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux/es/hooks/useSelector";
 import shoppingCart from "../../Photos/shoppingCart.svg";
+import { useAuth } from "../Auth/authContext";
 import userIcon from "../../Photos/icons8-user.png";
 
 const Navbar = () => {
   const navigate = useNavigate();
   const darkMode = useSelector((state) => state.darkMode);
+  const { userAuth } = useAuth();
 
   return (
     <div className={darkMode === true ? style.darkNavBar : style.navBar}>

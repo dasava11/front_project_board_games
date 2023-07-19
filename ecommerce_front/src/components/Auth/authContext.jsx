@@ -1,6 +1,7 @@
 //crear un estado por otro archivo, por fuera
 import axios from "axios";
 import { createContext, useContext, useEffect, useState } from "react";
+import emailjs from "@emailjs/browser";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
@@ -10,15 +11,20 @@ import {
   signInWithPopup,
   sendPasswordResetEmail,
   fetchSignInMethodsForEmail,
-  sendEmailVerification,
 } from "firebase/auth";
 import { auth } from "../Auth/firebase";
 import { toast } from "react-toastify";
 export const authContext = createContext();
 const userUrl = import.meta.env.VITE_URL_USERS;
 // const userUrl = 'http://localhost:3001/users';
+// const userUrlVerifyEmail = 'http://localhost:3001/users/verifyemail';
 
-const URL_LOGIN = import.meta.env.VITE_URL_LOGIN;
+const URL_LOGIN ="https://front-project-board-games.vercel.app/login";
+
+const serviceId = import.meta.env.VITE_SERVICE_ID;
+const templateId = import.meta.env.VITE_TEMPLATE_ID_EMAIL_VERIFICATION;
+const publicId = import.meta.env.VITE_YOUR_PUBLIC_KEY;
+
 
 export const useAuth = () => {
   const context = useContext(authContext);
@@ -33,14 +39,16 @@ export const AuthProvider = ({ children }) => {
       ({ user }) => {
             axios
               .post(userUrl, {
-                uid: user.uid,
+                user_id: user.uid,
                 email: user.email,
                 name: name})
               .then((res) => {
                 // setUserAuth({
-                //   name: newUser.name,
-                //   email: newUser.email,
-                //   token: idToken,
+                //   uid: user.uid,
+                //   name: user.name,
+                //   email: user.email,
+                //   token: user.accessToken,
+                //   emailVerified: user.emailVerified
                 // });
                 if (res.status === 201) {
                   toast.success("User created succesully!");
@@ -51,56 +59,32 @@ export const AuthProvider = ({ children }) => {
               .catch((err) => {
                 console.error(err);
               });
-        // user
-        //   .getIdToken()
-        //   .then((idToken) => {
-        //     window.localStorage.setItem("token", idToken);
-        //     const newUser = {
-        //       email: email,
-        //       name: name,
-        //       token: idToken,
-        //     };
-        //     axios
-        //       .post(userUrl, newUser)
-        //       .then((res) => {
-        //         setUserAuth({
-        //           name: newUser.name,
-        //           email: newUser.email,
-        //           token: idToken,
-        //         });
-        //         if (res.status === 201) {
-        //           toast.success("User created succesully!");
-        //         } else if (res.status === 400 || res.status === 500) {
-        //           toast.error(res.data.message);
-        //         }
-        //       })
-        //       .catch((err) => {
-        //         console.error(err);
-        //       });
-        //   })
-        //   .catch((err) => console.error(err));
       }
     );
-    const configuration = {
-      url: URL_LOGIN,
-    };
-
-    await sendEmailVerification(auth.currentUser, configuration)
-      .then(() => {
-        console.log(
-          `Se ha enviado un correo electrónico de verificación a ${name}.`
-        );
-      })
-      .catch((error) => {
-        console.error(
-          "Error sending verification email.",
-          error
-        );
-      });
+    sendEmail(name, auth.currentUser.email, auth.currentUser.uid);
 
     await signOut(auth);
     window.localStorage.removeItem("token");
   };
+
+  const sendEmail = (name, email ,uid) => {
+    // const link = "http://localhost:5173/login?verify=" + uid;
+    const link = "https://front-project-board-games.vercel.app/login?verify=" + uid;
+
+    const templateParams = {
+      user_name: name,
+      message: "Follow this link to verify your email address.", 
+      user_email: email, 
+      link: link
+    };
+    
+    emailjs.send(serviceId, templateId, templateParams, publicId)
+        .then(function(response) {
+          // console.log('SUCCESS!', response.status, response.text);
+        }, function(error) {
+          console.log('FAILED...', error);
+        });
+};
 
   const controlarEmail = async (email) => {
     const methods = await fetchSignInMethodsForEmail(auth, email);
@@ -125,15 +109,19 @@ export const AuthProvider = ({ children }) => {
   const login = async (email, password) => {
 
     const credentials = await signInWithEmailAndPassword(auth, email, password);
+
     const { user } = credentials;
-    
-    setUserAuth({
-      name: user.name,
-      email: user.email,
-      token: user.accessToken,
-      emailVerified: user.emailVerified
-    });
-    
+    let role = "";
+
+    // setUserAuth({
+    //   ...userAuth,
+    //   uid: user.uid,
+    //   name: user.name,
+    //   email: user.email,
+    //   token: user.accessToken,
+    //   emailVerified: user.emailVerified
+    // });
+
     if (!user.emailVerified) {
       await signOut(auth);
       window.localStorage.removeItem("token");
@@ -145,8 +133,39 @@ export const AuthProvider = ({ children }) => {
         window.localStorage.removeItem("token");
       }
       window.localStorage.setItem("token", user.accessToken);
+
+      role = await getRole(user.uid);
     }
+    setUserAuth({
+      ...userAuth,
+      uid: user.uid,
+      name: user.name,
+      email: user.email,
+      token: user.accessToken,
+      emailVerified: user.emailVerified,
+      role: role
+    });
   };
+
+  const getRole = async (user_id) => {
+    try {
+      const {data} = await axios.get(`${userUrl}/${user_id}`);
+      const {Role:{role_name}} = data;
+
+      // console.log('data')
+      // console.log(data)
+      // console.log('role_name')
+      // console.log(role_name)
+
+      setUserAuth({
+        ...userAuth,
+        role: role_name,
+      });
+      return role_name;
+    } catch ({message}) {
+      console.log(message);
+    }
+  }
 
   const logOut = async () => {
     try {
@@ -170,6 +189,7 @@ export const AuthProvider = ({ children }) => {
       );
     }
   };
+
   useEffect(() => {
     onAuthStateChanged(auth, (currentUser) => {
       setUserAuth(currentUser);
@@ -186,6 +206,7 @@ export const AuthProvider = ({ children }) => {
         logInWithGoogle,
         resetPassword,
         controlarEmail,
+        setUserAuth,
       }}
     >
       {children}

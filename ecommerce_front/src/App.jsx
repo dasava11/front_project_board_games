@@ -28,6 +28,8 @@ import Wrapper from "./components/Wrapper/Wrapper";
 import { WrapperAdmin } from "./components/Admin/WrapperAdmin/WrapperAdmin";
 import { Sales } from "./components/Admin/Sales/Sales";
 import UsersAdmin from "./components/Admin/UsersAdmin/UsersAdmin";
+import { UserAdminEdit } from "./components/Admin/UserAdminEdit/UserAdminEdit";
+import { UserId } from "./components/Admin/UsersAdmin/UserId";
 const PAYPAL_TOKEN = import.meta.env.VITE_PAYPAL_TOKEN;
 
 function App() {
@@ -67,6 +69,8 @@ function App() {
               <Route path="editproductform/:id" element={<EditProductForm />} />
               <Route path="sales" element={<Sales />} />
               <Route path="usersadmin" element={<UsersAdmin />} />
+              <Route path="edituser" element={<UserAdminEdit />} />
+              <Route path="userid/:id" element={<UserId />} />
             </Route>
           </Routes>
         </AuthProvider>

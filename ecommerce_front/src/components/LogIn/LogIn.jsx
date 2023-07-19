@@ -1,22 +1,56 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useAuth } from "../Auth/authContext";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { Link } from "react-router-dom";
+import axios from "axios";
 import { toast } from "react-toastify";
 import "./login.css";
 import { FcGoogle } from "react-icons/fc";
 
 export const LogIn = () => {
+
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const [forgotPassword, setForgotPassword] = useState(false)
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  const { login, logInWithGoogle, resetPassword, userAuth, setUserAuth } = useAuth();
+  let executed = false;
+
+  useEffect(()=> {
+    if(searchParams.get('verify') !== null){
+      verifyUser(searchParams.get('verify'));
+    }
+  },[])
+
+  const verifyUser = (id) => {
+    if(!executed){
+      axios
+      // .put(`http://localhost:3001/users/verifyemail/${id}`)
+      .put(`https://backprojectboardgames-production.up.railway.app/users/verifyemail/${searchParams.get('verify')}`)
+        .then((res) => {
+          if (res.status === 200) {
+            setUserAuth({...userAuth, emailVerified: true})
+            toast.success("Email verified!");
+            // setExecuted(true);
+            executed = true;
+            navigate('/login');
+          } else if (res.status === 400 || res.status === 500) {
+            toast.error(res.data.message);
+          }
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+    }
+  }
+
+
   const [error, setError] = useState();
   const [user, setUser] = useState({
     email: "",
     password: "",
   });
-  const [forgotPassword, setForgotPassword] = useState(false)
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  const { login, logInWithGoogle, resetPassword } = useAuth();
-  
+
   const validForm = () => {
     if(error?.length === 0  &&  user.email?.length !== 0  &&  user.password?.length !== 0){
       return true;
@@ -63,13 +97,13 @@ export const LogIn = () => {
       navigate("/");
     } catch (error) {
       if (error.code === "auth/user-not-found") {
-        toast.error("User not found");
+        toast.error("You must signup.");
         navigate("/signup");
       }
       if (error.code === "auth/wrong-password") {
         toast.error("Wrong password");
       } else{
-        toast.error(error.message);
+        // toast.error(error.message);
       }
     }
   };

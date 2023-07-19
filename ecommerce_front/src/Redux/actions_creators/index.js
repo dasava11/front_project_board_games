@@ -15,6 +15,8 @@ import {
   GET_ALL_USERS,
   GET_ALL_PURCHASES,
   SET_DARK_MODE,
+  GET_USER_BY_ID
+
 } from "../action-types/index";
 import { toast } from "react-toastify";
 
@@ -259,15 +261,24 @@ export const getAllUsers = () => {
       console.error(error);
     }
   };
-};
 
-export const getAllPurchases = () => {
-  return async (dispatch) => {
-    try {
-      const resp = await axios.get(VITE_URL_GET_PURCHASES);
-      dispatch({ type: GET_ALL_PURCHASES, payload: response.data });
-    } catch (err) {
-      console.error(err);
-    }
-  };
-};
+export const getAllPurchases =()=>{
+ return async (dispatch)=>{
+  try {
+    const resp=await axios.get(VITE_URL_GET_PURCHASES)
+    dispatch({ type: GET_ALL_PURCHASES, payload: response.data})
+  } catch(err){
+    console.error(err)
+  }
+ }
+}
+export const getUserById=(id)=>{
+  return async (dispatch)=>{
+ try {
+  const resp = await axios.get(`${VITE_URL_USERS}/${id}`)
+  dispatch({type: GET_USER_BY_ID, payload: resp.data})
+ } catch (error) {
+  console.error(error)
+ }
+  }
+ }
