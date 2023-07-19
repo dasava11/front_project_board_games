@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./Cart.module.css";
+import { useSelector } from "react-redux";
 
 const Cart = () => {
   const [order, setOrder] = useState(JSON.parse(localStorage.getItem("cart")));
   let suma = 0;
   const navigate = useNavigate();
+  const darkMode = useSelector((state) => state.darkMode);
 
   const handleTabClose = (e) => {
     e.preventDefault();
@@ -111,7 +113,11 @@ const Cart = () => {
               );
             })
           ) : (
-            <div className={styles.emptyCart}>
+            <div
+              className={
+                darkMode === true ? styles.darkEmptyCart : styles.emptyCart
+              }
+            >
               <h1>Your cart is empty</h1>
               <hr />
               <h2>Check our catalog to add something to your cart</h2>

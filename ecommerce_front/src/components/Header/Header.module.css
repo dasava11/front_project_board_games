@@ -1,43 +1,75 @@
-.headerFlex{
-    display: flex;
-    background-color: #000035;
-    justify-content: space-between;
-    align-items: flex-start;
-    height: 110px;
+.headerFlex {
+  display: flex;
+  background-color: #000035;
+  justify-content: space-between;
+  align-items: flex-start;
+  height: 110px;
 }
 
-.logoHead{
-    width: 195px;
-    height: 109.68px;
-    cursor: pointer;
+.darkHeaderFlex {
+  display: flex;
+  background-color: #000000;
+  justify-content: space-between;
+  align-items: flex-start;
+  height: 110px;
 }
 
-.inputsSB{
-    display: flex;
-    padding: 1rem;
-    align-items: center;
-    gap: 3rem;
+.logoHead {
+  width: 195px;
+  height: 109.68px;
+  cursor: pointer;
 }
 
-.inputs{
-    display: flex;
+.inputsSB {
+  display: flex;
+  padding: 1rem;
+  align-items: center;
+  gap: 3rem;
 }
 
-.inputs h6{
-    color: white;
-    margin: 0;
-    text-align: center;
+.inputs {
+  display: flex;
 }
 
-.inputs button{
-    background-color: transparent;
-    border: none;
+.inputs h6 {
+  color: white;
+  margin: 0;
+  text-align: center;
 }
 
-.inputs button:hover{
-    cursor: pointer;
+.inputs button {
+  background-color: transparent;
+  border: none;
+}
+
+.inputs button:hover {
+  cursor: pointer;
 }
 .name {
-    color:white;
-    margin-top: 0px;
+  color: white;
+  margin-top: 0px;
+}
+
+.switchDiv {
+  background-color: white;
+  border-radius: 1.5rem;
+  height: 100%;
+}
+
+.darkMode {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  flex-direction: column;
+}
+
+.darkMode h6 {
+  margin: 0;
+  color: white;
+}
+
+.darkMode h3 {
+  color: white;
+  height: 100%;
 }

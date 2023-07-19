@@ -2,11 +2,13 @@ import React, { useEffect, useState } from "react";
 import arrowBack from "../../Photos/icons-back.png";
 import arrowNext from "../../Photos/icons-next.png";
 import styles from "../DetailGameCarousel/DetailGameCarousel.module.css";
+import { useSelector } from "react-redux";
 
 const DetailGameCarousel = ({ game }) => {
   let carouselGame = game.image;
 
   const [index, setIndex] = useState(0);
+  const darkMode = useSelector((state) => state.darkMode);
 
   useEffect(() => {
     let timerId = setTimeout(() => {
@@ -60,7 +62,9 @@ const DetailGameCarousel = ({ game }) => {
           alt={`imagen ${[index]}`}
         />
       </div>
-      <div className={styles.photoRoll}>
+      <div
+        className={darkMode === true ? styles.darkPhotoRoll : styles.photoRoll}
+      >
         {game.image.url ? (
           <img src={game.image.url} alt={game.name} />
         ) : (
