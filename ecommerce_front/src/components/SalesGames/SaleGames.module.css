@@ -13,26 +13,38 @@
   gap: 2rem;
 }
 
-.imgSale{
+.imgSale {
   width: 1200px;
   height: 200px;
   border-radius: 0.5em;
   margin: 0 auto 30px;
 }
 
-.salesTitle h1{
+.darkSalesTitle h1 {
+  font-size: 3rem;
+  text-align: start;
+  color: #dfdfdf;
+}
+
+.darkSalesTitle h3 {
+  color: #dfdfdf;
+  font-size: 2rem;
+  font-weight: lighter;
+}
+
+.salesTitle h1 {
   font-size: 3rem;
   text-align: start;
   color: #000031;
 }
 
-.salesTitle h3{
+.salesTitle h3 {
   color: #000031;
   font-size: 2rem;
   font-weight: lighter;
 }
 
-.salesTitle{
+.salesTitle {
   display: flex;
   flex-direction: column;
   width: 80%;

@@ -3,9 +3,11 @@ import Instagram from "../../Photos/Instagram.svg";
 import Faceboock from "../../Photos/Faceboock.svg";
 import dados from "../../Photos/dados.png";
 import style from "../Footer/Footer.module.css";
+import { useSelector } from "react-redux";
 
 export const Footer = () => {
   const [email, setEmail] = useState("");
+  const darkMode = useSelector((state) => state.darkMode);
 
   const handleEmailChange = (event) => {
     setEmail(event.target.value);
@@ -17,7 +19,11 @@ export const Footer = () => {
   };
 
   return (
-    <footer className={style.footerContainer}>
+    <footer
+      className={
+        darkMode === true ? style.darkFooterContainer : style.footerContainer
+      }
+    >
       <div className={style.upFooter}>
         <div className={style.footerSocial}>
           <h1>Follow Us</h1>

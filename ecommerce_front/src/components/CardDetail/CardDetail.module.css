@@ -34,6 +34,15 @@
   padding-bottom: 0;
 }
 
+.darkTitleGame {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 0;
+  color: #dfdfdf;
+}
+
 .ratingCd {
   display: flex;
   justify-content: start;
@@ -72,6 +81,33 @@
   gap: 3rem;
   border-radius: 1rem;
   font-size: 1.5rem;
+}
+
+.darkCartBtn {
+  border: 1px solid transparent;
+  background-color: #000000;
+  height: 10%;
+  width: 50%;
+  padding: 0 1rem 0 1rem;
+  font-size: 22px;
+  text-transform: capitalize;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 3rem;
+  border-radius: 1rem;
+  font-size: 1.5rem;
+  color: #dfdfdf;
+}
+
+.darkCartBtn:hover {
+  cursor: pointer;
+  background-color: #00111a;
+}
+
+.darkCartBtn span img {
+  width: 40px;
 }
 
 .cartBtn span img {
@@ -130,6 +166,26 @@
   background-color: #e3c652;
 }
 
+.darkContinueShop {
+  border: 1px solid transparent;
+  background-color: #6e6027;
+  height: 10%;
+  width: 100%;
+  padding: 0.5rem 1rem 0.5rem 1rem;
+  font-size: 16px;
+  text-transform: capitalize;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 0.5rem;
+  color: #dfdfdf;
+}
+
+.darkContinueShop:hover {
+  cursor: pointer;
+  background-color: #7d6d2c;
+}
+
 .cardDescription p {
   text-align: center;
   margin: 2rem 2rem;
@@ -169,6 +225,21 @@
   height: 100%;
 }
 
+.darkTimeCd {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 0 auto;
+  align-items: center;
+  width: 33%;
+  height: 100%;
+  color: #dfdfdf;
+}
+
+.darkTimeCd h3 {
+  text-align: center;
+}
+
 .timeCd h3 {
   text-align: center;
 }
@@ -183,6 +254,17 @@
   height: 100%;
 }
 
+.darkPlayersCd {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 0 auto;
+  align-items: center;
+  width: 33%;
+  height: 100%;
+  color: #dfdfdf;
+}
+
 .categoryCd {
   display: flex;
   flex-direction: column;
@@ -193,9 +275,27 @@
   height: 100%;
 }
 
+.darkCategoryCd {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  width: 33%;
+  height: 100%;
+  color: #dfdfdf;
+}
+
 .inforCardDetail {
   width: 30vw;
   background-color: hsl(0, 0%, 100%, 70%);
+  padding: 2rem;
+  border-radius: 1rem;
+}
+
+.darkInfoCardDetail {
+  width: 30vw;
+  background-color: hsl(240, 34%, 16%, 100%);
   padding: 2rem;
   border-radius: 1rem;
 }
@@ -255,6 +355,16 @@
   display: flex;
   flex-direction: row;
   gap: 1rem;
+}
+
+.darkPrices {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+}
+
+.darkPrices h2 {
+  color: #dfdfdf;
 }
 
 .gameSale {

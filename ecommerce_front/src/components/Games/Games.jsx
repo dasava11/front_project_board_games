@@ -13,6 +13,7 @@ const Games = () => {
   const dispatch = useDispatch();
   let allGames = useSelector((state) => state.allGames);
   let filters = useSelector((state) => state.filter);
+  const darkMode = useSelector((state) => state.darkMode);
 
   const [currentPage, SetCurrentPage] = useState(1);
   const [postPerPage, setPostPerPage] = useState(12);
@@ -46,7 +47,11 @@ const Games = () => {
           <img src={promotionalBanner} alt="Banner" />
         </div>
         <div className={style.gamesMain}>
-          <div className={style.titleMain}>
+          <div
+            className={
+              darkMode === true ? style.darkTitleMain : style.titleMain
+            }
+          >
             <div className={style.gamesTitle}>
               <h1>Board Games</h1>
               <h3>Choose your favorite game</h3>
@@ -120,7 +125,11 @@ const Games = () => {
           <img src={promotionalBanner} alt="Banner" />
         </div>
         <div className={style.gamesMain}>
-          <div className={style.titleMain}>
+          <div
+            className={
+              darkMode === true ? style.darkTitleMain : style.titleMain
+            }
+          >
             <div className={style.gamesTitle}>
               <h1>Board Games</h1>
               <h3>Choose your favorite game</h3>
