@@ -50,6 +50,7 @@ export const Header = () => {
 
         <div className={style.inputsSB}>
           <div className={style.darkMode}>
+            <h6>Dark Mode</h6>
             <div className={style.switchDiv}>
               <Switch onChange={handleSwitch} />
             </div>

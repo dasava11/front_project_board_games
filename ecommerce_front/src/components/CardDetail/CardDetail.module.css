@@ -351,6 +351,12 @@
   gap: 2rem;
 }
 
+.textAreaDetail textarea {
+  width: 100%;
+  resize: none;
+  height: 100px;
+}
+
 .prices {
   display: flex;
   flex-direction: row;

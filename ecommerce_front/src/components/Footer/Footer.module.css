@@ -7,7 +7,7 @@
 
 .darkFooterContainer {
   height: 200px;
-  background-color: #000000;
+  background-color: hsl(240, 34%, 16%, 100%);
   display: flex;
   flex-direction: column;
 }

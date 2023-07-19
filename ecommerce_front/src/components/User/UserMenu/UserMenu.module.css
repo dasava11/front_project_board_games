@@ -1,34 +1,53 @@
-.userMenuContainer{
-    display: flex;
-    justify-content: flex-start;
-    width: 60%;
+.userMenuContainer {
+  display: flex;
+  justify-content: flex-start;
+  width: 60%;
 }
 
-.menuTabs{
-    display: flex;
-    flex-direction: column;
+.menuTabs {
+  display: flex;
+  flex-direction: column;
 }
 
-.menuTabs hr{
-    height: 1px;
-    color: black;
-    width: 100%;
+.menuTabs hr {
+  height: 1px;
+  color: black;
+  width: 100%;
 }
 
-.menuTablist{
-    display: flex;
-    gap: 5rem;
+.menuTablist {
+  display: flex;
+  gap: 5rem;
 }
 
-.menuTablist button{
-    background-color: transparent;
-    border: 1px solid transparent;
-    border-radius: 5px;
-    transition: 0.1s ease;
+.darkMenuTabList {
+  display: flex;
+  gap: 5rem;
 }
 
-.menuTablist button:hover{
-    background-color: #000035;
-    color: white;
-    cursor: pointer;
+.menuTablist button {
+  background-color: transparent;
+  border: 1px solid transparent;
+  border-radius: 5px;
+  transition: 0.1s ease;
+}
+
+.darkMenuTabList button {
+  background-color: transparent;
+  border: 1px solid transparent;
+  border-radius: 5px;
+  transition: 0.1s ease;
+  color: white;
+}
+
+.darkMenuTabList button:hover {
+  background-color: white;
+  color: #000035;
+  cursor: pointer;
+}
+
+.menuTablist button:hover {
+  background-color: #000035;
+  color: white;
+  cursor: pointer;
 }
