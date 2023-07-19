@@ -38,8 +38,7 @@ const initialState = {
     category_name: "",
   },
   userDetail:{},
-  allRoles:[]
-
+  allRoles:[],
   allPurchases: [],
   darkMode: false,
   userDetail: {},
@@ -218,7 +217,7 @@ case GET_ALL_PURCHASES:
         ...state,
         allRoles: action.payload
       }
-=======
+
     case GET_ALL_USERS:
       return {
         ...state,
