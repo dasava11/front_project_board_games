@@ -9,7 +9,7 @@ import userIcon from "../../Photos/icons8-user.png";
 const Navbar = () => {
   const navigate = useNavigate();
   const darkMode = useSelector((state) => state.darkMode);
-  const { userAuth } = useAuth();
+  const { userAuth, role } = useAuth();
 
   return (
     <div className={darkMode === true ? style.darkNavBar : style.navBar}>
@@ -44,16 +44,19 @@ const Navbar = () => {
             Games
           </NavLink>
         </li>
+{
+  (role === 'admin') &&
         <li>
           <NavLink
             to="/admin"
             className={({ isActive }) =>
-              isActive ? style.active : style.disable
-            }
+            isActive ? style.active : style.disable
+          }
           >
             Menu Admin
           </NavLink>
         </li>
+}
       </ul>
       <div className={style.navBarIcons}>
         <button>
