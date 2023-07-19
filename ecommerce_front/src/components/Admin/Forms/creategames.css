@@ -81,7 +81,22 @@
   background-color: #00006f;
   cursor: pointer;
 }
-
+.prev-button {
+  height: 30px;
+    margin: 20px;
+    background-color: #000035;
+    color: white;
+    border-radius: 7px;
+    font-size: medium;
+    text-decoration: none;
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+}
+.prev-button:hover{
+  background-color: #00006f;
+  cursor: pointer;
+}
 .next-button-disable{
   height: 30px;
   margin: 20px;

@@ -30,6 +30,7 @@ export const Header = () => {
     const token = window.localStorage.getItem("token");
   }, []);
 
+
   const handleSwitch = (e) => {
     dispatch(setDarkMode(e));
     document.body.classList.toggle("dark");

@@ -10,12 +10,12 @@ import {
   GET_THEMATICS,
   GET_GAMES_BY_NAMES,
   SORT_GAMES,
-  //FILTER_GAMES,
   FILTER_DELETE,
   GET_ALL_USERS,
   GET_ALL_PURCHASES,
-  SET_DARK_MODE,
   GET_USER_BY_ID,
+  GET_ROLES,
+  SET_DARK_MODE
 } from "../action-types/index";
 import { toast } from "react-toastify";
 
@@ -262,23 +262,36 @@ export const getAllUsers = () => {
   };
 };
 
-export const getAllPurchases = () => {
-  return async (dispatch) => {
+
+export const getAllPurchases =()=>{
+ return async (dispatch)=>{
+  try {
+    const resp=await axios.get(VITE_URL_GET_PURCHASES)
+    dispatch({ type: GET_ALL_PURCHASES, payload: response.data})
+  } catch(err){
+    console.error(err)
+  }
+ }
+}
+export const getUserById=(id)=>{
+  return async (dispatch)=>{
+ try {
+  const resp = await axios.get(`${VITE_URL_USERS}/${id}`)
+  dispatch({type: GET_USER_BY_ID, payload: resp.data})
+ } catch (error) {
+  console.error(error)
+ }
+  }
+ };
+
+ export const getRoles =()=>{
+  return async(dispatch)=>{
     try {
-      const resp = await axios.get(VITE_URL_GET_PURCHASES);
-      dispatch({ type: GET_ALL_PURCHASES, payload: response.data });
-    } catch (err) {
-      console.error(err);
-    }
-  };
-};
-export const getUserById = (id) => {
-  return async (dispatch) => {
-    try {
-      const resp = await axios.get(`${VITE_URL_USERS}/${id}`);
-      dispatch({ type: GET_USER_BY_ID, payload: resp.data });
+      const resp= await axios.get("https://backprojectboardgames-production.up.railway.app/roles")
+      dispatch({type:GET_ROLES, payload:resp.data.roles})
     } catch (error) {
-      console.error(error);
+      console.error(error)
     }
-  };
-};
+  }
+ }
+

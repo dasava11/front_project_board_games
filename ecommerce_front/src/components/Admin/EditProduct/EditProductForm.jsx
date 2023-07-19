@@ -120,7 +120,10 @@ export const EditProductForm = () => {
     };
 
     await axios
-      .put(VITE_GET_ALL_GAMES, newProduct)
+      .put(
+        "https://backprojectboardgames-production.up.railway.app/games",
+        newProduct
+      )
       .then((res) =>
         res.status === 200 ? toast.success(res.data.message) : null
       )
@@ -258,7 +261,9 @@ export const EditProductForm = () => {
 
   const handleSwitchOnSale = async (game_id) => {
     await axios
-      .put(VITE_GET_ALL_GAMES`${game_id}`)
+      .put(
+        `https://backprojectboardgames-production.up.railway.app/games/delete/${game_id}`
+      )
       .then((res) =>
         res.status === 200 ? toast.success(res.data.message) : null
       )
@@ -267,14 +272,17 @@ export const EditProductForm = () => {
 
   return (
     <div>
-      <h1 className={style.title}>Edit Product</h1>
-      <div className={style.formContainerEdit}>
+      <div className={style.title}>
+        <h1>Edit Product</h1>
         <ModifyOnSale
           product={product}
           setProduct={setProduct}
           handleSwitch={handleSwitch}
           handleSwitchOnSale={handleSwitchOnSale}
         />
+      </div>
+
+      <div className={style.formContainerEdit}>
         <div className={style.mainContainer}>
           {product && (
             <form className={style} onSubmit={handleSubmit}>
