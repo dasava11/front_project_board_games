@@ -12,8 +12,13 @@ import {
   FILTER_DELETE,
   GET_ALL_USERS,
   GET_ALL_PURCHASES,
+
+
+  GET_ROLES
+
   SET_DARK_MODE,
   GET_USER_BY_ID,
+
 } from "../action-types/index";
 
 const initialState = {
@@ -32,9 +37,13 @@ const initialState = {
     thematic_name: "",
     category_name: "",
   },
+  userDetail:{},
+  allRoles:[]
+
   allPurchases: [],
   darkMode: false,
   userDetail: {},
+
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -193,21 +202,35 @@ const rootReducer = (state = initialState, action) => {
         allGames: filterDeleted,
       };
 
+
+case GET_ALL_PURCHASES:
+  return {
+    ...state,
+    allPurchases:action.payload
+  }
+  case GET_USER_BY_ID:
+    return {
+      ...state,
+      userDetail:action.payload
+    }
+    case GET_ROLES:
+      return{
+        ...state,
+        allRoles: action.payload
+      }
+=======
     case GET_ALL_USERS:
       return {
         ...state,
         allUsers: action.payload,
       };
-    case GET_ALL_PURCHASES:
-      return {
-        ...state,
-        allPurchases: action.payload,
-      };
+   
     case GET_USER_BY_ID:
       return {
         ...state,
         userDetail: action.payload,
       };
+
     default:
       return state;
   }

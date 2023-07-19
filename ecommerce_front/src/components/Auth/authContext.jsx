@@ -18,7 +18,9 @@ export const authContext = createContext();
 const userUrl = import.meta.env.VITE_URL_USERS;
 // const userUrl = 'http://localhost:3001/users';
 // const userUrlVerifyEmail = 'http://localhost:3001/users/verifyemail';
+
 const URL_LOGIN = "https://front-project-board-games.vercel.app/login";
+
 const serviceId = import.meta.env.VITE_SERVICE_ID;
 const templateId = import.meta.env.VITE_TEMPLATE_ID_EMAIL_VERIFICATION;
 const publicId = import.meta.env.VITE_YOUR_PUBLIC_KEY;
@@ -41,6 +43,15 @@ export const AuthProvider = ({ children }) => {
             name: name,
           })
           .then((res) => {
+
+            // setUserAuth({
+            //   uid: user.uid,
+            //   name: user.name,
+            //   email: user.email,
+            //   token: user.accessToken,
+            //   emailVerified: user.emailVerified
+            // });
+
             if (res.status === 201) {
               toast.success("User created succesully!");
             } else if (res.status === 400 || res.status === 500) {
@@ -50,6 +61,36 @@ export const AuthProvider = ({ children }) => {
           .catch((err) => {
             console.error(err);
           });
+
+        // user
+        //   .getIdToken()
+        //   .then((idToken) => {
+        //     window.localStorage.setItem("token", idToken);
+        //     const newUser = {
+        //       email: email,
+        //       name: name,
+        //       token: idToken,
+        //     };
+        //     axios
+        //       .post(userUrl, newUser)
+        //       .then((res) => {
+        //         setUserAuth({
+        //           name: newUser.name,
+        //           email: newUser.email,
+        //           token: idToken,
+        //         });
+        //         if (res.status === 201) {
+        //           toast.success("User created succesully!");
+        //         } else if (res.status === 400 || res.status === 500) {
+        //           toast.error(res.data.message);
+        //         }
+        //       })
+        //       .catch((err) => {
+        //         console.error(err);
+        //       });
+        //   })
+        //   .catch((err) => console.error(err));
+
       }
     );
     sendEmail(name, auth.currentUser.email, auth.currentUser.uid);
@@ -70,7 +111,11 @@ export const AuthProvider = ({ children }) => {
     };
 
     emailjs.send(serviceId, templateId, templateParams, publicId).then(
-      function (response) {},
+
+      function (response) {
+        // console.log('SUCCESS!', response.status, response.text);
+      },
+
       function (error) {
         console.log("FAILED...", error);
       }
@@ -104,6 +149,9 @@ export const AuthProvider = ({ children }) => {
     let role = "";
 
     if (!user.emailVerified) {
+
+      console.log("el email no esta verificado authContext 161");
+
       await signOut(auth);
       window.localStorage.removeItem("token");
       throw new Error(
@@ -131,7 +179,9 @@ export const AuthProvider = ({ children }) => {
 
   const getRole = async (user_id) => {
     try {
+
       const { data } = await axios.get(`${userUrl}/${user_id}`);
+
       const {
         Role: { role_name },
       } = data;
@@ -195,6 +245,7 @@ export const AuthProvider = ({ children }) => {
         resetPassword,
         controlarEmail,
         setUserAuth,
+        getRole,
       }}
     >
       {children}

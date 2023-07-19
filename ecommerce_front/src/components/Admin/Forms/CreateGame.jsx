@@ -66,7 +66,9 @@ export default function CreateGame() {
     dispatch(getLanguages());
     dispatch(getMechanics());
     dispatch(getThematics());
-  }, [dispatch]);
+    const isFormValid = Object.values(errors).every((error) => error === "");
+    setAllowNext(isFormValid);
+  }, [input, errors]);
 
   const handleModalCreateCategories = () => {
     setModalCategories(modalCategories === true ? false : true);
@@ -140,14 +142,12 @@ export default function CreateGame() {
       thematics_name: [],
     });
     e.target.reset();
-    console.log(input);
+    navigate("/admin");
   };
 
   const handleNext = () => {
-    if (next === true) {
-      setNext(false);
-    } else {
-      setNext(true);
+    if (allowNext) {
+      setNext(!next);
     }
   };
 
@@ -391,17 +391,22 @@ export default function CreateGame() {
             </>
           )}
           {next === false ? (
-            <a onClick={handleNext} className="next-button">
+            <a
+              onClick={handleNext}
+              className="next-button"
+              disabled={!allowNext}
+            >
               Next
             </a>
           ) : (
-            <button
-              type="submit"
-              className="submit-button"
-              onClick={() => navigate("/admin/createproduct")}
-            >
-              Submit
-            </button>
+            <div style={{ display: "flex", justifyContent: "space-between" }}>
+              <a onClick={handleNext} className="prev-button">
+                Prev
+              </a>
+              <button type="submit" className="submit-button">
+                Submit
+              </button>
+            </div>
           )}
         </form>
         <CreateCategories

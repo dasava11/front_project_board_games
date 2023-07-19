@@ -22,3 +22,6 @@ export const SET_DARK_MODE = "SET_DARK_MODE";
 export const GET_ALL_USERS="GET_ALL_USERS"
 export const GET_ALL_PURCHASES="GET_ALL_PURCHASES"
 export const GET_USER_BY_ID="GET_USER_BY_ID"
+
+export const GET_ROLES="GET_ROLES"
+
