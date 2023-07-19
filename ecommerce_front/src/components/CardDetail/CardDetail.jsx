@@ -1,9 +1,12 @@
 import { createElement, useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 import axios from "axios";
 import style from "../CardDetail/CardDetail.module.css";
 import heart from "../../Photos/heart.svg";
+import darkHeart from "../../Photos/darkHeart.svg";
 import shoppingCart from "../../Photos/plusCart.svg";
+import darkShoppingCart from "../../Photos/darkPlusCart.svg";
 import star from "../../Photos/star.png";
 import MoreDetail from "../MoreDetail/MoreDetail";
 import { ChevronDownIcon, ChevronUpIcon } from "@chakra-ui/icons";
@@ -21,6 +24,7 @@ const CardDetail = () => {
   const [moreInfo, setMoreInfo] = useState(false);
   const [cart, setCart] = useLocalStorage("cart", []);
   const navigate = useNavigate();
+  const darkMode = useSelector((state) => state.darkMode);
 
   useEffect(() => {
     const fetchGameDetail = async () => {
@@ -36,7 +40,6 @@ const CardDetail = () => {
     };
     fetchGameDetail();
   }, [id]);
-  console.log(game);
 
   const handleCart = () => {
     let duplicate = cart?.find((g) => g.game_id === game.game_id);
@@ -71,8 +74,18 @@ const CardDetail = () => {
           <DetailGameCarousel game={game} />
         </div>
         <div className={style.gameDetail}>
-          <div className={style.inforCardDetail}>
-            <div className={style.titleGame}>
+          <div
+            className={
+              darkMode === true
+                ? style.darkInfoCardDetail
+                : style.inforCardDetail
+            }
+          >
+            <div
+              className={
+                darkMode === true ? style.darkTitleGame : style.titleGame
+              }
+            >
               <h1 className={style.nameGame}>{game.name}</h1>
               {game.stock === 0 ? (
                 <h3 className={style.unavailableCd}>unavailable</h3>
@@ -89,7 +102,9 @@ const CardDetail = () => {
                 <img className={style.starRating} src={star} alt="star" />
               </span>
             </div>
-            <div className={style.prices}>
+            <div
+              className={darkMode === true ? style.darkPrices : style.prices}
+            >
               <h2 className={game.on_sale ? style.gameSale : style.priceGame}>
                 ${game.price} USD
               </h2>
@@ -98,18 +113,34 @@ const CardDetail = () => {
               ) : null}
             </div>
             <div className={style.butonShop}>
-              <button className={style.cartBtn} onClick={handleCart}>
+              <button
+                className={
+                  darkMode === true ? style.darkCartBtn : style.cartBtn
+                }
+                onClick={handleCart}
+              >
                 add to cart
                 <span>
-                  <img src={shoppingCart} alt="cart" />
+                  <img
+                    src={darkMode === true ? darkShoppingCart : shoppingCart}
+                    alt="cart"
+                  />
                 </span>
               </button>
               <button className={style.heartBtn}>
-                <img className={style.heartImg} src={heart} alt="heart" />
+                <img
+                  className={style.heartImg}
+                  src={darkMode === true ? darkHeart : heart}
+                  alt="heart"
+                />
               </button>
               <div className={style.backGames}>
                 <button
-                  className={style.continueShop}
+                  className={
+                    darkMode === true
+                      ? style.darkContinueShop
+                      : style.continueShop
+                  }
                   onClick={() => navigate("/games")}
                 >
                   continue shopping
@@ -120,7 +151,11 @@ const CardDetail = () => {
               <p>{game.Mechanics.description}</p>
             </div>
             <div className={style.characteristics}>
-              <div className={style.categoryCd}>
+              <div
+                className={
+                  darkMode === true ? style.darkCategoryCd : style.categoryCd
+                }
+              >
                 <h2>category</h2>
                 {game &&
                   game.Categories.map((category, index) => {
@@ -132,14 +167,20 @@ const CardDetail = () => {
                   })}
               </div>
               <hr />
-              <div className={style.playersCd}>
+              <div
+                className={
+                  darkMode === true ? style.darkPlayersCd : style.playersCd
+                }
+              >
                 <h2>number of players</h2>
                 <h3>
                   {game.players_min} <span>-</span> {game.players_max}
                 </h3>
               </div>
               <hr />
-              <div className={style.timeCd}>
+              <div
+                className={darkMode === true ? style.darkTimeCd : style.timeCd}
+              >
                 <h2>time to play</h2>
                 <h3>{game.playing_time} min per player</h3>
               </div>

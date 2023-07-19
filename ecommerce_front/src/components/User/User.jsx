@@ -4,10 +4,12 @@ import userSvg from "../../Photos/userSvg.svg";
 import style from "./User.module.css";
 import axios from "axios";
 import { useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const User = () => {
   const { id } = useParams();
   const [user, setUser] = useState({});
+  const darkMode = useSelector((state) => state.darkMode);
 
   useEffect(() => {
     /*     try {
@@ -26,7 +28,11 @@ const User = () => {
   }, [id]);
 
   return (
-    <div className={style.userContainer}>
+    <div
+      className={
+        darkMode === true ? style.darkUserContainer : style.userContainer
+      }
+    >
       <div className={style.userImg}>
         <img src={userSvg} alt="user logo" />
         <div>
@@ -34,7 +40,7 @@ const User = () => {
           <h2>email@email.com</h2>
         </div>
       </div>
-      <UserMenu />
+      <UserMenu darkMode={darkMode} />
     </div>
   );
 };

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import {useDispatch} from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Menu, MenuButton, MenuItem, MenuList } from "@chakra-ui/react";
 import { ChevronDownIcon } from "@chakra-ui/icons";
 import style from "./Filter.module.css";
@@ -12,8 +12,9 @@ const getAll = import.meta.env.VITE_GET;
 
 const Filter = (props) => {
   const { type, nameType, SetCurrentPage, filter, setFilter } = props;
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const [fields, setFields] = useState([]);
+  const darkMode = useSelector((state) => state.darkMode);
 
   useEffect(() => {
     async function fetchData() {
@@ -30,25 +31,23 @@ const Filter = (props) => {
 
   const handleFilters = (event) => {
     const { value } = event.target;
-    setFilter({...filter, [nameType]: value})
+    setFilter({ ...filter, [nameType]: value });
     //dispatch(filterGames({value, nameType}))
     //console.log(value);
     //console.log(nameType);
-    dispatch(filterDelete({...filter, [nameType]: value}))
+    dispatch(filterDelete({ ...filter, [nameType]: value }));
     SetCurrentPage(1);
-
   };
 
   return (
     <div>
       <Menu>
-        <MenuButton className={style.filterBtn}>
+        <MenuButton
+          className={darkMode === true ? style.darkFilterBtn : style.filterBtn}
+        >
           {type} <ChevronDownIcon />
         </MenuButton>
-        <MenuList
-          className={style.menuList}
-          onClick={handleFilters}
-        >
+        <MenuList className={style.menuList} onClick={handleFilters}>
           {fields &&
             fields.map((field, index) => {
               return (
