@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getAllGames } from "../../Redux/actions_creators";
 import style from "./SaleGames.module.css";
 import Card from "../Card/Card";
-import salesBanner from "../../Photos/salesBanner.jpg";
+import salesBanner from "../../Photos/salesBanner.jpeg";
 
 const SaleGames = () => {
   const dispatch = useDispatch();
