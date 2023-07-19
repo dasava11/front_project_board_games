@@ -13,7 +13,7 @@ import {
   GET_ALL_USERS,
   GET_ALL_PURCHASES,
   SET_DARK_MODE,
-  GET_USER_BY_ID
+  GET_USER_BY_ID,
 } from "../action-types/index";
 
 const initialState = {
@@ -34,7 +34,7 @@ const initialState = {
   },
   allPurchases: [],
   darkMode: false,
-  userDetail:{},
+  userDetail: {},
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -136,70 +136,101 @@ const rootReducer = (state = initialState, action) => {
     //       ...state,
     //       allGames: filterGames
 
-      };
     case SET_DARK_MODE:
       return {
         ...state,
         darkMode: action.payload,
       };
 
-    //     } 
+    //     }
 
-        case FILTER_DELETE:
+    case FILTER_DELETE:
+      let filterDeleted = [];
 
-        let filterDeleted = [];
-        
+      filterDeleted = state.games;
 
-        filterDeleted = state.games
-        
+      if (action.payload.mechanic_name !== "") {
+        filterDeleted = filterDeleted.filter((game) =>
+          game.Mechanics?.some(
+            (c) =>
+              c.mechanic_name &&
+              c.mechanic_name === action.payload.mechanic_name
+          )
+        );
+        state.filter = {
+          ...state.filter,
+          mechanic_name: action.payload.mechanic_name,
+        };
+        console.log(state.filter);
+      } else {
+        state.filter = {
+          ...state.filter,
+          mechanic_name: action.payload.mechanic_name,
+        };
+        console.log(state.filter);
+      }
+      if (action.payload.thematic_name !== "") {
+        filterDeleted = filterDeleted.filter((game) =>
+          game.Thematics?.some(
+            (c) =>
+              c.thematic_name &&
+              c.thematic_name === action.payload.thematic_name
+          )
+        );
+        state.filter = {
+          ...state.filter,
+          thematic_name: action.payload.thematic_name,
+        };
+        console.log(state.filter);
+      } else {
+        state.filter = {
+          ...state.filter,
+          thematic_name: action.payload.thematic_name,
+        };
+        console.log(state.filter);
+      }
 
-        if (action.payload.mechanic_name !== ""  ) {
-          filterDeleted = filterDeleted.filter((game)=> game.Mechanics?.some((c)=>c.mechanic_name && c.mechanic_name === action.payload.mechanic_name));
-          state.filter = {...state.filter, mechanic_name : action.payload.mechanic_name};
-          console.log(state.filter);
-        } else {
-          state.filter = {...state.filter, mechanic_name : action.payload.mechanic_name};
-          console.log(state.filter);
-        }
-        if (action.payload.thematic_name !== "") {
-          filterDeleted = filterDeleted.filter((game)=>game.Thematics?.some((c)=>c.thematic_name && c.thematic_name === action.payload.thematic_name));
-          state.filter = {...state.filter, thematic_name : action.payload.thematic_name};         
-          console.log(state.filter);
-        } else {
-          state.filter = {...state.filter, thematic_name : action.payload.thematic_name};
-          console.log(state.filter);
-        }
+      if (action.payload.category_name !== "") {
+        filterDeleted = filterDeleted.filter((game) =>
+          game.Categories?.some(
+            (c) =>
+              c.category_name &&
+              c.category_name === action.payload.category_name
+          )
+        );
+        state.filter = {
+          ...state.filter,
+          category_name: action.payload.category_name,
+        };
+        console.log(state.filter);
+      } else {
+        state.filter = {
+          ...state.filter,
+          category_name: action.payload.category_name,
+        };
+        console.log(state.filter);
+      }
 
-        if (action.payload.category_name !== "") {
-          filterDeleted = filterDeleted.filter((game)=>game.Categories?.some((c)=>c.category_name && c.category_name === action.payload.category_name));
-          state.filter = {...state.filter, category_name : action.payload.category_name};         
-          console.log(state.filter);
-        } else {
-          state.filter = {...state.filter, category_name : action.payload.category_name};
-          console.log(state.filter);
-        }
-      
-        return{
-          ...state, 
-          allGames: filterDeleted
+      return {
+        ...state,
+        allGames: filterDeleted,
+      };
 
-        } 
-
-  case GET_ALL_USERS:
-    return{
-     ...state,
-     allUsers:action.payload
-    }
-case GET_ALL_PURCHASES:
-  return {
-    ...state,
-    allPurchases:action.payload
-  }
-  case GET_USER_BY_ID:
-    return {
-      ...state,
-      userDetail:action.payload
-    }
+    case GET_ALL_USERS:
+      return {
+        ...state,
+        allUsers: action.payload,
+      };
+    case GET_ALL_PURCHASES:
+      return {
+        ...state,
+        allPurchases: action.payload,
+      };
+    case GET_USER_BY_ID:
+      return {
+        ...state,
+        userDetail: action.payload,
+      };
     default:
       return state;
   }
