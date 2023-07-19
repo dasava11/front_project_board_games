@@ -1,4 +1,5 @@
 import React from "react";
+import { useAuth } from "../Auth/authContext";
 import style from "./MercadoPago.module.css";
 import logo from "../../Photos/mercadoPago.png";
 import axios from "axios";
@@ -8,7 +9,7 @@ const mercadoPagoPost = import.meta.env.VITE_URL_MERCADOPAGO;
 const MercadoPago = (props) => {
   const { order } = props;
   const orderArray = [];
-  console.log(order);
+  const { userAuth } = useAuth();
 
   order.map((item) => {
     orderArray.push({
@@ -21,7 +22,10 @@ const MercadoPago = (props) => {
   const handleOnClick = async () => {
     const arrayItems = {
       items: orderArray,
+      user_id: userAuth.uid,
     };
+
+    console.log(arrayItems);
 
     try {
       const response = await axios.post(mercadoPagoPost, arrayItems);

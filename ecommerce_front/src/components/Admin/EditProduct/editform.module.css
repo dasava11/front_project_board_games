@@ -176,3 +176,10 @@
     margin: 8rem;
     box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
 }
+
+.errorEdit {
+    font-size: 12px;
+    color: red;
+    margin-left: 10em;
+    font-style: italic;
+}

@@ -5,6 +5,7 @@ import { opUploadWidget } from "../Cloudinary/ClodinaryEdit";
 import { Switch } from "antd";
 import style from "./editform.module.css";
 import axios from "axios";
+import validationsEdit from "./validationsEdit";
 import { Select } from "antd";
 import {
   getCategories,
@@ -26,6 +27,26 @@ export const EditProductForm = () => {
   const { id } = useParams();
   const [product, setProduct] = useState({});
   const [checked, setChecked] = useState(true);
+  const [error, setError] = useState({
+    name: "",
+    released: "",
+    price: "",
+    age: "",
+    players_min: "",
+    players_max: "",
+    stock: "",
+    weight: "",
+    playing_time: "",
+    image: "",
+    Author: "",
+    Categories: "",
+    Designers: "",
+    editorial: "",
+    Languages: "",
+    Mechanics: "",
+    Thematics: "",
+  });
+
   const dispatch = useDispatch();
   const categories = useSelector((state) => state.allCategories);
   const filteredCategories = categories.filter(
@@ -118,14 +139,18 @@ export const EditProductForm = () => {
   };
 
   const handleChange = (e) => {
-    setProduct({ ...product, [e.tagret.name]: e.target.value });
+    setProduct({ ...product, [e.target.name]: e.target.value });
+    setError(validationsEdit(product));
+
   };
 
   const handleChangeAuthor = (value) => {
     setProduct({ ...product, Author: { author_name: value } });
+    setError(validationsEdit(product));
   };
   const handleChangeEditorial = (value) => {
     setProduct({ ...product, Editorial: { editorial_name: value } });
+    setError(validationsEdit(product));
   };
   const handleChangeCategories = (values) => {
     setProduct((product) => ({
@@ -135,6 +160,7 @@ export const EditProductForm = () => {
         ...values.map((cat) => ({ category_name: cat })),
       ],
     }));
+    setError(validationsEdit(product));
   };
 
   const handleChangeDesigners = (values) => {
@@ -145,6 +171,7 @@ export const EditProductForm = () => {
         ...values.map((des) => ({ designer_name: des })),
       ],
     }));
+    setError(validationsEdit(product));
   };
 
   const handleChangeLanguages = (values) => {
@@ -155,6 +182,7 @@ export const EditProductForm = () => {
         ...values.map((lan) => ({ language_name: lan })),
       ],
     }));
+    setError(validationsEdit(product));
   };
   const handleChangeThematic = (values) => {
     setProduct((product) => ({
@@ -164,6 +192,7 @@ export const EditProductForm = () => {
         ...values.map((t) => ({ thematic_name: t })),
       ],
     }));
+    setError(validationsEdit(product));
   };
 
   const handleChangeMechanic = (values) => {
@@ -174,6 +203,7 @@ export const EditProductForm = () => {
         ...values.map((m) => ({ mechanic_name: m })),
       ],
     }));
+    setError(validationsEdit(product));
   };
 
   const handleDelete = (e) => {
@@ -251,6 +281,9 @@ export const EditProductForm = () => {
                   onChange={handleChange}
                   className={style.inputEditName}
                 />
+                {error.name && (
+                  <span className={style.errorEdit}>{error.name}</span>
+                )}
               </div>
 
               <div className={style.formCreateDivFlexTwo}>
@@ -262,6 +295,9 @@ export const EditProductForm = () => {
                     onChange={handleChange}
                     className={style.inputEdit}
                   />
+                  {error.released && (
+                    <span className={style.errorEdit}>{error.released}</span>
+                  )}
                 </div>
                 <div className={style.subDivTwo}>
                   <label className={style.labels}>Price U$D</label>
@@ -271,6 +307,9 @@ export const EditProductForm = () => {
                     onChange={handleChange}
                     className={style.inputEdit}
                   />
+                  {error.price && (
+                    <span className={style.errorEdit}>{error.price}</span>
+                  )}
                 </div>
               </div>
               <div className={style.formCreateDivFlexThree}>
@@ -282,6 +321,9 @@ export const EditProductForm = () => {
                     onChange={handleChange}
                     className={style.inputEdit}
                   />
+                  {error.age && (
+                    <span className={style.errorEdit}>{error.age}</span>
+                  )}
                 </div>
                 <div className={style.subDivThree}>
                   <label className={style.labels}>Quantity min players</label>
@@ -291,15 +333,21 @@ export const EditProductForm = () => {
                     onChange={handleChange}
                     className={style.inputEdit}
                   />
+                  {error.players_min && (
+                    <span className={style.errorEdit}>{error.players_min}</span>
+                  )}
                 </div>
                 <div className={style.subDivThree}>
                   <label className={style.labels}>Quantity max players</label>
                   <input
-                    name="playes_max"
+                    name="players_max"
                     value={product.players_max}
                     onChange={handleChange}
                     className={style.inputEdit}
                   />
+                  {error.players_max && (
+                    <span className={style.errorEdit}>{error.players_max}</span>
+                  )}
                 </div>
               </div>
               <div className={style.formCreateDivFlexThree}>
@@ -311,6 +359,9 @@ export const EditProductForm = () => {
                     onChange={handleChange}
                     className={style.inputEdit}
                   />
+                  {error.stock && (
+                    <span className={style.errorEdit}>{error.stock}</span>
+                  )}
                 </div>
                 <div className={style.subDivThree}>
                   <label className={style.labels}>
@@ -322,6 +373,9 @@ export const EditProductForm = () => {
                     onChange={handleChange}
                     className={style.inputEdit}
                   />
+                  {error.weight && (
+                    <span className={style.errorEdit}>{error.weight}</span>
+                  )}
                 </div>
                 <div className={style.subDivThree}>
                   <label className={style.labels}>Playing time</label>
@@ -331,6 +385,11 @@ export const EditProductForm = () => {
                     onChange={handleChange}
                     className={style.inputEdit}
                   />
+                  {error.playing_time && (
+                    <span className={style.errorEdit}>
+                      {error.playing_time}
+                    </span>
+                  )}
                 </div>
               </div>
               <div className={style.imageSt}>
@@ -360,6 +419,9 @@ export const EditProductForm = () => {
                 >
                   Upload Image
                 </button>
+                {error.image && (
+                  <span className={style.errorEdit}>{error.image}</span>
+                )}
               </div>
               <br />
               <label className={style.labels}>Author</label>
@@ -400,6 +462,9 @@ export const EditProductForm = () => {
                 >
                   {product.Author?.author_name}X
                 </button>
+                {error.Author && (
+                  <span className={style.errorEdit}>{error.Author}</span>
+                )}
               </>
               <label className={style.labels}>Categories</label>
               <Select
@@ -444,6 +509,9 @@ export const EditProductForm = () => {
                     </button>
                   </>
                 ))}
+              {error.Categories && (
+                <span className={style.errorEdit}>{error.Categories}</span>
+              )}
               <label className={style.labels}>Designers</label>
               <Select
                 mode="multiple"
@@ -481,6 +549,9 @@ export const EditProductForm = () => {
                     </button>
                   </>
                 ))}
+              {error.Designers && (
+                <span className={style.errorEdit}>{error.Designers}</span>
+              )}
               <label className={style.labels}>Editorial</label>
               <Select
                 onChange={(value) => handleChangeEditorial(value)}
@@ -516,6 +587,9 @@ export const EditProductForm = () => {
                 >
                   {product.Editorial?.editorial_name}X
                 </button>
+                {error.editorial && (
+                  <span className={style.errorEdit}>{error.editorial}</span>
+                )}
               </>
               <label className={style.labels}>Languages</label>
               <Select
@@ -554,6 +628,9 @@ export const EditProductForm = () => {
                     </button>
                   </>
                 ))}
+              {error.Languages && (
+                <span className={style.errorEdit}>{error.Languages}</span>
+              )}
               <label className={style.labels}>Mechanic</label>
               <Select
                 mode="multiple"
@@ -591,6 +668,9 @@ export const EditProductForm = () => {
                     </button>
                   </>
                 ))}
+              {error.Mechanics && (
+                <span className={style.errorEdit}>{error.Mechanics}</span>
+              )}
               <label className={style.labels}>Thematic</label>
               <Select
                 mode="multiple"
@@ -631,6 +711,9 @@ export const EditProductForm = () => {
                     </button>
                   </>
                 ))}
+              {error.Thematics && (
+                <span className={style.errorEdit}>{error.Thematics}</span>
+              )}
               <button type="submit" className={style.sendButton}>
                 Send changes
               </button>
