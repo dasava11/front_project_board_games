@@ -1,5 +1,5 @@
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { sortGames } from "../../Redux/actions_creators";
 import {
   Menu,
@@ -13,6 +13,7 @@ import style from "./SortGames.module.css";
 
 const SortGames = ({ SetCurrentPage }) => {
   const dispatch = useDispatch();
+  const darkMode = useSelector((state) => state.darkMode);
 
   const handleSortGames = (event) => {
     const { value } = event.target;
@@ -24,7 +25,9 @@ const SortGames = ({ SetCurrentPage }) => {
   return (
     <div>
       <Menu>
-        <MenuButton className={style.filterBtn}>
+        <MenuButton
+          className={darkMode === true ? style.darkFilterBtn : style.filterBtn}
+        >
           Sort
           <ChevronDownIcon />
         </MenuButton>

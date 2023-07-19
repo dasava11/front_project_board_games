@@ -16,8 +16,11 @@ export const POST_MECHANICS = "POST_MECHANICS";
 export const POST_THEMATICS = "POST_THEMATICS";
 export const POST_LANGUAGES = "POST_LANGUAGES";
 export const SORT_GAMES = "SORT_GAMES";
-//export const FILTER_GAMES = "FILTER_GAMES";
+
 export const FILTER_DELETE = "FILTER_DELETE";
+export const SET_DARK_MODE = "SET_DARK_MODE";
 export const GET_ALL_USERS="GET_ALL_USERS"
 export const GET_ALL_PURCHASES="GET_ALL_PURCHASES"
 export const GET_USER_BY_ID="GET_USER_BY_ID"
+export const GET_ROLES="GET_ROLES"
+

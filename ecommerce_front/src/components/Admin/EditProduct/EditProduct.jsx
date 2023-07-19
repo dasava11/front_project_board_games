@@ -24,7 +24,7 @@ export const EditProduct = () => {
       <table className={style.mainTable}>
         <thead className={style.titleTable}>
           <tr className={style.tr}>
-            <th className={style.thG}>GameName</th>
+            <th className={style.th}>GameName</th>
             <th className={style.th}>Price</th>
             <th className={style.th}>Stock</th>
             <th className={style.th}>Edit</th>
@@ -35,18 +35,18 @@ export const EditProduct = () => {
             games.map((g) => {
               return (
                 <tr className={style.trb} key={g.game_id}>
-                  <td className={style.thb}>{g.name}</td>
-                  <td className={style.thb}>U$D{g.price}</td>
-                  <td className={style.thb}>{g.stock}</td>
-                  <td className={style.thb}>
+                  <td className={style.td}>{g.name}</td>
+                  <td className={style.td}>U$D{g.price}</td>
+                  <td className={style.td}>{g.stock}</td>
+                  <td className={style.td}>
                     <button
-                      className={style.thb}
+                      className={style.thB}
                       key={g.game_id}
                       type="button"
                       value={g.game_id}
                       onClick={(e) => showInfo(e)}
                     >
-                      EDIT
+                      Edit Product
                     </button>
                   </td>
                 </tr>

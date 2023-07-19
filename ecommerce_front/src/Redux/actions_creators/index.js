@@ -10,11 +10,12 @@ import {
   GET_THEMATICS,
   GET_GAMES_BY_NAMES,
   SORT_GAMES,
-  //FILTER_GAMES,
   FILTER_DELETE,
   GET_ALL_USERS,
   GET_ALL_PURCHASES,
-  GET_USER_BY_ID
+  GET_USER_BY_ID,
+  GET_ROLES,
+  SET_DARK_MODE
 } from "../action-types/index";
 import { toast } from "react-toastify";
 
@@ -27,13 +28,13 @@ const VITE_URL_LANGUAGES = import.meta.env.VITE_URL_LANGUAGES;
 const VITE_URL_EDITORIALS = import.meta.env.VITE_URL_EDITORIALS;
 const VITE_URL_MECHANICS = import.meta.env.VITE_URL_MECHANICS;
 const VITE_URL_THEMATICS = import.meta.env.VITE_URL_THEMATICS;
-const VITE_URL_USERS= import.meta.env.VITE_URL_USERS
-const VITE_URL_GET_PURCHASES=import.meta.env.VITE_URL_GET_PURCHASES;
+const VITE_URL_USERS = import.meta.env.VITE_URL_USERS;
+const VITE_URL_GET_PURCHASES = import.meta.env.VITE_URL_GET_PURCHASES;
 export const getAllGames = () => {
   return async (dispatch) => {
     try {
       const response = await axios.get(VITE_URL_GAMES);
-      console.log(response)
+      console.log(response);
       dispatch({ type: GET_ALL_GAMES, payload: response.data });
     } catch (error) {
       console.error(error);
@@ -53,7 +54,7 @@ export const getGamesByName = (name) => {
 };
 
 export const postGames = (data) => {
-  console.log(data)
+  console.log(data);
   return async () => {
     try {
       await axios.post(VITE_URL_GAMES, data);
@@ -232,7 +233,7 @@ export const sortGames = (payload) => {
 // export const filterGames = (payload)=>{
 //   return{
 //     type: FILTER_GAMES,
-//     payload, 
+//     payload,
 //   }
 // }
 
@@ -240,10 +241,17 @@ export const filterDelete = (payload) => {
   return {
     type: FILTER_DELETE,
     payload,
-  }
-}
+  };
+};
 
-export const getAllUsers =()=>{
+export const setDarkMode = (payload) => {
+  return {
+    type: SET_DARK_MODE,
+    payload,
+  };
+};
+
+export const getAllUsers = () => {
   return async (dispatch) => {
     try {
       const response = await axios.get(VITE_URL_USERS);
@@ -252,7 +260,8 @@ export const getAllUsers =()=>{
       console.error(error);
     }
   };
-}
+};
+
 
 export const getAllPurchases =()=>{
  return async (dispatch)=>{
@@ -273,4 +282,16 @@ export const getUserById=(id)=>{
   console.error(error)
  }
   }
+ };
+
+ export const getRoles =()=>{
+  return async(dispatch)=>{
+    try {
+      const resp= await axios.get("https://backprojectboardgames-production.up.railway.app/roles")
+      dispatch({type:GET_ROLES, payload:resp.data.roles})
+    } catch (error) {
+      console.error(error)
+    }
+  }
  }
+

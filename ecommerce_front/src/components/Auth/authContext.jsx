@@ -11,7 +11,6 @@ import {
   signInWithPopup,
   sendPasswordResetEmail,
   fetchSignInMethodsForEmail,
-  sendEmailVerification,
 } from "firebase/auth";
 import { auth } from "../Auth/firebase";
 import { toast } from "react-toastify";
@@ -20,12 +19,11 @@ const userUrl = import.meta.env.VITE_URL_USERS;
 // const userUrl = 'http://localhost:3001/users';
 // const userUrlVerifyEmail = 'http://localhost:3001/users/verifyemail';
 
-const URL_LOGIN ="https://front-project-board-games.vercel.app/login";
+const URL_LOGIN = "https://front-project-board-games.vercel.app/login";
 
 const serviceId = import.meta.env.VITE_SERVICE_ID;
 const templateId = import.meta.env.VITE_TEMPLATE_ID_EMAIL_VERIFICATION;
 const publicId = import.meta.env.VITE_YOUR_PUBLIC_KEY;
-
 
 export const useAuth = () => {
   const context = useContext(authContext);
@@ -38,28 +36,32 @@ export const AuthProvider = ({ children }) => {
   const signup = async (name, email, password) => {
     await createUserWithEmailAndPassword(auth, email, password).then(
       ({ user }) => {
-            axios
-              .post(userUrl, {
-                user_id: user.uid,
-                email: user.email,
-                name: name})
-              .then((res) => {
-                // setUserAuth({
-                //   uid: user.uid,
-                //   name: user.name,
-                //   email: user.email,
-                //   token: user.accessToken,
-                //   emailVerified: user.emailVerified
-                // });
-                if (res.status === 201) {
-                  toast.success("User created succesully!");
-                } else if (res.status === 400 || res.status === 500) {
-                  toast.error(res.data.message);
-                }
-              })
-              .catch((err) => {
-                console.error(err);
-              });
+        axios
+          .post(userUrl, {
+            user_id: user.uid,
+            email: user.email,
+            name: name,
+          })
+          .then((res) => {
+
+            // setUserAuth({
+            //   uid: user.uid,
+            //   name: user.name,
+            //   email: user.email,
+            //   token: user.accessToken,
+            //   emailVerified: user.emailVerified
+            // });
+
+            if (res.status === 201) {
+              toast.success("User created succesully!");
+            } else if (res.status === 400 || res.status === 500) {
+              toast.error(res.data.message);
+            }
+          })
+          .catch((err) => {
+            console.error(err);
+          });
+
         // user
         //   .getIdToken()
         //   .then((idToken) => {
@@ -88,36 +90,37 @@ export const AuthProvider = ({ children }) => {
         //       });
         //   })
         //   .catch((err) => console.error(err));
+
       }
     );
-    // const configuration = {
-    //   url: URL_LOGIN,
-    // };
-
     sendEmail(name, auth.currentUser.email, auth.currentUser.uid);
-
     await signOut(auth);
     window.localStorage.removeItem("token");
   };
 
-  const sendEmail = (name, email ,uid) => {
+  const sendEmail = (name, email, uid) => {
     // const link = "http://localhost:5173/login?verify=" + uid;
-    const link = "https://front-project-board-games.vercel.app/login?verify=" + uid;
+    const link =
+      "https://front-project-board-games.vercel.app/login?verify=" + uid;
 
     const templateParams = {
       user_name: name,
-      message: "Follow this link to verify your email address.", 
-      user_email: email, 
-      link: link
+      message: "Follow this link to verify your email address.",
+      user_email: email,
+      link: link,
     };
-    
-    emailjs.send(serviceId, templateId, templateParams, publicId)
-        .then(function(response) {
-          // console.log('SUCCESS!', response.status, response.text);
-        }, function(error) {
-          console.log('FAILED...', error);
-        });
-};
+
+    emailjs.send(serviceId, templateId, templateParams, publicId).then(
+
+      function (response) {
+        // console.log('SUCCESS!', response.status, response.text);
+      },
+
+      function (error) {
+        console.log("FAILED...", error);
+      }
+    );
+  };
 
   const controlarEmail = async (email) => {
     const methods = await fetchSignInMethodsForEmail(auth, email);
@@ -140,27 +143,20 @@ export const AuthProvider = ({ children }) => {
   };
 
   const login = async (email, password) => {
-
     const credentials = await signInWithEmailAndPassword(auth, email, password);
+
     const { user } = credentials;
     let role = "";
 
-    // setUserAuth({
-    //   ...userAuth,
-    //   uid: user.uid,
-    //   name: user.name,
-    //   email: user.email,
-    //   token: user.accessToken,
-    //   emailVerified: user.emailVerified
-    // });
-
     if (!user.emailVerified) {
-      console.log('el email no esta verificado authContext 161')
+
+      console.log("el email no esta verificado authContext 161");
+
       await signOut(auth);
       window.localStorage.removeItem("token");
       throw new Error(
         "Verify the account with the link that we sent to your email"
-        );
+      );
     } else {
       if (window.localStorage.getItem("token")) {
         window.localStorage.removeItem("token");
@@ -169,6 +165,7 @@ export const AuthProvider = ({ children }) => {
 
       role = await getRole(user.uid);
     }
+
     setUserAuth({
       ...userAuth,
       uid: user.uid,
@@ -176,24 +173,28 @@ export const AuthProvider = ({ children }) => {
       email: user.email,
       token: user.accessToken,
       emailVerified: user.emailVerified,
-      role: role
+      role: role,
     });
   };
 
-  const getRole = async (uid) => {
+  const getRole = async (user_id) => {
     try {
-      const {data} = await axios.get(`${userUrl}/${uid}`);
-      const {Role:{role_name}} = data;
+
+      const { data } = await axios.get(`${userUrl}/${user_id}`);
+
+      const {
+        Role: { role_name },
+      } = data;
 
       setUserAuth({
         ...userAuth,
         role: role_name,
       });
       return role_name;
-    } catch ({message}) {
+    } catch ({ message }) {
       console.log(message);
     }
-  }
+  };
 
   const logOut = async () => {
     try {
@@ -207,15 +208,24 @@ export const AuthProvider = ({ children }) => {
 
   const logInWithGoogle = async () => {
     const googleProvider = new GoogleAuthProvider();
-
-    const userCredential = await signInWithPopup(auth, googleProvider);
-    if (!userCredential.user.emailVerified) {
-      await signOut(auth);
-      window.localStorage.removeItem("token");
-      throw new Error(
-        "Verify the account with the link that we sent to your email"
-      );
-    }
+    // const userCredential = await signInWithPopup(auth, googleProvider);
+    signInWithPopup(auth, googleProvider).then(({ user }) => {
+      axios
+        .post(userUrl, {
+          user_id: user.uid,
+          email: user.email,
+          name: user.displayName,
+          email_verified: true,
+        })
+        .then((res) => {
+          if (res.status === 400 || res.status === 500) {
+            toast.error(res.data.message);
+          }
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+    });
   };
 
   useEffect(() => {
@@ -235,6 +245,7 @@ export const AuthProvider = ({ children }) => {
         resetPassword,
         controlarEmail,
         setUserAuth,
+        getRole,
       }}
     >
       {children}

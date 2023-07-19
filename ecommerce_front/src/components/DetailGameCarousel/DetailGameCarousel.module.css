@@ -1,4 +1,4 @@
-.carouselDetailGame{
+.carouselDetailGame {
   display: flex;
   flex-direction: column;
   width: 600px;
@@ -21,7 +21,7 @@
   height: 50px;
   background-color: rgba(255, 255, 255, 0.483);
   border: none;
-  font-size:xx-large;
+  font-size: xx-large;
   color: rgba(25, 25, 249, 0.766);
   /* border-radius: 50%; */
   position: absolute;
@@ -44,21 +44,31 @@
   cursor: pointer;
 }
 
-.imageCorouselGame{
-  object-fit:cover;
+.imageCorouselGame {
+  object-fit: cover;
 }
 
-.photoRoll{
- display: flex;
- flex-direction: row;
- height: 110px;
- width: 500px;
- margin: 3rem 0;
- background-color: hsl(0, 0%, 100%, 70%);
- padding: 2rem;
+.photoRoll {
+  display: flex;
+  flex-direction: row;
+  height: 110px;
+  width: 500px;
+  margin: 3rem 0;
+  background-color: hsl(0, 0%, 100%, 70%);
+  padding: 2rem;
 }
 
-.imgPhotoRoll{
+.darkPhotoRoll {
+  display: flex;
+  flex-direction: row;
+  height: 110px;
+  width: 500px;
+  margin: 3rem 0;
+  background-color: hsl(240, 34%, 16%, 100%);
+  padding: 2rem;
+}
+
+.imgPhotoRoll {
   width: 10%;
   height: 10%;
   margin: auto 1rem;

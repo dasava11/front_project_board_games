@@ -1,13 +1,26 @@
-.faq{
-    display: flex;
-    flex-direction: column;
-    width: 50%;
-    margin: auto;
-    height: 90vh;
+.faq {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  margin: auto;
+  height: 90vh;
 }
 
-.faq h2{
-    text-transform: capitalize;
-    text-align: center;
+.faq h2 {
+  text-transform: capitalize;
+  text-align: center;
 }
 
+.darkFaq {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  margin: auto;
+  height: 90vh;
+}
+
+.darkFaq h2 {
+  text-transform: capitalize;
+  text-align: center;
+  color: #dfdfdf;
+}

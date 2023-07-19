@@ -27,6 +27,7 @@ export const EditProductForm = () => {
   const { id } = useParams();
   const [product, setProduct] = useState({});
   const [checked, setChecked] = useState(true);
+  localStorage.setItem("cloud", JSON.stringify(product.image));
   const [error, setError] = useState({
     name: "",
     released: "",
@@ -107,7 +108,7 @@ export const EditProductForm = () => {
     e.preventDefault();
     const newProduct = {
       ...product,
-      image: product.image,
+      image: JSON.parse(localStorage.getItem("cloud")),
       game_id: product.game_id,
       author_name: product.Author.author_name,
       editorial_name: product.Editorial.editorial_name,
@@ -119,7 +120,10 @@ export const EditProductForm = () => {
     };
 
     await axios
-      .put(VITE_GET_ALL_GAMES, newProduct)
+      .put(
+        "https://backprojectboardgames-production.up.railway.app/games",
+        newProduct
+      )
       .then((res) =>
         res.status === 200 ? toast.success(res.data.message) : null
       )
@@ -141,7 +145,6 @@ export const EditProductForm = () => {
   const handleChange = (e) => {
     setProduct({ ...product, [e.target.name]: e.target.value });
     setError(validationsEdit(product));
-
   };
 
   const handleChangeAuthor = (value) => {
@@ -239,7 +242,12 @@ export const EditProductForm = () => {
     }
     if (e.target.name === "image") {
       let resetImage = product.image.filter((i) => i !== e.target.alt);
-      setProduct({ ...product, image: resetImage });
+      localStorage.setItem("cloud", JSON.stringify(resetImage));
+      setProduct({
+        ...product,
+        image: JSON.parse(localStorage.getItem("cloud")),
+      });
+      console.log(e.target.alt);
     }
     if (e.target.name === "author_name") {
       product.Author.author_name = "";
@@ -253,7 +261,9 @@ export const EditProductForm = () => {
 
   const handleSwitchOnSale = async (game_id) => {
     await axios
-      .put(VITE_GET_ALL_GAMES`${game_id}`)
+      .put(
+        `https://backprojectboardgames-production.up.railway.app/games/delete/${game_id}`
+      )
       .then((res) =>
         res.status === 200 ? toast.success(res.data.message) : null
       )
@@ -262,14 +272,17 @@ export const EditProductForm = () => {
 
   return (
     <div>
-      <h1 className={style.title}>Edit Product</h1>
-      <div className={style.formContainerEdit}>
+      <div className={style.title}>
+        <h1>Edit Product</h1>
         <ModifyOnSale
           product={product}
           setProduct={setProduct}
           handleSwitch={handleSwitch}
           handleSwitchOnSale={handleSwitchOnSale}
         />
+      </div>
+
+      <div className={style.formContainerEdit}>
         <div className={style.mainContainer}>
           {product && (
             <form className={style} onSubmit={handleSubmit}>
@@ -413,6 +426,7 @@ export const EditProductForm = () => {
                     </div>
                   ))}
                 <button
+                  disabled={product.image?.length >= 4 ? true : false}
                   type="button"
                   className={style.buttonCloudinary}
                   onClick={() => opUploadWidget(product, setProduct)}

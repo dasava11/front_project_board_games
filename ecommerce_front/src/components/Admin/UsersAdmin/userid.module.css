@@ -32,5 +32,28 @@
  
 }
 .label{
- 
+ color:#000035;
+}
+
+.cards{
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+}
+
+.roleCard{
+
+}
+.roleButton{
+  height: 30px;
+  margin: 20px;
+  background-color: #000035;
+  color: white;
+  border-radius: 7px;
+  font-size: medium;
+  text-decoration: none;
+  padding: 2rem;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
 }

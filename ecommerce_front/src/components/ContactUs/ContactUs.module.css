@@ -1,0 +1,132 @@
+.contactContainer {
+  width: 500px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: hsl(0, 0%, 96%);
+  text-align: center;
+  margin-top: 5%;
+  margin-bottom: 8%;
+}
+
+.darkContactContainer {
+  width: 500px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: hsl(240, 34%, 16%, 100%);
+  text-align: center;
+  margin-top: 5%;
+  margin-bottom: 8%;
+}
+
+.contactContainer h2 {
+  font-size: 24px;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.darkContactContainer h2 {
+  font-size: 24px;
+  color: #dfdfdf;
+  margin-bottom: 20px;
+}
+
+.formGroup {
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+.darkFormGroup {
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+.formGroup label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+  color: #848484;
+}
+
+.darkFormGroup label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+  color: #dddddd;
+}
+
+.inputContactUs {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.formGroup textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  resize: none;
+}
+
+.darkFormGroup textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  resize: none;
+}
+
+.submitBtn {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  background-color: #00324f;
+  border-radius: 4px;
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.darkSubmitBtn {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  background-color: #000000;
+  border-radius: 4px;
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.submitBtn:hover {
+  background-color: #024871;
+}
+
+.contactInfo {
+  margin-top: 30px;
+}
+
+.darkContactInfo {
+  margin-top: 30px;
+}
+
+.contactInfo h3 {
+  font-size: 20px;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.darkContactInfo h3 {
+  font-size: 20px;
+  margin-bottom: 10px;
+  color: #dddddd;
+}
+
+.darkContactInfo p {
+  color: #dddddd;
+}
