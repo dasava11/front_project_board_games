@@ -7,8 +7,8 @@ import { toast } from "react-toastify";
 import "./login.css";
 import { FcGoogle } from "react-icons/fc";
 
-export const LogIn = () => {
 
+export const LogIn = () => {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const [forgotPassword, setForgotPassword] = useState(false)
@@ -43,7 +43,6 @@ export const LogIn = () => {
         });
     }
   }
-
 
   const [error, setError] = useState();
   const [user, setUser] = useState({
