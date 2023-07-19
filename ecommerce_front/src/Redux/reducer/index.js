@@ -12,6 +12,7 @@ import {
   FILTER_DELETE,
   GET_ALL_USERS,
   GET_ALL_PURCHASES,
+  SET_DARK_MODE,
   GET_USER_BY_ID
 } from "../action-types/index";
 
@@ -25,13 +26,14 @@ const initialState = {
   allLanguages: [],
   allMechanics: [],
   allThematics: [],
-  allUsers:[],
+  allUsers: [],
   filter: {
     mechanic_name: "",
     thematic_name: "",
-    category_name: ""
+    category_name: "",
   },
-  allPurchases:[],
+  allPurchases: [],
+  darkMode: false,
   userDetail:{},
 };
 
@@ -116,25 +118,30 @@ const rootReducer = (state = initialState, action) => {
 
     //    let filterGames = [];
 
-        
-
     //     if (action.payload.nameType === "mechanic_name") {
     //       filterGames = state.allGames.filter((game)=> game.Mechanic?.mechanic_name && game.Mechanic?.mechanic_name.includes(action.payload.value))
-          
+
     //     }
     //     if (action.payload.nameType === "thematic_name") {
     //       filterGames = state.allGames.filter((game)=>game.Thematic?.thematic_name && game.Thematic?.thematic_name.includes(action.payload.value))
-         
+
     //     }
 
     //     if (action.payload.nameType === "category_name") {
     //       filterGames = state.allGames.filter((game)=>game.Categories?.some((c)=>c.category_name && c.category_name === action.payload.value))
-          
+
     //     }
-      
+
     //     return{
-    //       ...state, 
+    //       ...state,
     //       allGames: filterGames
+
+      };
+    case SET_DARK_MODE:
+      return {
+        ...state,
+        darkMode: action.payload,
+      };
 
     //     } 
 

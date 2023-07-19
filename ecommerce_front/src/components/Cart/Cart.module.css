@@ -1,130 +1,165 @@
-.cartComponent{
-    margin-top: 5rem;
-    margin-bottom: 10rem;
-    display: flex;
-    justify-content: center;
-    width: 75%;
-    margin: auto;
-    height: 100%;
+.cartComponent {
+  margin-top: 5rem;
+  margin-bottom: 10rem;
+  display: flex;
+  justify-content: center;
+  width: 75%;
+  margin: auto;
+  height: 100%;
 }
 
-.cartComponentComplete{
-    min-height: 75vh;
+.cartComponentComplete {
+  min-height: 75vh;
 }
-.containerCartOrder{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    height: 20rem;
-    width: 90rem;
-    border: 1px solid #ccc;
-    border-radius: 0.5rem;
-    background-color: hsl(0, 0%, 96%);
-    justify-content: space-between;
-    margin: 2rem 0;
+.containerCartOrder {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 20rem;
+  width: 90rem;
+  border: 1px solid #ccc;
+  border-radius: 0.5rem;
+  background-color: hsl(0, 0%, 96%);
+  justify-content: space-between;
+  margin: 2rem 0;
 }
 
-.emptyCart{
-    display: flex;
-    height: 20rem;
-    width: 90rem;
-    border: 1px solid #ccc;
-    border-radius: 0.5rem;
-    background-color: hsl(0, 0%, 96%);
-    flex-direction: column;
-    padding: 3rem;
-    margin: 2rem 0;
-    gap: 1rem;
+.emptyCart {
+  display: flex;
+  height: 20rem;
+  width: 90rem;
+  border: 1px solid #ccc;
+  border-radius: 0.5rem;
+  background-color: hsl(0, 0%, 96%);
+  flex-direction: column;
+  padding: 3rem;
+  margin: 2rem 0;
+  gap: 1rem;
+}
+
+.darkEmptyCart {
+  display: flex;
+  height: 20rem;
+  width: 90rem;
+  border: 1px solid #ccc;
+  border-radius: 0.5rem;
+  background-color: hsl(240, 34%, 16%, 100%);
+  flex-direction: column;
+  padding: 3rem;
+  margin: 2rem 0;
+  gap: 1rem;
+}
+
+.darkEmptyCart h1 {
+  font-size: 3rem;
+  margin-bottom: 0;
+  color: #dfdfdf;
+}
+
+.darkEmptyCart hr {
+  width: 100%;
+  height: 0.5px;
+}
+
+.darkEmptyCart h2 {
+  color: #dfdfdf;
+  margin: 0;
 }
 
 .emptyCart h1 {
-    font-size: 3rem;
-    margin-bottom: 0;
+  font-size: 3rem;
+  margin-bottom: 0;
 }
 
-.imgInCart{
-    display: flex;
-    align-items: center;
-    margin-left: 3rem;
-    width: 7%;
-    height: 20rem;
+.emptyCart hr {
+  width: 100%;
 }
 
-
-.imgInCart img{
-    width: 100%;
+.emptyCart h2 {
+  margin: 0;
 }
 
-.nameGameInOrder{
-    font-size: larger;
-    font-weight: bold;
+.imgInCart {
+  display: flex;
+  align-items: center;
+  margin-left: 3rem;
+  width: 7%;
+  height: 20rem;
 }
 
-.countGameInOrder{
-    margin-left: 1rem;
-    margin-right: 1rem;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    width: 30px;
-    align-content: center;
-    text-align: center;
+.imgInCart img {
+  width: 100%;
 }
 
-.priceOrder{
-    font-size: large;
-    font-weight: bold;
-    margin-right: 3rem;
+.nameGameInOrder {
+  font-size: larger;
+  font-weight: bold;
+}
+
+.countGameInOrder {
+  margin-left: 1rem;
+  margin-right: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 30px;
+  align-content: center;
+  text-align: center;
+}
+
+.priceOrder {
+  font-size: large;
+  font-weight: bold;
+  margin-right: 3rem;
 }
 
 .total {
-    font-size: 1.4rem;
-    text-transform: capitalize;
+  font-size: 1.4rem;
+  text-transform: capitalize;
 }
 
-.totalPriceOrder{
-    font-size:1.5rem;
-    font-weight: bold;
+.totalPriceOrder {
+  font-size: 1.5rem;
+  font-weight: bold;
 }
 
-.gameDeleteByOrder{
-    padding: 0.6rem;
-    border: none;
-    background-color: #00324f;
-    border-radius: 4px;
-    color: #fff;
-    font-size: 16px;
-    cursor: pointer;
-    text-transform: capitalize;
-    padding: 0.5rem;
+.gameDeleteByOrder {
+  padding: 0.6rem;
+  border: none;
+  background-color: #00324f;
+  border-radius: 4px;
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+  text-transform: capitalize;
+  padding: 0.5rem;
 }
-
 
 .gameAmountBtn {
-    border-radius: 50%;
-    background-color: #00324f;
-    width: 20px;
-    height: 20px;
-    color: white;
-    line-height: 20px;
+  border-radius: 50%;
+  background-color: #00324f;
+  width: 20px;
+  height: 20px;
+  color: white;
+  line-height: 20px;
 }
 
 .totalContainer {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 2rem;
 }
 
 .checkoutContainer {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: 25%;
-    margin: 2rem;
-    height: 200px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 25%;
+  margin: 2rem;
+  height: 200px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 1rem;
 }

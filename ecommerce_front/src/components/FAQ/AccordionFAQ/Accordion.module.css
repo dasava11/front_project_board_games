@@ -1,8 +1,22 @@
-.accordionItem button{
-    background-color: white;
-    border: 1px solid transparent;
-    height: 40px;
-    font-weight: 700;
-    border-radius: 0.5rem;
-    font-size: 1.5rem;
+.accordionItem button {
+  background-color: white;
+  border: 1px solid transparent;
+  height: 40px;
+  font-weight: 700;
+  border-radius: 0.5rem;
+  font-size: 1.5rem;
+}
+
+.darkAccordioItem button {
+  background-color: hsl(240, 34%, 16%, 100%);
+  border: 1px solid transparent;
+  height: 40px;
+  font-weight: 700;
+  border-radius: 0.5rem;
+  font-size: 1.5rem;
+  color: #dfdfdf;
+}
+
+.darkAccordioItem {
+  color: #dfdfdf;
 }

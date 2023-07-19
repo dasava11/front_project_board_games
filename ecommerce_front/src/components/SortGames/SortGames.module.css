@@ -11,7 +11,6 @@
   border: none;
   padding: 0.3rem;
   text-transform: capitalize;
-
 }
 
 .menuItem:hover {
@@ -21,8 +20,20 @@
 
 .filterBtn {
   border: 1px solid transparent;
-  color:hsl(240, 34%, 16%, 80%);
-  background-color: #FADA5C;
+  color: hsl(240, 34%, 16%, 80%);
+  background-color: #fada5c;
+  font-weight: bold;
+  height: 30px;
+  width: 122px;
+  border-radius: 0.5rem;
+  text-transform: capitalize;
+  font-size: 1.5rem;
+}
+
+.darkFilterBtn {
+  border: 1px solid transparent;
+  color: hsla(240, 14%, 90%, 0.8);
+  background-color: #6e6027;
   font-weight: bold;
   height: 30px;
   width: 122px;
@@ -32,6 +43,11 @@
 }
 
 .filterBtn:hover {
-  background-color: #E3C652;
+  background-color: #e3c652;
+  cursor: pointer;
+}
+
+.darkFilterBtn:hover {
+  background-color: #7d6d2c;
   cursor: pointer;
 }
