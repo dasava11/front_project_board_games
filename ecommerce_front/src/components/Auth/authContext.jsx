@@ -33,6 +33,7 @@ export const useAuth = () => {
 
 export const AuthProvider = ({ children }) => {
   const [userAuth, setUserAuth] = useState(null);
+  const [role, setRole] = useState('');
 
   const signup = async (name, email, password) => {
     await createUserWithEmailAndPassword(auth, email, password).then(
@@ -135,6 +136,8 @@ export const AuthProvider = ({ children }) => {
       window.localStorage.setItem("token", user.accessToken);
 
       role = await getRole(user.uid);
+      window.localStorage.setItem("role", role);
+      setRole(role);
     }
     setUserAuth({
       ...userAuth,
@@ -164,6 +167,8 @@ export const AuthProvider = ({ children }) => {
 
   const logOut = async () => {
     try {
+      setRole('client');
+      window.localStorage.removeItem("role");
       await signOut(auth);
       window.localStorage.removeItem("token");
       toast.success("Log out succesfull");
@@ -200,6 +205,11 @@ export const AuthProvider = ({ children }) => {
     onAuthStateChanged(auth, (currentUser) => {
       setUserAuth(currentUser);
     });
+
+    const getRoleLocalStorage = window.localStorage.getItem("role");
+    if (getRoleLocalStorage) {
+      setRole(getRoleLocalStorage);
+    }
   }, []);
 
   return (
@@ -213,6 +223,7 @@ export const AuthProvider = ({ children }) => {
         resetPassword,
         controlarEmail,
         setUserAuth,
+        role
       }}
     >
       {children}
