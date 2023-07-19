@@ -99,6 +99,9 @@ export const LogIn = () => {
         toast.error("You must signup.");
         navigate("/signup");
       }
+      if (error.code === "auth/user-disabled") {
+        toast.error("Your account has been blocked by the admin.");
+      }
       if (error.code === "auth/wrong-password") {
         toast.error("Wrong password");
       } else{
