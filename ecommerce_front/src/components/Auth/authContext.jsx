@@ -11,7 +11,6 @@ import {
   signInWithPopup,
   sendPasswordResetEmail,
   fetchSignInMethodsForEmail,
-  sendEmailVerification,
 } from "firebase/auth";
 import { auth } from "../Auth/firebase";
 import { toast } from "react-toastify";
@@ -20,7 +19,7 @@ const userUrl = import.meta.env.VITE_URL_USERS;
 // const userUrl = 'http://localhost:3001/users';
 // const userUrlVerifyEmail = 'http://localhost:3001/users/verifyemail';
 
-const URL_LOGIN ="https://front-project-board-games.vercel.app/login";
+// const URL_LOGIN ="https://front-project-board-games.vercel.app/login";
 
 const serviceId = import.meta.env.VITE_SERVICE_ID;
 const templateId = import.meta.env.VITE_TEMPLATE_ID_EMAIL_VERIFICATION;
@@ -60,40 +59,8 @@ export const AuthProvider = ({ children }) => {
               .catch((err) => {
                 console.error(err);
               });
-        // user
-        //   .getIdToken()
-        //   .then((idToken) => {
-        //     window.localStorage.setItem("token", idToken);
-        //     const newUser = {
-        //       email: email,
-        //       name: name,
-        //       token: idToken,
-        //     };
-        //     axios
-        //       .post(userUrl, newUser)
-        //       .then((res) => {
-        //         setUserAuth({
-        //           name: newUser.name,
-        //           email: newUser.email,
-        //           token: idToken,
-        //         });
-        //         if (res.status === 201) {
-        //           toast.success("User created succesully!");
-        //         } else if (res.status === 400 || res.status === 500) {
-        //           toast.error(res.data.message);
-        //         }
-        //       })
-        //       .catch((err) => {
-        //         console.error(err);
-        //       });
-        //   })
-        //   .catch((err) => console.error(err));
       }
     );
-    // const configuration = {
-    //   url: URL_LOGIN,
-    // };
-
     sendEmail(name, auth.currentUser.email, auth.currentUser.uid);
 
     await signOut(auth);
@@ -142,6 +109,7 @@ export const AuthProvider = ({ children }) => {
   const login = async (email, password) => {
 
     const credentials = await signInWithEmailAndPassword(auth, email, password);
+
     const { user } = credentials;
     let role = "";
 
@@ -155,7 +123,6 @@ export const AuthProvider = ({ children }) => {
     // });
 
     if (!user.emailVerified) {
-      console.log('el email no esta verificado authContext 161')
       await signOut(auth);
       window.localStorage.removeItem("token");
       throw new Error(
@@ -180,10 +147,15 @@ export const AuthProvider = ({ children }) => {
     });
   };
 
-  const getRole = async (uid) => {
+  const getRole = async (user_id) => {
     try {
-      const {data} = await axios.get(`${userUrl}/${uid}`);
+      const {data} = await axios.get(`${userUrl}/${user_id}`);
       const {Role:{role_name}} = data;
+
+      // console.log('data')
+      // console.log(data)
+      // console.log('role_name')
+      // console.log(role_name)
 
       setUserAuth({
         ...userAuth,
