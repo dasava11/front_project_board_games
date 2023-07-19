@@ -3,7 +3,7 @@ import style from "./editform.module.css";
 import { Switch } from "antd";
 export const ModifyOnSale = (props) => {
   const { product, setProduct, handleSwitch, handleSwitchOnSale } = props;
-  console.log(props);
+
   return (
     <div>
       <div className={style.buttonEdition}>

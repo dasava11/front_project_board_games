@@ -14,7 +14,8 @@ import {
   FILTER_DELETE,
   GET_ALL_USERS,
   GET_ALL_PURCHASES,
-  GET_USER_BY_ID
+  GET_USER_BY_ID,
+  GET_ROLES
 } from "../action-types/index";
 import { toast } from "react-toastify";
 
@@ -272,5 +273,16 @@ export const getUserById=(id)=>{
  } catch (error) {
   console.error(error)
  }
+  }
+ };
+
+ export const getRoles =()=>{
+  return async(dispatch)=>{
+    try {
+      const resp= await axios.get("https://backprojectboardgames-production.up.railway.app/roles")
+      dispatch({type:GET_ROLES, payload:resp.data.roles})
+    } catch (error) {
+      console.error(error)
+    }
   }
  }

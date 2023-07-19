@@ -20,28 +20,33 @@
 .titleTable{
     background-color: grey;
     color: #ffffff;
-    text-align:justify;
+    text-align:center;
 }
 
 
 .th{
-    padding: 16px;
+    padding: 10px;
     margin: 9px;
+    
 }
 .tr{
     padding: 10px 13px;
     margin: 0px;
 }
-.thG{
-    padding-left: 16px;
-   
+.td{
+    text-align: center;
 }
 .trb{
     padding: 2rem;
     margin:3rem;
 }
-.thb{
+.thB{
+    border-radius: 6px;
+    color: white;
+    background-color: #000035;
+    border: 1px solid #000035;
     padding: 0.5rem;
+    margin: 1rem;
     
 }
 .inputEdit{

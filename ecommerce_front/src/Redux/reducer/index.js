@@ -12,7 +12,8 @@ import {
   FILTER_DELETE,
   GET_ALL_USERS,
   GET_ALL_PURCHASES,
-  GET_USER_BY_ID
+  GET_USER_BY_ID, 
+  GET_ROLES
 } from "../action-types/index";
 
 const initialState = {
@@ -33,6 +34,7 @@ const initialState = {
   },
   allPurchases:[],
   userDetail:{},
+  allRoles:[]
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -193,6 +195,11 @@ case GET_ALL_PURCHASES:
       ...state,
       userDetail:action.payload
     }
+    case GET_ROLES:
+      return{
+        ...state,
+        allRoles: action.payload
+      }
     default:
       return state;
   }
