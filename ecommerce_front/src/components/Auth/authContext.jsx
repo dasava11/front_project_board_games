@@ -152,11 +152,6 @@ export const AuthProvider = ({ children }) => {
       const {data} = await axios.get(`${userUrl}/${user_id}`);
       const {Role:{role_name}} = data;
 
-      // console.log('data')
-      // console.log(data)
-      // console.log('role_name')
-      // console.log(role_name)
-
       setUserAuth({
         ...userAuth,
         role: role_name,
@@ -180,15 +175,26 @@ export const AuthProvider = ({ children }) => {
   const logInWithGoogle = async () => {
     const googleProvider = new GoogleAuthProvider();
 
-    const userCredential = await signInWithPopup(auth, googleProvider);
-    if (!userCredential.user.emailVerified) {
-      await signOut(auth);
-      window.localStorage.removeItem("token");
-      throw new Error(
-        "Verify the account with the link that we sent to your email"
-      );
-    }
-  };
+    // const userCredential = await signInWithPopup(auth, googleProvider);
+    signInWithPopup(auth, googleProvider).then(
+    ({ user }) => {
+      axios
+        .post(userUrl, {
+          user_id: user.uid,
+          email: user.email,
+          name: user.displayName,
+          email_verified:true
+        })
+        .then((res) => {
+          if (res.status === 400 || res.status === 500) {
+            toast.error(res.data.message);
+          }
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+  })
+};
 
   useEffect(() => {
     onAuthStateChanged(auth, (currentUser) => {
