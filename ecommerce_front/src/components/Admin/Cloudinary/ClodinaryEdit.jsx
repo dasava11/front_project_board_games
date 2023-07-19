@@ -1,5 +1,5 @@
 export const opUploadWidget = (setProduct, product) => {
-  let arrAux = [];
+  let arrAux = JSON.parse(localStorage.getItem("cloud"));
 
   window.cloudinary.openUploadWidget(
     {
@@ -38,9 +38,8 @@ export const opUploadWidget = (setProduct, product) => {
       if (!err) {
         if (info.event === "queues-end") {
           arrAux.push(info.data.info.files[0].uploadInfo.secure_url);
-          product.image = arrAux;
+          localStorage.setItem("cloud", JSON.stringify(arrAux));
         }
-        console.log(product.image);
       }
     }
   );
