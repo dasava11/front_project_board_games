@@ -1,40 +1,94 @@
-.inputSearch{
-    border: 1px solid transparent;
-    border-radius: 10px;
-    height: 30px;
+.inputSearch {
+  border: 1px solid transparent;
+  border-radius: 10px;
+  height: 30px;
 }
 
-.searchBtn{
-    background-color: transparent;
-    border: none;
-    position: relative;
-    right: 30px;
-    top: 3px;
+.searchBtn {
+  background-color: transparent;
+  border: none;
+  position: relative;
+  right: 30px;
+  top: 3px;
 }
 
-.searchBtn:hover{
-    cursor: pointer;
+.searchBtn:hover {
+  cursor: pointer;
 }
 
-.searchContainer{
-    display: flex;
-    background-color: white;
-    justify-content: center;
-    align-items: center;
-    padding: 3px;
-    border-radius: 1rem;
-    gap: 1rem;
+.searchContainer {
+  display: flex;
+  background-color: white;
+  justify-content: center;
+  align-items: center;
+  padding: 3px;
+  border-radius: 1rem;
+  gap: 1rem;
 }
 
-.searchContainer input{
-    outline: none;
+.searchContainer input {
+  outline: none;
 }
 
-.searchContainer hr{
-    height: 15px
+.searchContainer hr {
+  height: 15px;
 }
 
-.searchContainer img{
-    display: flex;
-    margin: auto 5px;
+.searchContainer img {
+  display: flex;
+  margin: auto 5px;
+}
+
+.searchModal {
+  position: absolute;
+  width: 350px;
+  max-height: 400px;
+  overflow: hidden;
+  overflow-y: auto;
+  background-color: white;
+  margin-top: 5px;
+  border: 1px solid #000035;
+  border-radius: 0.5rem;
+  z-index: 100;
+}
+
+.searchModal::-webkit-scrollbar {
+  display: none;
+}
+
+.itemModal {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem;
+  gap: 1rem;
+  background-color: white;
+  text-decoration: none;
+  color: #000035;
+}
+
+.itemModal h1 {
+  font-size: 1.5rem;
+}
+
+.itemModal:hover {
+  cursor: pointer;
+  background-color: rgb(185, 185, 185);
+}
+
+.itemModal img {
+  border: 1px solid rgb(95, 95, 95);
+  border-radius: 0.5rem;
+}
+
+.itemModalPrice {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem;
+}
+
+.itemModalPrice p {
+  margin: 0;
 }
