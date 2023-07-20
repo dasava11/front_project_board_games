@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { img1, img2, img3, img4, img5 } from "./images";
-import arrowBack from "../../Photos/arrowback.png";
-import arrowGo from "../../Photos/arrowGo.png";
+import arrowBack from "../../Photos/iconBack.svg";
+import arrowGo from "../../Photos/iconNext.svg";
 import styles from "./CarouselLanding.module.css";
 
 const CarouselLanding = () => {
@@ -20,7 +20,7 @@ const CarouselLanding = () => {
         setIndex(index + 1);
       }
       timerId = null;
-    }, 3000);
+    }, 8000);
     return () => clearTimeout(timerId);
   });
 
