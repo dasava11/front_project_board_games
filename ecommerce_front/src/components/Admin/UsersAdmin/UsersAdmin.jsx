@@ -14,7 +14,7 @@ export const UsersAdmin = () => {
   const navigate = useNavigate();
   useEffect(() => {
     dispatch(getAllUsers());
-  }, []);
+  }, [users]);
 
   const handleSwitch = async (user_id) => {
     await axios

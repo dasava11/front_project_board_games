@@ -266,8 +266,8 @@ export const getAllUsers = () => {
 export const getAllPurchases =()=>{
  return async (dispatch)=>{
   try {
-    const resp=await axios.get(VITE_URL_GET_PURCHASES)
-    dispatch({ type: GET_ALL_PURCHASES, payload: response.data})
+    const resp = await axios.get("https://backprojectboardgames-production.up.railway.app/purchase/")
+    dispatch({ type: GET_ALL_PURCHASES, payload: resp.data})
   } catch(err){
     console.error(err)
   }
