@@ -43,7 +43,7 @@ export const Header = () => {
         <img
           src={logo}
           alt="logo"
-          className={style.logoHead}
+          className={darkMode === true ? style.darkLogoHead : style.logoHead}
           onClick={() => navigate("/")}
         />
 

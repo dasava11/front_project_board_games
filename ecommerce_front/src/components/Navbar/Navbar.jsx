@@ -44,30 +44,31 @@ const Navbar = () => {
             Games
           </NavLink>
         </li>
-{
-  (role === 'admin') &&
-        <li>
-          <NavLink
-            to="/admin"
-            className={({ isActive }) =>
-            isActive ? style.active : style.disable
-          }
-          >
-            Menu Admin
-          </NavLink>
-        </li>
-}
+        {role === "admin" && (
+          <li>
+            <NavLink
+              to="/admin"
+              className={({ isActive }) =>
+                isActive ? style.active : style.disable
+              }
+            >
+              Menu Admin
+            </NavLink>
+          </li>
+        )}
       </ul>
       <div className={style.navBarIcons}>
-        <button>
-          <img
-            src={userIcon}
-            alt="userIcon"
-            width="40px"
-            height="40px"
-            onClick={() => navigate("/user")}
-          />
-        </button>
+        {userAuth && role !== "admin" && (
+          <button>
+            <img
+              src={userIcon}
+              alt="userIcon"
+              width="40px"
+              height="40px"
+              onClick={() => navigate("/user")}
+            />
+          </button>
+        )}
         <button>
           <img
             src={shoppingCart}
