@@ -71,7 +71,7 @@ const UserMenu = (props) => {
                     <Tr>
                       <Th>Name</Th>
                       <Th>Adress</Th>
-                      <Th>Password</Th>
+                      <Th>Password </Th>
                     </Tr>
                   </Thead>
                   <Tbody>
