@@ -17,16 +17,14 @@ const PayPalPaymentButton = () => {
 
   const onSuccess = async () => {
     const newData = {
+      user_id: userAuth.uid,
       games: buys.map((item) => ({
         name: item.name,
         price: item.price,
         quantity: item.quantity,
-        user_id: userAuth.uid,
       })),
       total_amount: amount,
     };
-
-    console.log("Pago exitoso:", newData);
 
     try {
       await axios.post(VITE_URL_PAYPAL, newData);
