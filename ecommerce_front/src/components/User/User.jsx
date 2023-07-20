@@ -38,8 +38,8 @@ const User = () => {
       <div className={style.userImg}>
         <img src={userSvg} alt="user logo" />
         <div>
-          <h4>{userAuth.displayName}</h4>
-          <h2>{userAuth.email}</h2>
+          {/* <h4>{userAuth.displayName}</h4>
+          <h2>{userAuth.email}</h2> */}
         </div>
       </div>
       <UserMenu darkMode={darkMode} />

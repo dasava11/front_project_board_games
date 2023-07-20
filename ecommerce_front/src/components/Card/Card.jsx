@@ -1,22 +1,56 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { getUserById, getAllUsers } from "../../Redux/actions_creators/index"
+import { useAuth } from "../Auth/authContext";
 import style from "./Card.module.css";
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import axios from "axios";
+import { auth } from "../Auth/firebase";
+import { toast } from "react-toastify";
+const VITE_URL_USERS = import.meta.env.VITE_URL_USERS
+
 
 const Card = (props) => {
   const { name, image, price, id, onSale } = props;
   const [isFav, setIsFav] = useState(false);
   const darkMode = useSelector((state) => state.darkMode);
+  const dispatch = useDispatch();
+  const { userAuth} = useAuth();
+  const [fav, setFav] = useState();
+  
+  
+  
 
-  const handleFavorite = (e) => {
-    console.log(e.target.value);
 
+ 
+  useEffect(() => {
+    const userIdAux = localStorage.getItem("user_id");
+    axios.get(`${VITE_URL_USERS}/${userIdAux}`)
+    .then(res => setFav(res.data.wish_list))
+    .then (() => setIsFav(fav.some((g) => parseInt(g.game_id) === parseInt(id) )));
+    console.log(fav)
+    
+  }, [fav])
+
+//console.log(isFav);
+  const handleFavorite = async (res) => {
+    try {
+    const data = {user_id: userAuth.uid, game_id: id}
+    let response = await axios.put("https://backprojectboardgames-production.up.railway.app/users/wishlist", data);
+    toast.success(response.data.message);
+  } catch (error) {
+    toast.error(error.data.message);
+  }
     if (isFav === true) {
       setIsFav(false);
     } else {
       setIsFav(true);
     }
   };
+
+ 
+
+
   return (
     <div className={darkMode === true ? style.darkCard : style.card}>
       <Link to={`/details/${id}`}>
