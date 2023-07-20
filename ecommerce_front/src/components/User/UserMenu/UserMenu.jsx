@@ -1,5 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
 import style from "./UserMenu.module.css";
+import { getUserById } from "../../../Redux/actions_creators";
+import axios from "axios";
 import {
   Tabs,
   TabList,
@@ -18,10 +22,15 @@ import {
 } from "@chakra-ui/react";
 import { useAuth } from "../../Auth/authContext";
 import { auth } from "../../Auth/firebase";
+const VITE_URL_USERS = import.meta.env.VITE_URL_USERS
 
 const UserMenu = (props) => {
+  const dispatch = useDispatch();
+  const userIdInfo = useSelector((state) => state.userDetail);
   const { darkMode } = props;
   const { userAuth } = useAuth();
+  const { id } = useParams();
+  const [fav, setFav] = useState();
 
   const handleNameChange = (value) => {
     setUser((prevUser) => ({ ...prevUser, name: value }));
@@ -34,6 +43,12 @@ const UserMenu = (props) => {
   const handlePasswordChange = (value) => {
     setUser((prevUser) => ({ ...prevUser, password: value }));
   };
+
+  useEffect(() => {
+    const userIdAux = localStorage.getItem("user_id");
+      axios.get(`${VITE_URL_USERS}/${userIdAux}`)
+      .then(res => setFav(res.data.wish_list))    
+  }, [fav])
 
   return (
     <div className={style.userMenuContainer}>
@@ -104,7 +119,10 @@ const UserMenu = (props) => {
                 </Table>
           </TabPanel>
           <TabPanel>
-            <Table size="sm">
+            {fav && fav.map ((f) => {
+              <h3>{f.name}</h3>
+            })}
+            {/* <Table size="sm">
               <Thead>
                 <Tr>
                   <Th>Wish</Th>
@@ -112,7 +130,7 @@ const UserMenu = (props) => {
               </Thead>
                   <Tbody>
                   </Tbody>
-                </Table>
+                </Table> */}
           </TabPanel>
         </TabPanels>
         <button>Editar</button>

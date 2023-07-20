@@ -120,6 +120,7 @@ export const AuthProvider = ({ children }) => {
         window.localStorage.removeItem("token");
       }
       window.localStorage.setItem("token", user.accessToken);
+      window.localStorage.setItem("userId", user.uid);
 
       role = await getRole(user.uid);
       window.localStorage.setItem("role", role);
