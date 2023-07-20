@@ -15,7 +15,7 @@ import {
   GET_ALL_PURCHASES,
   GET_USER_BY_ID,
   GET_ROLES,
-  SET_DARK_MODE
+  SET_DARK_MODE,
 } from "../action-types/index";
 import { toast } from "react-toastify";
 
@@ -34,7 +34,6 @@ export const getAllGames = () => {
   return async (dispatch) => {
     try {
       const response = await axios.get(VITE_URL_GAMES);
-      console.log(response);
       dispatch({ type: GET_ALL_GAMES, payload: response.data });
     } catch (error) {
       console.error(error);
@@ -262,36 +261,38 @@ export const getAllUsers = () => {
   };
 };
 
-
-export const getAllPurchases =()=>{
- return async (dispatch)=>{
-  try {
-    const resp = await axios.get("https://backprojectboardgames-production.up.railway.app/purchase/")
-    dispatch({ type: GET_ALL_PURCHASES, payload: resp.data})
-  } catch(err){
-    console.error(err)
-  }
- }
-}
-export const getUserById=(id)=>{
-  return async (dispatch)=>{
- try {
-  const resp = await axios.get(`${VITE_URL_USERS}/${id}`)
-  dispatch({type: GET_USER_BY_ID, payload: resp.data})
- } catch (error) {
-  console.error(error)
- }
-  }
- };
-
- export const getRoles =()=>{
-  return async(dispatch)=>{
+export const getAllPurchases = () => {
+  return async (dispatch) => {
     try {
-      const resp= await axios.get("https://backprojectboardgames-production.up.railway.app/roles")
-      dispatch({type:GET_ROLES, payload:resp.data.roles})
-    } catch (error) {
-      console.error(error)
+      const resp = await axios.get(
+        "https://backprojectboardgames-production.up.railway.app/purchase/"
+      );
+      dispatch({ type: GET_ALL_PURCHASES, payload: resp.data });
+    } catch (err) {
+      console.error(err);
     }
-  }
- }
+  };
+};
+export const getUserById = (id) => {
+  return async (dispatch) => {
+    try {
+      const resp = await axios.get(`${VITE_URL_USERS}/${id}`);
+      dispatch({ type: GET_USER_BY_ID, payload: resp.data });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+};
 
+export const getRoles = () => {
+  return async (dispatch) => {
+    try {
+      const resp = await axios.get(
+        "https://backprojectboardgames-production.up.railway.app/roles"
+      );
+      dispatch({ type: GET_ROLES, payload: resp.data.roles });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+};

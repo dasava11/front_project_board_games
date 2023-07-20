@@ -58,7 +58,7 @@ const Navbar = () => {
         )}
       </ul>
       <div className={style.navBarIcons}>
-        {userAuth && role !== "admin" && (
+        {userAuth && (
           <button>
             <img
               src={userIcon}

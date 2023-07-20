@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { NavLink } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import style from "./UserMenu.module.css";
 import { getUserById } from "../../../Redux/actions_creators";
@@ -22,14 +23,12 @@ import {
 } from "@chakra-ui/react";
 import { useAuth } from "../../Auth/authContext";
 import { auth } from "../../Auth/firebase";
-const VITE_URL_USERS = import.meta.env.VITE_URL_USERS
+const VITE_URL_USERS = import.meta.env.VITE_URL_USERS;
 
 const UserMenu = (props) => {
   const dispatch = useDispatch();
-  const userIdInfo = useSelector((state) => state.userDetail);
-  const { darkMode } = props;
+  const { darkMode, user } = props;
   const { userAuth } = useAuth();
-  const { id } = useParams();
   const [fav, setFav] = useState();
 
   const handleNameChange = (value) => {
@@ -43,12 +42,6 @@ const UserMenu = (props) => {
   const handlePasswordChange = (value) => {
     setUser((prevUser) => ({ ...prevUser, password: value }));
   };
-
-  useEffect(() => {
-    const userIdAux = localStorage.getItem("user_id");
-      axios.get(`${VITE_URL_USERS}/${userIdAux}`)
-      .then(res => setFav(res.data.wish_list))    
-  }, [fav])
 
   return (
     <div className={style.userMenuContainer}>
@@ -71,17 +64,17 @@ const UserMenu = (props) => {
                   <Thead>
                     <Tr>
                       <Th>Name</Th>
-                      <Th>Email</Th>
+                      <Th>Adress</Th>
                       <Th>Password</Th>
                     </Tr>
                   </Thead>
                   <Tbody>
-                    <Tr key={userAuth.email}>
+                    <Tr key={user.email}>
                       <Td>
                         <Input
                           size="sm"
                           w="120px"
-                          value={userAuth.displayName}
+                          value={user.name}
                           onChange={(e) => handleNameChange(e.target.value)}
                         />
                       </Td>
@@ -89,17 +82,12 @@ const UserMenu = (props) => {
                         <Input
                           size="sm"
                           w="180px"
-                          value={userAuth.email}
+                          value={user.street}
                           onChange={(e) => handleEmailChange(e.target.value)}
                         />
                       </Td>
                       <Td>
-                        <Input
-                          size="sm"
-                          w="100px"
-                          value="******"
-                          onChange={(e) => handlePasswordChange(e.target.value)}
-                        />
+                        <NavLink>Change password</NavLink>
                       </Td>
                     </Tr>
                   </Tbody>
@@ -109,28 +97,25 @@ const UserMenu = (props) => {
           </TabPanel>
           <TabPanel>
             <Table size="sm">
-                  <Thead>
-                    <Tr>
-                      <Th>Purchases</Th>
-                    </Tr>
-                  </Thead>
-                  <Tbody>
-                  </Tbody>
-                </Table>
+              <Thead>
+                <Tr>
+                  <Th>Purchases</Th>
+                </Tr>
+              </Thead>
+              <Tbody></Tbody>
+            </Table>
           </TabPanel>
           <TabPanel>
-            {fav && fav.map ((f) => {
-              <h3>{f.name}</h3>
-            })}
-            {/* <Table size="sm">
+            <Table size="sm">
               <Thead>
                 <Tr>
                   <Th>Wish</Th>
-                    </Tr>
+                </Tr>
               </Thead>
-                  <Tbody>
-                  </Tbody>
-                </Table> */}
+              <Tbody>
+                {user && user.wish_list?.map((w) => <h3>{w.name}</h3>)}
+              </Tbody>
+            </Table>
           </TabPanel>
         </TabPanels>
         <button>Editar</button>
