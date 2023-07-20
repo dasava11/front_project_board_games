@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import style from "./UserMenu.module.css";
+import { getUserById } from "../../../Redux/actions_creators";
+import axios from "axios";
 import {
   Tabs,
   TabList,
@@ -22,6 +24,8 @@ import axios from "axios";
 const VITE_URL_PAYPAL = import.meta.env.VITE_URL_PAYPAL;
 
 const UserMenu = (props) => {
+  const dispatch = useDispatch();
+  const userIdInfo = useSelector((state) => state.userDetail);
   const { darkMode } = props;
   const { userAuth } = useAuth();
   const [purchases, setPurchases] = useState([]); // Estado para almacenar las compras del usuario
@@ -55,6 +59,12 @@ const UserMenu = (props) => {
   const handlePasswordChange = (value) => {
     setUser((prevUser) => ({ ...prevUser, password: value }));
   };
+
+  useEffect(() => {
+    const userIdAux = localStorage.getItem("user_id");
+      axios.get(`${VITE_URL_USERS}/${userIdAux}`)
+      .then(res => setFav(res.data.wish_list))    
+  }, [fav])
 
   return (
     <div className={style.userMenuContainer}>

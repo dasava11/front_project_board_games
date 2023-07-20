@@ -44,15 +44,6 @@ export const AuthProvider = ({ children }) => {
             name: name,
           })
           .then((res) => {
-
-            // setUserAuth({
-            //   uid: user.uid,
-            //   name: user.name,
-            //   email: user.email,
-            //   token: user.accessToken,
-            //   emailVerified: user.emailVerified
-            // });
-
             if (res.status === 201) {
               toast.success("User created succesully!");
             } else if (res.status === 400 || res.status === 500) {
@@ -62,36 +53,6 @@ export const AuthProvider = ({ children }) => {
           .catch((err) => {
             console.error(err);
           });
-
-        // user
-        //   .getIdToken()
-        //   .then((idToken) => {
-        //     window.localStorage.setItem("token", idToken);
-        //     const newUser = {
-        //       email: email,
-        //       name: name,
-        //       token: idToken,
-        //     };
-        //     axios
-        //       .post(userUrl, newUser)
-        //       .then((res) => {
-        //         setUserAuth({
-        //           name: newUser.name,
-        //           email: newUser.email,
-        //           token: idToken,
-        //         });
-        //         if (res.status === 201) {
-        //           toast.success("User created succesully!");
-        //         } else if (res.status === 400 || res.status === 500) {
-        //           toast.error(res.data.message);
-        //         }
-        //       })
-        //       .catch((err) => {
-        //         console.error(err);
-        //       });
-        //   })
-        //   .catch((err) => console.error(err));
-
       }
     );
     sendEmail(name, auth.currentUser.email, auth.currentUser.uid);
@@ -101,8 +62,7 @@ export const AuthProvider = ({ children }) => {
 
   const sendEmail = (name, email, uid) => {
     // const link = "http://localhost:5173/login?verify=" + uid;
-    const link =
-      "https://front-project-board-games.vercel.app/login?verify=" + uid;
+    const link ="https://front-project-board-games.vercel.app/login?verify=" + uid;
 
     const templateParams = {
       user_name: name,
@@ -150,9 +110,6 @@ export const AuthProvider = ({ children }) => {
     let role = "";
 
     if (!user.emailVerified) {
-
-      console.log("el email no esta verificado authContext 161");
-
       await signOut(auth);
       window.localStorage.removeItem("token");
       throw new Error(
@@ -163,6 +120,7 @@ export const AuthProvider = ({ children }) => {
         window.localStorage.removeItem("token");
       }
       window.localStorage.setItem("token", user.accessToken);
+      window.localStorage.setItem("userId", user.uid);
 
       role = await getRole(user.uid);
       window.localStorage.setItem("role", role);
@@ -182,18 +140,13 @@ export const AuthProvider = ({ children }) => {
 
   const getRole = async (user_id) => {
     try {
-
       const { data } = await axios.get(`${userUrl}/${user_id}`);
-
-      const {
-        Role: { role_name },
-      } = data;
 
       setUserAuth({
         ...userAuth,
-        role: role_name,
+        role: data.Role.role_name,
       });
-      return role_name;
+      return data.Role.role_name;
     } catch ({ message }) {
       console.log(message);
     }
@@ -213,25 +166,29 @@ export const AuthProvider = ({ children }) => {
 
   const logInWithGoogle = async () => {
     const googleProvider = new GoogleAuthProvider();
-    // const userCredential = await signInWithPopup(auth, googleProvider);
-    signInWithPopup(auth, googleProvider).then(({ user }) => {
-      axios
-        .post(userUrl, {
-          user_id: user.uid,
-          email: user.email,
-          name: user.displayName,
-          email_verified: true,
+
+    const {user} = await signInWithPopup(auth, googleProvider);
+
+    if(user){
+      axios.get(`${userUrl}/${user.uid}`)
+        .then(({data}) => {
+          window.localStorage.setItem("role", data.Role.role_name);
+          setRole(data.Role.role_name);
         })
-        .then((res) => {
-          if (res.status === 400 || res.status === 500) {
-            toast.error(res.data.message);
-          }
+        .catch((error) => {
+          axios.post(userUrl, {
+            user_id: user.uid,
+            email: user.email,
+            name: user.displayName,
+            email_verified: true,
+          }).then((res) => {
+            window.localStorage.setItem("role", "client");
+            setRole("client");
+          }).catch((error) => {
+          })
         })
-        .catch((err) => {
-          console.error(err);
-        });
-    });
-  };
+    }
+  }
 
   useEffect(() => {
     onAuthStateChanged(auth, (currentUser) => {

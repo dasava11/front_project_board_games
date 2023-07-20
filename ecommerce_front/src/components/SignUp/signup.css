@@ -34,7 +34,8 @@
   border-radius: 4px;
   border: 1px solid white;
   box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem;
+  margin-top: 0.2rem;
 }
 
 .inputs-signup:focus {
@@ -65,10 +66,13 @@
   color: #000035;
 }
 
-.inputs-errors{
+.inputs-errors-signup{
   align-self: flex-start;
   color: red;
   font-size: 12px;
+  margin-top: 0px;
+  margin-bottom: 5px;
+  display: block;
 }
 
 .div-inputs{
@@ -81,6 +85,7 @@
   color: red;
   text-transform: uppercase;
   font-size: 11px;
+  margin-top: 0;
 }
 
 .signup-password-medium{
@@ -89,6 +94,7 @@
   color: orange;
   text-transform: uppercase;
   font-size: 11px;
+  margin-top: 0;
 }
 
 .signup-password-strong{
@@ -97,6 +103,7 @@
   color: green;
   text-transform: uppercase;
   font-size: 11px;
+  margin-top: 0;
 }
 
 .login-p:hover{

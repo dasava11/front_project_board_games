@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import style from "./sales.module.css";
 import { getAllPurchases } from "../../../Redux/actions_creators";
+import { Switch } from "antd";
 export const Sales = () => {
   const dispatch = useDispatch();
   const sales = useSelector((state) => state.allPurchases);
@@ -37,11 +38,11 @@ export const Sales = () => {
       <table className={style.purchaseTable}>
         <thead className={style.purchaseHead}>
           <tr className={style.purchTr}>
-            <th className={style.tH}>Purchase Id</th>
+            <th className={style.tH}> Nº Purchase</th>
             {/* <th className={style.tH}>Username</th> */}
             <th className={style.tH}>Products purchased</th>
             <th className={style.tH}>Amount</th>
-            <th className={style.tH}>Status</th>
+            <th className={style.tH}>Dispatched order</th>
           </tr>
         </thead>
         <tbody className={style.purchaseBody}>
@@ -53,10 +54,15 @@ export const Sales = () => {
                   {/* <td className={style.tH}>{sale.username}</td> */}
                   <td className={style.tH}>
                     {sale.description.map((e) => (
-                      <span key={e.id}>{e.quantity}</span>
+                      <div className={style.divTable} key={e.id}>
+                        {e.name} x Units {e.quantity}
+                      </div>
                     ))}
                   </td>
                   <td className={style.tH}>{sale.total_amount}</td>
+                  <th className={style.tH}>
+                    <Switch />
+                  </th>
                 </tr>
               );
             })}
