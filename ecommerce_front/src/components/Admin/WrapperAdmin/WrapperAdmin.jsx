@@ -6,12 +6,11 @@ import { useAuth } from "../../Auth/authContext";
 export const WrapperAdmin = () => {
   const navigate = useNavigate();
   const {role} = useAuth();
-  useEffect( () => {
-    if(role!== "admin"){
-      navigate("/");
-    }
-  },[])
-
+  
+  if(role!== "admin"){
+    navigate("/");
+  }
+  
   return (
     <>
       <HeaderAdmin />
