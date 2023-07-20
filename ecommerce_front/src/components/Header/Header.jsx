@@ -14,7 +14,6 @@ import { setDarkMode } from "../../Redux/actions_creators";
 export const Header = () => {
   const navigate = useNavigate();
   const { logOut } = useAuth();
-  //const [isLogged, setIsLogged] = useState(false);
   const dispatch = useDispatch();
   const darkMode = useSelector((state) => state.darkMode);
 
@@ -29,7 +28,6 @@ export const Header = () => {
   useEffect(() => {
     const token = window.localStorage.getItem("token");
   }, []);
-
 
   const handleSwitch = (e) => {
     dispatch(setDarkMode(e));

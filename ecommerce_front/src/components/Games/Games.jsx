@@ -97,8 +97,13 @@ const Games = () => {
             </div>
           </div>
         </div>
-        <div>
-          {filter &&
+        <div
+          className={
+            darkMode === true ? style.darkFiltersDelete : style.filtersDelete
+          }
+        >
+          {Object.keys(filter).some((keys) => filter[keys]) === true ? (
+            filter &&
             Object.keys(filter).map((key) => {
               if (filter[key] !== "") {
                 return (
@@ -111,9 +116,16 @@ const Games = () => {
                   </button>
                 );
               }
-            })}
+            })
+          ) : (
+            <div className={style.filtersDelteEmpty}>
+              <hr />
+            </div>
+          )}
         </div>
-        <div className={style.notFound}>
+        <div
+          className={darkMode === true ? style.darkNotFound : style.notFound}
+        >
           GAMES WERE NOT FOUND WITH THOSE FILTERS
         </div>
       </div>
@@ -175,8 +187,13 @@ const Games = () => {
             </div>
           </div>
         </div>
-        <div>
-          {filter &&
+        <div
+          className={
+            darkMode === true ? style.darkFiltersDelete : style.filtersDelete
+          }
+        >
+          {Object.keys(filter).some((keys) => filter[keys]) === true ? (
+            filter &&
             Object.keys(filter).map((key) => {
               if (filter[key] !== "") {
                 return (
@@ -189,7 +206,12 @@ const Games = () => {
                   </button>
                 );
               }
-            })}
+            })
+          ) : (
+            <div className={style.filtersDelteEmpty}>
+              <hr />
+            </div>
+          )}
         </div>
         <div className={style.gamePagination}>
           <Pagination

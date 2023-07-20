@@ -18,6 +18,7 @@ const PayPalPaymentButton = () => {
 
   const onSuccess = async () => {
     const newData = {
+      user_id: userAuth.uid,
       games: buys.map((item) => ({
         name: item.name,
         price: item.price,
