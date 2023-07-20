@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useAuth } from "../Auth/authContext";
 import { useLocation, useNavigate } from "react-router-dom";
 import { PayPalButtons } from "@paypal/react-paypal-js";
+import { toast } from "react-toastify";
 import styles from "./Paypal.module.css";
 import axios from "axios";
 
@@ -17,12 +18,12 @@ const PayPalPaymentButton = () => {
 
   const onSuccess = async () => {
     const newData = {
-      user_id: userAuth.uid,
       games: buys.map((item) => ({
         name: item.name,
         price: item.price,
         quantity: item.quantity,
       })),
+      user_id: userAuth.uid,
       total_amount: amount,
     };
 
@@ -30,7 +31,8 @@ const PayPalPaymentButton = () => {
       await axios.post(VITE_URL_PAYPAL, newData);
       setShowSummary(true);
     } catch (error) {
-      alert(error.message);
+      console.log(error);
+      toast.error(error.response.data.message);
     }
   };
 

@@ -1,5 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { NavLink } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import style from "./UserMenu.module.css";
+import { getUserById } from "../../../Redux/actions_creators";
+import axios from "axios";
 import {
   Tabs,
   TabList,
@@ -16,30 +21,33 @@ import {
   Input,
   Box,
 } from "@chakra-ui/react";
+import { useAuth } from "../../Auth/authContext";
+import { auth } from "../../Auth/firebase";
+const VITE_URL_PAYPAL = import.meta.env.VITE_URL_PAYPAL;
 
 const UserMenu = (props) => {
-  const { darkMode } = props;
+  const dispatch = useDispatch();
+  const { darkMode, user } = props;
+  const { userAuth } = useAuth();
+  const [fav, setFav] = useState();
+  const [purchases, setPurchases] = useState([]);
 
-  const initialData = {
-    id: 1,
-    name: "Kaleth",
-    email: "Kaleth@example.com",
-    password: "********",
-  };
+    useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const res = await axios.get(VITE_URL_PAYPAL);
+        const userPurchases = res.data.filter(
+          (purchase) => purchase.user_id === userAuth.uid
+        );
 
-  const [user, setUser] = useState(initialData);
+        setPurchases(userPurchases);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
 
-  const handleNameChange = (value) => {
-    setUser((prevUser) => ({ ...prevUser, name: value }));
-  };
-
-  const handleEmailChange = (value) => {
-    setUser((prevUser) => ({ ...prevUser, email: value }));
-  };
-
-  const handlePasswordChange = (value) => {
-    setUser((prevUser) => ({ ...prevUser, password: value }));
-  };
+    fetchData();
+  }, [userAuth.uid]);
 
   return (
     <div className={style.userMenuContainer}>
@@ -62,35 +70,24 @@ const UserMenu = (props) => {
                   <Thead>
                     <Tr>
                       <Th>Name</Th>
-                      <Th>Email</Th>
-                      <Th>Password</Th>
+                      <Th>Adress</Th>
+                      <Th>Password </Th>
                     </Tr>
                   </Thead>
                   <Tbody>
-                    <Tr key={user.id}>
+                    <Tr key={user.email}>
                       <Td>
-                        <Input
-                          size="sm"
-                          w="120px"
-                          value={user.name}
-                          onChange={(e) => handleNameChange(e.target.value)}
-                        />
+                        <h2>{user.name}</h2>
                       </Td>
                       <Td>
                         <Input
                           size="sm"
-                          w="180px"
-                          value={user.email}
-                          onChange={(e) => handleEmailChange(e.target.value)}
-                        />
+                          w="80px"
+                          value={user.street}
+                          />
                       </Td>
                       <Td>
-                        <Input
-                          size="sm"
-                          w="100px"
-                          value={user.password}
-                          onChange={(e) => handlePasswordChange(e.target.value)}
-                        />
+                        <NavLink>Change password</NavLink>
                       </Td>
                     </Tr>
                   </Tbody>
@@ -100,25 +97,44 @@ const UserMenu = (props) => {
           </TabPanel>
           <TabPanel>
             <Table size="sm">
-                  <Thead>
-                    <Tr>
-                      <Th>Purchases</Th>
+              <Thead>
+                <Tr>
+                  <Th>Purchases</Th>
+                </Tr>
+              </Thead>
+              <Tbody>
+                {purchases.map((purchase, index) => (
+                    <Tr key={index}>
+                      <Td>
+                        <ul className={style.purchases}>
+                          {purchase.description.map((item, itemIndex) => (
+                            <li key={itemIndex}>
+                              <h4>Name: {item.name}</h4>
+                              <h5>Price: {item.price}</h5>
+                              <h5>Quantity: {item.quantity}</h5>
+                            </li>
+                          ))}
+                        </ul>
+                      </Td>
+                      <Td>
+                        <h4>Total amount: {purchase.total_amount}$</h4>
+                      </Td>
                     </Tr>
-                  </Thead>
-                  <Tbody>
-                  </Tbody>
-                </Table>
+                  ))}
+              </Tbody>
+            </Table>
           </TabPanel>
           <TabPanel>
             <Table size="sm">
               <Thead>
                 <Tr>
                   <Th>Wish</Th>
-                    </Tr>
+                </Tr>
               </Thead>
-                  <Tbody>
-                  </Tbody>
-                </Table>
+              <Tbody>
+                {user && user.wish_list?.map((w) => <h3>{w.name}</h3>)}
+              </Tbody>
+            </Table>
           </TabPanel>
         </TabPanels>
       </Tabs>

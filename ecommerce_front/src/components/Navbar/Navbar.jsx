@@ -16,6 +16,16 @@ const Navbar = () => {
       <ul className={style.listFlex}>
         <li>
           <NavLink
+            to="/games"
+            className={({ isActive }) =>
+              isActive ? style.active : style.disable
+            }
+          >
+            Games
+          </NavLink>
+        </li>
+        <li>
+          <NavLink
             to="/questions"
             className={({ isActive }) =>
               isActive ? style.active : style.disable
@@ -31,21 +41,13 @@ const Navbar = () => {
               isActive ? style.active : style.disable
             }
           >
-            Contact Us
+
+           Contact Us
           </NavLink>
         </li>
-        <li>
-          <NavLink
-            to="/games"
-            className={({ isActive }) =>
-              isActive ? style.active : style.disable
-            }
-          >
-            Games
-          </NavLink>
-        </li>
-        {
-          // (role === 'admin') &&
+           {role === "admin" && (
+       
+      
           <li>
             <NavLink
               to="/admin"
@@ -56,18 +58,22 @@ const Navbar = () => {
               Menu Admin
             </NavLink>
           </li>
-        }
+
+        )}
+
       </ul>
       <div className={style.navBarIcons}>
-        <button>
-          <img
-            src={userIcon}
-            alt="userIcon"
-            width="40px"
-            height="40px"
-            onClick={() => navigate("/user")}
-          />
-        </button>
+        {userAuth && (
+          <button>
+            <img
+              src={userIcon}
+              alt="userIcon"
+              width="40px"
+              height="40px"
+              onClick={() => navigate("/user")}
+            />
+          </button>
+        )}
         <button>
           <img
             src={shoppingCart}

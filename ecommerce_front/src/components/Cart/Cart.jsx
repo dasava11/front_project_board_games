@@ -54,6 +54,8 @@ const Cart = () => {
     });
   };
 
+  console.log(order);
+
   return (
     <div className={styles.cartComponentComplete}>
       <div className={styles.cartComponent}>
@@ -137,7 +139,6 @@ const Cart = () => {
               <h1 className={styles.totalPriceOrder}>${suma.toFixed(2)} USD</h1>
             </div>
             <button
-              //disabled={order.length < 1 ? true : false}
               className={styles.gameDeleteByOrder}
               onClick={() => handleCheckout()}
             >

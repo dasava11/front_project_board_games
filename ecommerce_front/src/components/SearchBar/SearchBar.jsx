@@ -1,11 +1,9 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate, Link } from "react-router-dom";
 import { getAllGames, getGamesByName } from "../../Redux/actions_creators";
-import { Modal } from "antd";
 import style from "./SearchBar.module.css";
 import searchIcon from "../../Photos/search_icon.svg";
-import ModalSearch from "../ModalSearch/ModalSearch";
 
 const regexNumber = /^[0-9]+$/;
 
@@ -20,14 +18,26 @@ const validation = (search) => {
 const SearchBar = () => {
   const [search, setSearch] = useState("");
   const [error, setError] = useState("");
-  const [modal, setModal] = useState(false);
-  const dispatch = useDispatch();
+  const allGames = useSelector((state) => state.allGames);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const [filteredGames, setFilteredGames] = useState([]);
 
   const handleSearch = (event) => {
     const { value } = event.target;
+    const searchWord = event.target.value;
     setSearch(value);
     setError(validation(value));
+
+    const newFilter = allGames.filter((game) => {
+      return game.name.toLowerCase().includes(searchWord.toLowerCase());
+    });
+
+    if (searchWord === "") {
+      setFilteredGames([]);
+    } else {
+      setFilteredGames(newFilter);
+    }
   };
 
   const handleSubmit = (event) => {
@@ -45,10 +55,6 @@ const SearchBar = () => {
         setSearch("");
       }
     }
-  };
-
-  const handleModalSearch = () => {
-    setModal(modal === true ? false : true);
   };
 
   const handleKey = (event) => {
@@ -71,6 +77,10 @@ const SearchBar = () => {
     }
   };
 
+  const handleEmptyModal = () => {
+    setFilteredGames([]);
+  };
+
   return (
     <div>
       <div className={style.searchContainer}>
@@ -84,12 +94,27 @@ const SearchBar = () => {
           onKeyDown={handleKey}
         />
       </div>
-      {/* <ModalSearch
-        search={search}
-        handleModalSearch={handleModalSearch}
-        modal={modal}
-        handleKey={handleKey}
-      /> */}
+      {filteredGames.length > 0 && (
+        <div className={style.searchModal}>
+          {filteredGames.slice(0, 10).map((game) => {
+            return (
+              <Link
+                to={`/details/${game.game_id}`}
+                key={game.game_id}
+                className={style.itemModal}
+                onClick={handleEmptyModal}
+              >
+                <img src={game.image[0]} alt="" width="100px" />
+                <h1>{game.name}</h1>
+                <div className={style.itemModalPrice}>
+                  <p>Price</p>
+                  <p>${game.price}</p>
+                </div>
+              </Link>
+            );
+          })}
+        </div>
+      )}
     </div>
   );
 };

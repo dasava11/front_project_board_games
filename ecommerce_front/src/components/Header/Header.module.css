@@ -14,6 +14,13 @@
   height: 110px;
 }
 
+.darkLogoHead{
+  background-color: transparent;
+  width: 195px;
+  height: 109.68px;
+  cursor: pointer;
+}
+
 .logoHead {
   width: 195px;
   height: 109.68px;
