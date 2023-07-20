@@ -54,11 +54,14 @@
   font-size: smaller;
   display: flex;
   justify-content: flex-end;
+  margin-top: 0.5rem;
+  margin-bottom: 1rem;
 }
 
 .forgot-p:hover{
   cursor: pointer;
   color:blue;
+
 }
 
 .signup-p:hover{
