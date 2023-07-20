@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import style from "./UserMenu.module.css";
 import { getUserById } from "../../../Redux/actions_creators";
 import axios from "axios";
@@ -22,20 +23,19 @@ import {
 } from "@chakra-ui/react";
 import { useAuth } from "../../Auth/authContext";
 import { auth } from "../../Auth/firebase";
-const VITE_URL_USERS = import.meta.env.VITE_URL_USERS;
 const VITE_URL_PAYPAL = import.meta.env.VITE_URL_PAYPAL;
 
 const UserMenu = (props) => {
   const dispatch = useDispatch();
   const { darkMode, user } = props;
   const { userAuth } = useAuth();
-  const [purchases, setPurchases] = useState([]); // Estado para almacenar las compras del usuario
+  const [fav, setFav] = useState();
+  const [purchases, setPurchases] = useState([]);
 
-  useEffect(() => {
+    useEffect(() => {
     const fetchData = async () => {
       try {
         const res = await axios.get(VITE_URL_PAYPAL);
-        // Filtrar las compras que pertenecen al usuario actual
         const userPurchases = res.data.filter(
           (purchase) => purchase.user_id === userAuth.uid
         );
@@ -47,19 +47,7 @@ const UserMenu = (props) => {
     };
 
     fetchData();
-  }, [userAuth.uid]); // Asegurarse de que la solicitud se realice cuando cambie el uid del usuario
-
-  const handleNameChange = (value) => {
-    // Lógica para cambiar el nombre del usuario
-  };
-
-  const handleEmailChange = (value) => {
-    // Lógica para cambiar el email del usuario
-  };
-
-  const handlePasswordChange = (value) => {
-    // Lógica para cambiar la contraseña del usuario
-  };
+  }, [userAuth.uid]);
 
   return (
     <div className={style.userMenuContainer}>
@@ -89,19 +77,13 @@ const UserMenu = (props) => {
                   <Tbody>
                     <Tr key={user.email}>
                       <Td>
-                        <Input
-                          size="sm"
-                          w="120px"
-                          value={user.name}
-                          onChange={(e) => handleNameChange(e.target.value)}
-                        />
+                        <h2>{user.name}</h2>
                       </Td>
                       <Td>
                         <Input
                           size="sm"
-                          w="180px"
+                          w="80px"
                           value={user.street}
-                          onChange={(e) => handleEmailChange(e.target.value)}
                           />
                       </Td>
                       <Td>
@@ -109,19 +91,19 @@ const UserMenu = (props) => {
                       </Td>
                     </Tr>
                   </Tbody>
-                          <button>Editar</button>
                 </Table>
               </TableContainer>
             </Box>
           </TabPanel>
           <TabPanel>
-            <Box maxW="800px" mx="auto" overflowX="auto">
-              <Table size="sm" overflowY="auto" maxHeight="400px">
-                <Thead>
-                    <Th>Purchases</Th>
-                </Thead>
-                <Tbody>
-                  {purchases.map((purchase, index) => (
+            <Table size="sm">
+              <Thead>
+                <Tr>
+                  <Th>Purchases</Th>
+                </Tr>
+              </Thead>
+              <Tbody>
+                {purchases.map((purchase, index) => (
                     <Tr key={index}>
                       <Td>
                         <ul className={style.purchases}>
@@ -139,9 +121,8 @@ const UserMenu = (props) => {
                       </Td>
                     </Tr>
                   ))}
-                </Tbody>
-              </Table>
-            </Box>
+              </Tbody>
+            </Table>
           </TabPanel>
           <TabPanel>
             <Table size="sm">
@@ -151,7 +132,7 @@ const UserMenu = (props) => {
                 </Tr>
               </Thead>
               <Tbody>
-                {user && user.wish_list?.map((w) => <h3 key={w.name}>{w.name}</h3>)}
+                {user && user.wish_list?.map((w) => <h3>{w.name}</h3>)}
               </Tbody>
             </Table>
           </TabPanel>
