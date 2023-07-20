@@ -4,11 +4,15 @@ import userSvg from "../../Photos/userSvg.svg";
 import style from "./User.module.css";
 import axios from "axios";
 import { useSelector } from "react-redux";
+import { useAuth } from "../Auth/authContext";
+
 const VITE_URL_USERS = import.meta.env.VITE_URL_USERS;
 
 const User = () => {
   const [user, setUser] = useState({});
   const darkMode = useSelector((state) => state.darkMode);
+  const { userAuth } = useAuth();
+
 
   useEffect(() => {
     const userIdAux = localStorage.getItem("userId");
@@ -27,8 +31,8 @@ const User = () => {
       <div className={style.userImg}>
         <img src={userSvg} alt="user logo" />
         <div>
-          {user && <h4>{user.name}</h4>}
-          {user && <h2>{user.email}</h2>}
+          {user && <h4>{userAuth.displayName}</h4>}
+          {user && <h2>{userAuth.email}</h2>}
         </div>
       </div>
       <UserMenu darkMode={darkMode} user={user} />
