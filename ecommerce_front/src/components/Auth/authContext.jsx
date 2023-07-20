@@ -32,7 +32,7 @@ export const useAuth = () => {
 
 export const AuthProvider = ({ children }) => {
   const [userAuth, setUserAuth] = useState(null);
-  const [role, setRole] = useState('');
+  const [role, setRole] = useState("");
 
   const signup = async (name, email, password) => {
     await createUserWithEmailAndPassword(auth, email, password).then(
@@ -62,7 +62,8 @@ export const AuthProvider = ({ children }) => {
 
   const sendEmail = (name, email, uid) => {
     // const link = "http://localhost:5173/login?verify=" + uid;
-    const link ="https://front-project-board-games.vercel.app/login?verify=" + uid;
+    const link =
+      "https://front-project-board-games.vercel.app/login?verify=" + uid;
 
     const templateParams = {
       user_name: name,
@@ -72,7 +73,6 @@ export const AuthProvider = ({ children }) => {
     };
 
     emailjs.send(serviceId, templateId, templateParams, publicId).then(
-
       function (response) {
         // console.log('SUCCESS!', response.status, response.text);
       },
@@ -119,12 +119,12 @@ export const AuthProvider = ({ children }) => {
       if (window.localStorage.getItem("token")) {
         window.localStorage.removeItem("token");
       }
-      window.localStorage.setItem("token", user.accessToken);
-      window.localStorage.setItem("userId", user.uid);
 
       role = await getRole(user.uid);
       window.localStorage.setItem("role", role);
       setRole(role);
+      window.localStorage.setItem("token", user.accessToken);
+      window.localStorage.setItem("userId", user.uid);
     }
 
     setUserAuth({
@@ -154,7 +154,7 @@ export const AuthProvider = ({ children }) => {
 
   const logOut = async () => {
     try {
-      setRole('client');
+      setRole("client");
       window.localStorage.removeItem("role");
       await signOut(auth);
       window.localStorage.removeItem("token");
@@ -167,28 +167,31 @@ export const AuthProvider = ({ children }) => {
   const logInWithGoogle = async () => {
     const googleProvider = new GoogleAuthProvider();
 
-    const {user} = await signInWithPopup(auth, googleProvider);
+    const { user } = await signInWithPopup(auth, googleProvider);
 
-    if(user){
-      axios.get(`${userUrl}/${user.uid}`)
-        .then(({data}) => {
+    if (user) {
+      axios
+        .get(`${userUrl}/${user.uid}`)
+        .then(({ data }) => {
           window.localStorage.setItem("role", data.Role.role_name);
           setRole(data.Role.role_name);
         })
         .catch((error) => {
-          axios.post(userUrl, {
-            user_id: user.uid,
-            email: user.email,
-            name: user.displayName,
-            email_verified: true,
-          }).then((res) => {
-            window.localStorage.setItem("role", "client");
-            setRole("client");
-          }).catch((error) => {
-          })
-        })
+          axios
+            .post(userUrl, {
+              user_id: user.uid,
+              email: user.email,
+              name: user.displayName,
+              email_verified: true,
+            })
+            .then((res) => {
+              window.localStorage.setItem("role", "client");
+              setRole("client");
+            })
+            .catch((error) => {});
+        });
     }
-  }
+  };
 
   useEffect(() => {
     onAuthStateChanged(auth, (currentUser) => {
@@ -212,7 +215,7 @@ export const AuthProvider = ({ children }) => {
         resetPassword,
         controlarEmail,
         setUserAuth,
-        role
+        role,
       }}
     >
       {children}
