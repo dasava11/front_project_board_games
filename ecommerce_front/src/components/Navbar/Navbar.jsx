@@ -16,6 +16,16 @@ const Navbar = () => {
       <ul className={style.listFlex}>
         <li>
           <NavLink
+            to="/games"
+            className={({ isActive }) =>
+              isActive ? style.active : style.disable
+            }
+          >
+            Games
+          </NavLink>
+        </li>
+        <li>
+          <NavLink
             to="/questions"
             className={({ isActive }) =>
               isActive ? style.active : style.disable
@@ -32,16 +42,6 @@ const Navbar = () => {
             }
           >
             Contact Us
-          </NavLink>
-        </li>
-        <li>
-          <NavLink
-            to="/games"
-            className={({ isActive }) =>
-              isActive ? style.active : style.disable
-            }
-          >
-            Games
           </NavLink>
         </li>
         {role === "admin" && (
