@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { getUserById, getRoles } from "../../../Redux/actions_creators";
 import { DeleteIcon } from "@chakra-ui/icons";
@@ -9,6 +9,7 @@ import { toast } from "react-toastify";
 
 import styles from "./userid.module.css";
 const VITE_URL_USERS = import.meta.env.VITE_URL_USERS;
+
 const { Option } = Select;
 export const UserId = () => {
   const userIdInfo = useSelector((state) => state.userDetail);
@@ -17,22 +18,27 @@ export const UserId = () => {
   const [user, setUser] = useState({});
   const { id } = useParams();
   const dispatch = useDispatch();
-
+  //  if (e.target.name === "author_name") {
+  //       product.Author.author_name = "";
+  //       setProduct({ ...product, Author: { author_name: "" } });
   const handleDeleteRole = async () => {
     userIdInfo.Role.role_name = "";
-    setRole({ Role: { role_name: "" } });
+    setRole({ ...role, Role: { role_name: "" } });
   };
-  const handleChangeRole = (value) => {
-    console.log("aca value", value);
+  const handleChangeRole = (e) => {
+    const { name, value } = e.target;
+    console.log("aca value", value); //hasta aca llega
     setRole({ Role: { role_name: value } });
+    console.log(role);
   };
-
-  const handleSendRole = async () => {
+  console.log(userIdInfo);
+  const handleSendRole = async (e) => {
+    e.preventDefault();
     const newRole = {
       user_id: userIdInfo.user_id,
       role_name: role.role_name,
     };
-
+    console.log(newRole);
     await axios
       .put(
         `https://backprojectboardgames-production.up.railway.app/users/`,
@@ -71,11 +77,10 @@ export const UserId = () => {
               </button>
             )}
 
-            <form onSubmit={() => handleSendRole}>
+            <form onSubmit={(e) => handleSendRole(e)}>
               <label>Select new Role</label>
-              <Select
-                key={userIdInfo.role_id}
-                onChange={(value) => handleChangeRole(value)}
+              <select
+                onChange={handleChangeRole}
                 name="role_name"
                 style={{
                   width: "50%",
@@ -89,13 +94,13 @@ export const UserId = () => {
                   roles?.map((r) => {
                     return (
                       <>
-                        <Option key={r.role_name} value={r.role_name}>
+                        <option key={r.role_id} value={r.role_name}>
                           {r.role_name}
-                        </Option>
+                        </option>
                       </>
                     );
                   })}
-              </Select>
+              </select>
               <button type="submit" className={styles.roleButton}>
                 Update new role
               </button>
