@@ -90,7 +90,8 @@ export const Header = () => {
                   <img src={userIcon} alt="userIcon" />
                 </button>
                 <h5 className={style.name}>
-                  {auth?.currentUser?.displayName?.split(" ")[0]}
+                  {auth.currentUser &&
+                    auth.currentUser.displayName.split(" ")[0]}
                 </h5>
               </Link>
               <div className={style.inputs}>
