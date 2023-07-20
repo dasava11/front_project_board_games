@@ -109,7 +109,7 @@ const UserMenu = (props) => {
                       </Td>
                     </Tr>
                   </Tbody>
-                          <button>Editar </button>
+                          <button>Editar</button>
                 </Table>
               </TableContainer>
             </Box>
