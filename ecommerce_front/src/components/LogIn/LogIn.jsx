@@ -161,7 +161,6 @@ export const LogIn = () => {
         <button type="submit" className={`login-button ${forgotPassword && "login-disabled"}`} disabled={forgotPassword || !validForm()} onClick={handleSubmit}>
           Log in
         </button>
-        <div className="form-body">
           <button className={`login-button ${forgotPassword && "login-disabled"}`} onClick={handleGoogleSignIn} disabled={forgotPassword}>
             Log in with <FcGoogle />
           </button>
@@ -171,7 +170,6 @@ export const LogIn = () => {
           <span className="span-signup-p">
             Don't have an account? <Link to="/signup" className="signup-p">Create one now</Link>
           </span>
-        </div>
       </form>
     </div>
   );

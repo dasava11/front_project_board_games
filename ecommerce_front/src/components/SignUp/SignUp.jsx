@@ -71,7 +71,7 @@ export const SignUp = () => {
             value={form.name}
             onChange={handleChange}
             />
-          <span className="inputs-errors">{errors.name}</span>
+          <span className="inputs-errors-signup">{errors.name}</span>
           <label htmlFor="email">Email:</label>
           <input
             className="inputs-signup"
@@ -81,7 +81,7 @@ export const SignUp = () => {
             value={form.email}
             onChange={handleChange}
             />
-          <span className="inputs-errors">{errors.email}</span>
+          <span className="inputs-errors-signup">{errors.email}</span>
 
           <label htmlFor="password">Password:</label>
           <input
@@ -92,7 +92,7 @@ export const SignUp = () => {
             value={form.password}
             onChange={handleChange}
             />
-          <span className="inputs-errors">{errors.password}</span>
+          <span className="inputs-errors-signup">{errors.password}</span>
           <p className={`signup-password-${passDifficulty}`}>{passDifficulty}</p>
         </div>
 
