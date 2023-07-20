@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { getAllGames, getGamesByName } from "../../Redux/actions_creators";
 import { Modal } from "antd";
 import style from "./SearchBar.module.css";
@@ -19,7 +20,9 @@ const validation = (search) => {
 const SearchBar = () => {
   const [search, setSearch] = useState("");
   const [error, setError] = useState("");
+  const [modal, setModal] = useState(false);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleSearch = (event) => {
     const { value } = event.target;
@@ -44,18 +47,24 @@ const SearchBar = () => {
     }
   };
 
+  const handleModalSearch = () => {
+    setModal(modal === true ? false : true);
+  };
+
   const handleKey = (event) => {
     if (event.key === "Enter") {
       event.preventDefault();
+      navigate("/games");
+      /* setModal(true); */
       if (Object.keys(error).length) {
         alert("The field doesn't admit numbers");
       } else {
         if (!search) {
+          navigate("/games");
           dispatch(getAllGames());
           setSearch("");
         } else {
           dispatch(getGamesByName(search));
-          /* setPages(1); */
           setSearch("");
         }
       }
@@ -63,16 +72,24 @@ const SearchBar = () => {
   };
 
   return (
-    <div className={style.searchContainer}>
-      <img src={searchIcon} alt="search button" width="15px" height="15px" />
-      <hr />
-      <input
-        className={style.inputSearch}
-        type="search"
-        placeholder="Search a Game"
-        onChange={handleSearch}
-        onKeyDown={handleKey}
-      />
+    <div>
+      <div className={style.searchContainer}>
+        <img src={searchIcon} alt="search button" width="15px" height="15px" />
+        <hr />
+        <input
+          className={style.inputSearch}
+          type="search"
+          placeholder="Search a Game"
+          onChange={handleSearch}
+          onKeyDown={handleKey}
+        />
+      </div>
+      {/* <ModalSearch
+        search={search}
+        handleModalSearch={handleModalSearch}
+        modal={modal}
+        handleKey={handleKey}
+      /> */}
     </div>
   );
 };

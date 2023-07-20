@@ -5,11 +5,13 @@ import style from "./User.module.css";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { useAuth } from "../Auth/authContext";
 
 const User = () => {
   const { id } = useParams();
   const [user, setUser] = useState({});
   const darkMode = useSelector((state) => state.darkMode);
+  const { userAuth } = useAuth();
 
   useEffect(() => {
     /*     try {
@@ -36,8 +38,8 @@ const User = () => {
       <div className={style.userImg}>
         <img src={userSvg} alt="user logo" />
         <div>
-          <h1>User´s name</h1>
-          <h2>email@email.com</h2>
+          <h4>{userAuth.displayName}</h4>
+          <h2>{userAuth.email}</h2>
         </div>
       </div>
       <UserMenu darkMode={darkMode} />
