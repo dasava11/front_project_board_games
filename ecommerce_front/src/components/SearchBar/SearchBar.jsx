@@ -104,7 +104,7 @@ const SearchBar = () => {
                 className={style.itemModal}
                 onClick={handleEmptyModal}
               >
-                <img src={game.image[2]} alt="" width="100px" />
+                <img src={game.image[0]} alt="" width="100px" />
                 <h1>{game.name}</h1>
                 <div className={style.itemModalPrice}>
                   <p>Price</p>
