@@ -64,4 +64,5 @@ const ModalSearch = () => {
     );
   };
 };
+
 export default ModalSearch;
