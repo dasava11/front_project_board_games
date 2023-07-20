@@ -16,18 +16,12 @@ import {
   Input,
   Box,
 } from "@chakra-ui/react";
+import { useAuth } from "../../Auth/authContext";
+import { auth } from "../../Auth/firebase";
 
 const UserMenu = (props) => {
   const { darkMode } = props;
-
-  const initialData = {
-    id: 1,
-    name: "Kaleth",
-    email: "Kaleth@example.com",
-    password: "********",
-  };
-
-  const [user, setUser] = useState(initialData);
+  const { userAuth } = useAuth();
 
   const handleNameChange = (value) => {
     setUser((prevUser) => ({ ...prevUser, name: value }));
@@ -67,12 +61,12 @@ const UserMenu = (props) => {
                     </Tr>
                   </Thead>
                   <Tbody>
-                    <Tr key={user.id}>
+                    <Tr key={userAuth.email}>
                       <Td>
                         <Input
                           size="sm"
                           w="120px"
-                          value={user.name}
+                          value={userAuth.displayName}
                           onChange={(e) => handleNameChange(e.target.value)}
                         />
                       </Td>
@@ -80,7 +74,7 @@ const UserMenu = (props) => {
                         <Input
                           size="sm"
                           w="180px"
-                          value={user.email}
+                          value={userAuth.email}
                           onChange={(e) => handleEmailChange(e.target.value)}
                         />
                       </Td>
@@ -88,7 +82,7 @@ const UserMenu = (props) => {
                         <Input
                           size="sm"
                           w="100px"
-                          value={user.password}
+                          value="******"
                           onChange={(e) => handlePasswordChange(e.target.value)}
                         />
                       </Td>
@@ -121,6 +115,7 @@ const UserMenu = (props) => {
                 </Table>
           </TabPanel>
         </TabPanels>
+        <button>Editar</button>
       </Tabs>
     </div>
   );
