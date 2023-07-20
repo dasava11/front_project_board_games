@@ -133,17 +133,6 @@ export const EditProductForm = () => {
     setProduct({ [e.target.name]: "" });
   };
 
-  const handleSwitch = async (game_id) => {
-    await axios
-      .put(
-        `https://backprojectboardgames-production.up.railway.app/games/delete/${game_id}`
-      )
-      .then((res) =>
-        res.status === 200 ? toast.success(res.data.message) : null
-      )
-      .catch((err) => toast.error(err));
-  };
-
   const handleChange = (e) => {
     setProduct({ ...product, [e.target.name]: e.target.value });
     setError(validationsEdit(product));
@@ -279,11 +268,9 @@ export const EditProductForm = () => {
         <ModifyOnSale
           product={product}
           setProduct={setProduct}
-          handleSwitch={handleSwitch}
           handleSwitchOnSale={handleSwitchOnSale}
         />
       </div>
-
       <div className={style.formContainerEdit}>
         <div className={style.mainContainer}>
           {product && (

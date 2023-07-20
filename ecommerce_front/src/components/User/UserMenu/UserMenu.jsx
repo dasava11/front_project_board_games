@@ -23,25 +23,31 @@ import {
 } from "@chakra-ui/react";
 import { useAuth } from "../../Auth/authContext";
 import { auth } from "../../Auth/firebase";
-const VITE_URL_USERS = import.meta.env.VITE_URL_USERS;
+const VITE_URL_PAYPAL = import.meta.env.VITE_URL_PAYPAL;
 
 const UserMenu = (props) => {
   const dispatch = useDispatch();
   const { darkMode, user } = props;
   const { userAuth } = useAuth();
   const [fav, setFav] = useState();
+  const [purchases, setPurchases] = useState([]);
 
-  const handleNameChange = (value) => {
-    setUser((prevUser) => ({ ...prevUser, name: value }));
-  };
+    useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const res = await axios.get(VITE_URL_PAYPAL);
+        const userPurchases = res.data.filter(
+          (purchase) => purchase.user_id === userAuth.uid
+        );
 
-  const handleEmailChange = (value) => {
-    setUser((prevUser) => ({ ...prevUser, email: value }));
-  };
+        setPurchases(userPurchases);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
 
-  const handlePasswordChange = (value) => {
-    setUser((prevUser) => ({ ...prevUser, password: value }));
-  };
+    fetchData();
+  }, [userAuth.uid]);
 
   return (
     <div className={style.userMenuContainer}>
@@ -65,26 +71,20 @@ const UserMenu = (props) => {
                     <Tr>
                       <Th>Name</Th>
                       <Th>Adress</Th>
-                      <Th>Password</Th>
+                      <Th>Password </Th>
                     </Tr>
                   </Thead>
                   <Tbody>
                     <Tr key={user.email}>
                       <Td>
-                        <Input
-                          size="sm"
-                          w="120px"
-                          value={user.name}
-                          onChange={(e) => handleNameChange(e.target.value)}
-                        />
+                        <h2>{user.name}</h2>
                       </Td>
                       <Td>
                         <Input
                           size="sm"
-                          w="180px"
+                          w="80px"
                           value={user.street}
-                          onChange={(e) => handleEmailChange(e.target.value)}
-                        />
+                          />
                       </Td>
                       <Td>
                         <NavLink>Change password</NavLink>
@@ -102,7 +102,26 @@ const UserMenu = (props) => {
                   <Th>Purchases</Th>
                 </Tr>
               </Thead>
-              <Tbody></Tbody>
+              <Tbody>
+                {purchases.map((purchase, index) => (
+                    <Tr key={index}>
+                      <Td>
+                        <ul className={style.purchases}>
+                          {purchase.description.map((item, itemIndex) => (
+                            <li key={itemIndex}>
+                              <h4>Name: {item.name}</h4>
+                              <h5>Price: {item.price}</h5>
+                              <h5>Quantity: {item.quantity}</h5>
+                            </li>
+                          ))}
+                        </ul>
+                      </Td>
+                      <Td>
+                        <h4>Total amount: {purchase.total_amount}$</h4>
+                      </Td>
+                    </Tr>
+                  ))}
+              </Tbody>
             </Table>
           </TabPanel>
           <TabPanel>
@@ -118,7 +137,6 @@ const UserMenu = (props) => {
             </Table>
           </TabPanel>
         </TabPanels>
-        <button>Editar</button>
       </Tabs>
     </div>
   );

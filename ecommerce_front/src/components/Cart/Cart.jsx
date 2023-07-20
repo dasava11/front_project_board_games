@@ -107,15 +107,9 @@ const Cart = () => {
                     </button>
                   </div>
                   <div>
-                    {game.on_sale === false ? (
-                      <h1 className={styles.priceOrder}>
-                        $ {(game.price * game.count).toFixed(2)} USD
-                      </h1>
-                    ) : (
-                      <h1 className={styles.priceOrder}>
-                        $ {(game.price * 0.8 * game.count).toFixed(2)} USD
-                      </h1>
-                    )}
+                    <h1 className={styles.priceOrder}>
+                      $ {(game.price * game.count).toFixed(2)} USD
+                    </h1>
                   </div>
                 </div>
               );
@@ -140,15 +134,11 @@ const Cart = () => {
               </h1>
               {order &&
                 order.map((game) => {
-                  /*  if (game.on_sale === true) {
-                    game.price = game.price * 0.8;
-                  } */
                   suma = suma + Number(game.price * game.count);
                 })}
               <h1 className={styles.totalPriceOrder}>${suma.toFixed(2)} USD</h1>
             </div>
             <button
-              //disabled={order.length < 1 ? true : false}
               className={styles.gameDeleteByOrder}
               onClick={() => handleCheckout()}
             >
