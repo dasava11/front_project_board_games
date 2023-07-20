@@ -44,19 +44,19 @@ const Navbar = () => {
             Games
           </NavLink>
         </li>
-{
-  (role === 'admin') &&
-        <li>
-          <NavLink
-            to="/admin"
-            className={({ isActive }) =>
-            isActive ? style.active : style.disable
-          }
-          >
-            Menu Admin
-          </NavLink>
-        </li>
-}
+        {
+          // (role === 'admin') &&
+          <li>
+            <NavLink
+              to="/admin"
+              className={({ isActive }) =>
+                isActive ? style.active : style.disable
+              }
+            >
+              Menu Admin
+            </NavLink>
+          </li>
+        }
       </ul>
       <div className={style.navBarIcons}>
         <button>

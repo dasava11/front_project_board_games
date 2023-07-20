@@ -17,7 +17,7 @@
     align-items: center;
     background-color: #f5f5f5;
     border:1px solid rgb(211, 209, 209);
-    width: 70%;
+    width: 80%;
     padding: 3rem;
     margin: 7rem;
     border-radius: 4px;
@@ -99,7 +99,7 @@
     width: 100%;
 }
 .labels{
-    margin:3px;
+    margin:2px;
     font-size: 16px;
 }
 .inputEdit{

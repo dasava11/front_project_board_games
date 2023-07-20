@@ -31,14 +31,14 @@ export const UserId = () => {
     setRole({ Role: { role_name: value } });
     console.log(role);
   };
-  console.log(userIdInfo);
+
   const handleSendRole = async (e) => {
     e.preventDefault();
     const newRole = {
       user_id: userIdInfo.user_id,
       role_name: role.role_name,
     };
-    console.log(newRole);
+
     await axios
       .put(
         `https://backprojectboardgames-production.up.railway.app/users/`,
@@ -235,10 +235,11 @@ export const UserId = () => {
             </label>
           </div>
           <div>
-            <label className={styles.label}>Whishlist</label>
+            <br />
+            <label className={styles.labelFav}>Whishlist</label>
             <span>
               {userIdInfo.wish_list?.length > 0 ? (
-                userIdInfo.wish_list.map((w) => <h4>w.name</h4>)
+                userIdInfo.wish_list.map((w) => <h4>{w.name}</h4>)
               ) : (
                 <span
                   style={{

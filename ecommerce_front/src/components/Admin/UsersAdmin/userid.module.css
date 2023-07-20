@@ -26,10 +26,13 @@
   display: flex;
   justify-content: center;
 }
-.infoUserContainer{
- 
- 
- 
+.labelFav{
+  font-size: large;
+  text-decoration: solid;
+  background-color:#000035;
+  color: #ffffff;
+  padding: 0.5rem;
+  border-radius: 4px;
 }
 .label{
  color:#000035;
@@ -41,9 +44,7 @@
   flex-direction: row;
 }
 
-.roleCard{
 
-}
 .roleButton{
   height: 30px;
   margin: 20px;

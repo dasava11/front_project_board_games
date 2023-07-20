@@ -16,8 +16,8 @@ export const UsersAdmin = () => {
     dispatch(getAllUsers());
   }, [users]);
 
-  const handleSwitch = async (user_id) => {
-    await axios
+  const handleSwitch = (user_id) => {
+    axios
       .delete(
         `https://backprojectboardgames-production.up.railway.app/users/${user_id}`
       )
@@ -27,9 +27,9 @@ export const UsersAdmin = () => {
       .catch((err) => toast.error(err.message));
   };
 
-  const handleSwitchActivate = async (user_id) => {
+  const handleSwitchActivate = (user_id) => {
     const info = { user_id, active: true };
-    await axios
+    axios
       .put(
         "https://backprojectboardgames-production.up.railway.app/users/",
         info
