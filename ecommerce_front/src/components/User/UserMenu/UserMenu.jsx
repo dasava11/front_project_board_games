@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import style from "./UserMenu.module.css";
 import {
   Tabs,
@@ -17,11 +17,32 @@ import {
   Box,
 } from "@chakra-ui/react";
 import { useAuth } from "../../Auth/authContext";
-import { auth } from "../../Auth/firebase";
+import axios from "axios";
+
+const VITE_URL_PAYPAL = import.meta.env.VITE_URL_PAYPAL;
 
 const UserMenu = (props) => {
   const { darkMode } = props;
   const { userAuth } = useAuth();
+  const [purchases, setPurchases] = useState([]); // Estado para almacenar las compras del usuario
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const res = await axios.get(VITE_URL_PAYPAL);
+        // Filtrar las compras que pertenecen al usuario actual
+        const userPurchases = res.data.filter(
+          (purchase) => purchase.user_id === userAuth.uid
+        );
+
+        setPurchases(userPurchases);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
+  }, [userAuth.uid]); // Asegurarse de que la solicitud se realice cuando cambie el uid del usuario
 
   const handleNameChange = (value) => {
     setUser((prevUser) => ({ ...prevUser, name: value }));
@@ -86,6 +107,7 @@ const UserMenu = (props) => {
                           onChange={(e) => handlePasswordChange(e.target.value)}
                         />
                       </Td>
+                      <button>Editar</button>
                     </Tr>
                   </Tbody>
                 </Table>
@@ -93,29 +115,37 @@ const UserMenu = (props) => {
             </Box>
           </TabPanel>
           <TabPanel>
-            <Table size="sm">
-                  <Thead>
-                    <Tr>
-                      <Th>Purchases</Th>
+            <Box maxW="800px" mx="auto" overflowX="auto">
+              <Table size="sm" overflowY="auto" maxHeight="400px">
+                <Thead>
+                    <Th>Purchases</Th>
+                </Thead>
+                <Tbody>
+                  {purchases.map((purchase, index) => (
+                    <Tr key={index}>
+                      <Td>
+                        <ul className={style.purchases}>
+                          {purchase.description.map((item, itemIndex) => (
+                            <li key={itemIndex}>
+                              <h4>Name: {item.name}</h4>
+                              <h5>Price: {item.price}</h5>
+                              <h5>Quantity: {item.quantity}</h5>
+                            </li>
+                          ))}
+                        </ul>
+                      </Td>
+                      <Td>
+                        <h4>Total amount: {purchase.total_amount}$</h4>
+                      </Td>
                     </Tr>
-                  </Thead>
-                  <Tbody>
-                  </Tbody>
-                </Table>
+                  ))}
+                </Tbody>
+              </Table>
+            </Box>
           </TabPanel>
           <TabPanel>
-            <Table size="sm">
-              <Thead>
-                <Tr>
-                  <Th>Wish</Th>
-                    </Tr>
-              </Thead>
-                  <Tbody>
-                  </Tbody>
-                </Table>
           </TabPanel>
         </TabPanels>
-        <button>Editar</button>
       </Tabs>
     </div>
   );
