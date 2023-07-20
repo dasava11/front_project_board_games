@@ -102,7 +102,7 @@ export const EditProductForm = () => {
       .catch((err) => {
         console.log(err);
       });
-  }, []);
+  }, [product]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -135,7 +135,9 @@ export const EditProductForm = () => {
 
   const handleSwitch = async (game_id) => {
     await axios
-      .put(VITE_URL_GAMES_DELETE`${game_id}`)
+      .put(
+        `https://backprojectboardgames-production.up.railway.app/games/delete/${game_id}`
+      )
       .then((res) =>
         res.status === 200 ? toast.success(res.data.message) : null
       )
@@ -262,7 +264,7 @@ export const EditProductForm = () => {
   const handleSwitchOnSale = async (game_id) => {
     await axios
       .put(
-        `https://backprojectboardgames-production.up.railway.app/games/delete/${game_id}`
+        `https://backprojectboardgames-production.up.railway.app/games/${game_id}`
       )
       .then((res) =>
         res.status === 200 ? toast.success(res.data.message) : null

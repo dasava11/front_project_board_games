@@ -1,9 +1,35 @@
-import React from "react";
+import React, { useState } from "react";
 import style from "./editform.module.css";
 import { Switch } from "antd";
+import axios from "axios";
+import { toast } from "react-toastify";
 export const ModifyOnSale = (props) => {
   const { product, setProduct, handleSwitch, handleSwitchOnSale } = props;
-
+  const [switchState, setSwitchState] = useState(true);
+  const handleSwitchActivate = async (product) => {
+    const productAct = {
+      ...product,
+      active: true,
+      author_name: product.Author.author_name,
+      editorial_name: product.Editorial.editorial_name,
+      categories_name: product.Categories.map((cat) => cat.category_name),
+      designers_name: product.Designers.map((des) => des.designer_name),
+      mechanics_name: product.Mechanics.map((mec) => mec.mechanic_name),
+      thematics_name: product.Thematics.map((t) => t.thematic_name),
+      languages_name: product.Languages.map((lan) => lan.language_name),
+      active: true,
+    };
+    console.log(productAct);
+    await axios
+      .put(
+        "https://backprojectboardgames-production.up.railway.app/games",
+        productAct
+      )
+      .then((res) =>
+        res.status === 200 ? toast.success(res.data.message) : null
+      )
+      .catch((err) => console.error(err));
+  };
   return (
     <div>
       <div className={style.buttonEdition}>
@@ -11,7 +37,7 @@ export const ModifyOnSale = (props) => {
           <div className={style.switchButton}>
             <h6>Deactivate product</h6>
             <Switch
-              checked
+              checked={switchState}
               onChange={() => {
                 handleSwitch(product.game_id);
               }}
@@ -21,9 +47,8 @@ export const ModifyOnSale = (props) => {
           <div className={style.switchButton}>
             <h6>Activate product</h6>
             <Switch
-              checked={false}
               onChange={() => {
-                handleSwitch(product.game_id);
+                handleSwitchActivate(product);
               }}
             />
           </div>
