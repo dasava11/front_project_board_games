@@ -36,5 +36,7 @@
 
 }
 .purchTr{}
-.tH{}
+.tH{
+    text-align:left;
+}
 .purchaseBody{}
