@@ -135,7 +135,7 @@ const UserMenu = (props) => {
                         </ul>
                       </Td>
                       <Td>
-                        <h4>Total amount: {purchase.total_amount}$ </h4>
+                        <h4>Total amount: {purchase.total_amount}$</h4>
                       </Td>
                     </Tr>
                   ))}
