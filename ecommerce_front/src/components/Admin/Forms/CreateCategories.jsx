@@ -16,8 +16,8 @@ export const CreateCategories = (setIsOpen) => {
     const { name, value } = e.target;
     setInput({ ...input, [name]: value });
   };
-  const handleOk = () => {
-    console.log("hola");
+  const handleModal = () => {
+    setModalReviews(modalReviews === true ? false : true);
   };
 
   return (

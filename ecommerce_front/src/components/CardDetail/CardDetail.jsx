@@ -9,12 +9,12 @@ import shoppingCart from "../../Photos/plusCart.svg";
 import darkShoppingCart from "../../Photos/darkPlusCart.svg";
 import star from "../../Photos/star.png";
 import MoreDetail from "../MoreDetail/MoreDetail";
-import { ChevronDownIcon, ChevronUpIcon } from "@chakra-ui/icons";
 import useLocalStorage from "../LocalStorage/useLocalStorage";
 import { toast } from "react-toastify";
 import { useAuth } from "../Auth/authContext";
 import DetailGameCarousel from "../DetailGameCarousel/DetailGameCarousel";
-import TableDetailGame from "../TableDetailGame/TableDetailGame";
+import { Modal } from "antd";
+import FormReview from "../FormReview/FormReview";
 
 const VITE_URL_ALL_GAMES = import.meta.env.VITE_URL_ALL_GAMES;
 
@@ -27,6 +27,7 @@ const CardDetail = () => {
   const { userAuth, role } = useAuth();
   const navigate = useNavigate();
   const darkMode = useSelector((state) => state.darkMode);
+  const [modalReview, setModalReview] = useState(false);
 
   useEffect(() => {
     const fetchGameDetail = async () => {
@@ -66,6 +67,16 @@ const CardDetail = () => {
       setCart([...cart, game]);
       toast.success(`${game.name} added to cart`);
     }
+  };
+
+  const handleModal = () => {
+    setModalReview(modalReview === true ? false : true);
+  };
+
+  const handleSubmitReview = () => {
+    console.log("hola");
+
+    setModalReview(modalReview === true ? false : true);
   };
   return loading ? (
     <h1>Cargando...</h1>
@@ -194,18 +205,26 @@ const CardDetail = () => {
       <div className={style.reviewCardDetail}>
         <h2>Review</h2>
         {userAuth ? (
-          <div className={style.textAreaDetail}>
-            <textarea></textarea>
-            <button>Send</button>
-          </div>
+          <button id="modalReview" onClick={handleModal}>
+            leave a review
+          </button>
         ) : (
-          <spna>
+          <span>
             Only registered users can write comments. Please{" "}
             <NavLink to={"/login"}>login</NavLink> or{" "}
             <NavLink to={"/signup"}>create an account</NavLink>
-          </spna>
+          </span>
         )}
       </div>
+      <Modal
+        open={modalReview}
+        onCancel={handleModal}
+        onOk={handleSubmitReview}
+        footer={""}
+        title="Leave a Review"
+      >
+        <FormReview gameId={game.game_id} />
+      </Modal>
     </div>
   );
 };
