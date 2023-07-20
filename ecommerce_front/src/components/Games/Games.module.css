@@ -100,11 +100,71 @@
   justify-content: center;
   background-color: rgb(237, 237, 237);
   border-radius: 6px;
-  width: 1200px;
+  width: 75%;
   height: 500px;
-  margin: 50px 30px 0;
+  margin: 2rem auto 10rem;
 }
 
 .notFound span {
   color: rgb(27, 27, 27);
+}
+
+.darkNotFound {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: hsl(240, 34%, 16%, 100%);
+  border-radius: 6px;
+  width: 75%;
+  height: 500px;
+  margin: 2rem auto 10rem;
+  color: #dfdfdf;
+}
+
+.filtersDelete {
+  display: flex;
+  width: 75%;
+  margin: auto;
+  gap: 1rem;
+}
+
+.filtersDelete button {
+  border: 1px solid transparent;
+  border-bottom: 2px solid #fada5c;
+  background-color: transparent;
+  transition: 0.2s border-bottom ease;
+}
+
+.filtersDelete button:hover {
+  cursor: pointer;
+  border-bottom: 2px solid #ea1c1c;
+}
+
+.filtersDelteEmpty hr {
+  height: 20.5;
+}
+
+.darkFiltersDelete {
+  display: flex;
+  width: 75%;
+  margin: auto;
+  gap: 1rem;
+}
+
+.darkFiltersDelete button {
+  border: 1px solid transparent;
+  border-bottom: 2px solid #fada5c;
+  background-color: transparent;
+  transition: 0.2s border-bottom ease;
+  color: #dfdfdf;
+}
+
+.darkFiltersDelete button:hover {
+  cursor: pointer;
+  border-bottom: 2px solid #ea1c1c;
+}
+
+.filtersDelteEmpty hr {
+  height: 20.5;
 }
