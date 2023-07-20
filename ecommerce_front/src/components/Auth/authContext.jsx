@@ -141,15 +141,11 @@ export const AuthProvider = ({ children }) => {
     try {
       const { data } = await axios.get(`${userUrl}/${user_id}`);
 
-      const {
-        Role: { role_name },
-      } = data;
-
       setUserAuth({
         ...userAuth,
-        role: role_name,
+        role: data.Role.role_name,
       });
-      return role_name;
+      return data.Role.role_name;
     } catch ({ message }) {
       console.log(message);
     }
