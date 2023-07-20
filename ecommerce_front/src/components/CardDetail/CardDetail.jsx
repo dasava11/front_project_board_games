@@ -1,5 +1,5 @@
 import { createElement, useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
 import axios from "axios";
 import style from "../CardDetail/CardDetail.module.css";
@@ -12,6 +12,7 @@ import MoreDetail from "../MoreDetail/MoreDetail";
 import { ChevronDownIcon, ChevronUpIcon } from "@chakra-ui/icons";
 import useLocalStorage from "../LocalStorage/useLocalStorage";
 import { toast } from "react-toastify";
+import { useAuth } from "../Auth/authContext";
 import DetailGameCarousel from "../DetailGameCarousel/DetailGameCarousel";
 import TableDetailGame from "../TableDetailGame/TableDetailGame";
 
@@ -23,6 +24,7 @@ const CardDetail = () => {
   const [loading, setLoading] = useState(true);
   const [moreInfo, setMoreInfo] = useState(false);
   const [cart, setCart] = useLocalStorage("cart", []);
+  const { userAuth, role } = useAuth();
   const navigate = useNavigate();
   const darkMode = useSelector((state) => state.darkMode);
 
@@ -191,10 +193,18 @@ const CardDetail = () => {
       </div>
       <div className={style.reviewCardDetail}>
         <h2>Review</h2>
-        <div className={style.textAreaDetail}>
-          <textarea></textarea>
-          <button>Send</button>
-        </div>
+        {userAuth ? (
+          <div className={style.textAreaDetail}>
+            <textarea></textarea>
+            <button>Send</button>
+          </div>
+        ) : (
+          <spna>
+            Only registered users can write comments. Please{" "}
+            <NavLink to={"/login"}>login</NavLink> or{" "}
+            <NavLink to={"/signup"}>create an account</NavLink>
+          </spna>
+        )}
       </div>
     </div>
   );
