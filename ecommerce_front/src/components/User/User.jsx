@@ -32,7 +32,7 @@ const User = () => {
         <img src={userSvg} alt="user logo" />
         <div>
           {user && <h4>{userAuth.displayName}</h4>}
-          {user && <h2>{userAuth.email}</h2>}
+          {user && <h2>{userAuth.email} </h2>}
         </div>
       </div>
       <UserMenu darkMode={darkMode} user={user} />
