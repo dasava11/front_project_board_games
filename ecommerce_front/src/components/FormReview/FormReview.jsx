@@ -11,6 +11,8 @@ const FormReview = ({ gameId }) => {
   const [userId, setUserId] = useState();
   const [message, setMessage] = useState("");
 
+  console.log(stars);
+
   const handleOnChange = (e) => {
     setMessage(e.target.value);
   };
@@ -30,7 +32,7 @@ const FormReview = ({ gameId }) => {
       user_id: userId,
       game_id: gameId,
       comment: message,
-      raiting: Number.stars,
+      raiting: stars,
     };
     try {
       axios.post(VITE_URL_REVIEWS, reviewObj);
