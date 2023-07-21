@@ -25,7 +25,7 @@ export const LogIn = () => {
   const verifyUser = (id) => {
     if(!executed){
       axios
-      // .put(`http://localhost:3001/users/verifyemail/${id}`)
+      // .put(`https://backprojectboardgames-production.up.railway.app/users/verifyemail/${id}`)
       .put(`https://backprojectboardgames-production.up.railway.app/users/verifyemail/${searchParams.get('verify')}`)
         .then((res) => {
           if (res.status === 200) {

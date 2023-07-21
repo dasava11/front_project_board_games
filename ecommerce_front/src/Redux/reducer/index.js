@@ -15,12 +15,14 @@ import {
   GET_ROLES,
   SET_DARK_MODE,
   GET_USER_BY_ID,
+  GET_ALL_GAMES_ADMIN
 
 } from "../action-types/index";
 
 const initialState = {
   games: [],
   allGames: [],
+  allGamesAdmin: [],
   allAuthors: [],
   allCategories: [],
   allDesigners: [],
@@ -49,6 +51,13 @@ const rootReducer = (state = initialState, action) => {
         games: action.payload,
         allGames: action.payload,
       };
+
+      case GET_ALL_GAMES_ADMIN:
+        console.log("reducer");
+        return {
+          ...state,
+          allGamesAdmin: action.payload,
+        };
 
     case GET_GAMES_BY_NAMES:
       return {

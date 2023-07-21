@@ -14,35 +14,21 @@ export const UsersAdmin = () => {
   const navigate = useNavigate();
   useEffect(() => {
     dispatch(getAllUsers());
-  }, [users]);
+  }, []);
 
   const handleSwitch = (user_id) => {
-    axios
-      .delete(
-        `https://backprojectboardgames-production.up.railway.app/users/${user_id}`
-      )
+    console.log(user_id);
+    axios.delete(`https://backprojectboardgames-production.up.railway.app/users/${user_id}`)
       .then((res) =>
         res.status === 200 ? toast.success(res.data.message) : null
       )
+      
+      
       .catch((err) => toast.error(err.message));
+     
   };
 
-  const handleSwitchActivate = (user_id) => {
-    const info = { user_id, active: true };
-    axios
-      .put(
-        "https://backprojectboardgames-production.up.railway.app/users/",
-        info
-      )
-      .then((res) =>
-        res.status === 200 ? toast.success(res.data.message) : null
-      )
-      .catch((err) => toast.error(err));
-  };
-  const editUser = (e) => {
-    const { name, value } = e.target;
-    navigate(`/admin/userid/${value}`);
-  };
+ 
 
   return (
     <div className={style.mainContainerUser}>
@@ -80,7 +66,7 @@ export const UsersAdmin = () => {
                     {u.active === true ? (
                       <>
                         <Switch
-                          checked={switchState}
+                          defaultChecked={u.active}
                           style={{ margin: "6px" }}
                           onChange={() => {
                             handleSwitch(u.user_id);
@@ -92,7 +78,7 @@ export const UsersAdmin = () => {
                         <Switch
                           style={{ margin: "6px" }}
                           onChange={() => {
-                            handleSwitchActivate(u.user_id);
+                            handleSwitch(u.user_id);
                           }}
                         />
                       </>

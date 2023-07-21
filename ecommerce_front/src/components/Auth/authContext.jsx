@@ -16,8 +16,8 @@ import { auth } from "../Auth/firebase";
 import { toast } from "react-toastify";
 export const authContext = createContext();
 const userUrl = import.meta.env.VITE_URL_USERS;
-// const userUrl = 'http://localhost:3001/users';
-// const userUrlVerifyEmail = 'http://localhost:3001/users/verifyemail';
+// const userUrl = 'https://backprojectboardgames-production.up.railway.app/users';
+// const userUrlVerifyEmail = 'https://backprojectboardgames-production.up.railway.app/users/verifyemail';
 
 const URL_LOGIN = "https://front-project-board-games.vercel.app/login";
 
