@@ -43,7 +43,6 @@ export const EditProduct = () => {
       mechanics_name: product.Mechanics.map((mec) => mec.mechanic_name),
       thematics_name: product.Thematics.map((t) => t.thematic_name),
       languages_name: product.Languages.map((lan) => lan.language_name),
-      active: true,
     };
     await axios
       .put(

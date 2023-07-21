@@ -18,14 +18,15 @@ const Card = (props) => {
   const [fav, setFav] = useState();
 
   useEffect(() => {
-    const userIdAux = localStorage.getItem("user_id");
-    axios
-      .get(`${VITE_URL_USERS}/${userIdAux}`)
-      .then((res) => setFav(res.data.wish_list))
-      .then(() =>
-        setIsFav(fav.some((g) => parseInt(g.game_id) === parseInt(id)))
-      );
-    console.log(fav);
+    // const userIdAux = localStorage.getItem("user_id");
+    if (userAuth && userAuth.uid) {
+      axios
+        .get(`${VITE_URL_USERS}/${userAuth.uid}`)
+        .then((res) => setFav(res.data.wish_list))
+        .then(() =>
+          setIsFav(fav && fav.some((g) => parseInt(g.game_id) === parseInt(id)))
+        );
+    }
   }, [fav]);
 
   const handleFavorite = async (res) => {
