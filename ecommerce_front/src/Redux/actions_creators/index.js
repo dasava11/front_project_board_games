@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from 'axios';
 import {
   GET_ALL_GAMES,
   GET_CATEGORIES,
@@ -15,9 +15,12 @@ import {
   GET_ALL_PURCHASES,
   GET_USER_BY_ID,
   GET_ROLES,
-  SET_DARK_MODE
-} from "../action-types/index";
-import { toast } from "react-toastify";
+  SET_DARK_MODE,
+  FETCH_FAQ_DATA_REQUEST,
+  FETCH_FAQ_DATA_SUCCESS,
+  FETCH_FAQ_DATA_FAILURE,
+} from '../action-types/index';
+import { toast } from 'react-toastify';
 
 // const VITE_URL_GAMES = "http://localhost:3001/games";
 const VITE_URL_GAMES = import.meta.env.VITE_URL_GAMES;
@@ -58,7 +61,7 @@ export const postGames = (data) => {
   return async () => {
     try {
       await axios.post(VITE_URL_GAMES, data);
-      toast.success("The game was successfully created");
+      toast.success('The game was successfully created');
     } catch (error) {
       toast.error(error.message);
       console.error(error);
@@ -81,7 +84,7 @@ export const postCategories = (data) => {
   return async (dispatch) => {
     try {
       await axios.post(VITE_URL_CATEGORIES, data);
-      toast.success("The category was successfully created");
+      toast.success('The category was successfully created');
       dispatch(getCategories());
     } catch (error) {
       toast.error(error.message);
@@ -103,7 +106,7 @@ export const postAuthors = (data) => {
   return async (dispatch) => {
     try {
       await axios.post(VITE_URL_AUTHORS, data);
-      toast.success("Author was successfully created");
+      toast.success('Author was successfully created');
       dispatch(getAuthors());
     } catch (error) {
       toast.error(error.message);
@@ -125,7 +128,7 @@ export const postDesigners = (data) => {
   return async (dispatch) => {
     try {
       await axios.post(VITE_URL_DESIGNERS, data);
-      toast.success("Designer was successfully created");
+      toast.success('Designer was successfully created');
       dispatch(getDesigners());
     } catch (error) {
       toast.error(error.message);
@@ -147,7 +150,7 @@ export const postLanguages = (data) => {
   return async (dispatch) => {
     try {
       await axios.post(VITE_URL_LANGUAGES, data);
-      toast.success("Language was successfully created");
+      toast.success('Language was successfully created');
       dispatch(getLanguages());
     } catch (error) {
       toast.error(error.message);
@@ -169,7 +172,7 @@ export const postEditorials = (data) => {
   return async (dispatch) => {
     try {
       await axios.post(VITE_URL_EDITORIALS, data);
-      toast.success("Editorial was successfully created");
+      toast.success('Editorial was successfully created');
       dispatch(getEditorials());
     } catch (error) {
       toast.error(error.message);
@@ -192,7 +195,7 @@ export const postMechanics = (data) => {
   return async (dispatch) => {
     try {
       await axios.post(VITE_URL_MECHANICS, data);
-      toast.success("Mechanic was successfully created");
+      toast.success('Mechanic was successfully created');
       dispatch(getMechanics());
     } catch (error) {
       toast.error(error.message);
@@ -215,7 +218,7 @@ export const postThematics = (data) => {
   return async (dispatch) => {
     try {
       await axios.post(VITE_URL_THEMATICS, data);
-      toast.success("Thematic was successfully created");
+      toast.success('Thematic was successfully created');
       dispatch(getThematics());
     } catch (error) {
       toast.error(error.message);
@@ -262,36 +265,76 @@ export const getAllUsers = () => {
   };
 };
 
-
-export const getAllPurchases =()=>{
- return async (dispatch)=>{
-  try {
-    const resp=await axios.get(VITE_URL_GET_PURCHASES)
-    dispatch({ type: GET_ALL_PURCHASES, payload: response.data})
-  } catch(err){
-    console.error(err)
-  }
- }
-}
-export const getUserById=(id)=>{
-  return async (dispatch)=>{
- try {
-  const resp = await axios.get(`${VITE_URL_USERS}/${id}`)
-  dispatch({type: GET_USER_BY_ID, payload: resp.data})
- } catch (error) {
-  console.error(error)
- }
-  }
- };
-
- export const getRoles =()=>{
-  return async(dispatch)=>{
+export const getAllPurchases = () => {
+  return async (dispatch) => {
     try {
-      const resp= await axios.get("https://backprojectboardgames-production.up.railway.app/roles")
-      dispatch({type:GET_ROLES, payload:resp.data.roles})
-    } catch (error) {
-      console.error(error)
+      const resp = await axios.get(VITE_URL_GET_PURCHASES);
+      dispatch({ type: GET_ALL_PURCHASES, payload: response.data });
+    } catch (err) {
+      console.error(err);
     }
-  }
- }
+  };
+};
+export const getUserById = (id) => {
+  return async (dispatch) => {
+    try {
+      const resp = await axios.get(`${VITE_URL_USERS}/${id}`);
+      dispatch({ type: GET_USER_BY_ID, payload: resp.data });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+};
 
+export const getRoles = () => {
+  return async (dispatch) => {
+    try {
+      const resp = await axios.get(
+        'https://backprojectboardgames-production.up.railway.app/roles'
+      );
+      dispatch({ type: GET_ROLES, payload: resp.data.roles });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+};
+
+export const fetchFaqData = () => {
+  return (dispatch) => {
+    dispatch({ type: FETCH_FAQ_DATA_REQUEST });
+    axios
+      .get('http://localhost:3001/faqs')
+      .then((response) => {
+        dispatch({
+          type: FETCH_FAQ_DATA_SUCCESS,
+          payload: response.data,
+        });
+      })
+      .catch((error) => {
+        dispatch({
+          type: FETCH_FAQ_DATA_FAILURE,
+          payload: error.message,
+        });
+      });
+  };
+};
+
+export const searchFaqData = (searchTerm) => {
+  return (dispatch) => {
+    dispatch({ type: FETCH_FAQ_DATA_REQUEST });
+    axios
+      .get(`http://localhost:3001/faqs/search?question=${searchTerm}`)
+      .then((response) => {
+        dispatch({
+          type: FETCH_FAQ_DATA_SUCCESS,
+          payload: response.data,
+        });
+      })
+      .catch((error) => {
+        dispatch({
+          type: FETCH_FAQ_DATA_FAILURE,
+          payload: error.message,
+        });
+      });
+  };
+};

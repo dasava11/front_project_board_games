@@ -15,8 +15,10 @@ import {
   GET_ROLES,
   SET_DARK_MODE,
   GET_USER_BY_ID,
-
-} from "../action-types/index";
+  FETCH_FAQ_DATA_REQUEST,
+  FETCH_FAQ_DATA_SUCCESS,
+  FETCH_FAQ_DATA_FAILURE,
+} from '../action-types/index';
 
 const initialState = {
   games: [],
@@ -30,16 +32,20 @@ const initialState = {
   allThematics: [],
   allUsers: [],
   filter: {
-    mechanic_name: "",
-    thematic_name: "",
-    category_name: "",
+    mechanic_name: '',
+    thematic_name: '',
+    category_name: '',
   },
-  userDetail:{},
-  allRoles:[],
+  userDetail: {},
+  allRoles: [],
   allPurchases: [],
   darkMode: false,
-  userDetail: {},
 
+  // userDetail: {},
+
+  loading: false,
+  faqItems: [],
+  error: '',
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -95,21 +101,21 @@ const rootReducer = (state = initialState, action) => {
     case SORT_GAMES:
       let sortsGames = [];
 
-      if (action.payload === "order") {
+      if (action.payload === 'order') {
         sortsGames = state.allGames;
-      } else if (action.payload === "highest price") {
+      } else if (action.payload === 'highest price') {
         sortsGames = state.allGames?.sort((a, b) =>
-          Number(a.price.split(".")[0]) > Number(b.price.split(".")[0]) ? -1 : 1
+          Number(a.price.split('.')[0]) > Number(b.price.split('.')[0]) ? -1 : 1
         );
-      } else if (action.payload === "lowest price") {
+      } else if (action.payload === 'lowest price') {
         sortsGames = state.allGames?.sort((a, b) =>
-          Number(a.price.split(".")[0]) > Number(b.price.split(".")[0]) ? 1 : -1
+          Number(a.price.split('.')[0]) > Number(b.price.split('.')[0]) ? 1 : -1
         );
-      } else if (action.payload === "A-Z") {
+      } else if (action.payload === 'A-Z') {
         sortsGames = state.allGames?.sort((a, b) =>
           a.name.localeCompare(b.name)
         );
-      } else if (action.payload === "Z-A") {
+      } else if (action.payload === 'Z-A') {
         sortsGames = state.allGames?.sort((b, a) =>
           a.name.localeCompare(b.name)
         );
@@ -131,7 +137,7 @@ const rootReducer = (state = initialState, action) => {
 
       filterDeleted = state.games;
 
-      if (action.payload.mechanic_name !== "") {
+      if (action.payload.mechanic_name !== '') {
         filterDeleted = filterDeleted.filter((game) =>
           game.Mechanics?.some(
             (c) =>
@@ -151,7 +157,7 @@ const rootReducer = (state = initialState, action) => {
         };
         console.log(state.filter);
       }
-      if (action.payload.thematic_name !== "") {
+      if (action.payload.thematic_name !== '') {
         filterDeleted = filterDeleted.filter((game) =>
           game.Thematics?.some(
             (c) =>
@@ -172,7 +178,7 @@ const rootReducer = (state = initialState, action) => {
         console.log(state.filter);
       }
 
-      if (action.payload.category_name !== "") {
+      if (action.payload.category_name !== '') {
         filterDeleted = filterDeleted.filter((game) =>
           game.Categories?.some(
             (c) =>
@@ -198,33 +204,52 @@ const rootReducer = (state = initialState, action) => {
         allGames: filterDeleted,
       };
 
-
-case GET_ALL_PURCHASES:
-  return {
-    ...state,
-    allPurchases:action.payload
-  }
-  case GET_USER_BY_ID:
-    return {
-      ...state,
-      userDetail:action.payload
-    }
-    case GET_ROLES:
-      return{
+    case GET_ALL_PURCHASES:
+      return {
         ...state,
-        allRoles: action.payload
-      }
+        allPurchases: action.payload,
+      };
+    case GET_USER_BY_ID:
+      return {
+        ...state,
+        userDetail: action.payload,
+      };
+    case GET_ROLES:
+      return {
+        ...state,
+        allRoles: action.payload,
+      };
 
     case GET_ALL_USERS:
       return {
         ...state,
         allUsers: action.payload,
       };
-   
+
+    /*
     case GET_USER_BY_ID:
       return {
         ...state,
         userDetail: action.payload,
+      };
+*/
+
+    case FETCH_FAQ_DATA_REQUEST:
+      return {
+        ...state,
+        loading: true,
+      };
+    case FETCH_FAQ_DATA_SUCCESS:
+      return {
+        loading: false,
+        faqItems: action.payload,
+        error: '',
+      };
+    case FETCH_FAQ_DATA_FAILURE:
+      return {
+        loading: false,
+        faqItems: [],
+        error: action.payload,
       };
 
     default:
