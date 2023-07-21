@@ -18,13 +18,11 @@ const Reviews = ({ gameId }) => {
 
         setReviews(data[0].Reviews);
       } catch (error) {
-        console.log(error);
       }
     };
     fetchData();
   }, [data]);
 
-  console.log(reviews);
   return (
     <div>
       {reviews.map((r) => {

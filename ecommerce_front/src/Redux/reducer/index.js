@@ -38,7 +38,6 @@ const initialState = {
   allRoles:[],
   allPurchases: [],
   darkMode: false,
-  userDetail: {},
 
 };
 
@@ -221,11 +220,6 @@ case GET_ALL_PURCHASES:
         allUsers: action.payload,
       };
    
-    case GET_USER_BY_ID:
-      return {
-        ...state,
-        userDetail: action.payload,
-      };
 
     default:
       return state;
