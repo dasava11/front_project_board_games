@@ -233,7 +233,7 @@ const CardDetail = () => {
           </span>
         )}
       </div>
-      <div>{userAuth && data && <Reviews data={data} />}</div>
+      {/* <div>{userAuth && data && <Reviews data={data} />}</div> */}
       <Modal
         open={modalReview}
         onOk={handleSubmitReview}
