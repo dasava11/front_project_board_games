@@ -34,7 +34,7 @@ export const Header = () => {
   useEffect(() => {
     const token = window.localStorage.getItem("token");
     const userIdAux = localStorage.getItem("userId");
-    console.log(localStorage.getItem("userId"));
+
     axios
       .get(`${VITE_URL_USERS}/${userIdAux}`)
       .then((res) => setUser(res.data));
@@ -44,8 +44,6 @@ export const Header = () => {
     dispatch(setDarkMode(e));
     document.body.classList.toggle("dark");
   };
-
-  console.log(auth.currentUser);
 
   return (
     <div>

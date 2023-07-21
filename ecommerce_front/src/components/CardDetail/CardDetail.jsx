@@ -15,6 +15,7 @@ import { useAuth } from "../Auth/authContext";
 import DetailGameCarousel from "../DetailGameCarousel/DetailGameCarousel";
 import { Modal } from "antd";
 import FormReview from "../FormReview/FormReview";
+import Reviews from "../Reviews/Reviews";
 
 const VITE_URL_ALL_GAMES = import.meta.env.VITE_URL_ALL_GAMES;
 
@@ -222,6 +223,7 @@ const CardDetail = () => {
           </span>
         )}
       </div>
+      <div>{userAuth && <Reviews gameId={game.game_id} />}</div>
       <Modal
         open={modalReview}
         onCancel={handleModal}
