@@ -1,15 +1,22 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import emailjs from "@emailjs/browser";
 import { useDispatch, useSelector } from "react-redux";
 import style from "./sales.module.css";
 import { getAllPurchases } from "../../../Redux/actions_creators";
 import { Switch } from "antd";
+import { toast } from "react-toastify";
+
+
+const serviceId = import.meta.env.VITE_SERVICE_ID;
+const publicId = import.meta.env.VITE_YOUR_PUBLIC_KEY;
+const templateIdShipped = "template_hltdivo";
+const templateIdDelivered = "template_bvcs98q";
 
 
 export const Sales = () => {
   const dispatch = useDispatch();
   const sales = useSelector((state) => state.allPurchases);
-  const [isChecked, setIsChecked] = useState(false);
   const [filterSales,setFilterSales] = useState(sales);
   const [search, setSearch] = useState();
   let salesFiltered = [];
@@ -38,21 +45,45 @@ export const Sales = () => {
   };
 
 
-  const handleSwitch = async(checked, purchase_id, state) => {
+  const handleSwitch = async(checked, sale) => {
 
-    console.log('state')
-    console.log(state)
+    if(sale.state === 'Preparing'){
+      // await axios.put('http://localhost:3001/purchase/state',{purchase_id:sale.purchase_id, state:"Shipped"})
+      await axios.put('https://backprojectboardgames-production.up.railway.app/purchase/state',{purchase_id:sale.purchase_id, state:"Shipped"})
 
-    if(state === 'Preparing'){
-      // await axios.put('http://localhost:3001/purchase/state',{purchase_id:purchase_id, state:"Shipped"})
-      await axios.put('https://backprojectboardgames-production.up.railway.app/purchase/state',{purchase_id:purchase_id, state:"Shipped"})
+      const templateParamsShipped = {
+        user_name: sale.name,
+        message: "Your order has been dispatched.",
+        user_email: sale.email,
+      };
+      emailjs.send(serviceId, templateIdShipped, templateParamsShipped, publicId).then(
+        function (response) {},
+        function (error) {
+          console.log("FAILED...", error);
+        }
+      );
+      toast.success("The email has been sent!");
+
       dispatch(getAllPurchases());
-    console.log('Shipped')
-
     }
-    if(state === 'Shipped'){
-      // await axios.put('http://localhost:3001/purchase/state',{purchase_id:purchase_id, state:"Delivered"})
-      await axios.put('https://backprojectboardgames-production.up.railway.app/purchase/state',{purchase_id:purchase_id, state:"Delivered"})
+    if(sale.state === 'Shipped'){
+      // await axios.put('http://localhost:3001/purchase/state',{purchase_id:sale.purchase_id, state:"Delivered"})
+      await axios.put('https://backprojectboardgames-production.up.railway.app/purchase/state',{purchase_id:sale.purchase_id, state:"Delivered"})
+
+
+      const templateParamsDelivered= {
+        user_name: sale.name,
+        message: "Your order has been delivered.",
+        user_email: sale.email,
+      };
+      emailjs.send(serviceId, templateIdDelivered, templateParamsDelivered, publicId).then(
+        function (response) {},
+        function (error) {
+          console.log("FAILED...", error);
+        }
+      );
+      toast.success("The email has been sent!");
+
       dispatch(getAllPurchases());
     console.log('Delivered')
 
@@ -107,12 +138,12 @@ export const Sales = () => {
                   <td className={style.tH}>{sale.state}</td>
                   <th className={style.tH}>
                     <div key={sale.id}>
-                      <Switch checked={sale.state !== 'Preparing'} disabled={sale.state !== 'Preparing'} onChange={(checked) => handleSwitch(checked,sale.purchase_id,sale.state)} />
+                      <Switch checked={sale.state !== 'Preparing'} disabled={sale.state !== 'Preparing'} onChange={(checked) => handleSwitch(checked,sale)} />
                     </div>
                   </th>
                   <th className={style.tH}>
                     <div key={sale.id}>
-                      <Switch checked={sale.state === 'Delivered'} disabled={sale.state !== 'Shipped'} onChange={(checked) => handleSwitch(checked,sale.purchase_id,sale.state)} />
+                      <Switch checked={sale.state === 'Delivered'} disabled={sale.state !== 'Shipped'} onChange={(checked) => handleSwitch(checked,sale)} />
                     </div>
                   </th>
                 </tr>
