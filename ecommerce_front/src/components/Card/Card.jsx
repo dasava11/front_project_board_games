@@ -17,17 +17,17 @@ const Card = (props) => {
   const { userAuth } = useAuth();
   const [fav, setFav] = useState();
 
-  useEffect(() => {
-    // const userIdAux = localStorage.getItem("user_id");
-    if (userAuth && userAuth.uid) {
-      axios
-        .get(`${VITE_URL_USERS}/${userAuth.uid}`)
-        .then((res) => setFav(res.data.wish_list))
-        .then(() =>
-          setIsFav(fav && fav.some((g) => parseInt(g.game_id) === parseInt(id)))
-        );
-    }
-  }, [fav]);
+  // useEffect(() => {
+  //   // const userIdAux = localStorage.getItem("user_id");
+  //   if (userAuth && userAuth.uid) {
+  //     axios
+  //       .get(`${VITE_URL_USERS}/${userAuth.uid}`)
+  //       .then((res) => setFav(res.data.wish_list))
+  //       .then(() =>
+  //         setIsFav(fav && fav.some((g) => parseInt(g.game_id) === parseInt(id)))
+  //       );
+  //   }
+  // }, [fav]);
 
   const handleFavorite = async (res) => {
     try {
