@@ -15,8 +15,8 @@ import {
 import { auth } from "../Auth/firebase";
 import { toast } from "react-toastify";
 export const authContext = createContext();
-// const userUrl = import.meta.env.VITE_URL_USERS;
-const userUrl = 'http://localhost:3001/users';
+const userUrl = import.meta.env.VITE_URL_USERS;
+// const userUrl = 'http://localhost:3001/users';
 // const userUrlVerifyEmail = 'http://localhost:3001/users/verifyemail';
 
 
@@ -38,6 +38,8 @@ export const AuthProvider = ({ children }) => {
   const signup = async (name, email, password) => {
     await createUserWithEmailAndPassword(auth, email, password).then(
       ({ user }) => {
+        console.log('user')
+        console.log(user)
         axios
           .post(userUrl, {
             user_id: user.uid,
@@ -62,8 +64,8 @@ export const AuthProvider = ({ children }) => {
   };
 
   const sendEmail = (name, email, uid) => {
-    const link = "http://localhost:5173/login?verify=" + uid;
-    // const link ="https://front-project-board-games.vercel.app/login?verify=" + uid;
+    // const link = "http://localhost:5173/login?verify=" + uid;
+    const link ="https://front-project-board-games.vercel.app/login?verify=" + uid;
 
     const templateParams = {
       user_name: name,
@@ -108,21 +110,27 @@ export const AuthProvider = ({ children }) => {
 
     const { user } = credentials;
 
-    console.llog('credentials')
-    console.llog(credentials)
-    console.llog('user')
-    console.llog(user)
+    console.log('credentials')
+    console.log(credentials)
+    console.log('user')
+    console.log(user)
     let role = "";
-    /////
-      //   if (user) {
-      // axios
-      //   .get(`${userUrl}/${user.uid}`)
-      //   .then(({ data }) => {
-      //     window.localStorage.setItem("role", data.Role.role_name);
-      //     setUserAuth(data.Role.role_name);
-      //   })
-////
 
+    //////////////////
+        if (user) {
+        console.log('user')
+        console.log(user)
+      axios
+        .get(`${userUrl}/${user.uid}`)
+        .then(({ data }) => {
+          console.log('data')
+          console.log(data)
+          window.localStorage.setItem("role", data.Role.role_name);
+          setUserAuth({...userAuth, displayName: data.name});
+        window.localStorage.setItem("displayName", data.name);
+        })
+      }
+////////////////////////
     if (!user.emailVerified) {
       await signOut(auth);
       window.localStorage.removeItem("token");
@@ -170,6 +178,7 @@ export const AuthProvider = ({ children }) => {
     try {
       setRole("client");
       window.localStorage.removeItem("role");
+      window.localStorage.removeItem("displayName");
       await signOut(auth);
       window.localStorage.removeItem("token");
       toast.success("Log out succesfull");
@@ -182,6 +191,7 @@ export const AuthProvider = ({ children }) => {
     const googleProvider = new GoogleAuthProvider();
 
     const { user } = await signInWithPopup(auth, googleProvider);
+    window.localStorage.setItem("displayName", user.displayName);
 
     if (user) {
       axios
