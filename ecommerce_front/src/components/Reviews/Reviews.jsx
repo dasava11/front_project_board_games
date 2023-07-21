@@ -3,6 +3,7 @@ import style from "./Reviews.module.css";
 import { Rate } from "antd";
 
 const Reviews = ({ reviews }) => {
+  console.log(reviews);
   return (
     reviews && (
       <div className={style.cardReviewDetail}>
