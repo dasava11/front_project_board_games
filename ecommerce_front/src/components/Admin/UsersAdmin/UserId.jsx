@@ -2,48 +2,34 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { getUserById, getRoles } from "../../../Redux/actions_creators";
-import { DeleteIcon } from "@chakra-ui/icons";
 import axios from "axios";
-import { Select } from "antd";
 import { toast } from "react-toastify";
 
 import styles from "./userid.module.css";
 const VITE_URL_USERS = import.meta.env.VITE_URL_USERS;
 
-const { Option } = Select;
 export const UserId = () => {
   const userIdInfo = useSelector((state) => state.userDetail);
   const roles = useSelector((state) => state.allRoles);
-  const [role, setRole] = useState();
+  const [role, setRole] = useState(userIdInfo.Role?.role_name);
   const [user, setUser] = useState({});
   const { id } = useParams();
   const dispatch = useDispatch();
-  //  if (e.target.name === "author_name") {
-  //       product.Author.author_name = "";
-  //       setProduct({ ...product, Author: { author_name: "" } });
-  const handleDeleteRole = async () => {
-    userIdInfo.Role.role_name = "";
-    setRole({ ...role, Role: { role_name: "" } });
-  };
+
   const handleChangeRole = (e) => {
     const { name, value } = e.target;
-    console.log("aca value", value); //hasta aca llega
-    setRole({ Role: { role_name: value } });
-    console.log(role);
+    setRole(value);
   };
 
-  const handleSendRole = async (e) => {
+  const handleSendRole = (e) => {
     e.preventDefault();
     const newRole = {
       user_id: userIdInfo.user_id,
-      role_name: role.role_name,
+      role_name: role,
     };
 
-    await axios
-      .put(
-        `https://backprojectboardgames-production.up.railway.app/users/`,
-        newRole
-      )
+    axios
+      .put(VITE_URL_USERS, newRole)
       .then((res) =>
         res.status === 200 ? toast.success(res.data.message) : null
       )
@@ -53,32 +39,15 @@ export const UserId = () => {
     dispatch(getUserById(id));
     dispatch(getRoles());
   }, []);
-
+  console.log(userIdInfo);
   return (
     <>
       <h1 className={styles.titleUser}>User's Information</h1>
       <div className={styles.cards}>
         <div className={styles.mainContainerUser}>
           <div className={styles.roleCard}>
-            <label>Current Role:</label>
-            {userIdInfo.Role?.role_name ? (
-              <button
-                onClick={handleDeleteRole}
-                type="button"
-                name="role_name"
-                className={styles.roleButton}
-              >
-                {userIdInfo.Role?.role_name}
-                <DeleteIcon style={{ marginLeft: "2rem" }} />
-              </button>
-            ) : (
-              <button type="button" name="role" className={styles.roleButton}>
-                No current role
-              </button>
-            )}
-
             <form onSubmit={(e) => handleSendRole(e)}>
-              <label>Select new Role</label>
+              <label>Current Role</label>
               <select
                 onChange={handleChangeRole}
                 name="role_name"
@@ -90,16 +59,18 @@ export const UserId = () => {
                 }}
                 placeholder="Select a new role"
               >
-                {roles &&
-                  roles?.map((r) => {
-                    return (
-                      <>
-                        <option key={r.role_id} value={r.role_name}>
-                          {r.role_name}
-                        </option>
-                      </>
-                    );
-                  })}
+                <option
+                  value="admin"
+                  selected={userIdInfo.Role?.role_name === "admin"}
+                >
+                  Admin
+                </option>
+                <option
+                  value="client"
+                  selected={userIdInfo.Role?.role_name === "client"}
+                >
+                  Client
+                </option>
               </select>
               <button type="submit" className={styles.roleButton}>
                 Update new role
