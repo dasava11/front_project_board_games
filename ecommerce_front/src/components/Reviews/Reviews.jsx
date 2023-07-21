@@ -11,14 +11,15 @@ const Reviews = ({ data }) => {
   return (
     Reviews && (
       <div className={style.cardReviewDetail}>
-        {reviews.map((r) => {
+        {/* {reviews?.map((r) => {
           return (
             <div key={r.review_id} className={style.cardReviewItem}>
               <Rate disabled defaultValue={r.rating} />
               <h1>{r.comment}</h1>
             </div>
           );
-        })}
+        })} */}
+        <h1>Hola</h1>
       </div>
     )
   );
