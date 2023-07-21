@@ -27,7 +27,7 @@ const MercadoPago = ({ order }) => {
 
       window.location.href = response.data.init_point;
     } catch (error) {
-      toast.error(error.message);
+      toast.error(error.response.data.message);
     }
   };
 
