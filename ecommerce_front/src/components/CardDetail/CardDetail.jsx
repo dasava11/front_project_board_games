@@ -240,7 +240,7 @@ const CardDetail = () => {
         )}
       </div>
 
-      {<div>{userAuth && data && <Reviews reviews={reviews} />}</div>}
+      {/* {<div>{userAuth && data && <Reviews reviews={reviews} />}</div>} */}
       <Modal
         open={modalReview}
         onOk={handleSubmitReview}
