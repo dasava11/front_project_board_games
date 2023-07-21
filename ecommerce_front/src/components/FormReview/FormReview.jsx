@@ -13,6 +13,7 @@ const FormReview = ({ gameId }) => {
 
   const handleOnChange = (e) => {
     setMessage(e.target.value);
+    console.log(message);
   };
 
   const handleStars = (e) => {
@@ -28,11 +29,13 @@ const FormReview = ({ gameId }) => {
     e.preventDefault();
 
     const reviewObj = {
+      rating: stars,
+      comment: message,
       user_id: userId,
       game_id: gameId,
-      comment: message,
-      raiting: stars,
     };
+    console.log(gameId);
+    console.log(reviewObj);
     try {
       axios.post(VITE_URL_REVIEWS, reviewObj);
     } catch (error) {
