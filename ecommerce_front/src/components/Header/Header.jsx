@@ -102,7 +102,7 @@ export const Header = () => {
                   <img src={userIcon} alt="userIcon" />
                 </button>
                 <h5 className={style.name}>
-                  {user && user.name.split(" ")[0]}
+                  {user.name && user.name.split(" ")[0]}
                 </h5>
               </Link>
               <div className={style.inputs}>

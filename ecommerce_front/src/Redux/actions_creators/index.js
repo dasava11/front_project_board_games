@@ -229,13 +229,6 @@ export const sortGames = (payload) => {
   };
 };
 
-// export const filterGames = (payload)=>{
-//   return{
-//     type: FILTER_GAMES,
-//     payload,
-//   }
-// }
-
 export const filterDelete = (payload) => {
   return {
     type: FILTER_DELETE,
