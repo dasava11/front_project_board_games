@@ -18,17 +18,19 @@ export const UsersAdmin = () => {
 
   const handleSwitch = (user_id) => {
     console.log(user_id);
-    axios.delete(`https://backprojectboardgames-production.up.railway.app/users/${user_id}`)
+    axios
+      .delete(
+        `https://backprojectboardgames-production.up.railway.app/users/${user_id}`
+      )
       .then((res) =>
         res.status === 200 ? toast.success(res.data.message) : null
       )
-      
-      
       .catch((err) => toast.error(err.message));
-     
   };
-
- 
+  const editUser = (e) => {
+    const { name, value } = e.target;
+    navigate(`/admin/userid/${value}`);
+  };
 
   return (
     <div className={style.mainContainerUser}>

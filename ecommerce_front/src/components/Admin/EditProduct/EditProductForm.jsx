@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { opUploadWidget } from "../Cloudinary/ClodinaryEdit";
 import { Switch } from "antd";
 import style from "./editform.module.css";
@@ -27,6 +27,7 @@ export const EditProductForm = () => {
   const { id } = useParams();
   const [product, setProduct] = useState({});
   const [checked, setChecked] = useState(true);
+  const navigate = useNavigate();
   localStorage.setItem("cloud", JSON.stringify(product.image));
   const [error, setError] = useState({
     name: "",
@@ -131,6 +132,7 @@ export const EditProductForm = () => {
         console.log(err);
       });
     setProduct({ [e.target.name]: "" });
+    navigate("/admin/editproduct");
   };
 
   const handleChange = (e) => {
