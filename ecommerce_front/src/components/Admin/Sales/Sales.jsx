@@ -48,7 +48,7 @@ export const Sales = () => {
   const handleSwitch = async(checked, sale) => {
 
     if(sale.state === 'Preparing'){
-      // await axios.put('http://localhost:3001/purchase/state',{purchase_id:sale.purchase_id, state:"Shipped"})
+      // await axios.put('https://backprojectboardgames-production.up.railway.app/purchase/state',{purchase_id:sale.purchase_id, state:"Shipped"})
       await axios.put('https://backprojectboardgames-production.up.railway.app/purchase/state',{purchase_id:sale.purchase_id, state:"Shipped"})
 
       const templateParamsShipped = {
@@ -67,7 +67,7 @@ export const Sales = () => {
       dispatch(getAllPurchases());
     }
     if(sale.state === 'Shipped'){
-      // await axios.put('http://localhost:3001/purchase/state',{purchase_id:sale.purchase_id, state:"Delivered"})
+      // await axios.put('https://backprojectboardgames-production.up.railway.app/purchase/state',{purchase_id:sale.purchase_id, state:"Delivered"})
       await axios.put('https://backprojectboardgames-production.up.railway.app/purchase/state',{purchase_id:sale.purchase_id, state:"Delivered"})
 
 
