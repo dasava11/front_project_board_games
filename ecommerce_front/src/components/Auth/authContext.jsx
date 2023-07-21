@@ -19,6 +19,7 @@ export const authContext = createContext();
 const userUrl = 'http://localhost:3001/users';
 // const userUrlVerifyEmail = 'http://localhost:3001/users/verifyemail';
 
+
 const URL_LOGIN = "https://front-project-board-games.vercel.app/login";
 
 const serviceId = import.meta.env.VITE_SERVICE_ID;

@@ -18,12 +18,13 @@ import FormReview from "../FormReview/FormReview";
 import Reviews from "../Reviews/Reviews";
 
 const VITE_URL_ALL_GAMES = import.meta.env.VITE_URL_ALL_GAMES;
+const VITE_URL_REVIEWS = import.meta.env.VITE_URL_REVIEWS;
 
 const CardDetail = () => {
   const { id } = useParams();
   const [game, setGame] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [moreInfo, setMoreInfo] = useState(false);
+  const [data, setData] = useState([]);
   const [cart, setCart] = useLocalStorage("cart", []);
   const { userAuth, role } = useAuth();
   const navigate = useNavigate();
@@ -43,6 +44,15 @@ const CardDetail = () => {
       }
     };
     fetchGameDetail();
+    const fetchDataReview = async () => {
+      try {
+        const response = await axios.get(`${VITE_URL_REVIEWS}/idGame/${id}`);
+        setData(response.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchDataReview();
   }, [id]);
 
   const handleCart = () => {
@@ -52,9 +62,9 @@ const CardDetail = () => {
       for (let index = 0; index < cart.length; index++) {
         let g = cart[index];
         if (g.game_id === game.game_id) {
-          if (g.game.on_sale === true) {
-            g.game.price = g.game.price * 0.8;
-          }
+          // if (g.game.on_sale === true) {
+          //   g.game.price = g.game.price * 0.8;
+          // }
           if (g.count < g.stock) {
             g.count = g.count + 1;
             g.total_price = g.count * g.price;
@@ -66,9 +76,9 @@ const CardDetail = () => {
         }
       }
     } else {
-      if (game.on_sale === true) {
-        game.price = game.price * 0.8;
-      }
+      // if (game.on_sale === true) {
+      //   game.price = game.price * 0.8;
+      // }
       game.count = +1;
       game.total_price = game.price;
       setCart([...cart, game]);
@@ -213,7 +223,7 @@ const CardDetail = () => {
         <h2>Review</h2>
         {userAuth ? (
           <button id="modalReview" onClick={handleModal}>
-            leave a review
+            review game
           </button>
         ) : (
           <span>
@@ -223,15 +233,15 @@ const CardDetail = () => {
           </span>
         )}
       </div>
-      <div>{userAuth && <Reviews gameId={game.game_id} />}</div>
+      <div>{userAuth && <Reviews data={data} />}</div>
       <Modal
         open={modalReview}
-        onCancel={handleModal}
         onOk={handleSubmitReview}
+        onCancel={handleModal}
         footer={""}
         title="Leave a Review"
       >
-        <FormReview gameId={game.game_id} />
+        <FormReview gameId={game.game_id} handleModal={handleModal} />
       </Modal>
     </div>
   );

@@ -35,11 +35,11 @@ const PAYPAL_TOKEN = import.meta.env.VITE_PAYPAL_TOKEN;
 function App() {
   return (
     <div>
-      <PayPalScriptProvider
+      {/* <PayPalScriptProvider
         options={{
           "client-id": PAYPAL_TOKEN,
         }}
-      >
+      > */}
         <ToastContainer />
         <AuthProvider>
           <Routes>
@@ -74,7 +74,7 @@ function App() {
             </Route>
           </Routes>
         </AuthProvider>
-      </PayPalScriptProvider>
+      {/* </PayPalScriptProvider> */}
     </div>
   );
 }

@@ -17,7 +17,7 @@ const MoreDetail = (props) => {
           <span>
             {game &&
               game.Designers.map((d) => {
-                return <span> - {d.designer_name}</span>;
+                return <span key={d.designer_id}> - {d.designer_name}</span>;
               })}
           </span>
         </h2>

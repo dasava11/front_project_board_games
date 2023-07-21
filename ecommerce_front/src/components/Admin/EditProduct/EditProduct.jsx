@@ -2,18 +2,18 @@ import React, { useEffect, useState } from "react";
 import style from "./editproduct.module.css";
 import { Switch } from "antd";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllGames } from "../../../Redux/actions_creators";
+import { getAllGamesAdmin } from "../../../Redux/actions_creators";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import axios from "axios";
 export const EditProduct = () => {
   const dispatch = useDispatch();
   const [switchState, setSwitchState] = useState(true);
-  const games = useSelector((state) => state.allGames);
+  const games = useSelector((state) => state.allGamesAdmin);
   const navigate = useNavigate();
 
   useEffect(() => {
-    dispatch(getAllGames());
+    dispatch(getAllGamesAdmin());
   }, []);
 
   const handleSwitch = async (game_id) => {
@@ -90,7 +90,7 @@ export const EditProduct = () => {
                     {g.active === true ? (
                       <div className={style.td}>
                         <Switch
-                          checked={switchState}
+                          defaultChecked={switchState}
                           onChange={() => {
                             handleSwitch(g.game_id);
                           }}
@@ -100,7 +100,7 @@ export const EditProduct = () => {
                       <div className={style.td}>
                         <Switch
                           onChange={() => {
-                            handleSwitchActivate();
+                            handleSwitch(g.game_id);
                           }}
                         />
                       </div>
