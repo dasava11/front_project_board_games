@@ -1,0 +1,18 @@
+.cardReviewDetail {
+  display: flex;
+  width: 75%;
+  margin: 1rem auto;
+}
+
+.cardReviewDetail h1 {
+  color: #000035;
+  font-size: 1.5rem;
+}
+
+.cardReviewItem {
+  background-color: hsl(240, 100%, 10%, 10%);
+  width: 50%;
+  padding: 2rem;
+  border: 1px solid transparent;
+  border-radius: 1rem;
+}
