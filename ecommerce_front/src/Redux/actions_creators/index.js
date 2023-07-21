@@ -19,7 +19,6 @@ import {
 } from "../action-types/index";
 import { toast } from "react-toastify";
 
-// const VITE_URL_GAMES = "http://localhost:3001/games";
 const VITE_URL_GAMES = import.meta.env.VITE_URL_GAMES;
 const VITE_URL_CATEGORIES = import.meta.env.VITE_URL_CATEGORIES;
 const VITE_URL_AUTHORS = import.meta.env.VITE_URL_AUTHORS;
@@ -30,6 +29,7 @@ const VITE_URL_MECHANICS = import.meta.env.VITE_URL_MECHANICS;
 const VITE_URL_THEMATICS = import.meta.env.VITE_URL_THEMATICS;
 const VITE_URL_USERS = import.meta.env.VITE_URL_USERS;
 const VITE_URL_GET_PURCHASES = import.meta.env.VITE_URL_GET_PURCHASES;
+
 export const getAllGames = () => {
   return async (dispatch) => {
     try {

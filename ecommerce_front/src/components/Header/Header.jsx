@@ -28,13 +28,12 @@ export const Header = () => {
       await logOut();
       navigate("/");
     } catch (error) {
-      console.log(error);
+      console.error(error.message);
     }
   };
   useEffect(() => {
     const token = window.localStorage.getItem("token");
     const userIdAux = localStorage.getItem("userId");
-
     axios
       .get(`${VITE_URL_USERS}/${userIdAux}`)
       .then((res) => setUser(res.data));

@@ -40,14 +40,11 @@ const Navbar = () => {
               isActive ? style.active : style.disable
             }
           >
-
-           Contact Us
+            Contact Us
           </NavLink>
         </li>
-           {role === "admin" && (
-       
-      
-          <li>
+        {
+          /* role === "admin" &&  */ <li>
             <NavLink
               to="/admin"
               className={({ isActive }) =>
@@ -57,9 +54,7 @@ const Navbar = () => {
               Menu Admin
             </NavLink>
           </li>
-
-        )}
-
+        }
       </ul>
       <div className={style.navBarIcons}>
         <button>
