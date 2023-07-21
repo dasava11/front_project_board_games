@@ -109,14 +109,8 @@ export const AuthProvider = ({ children }) => {
     const credentials = await signInWithEmailAndPassword(auth, email, password);
 
     const { user } = credentials;
-
-    console.log('credentials')
-    console.log(credentials)
-    console.log('user')
-    console.log(user)
     let role = "";
 
-    //////////////////
         if (user) {
         console.log('user')
         console.log(user)
@@ -130,7 +124,6 @@ export const AuthProvider = ({ children }) => {
         window.localStorage.setItem("displayName", data.name);
         })
       }
-////////////////////////
     if (!user.emailVerified) {
       await signOut(auth);
       window.localStorage.removeItem("token");
@@ -179,6 +172,7 @@ export const AuthProvider = ({ children }) => {
       setRole("client");
       window.localStorage.removeItem("role");
       window.localStorage.removeItem("displayName");
+      window.localStorage.removeItem("userId");
       await signOut(auth);
       window.localStorage.removeItem("token");
       toast.success("Log out succesfull");
@@ -192,6 +186,8 @@ export const AuthProvider = ({ children }) => {
 
     const { user } = await signInWithPopup(auth, googleProvider);
     window.localStorage.setItem("displayName", user.displayName);
+    window.localStorage.setItem("userId", user.uid);
+
 
     if (user) {
       axios
