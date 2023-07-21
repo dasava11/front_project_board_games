@@ -19,6 +19,7 @@ const FormReview = ({ gameId }) => {
 
   const handleStars = (e) => {
     setStars(e);
+    console.log(stars);
   };
 
   useEffect(() => {

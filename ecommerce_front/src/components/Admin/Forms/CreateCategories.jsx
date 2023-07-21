@@ -25,7 +25,6 @@ export const CreateCategories = (setIsOpen) => {
       <Modal
         open={setIsOpen.isOpen}
         title="Create Information"
-        onOk={handleOk}
         onCancel={setIsOpen.setIsOpen}
         footer={""}
       >
