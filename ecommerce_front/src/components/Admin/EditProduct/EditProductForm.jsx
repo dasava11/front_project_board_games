@@ -102,7 +102,7 @@ export const EditProductForm = () => {
       .catch((err) => {
         console.log(err);
       });
-  }, [product]);
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
