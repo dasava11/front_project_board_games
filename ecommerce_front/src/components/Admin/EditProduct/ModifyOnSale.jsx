@@ -17,7 +17,6 @@ export const ModifyOnSale = (props) => {
       mechanics_name: product.Mechanics.map((mec) => mec.mechanic_name),
       thematics_name: product.Thematics.map((t) => t.thematic_name),
       languages_name: product.Languages.map((lan) => lan.language_name),
-      active: true,
     };
     console.log(productAct);
     await axios
