@@ -14,7 +14,7 @@
   height: 110px;
 }
 
-.darkLogoHead{
+.darkLogoHead {
   background-color: transparent;
   width: 195px;
   height: 109.68px;
@@ -38,10 +38,11 @@
   display: flex;
 }
 
-.inputs h6 {
+.inputs h5 {
   color: white;
   margin: 0;
   text-align: center;
+  font-size: 1rem;
 }
 
 .inputs button {
@@ -79,4 +80,37 @@
 .darkMode h3 {
   color: white;
   height: 100%;
+}
+
+.loginCorrectContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.logInUserStyle {
+  transition: 0.1s background-color ease;
+}
+
+.logInUserStyle:hover {
+  background-color: rgb(195, 195, 195, 20%);
+  cursor: pointer;
+}
+
+.logInUserStyle button {
+  background-color: transparent;
+  border: none;
+  padding: 0;
+}
+
+.logInUserStyle img {
+  width: 45px;
+  height: 45px;
+}
+
+.logInUserStyle h5 {
+  margin: 0;
+  font-size: 1rem;
+  text-align: center;
 }

@@ -7,6 +7,7 @@ export const Sales = () => {
   const dispatch = useDispatch();
   const sales = useSelector((state) => state.allPurchases);
   const [search, setSearch] = useState();
+  const [switchState, setSwitchState] = useState(false);
 
   useEffect(() => {
     dispatch(getAllPurchases());
@@ -19,7 +20,8 @@ export const Sales = () => {
     const { name, value } = e.target;
     setSearch({ ...search, [name]: value });
   };
-  console.log(sales);
+  const handleSwitch = () => {};
+
   return (
     <div className={style.mainFormPurchase}>
       <h1>All Sales</h1>
@@ -32,7 +34,9 @@ export const Sales = () => {
             placeholder="Search by ID"
             onChange={handleChange}
           />
-          <button type="submit">Go!</button>
+          <button type="submit" className={style.goButton}>
+            Go!
+          </button>
         </form>
       </div>
       <table className={style.purchaseTable}>
@@ -61,7 +65,12 @@ export const Sales = () => {
                   </td>
                   <td className={style.tH}>{sale.total_amount}</td>
                   <th className={style.tH}>
-                    <Switch />
+                    <Switch
+                      checked={switchState}
+                      onChange={() => {
+                        handleSwitch();
+                      }}
+                    />
                   </th>
                 </tr>
               );

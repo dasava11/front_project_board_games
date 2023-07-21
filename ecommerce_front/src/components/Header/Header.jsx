@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import logo from "../../Photos/logo.png";
 import dice1 from "../../Photos/dice_1.svg";
@@ -7,14 +7,20 @@ import dice4 from "../../Photos/dice_4.svg";
 import SearchBar from "../SearchBar/SearchBar";
 import style from "./Header.module.css";
 import Navbar from "../Navbar/Navbar";
+import userIcon from "../../Photos/icons8-user.png";
 import { useAuth } from "../Auth/authContext";
 import { auth } from "../Auth/firebase";
 import { Switch } from "antd";
 import { setDarkMode } from "../../Redux/actions_creators";
+import axios from "axios";
+
+const VITE_URL_USERS = import.meta.env.VITE_URL_USERS;
+
 export const Header = () => {
   const navigate = useNavigate();
   const { logOut } = useAuth();
   const dispatch = useDispatch();
+  const [user, setUser] = useState({});
   const darkMode = useSelector((state) => state.darkMode);
 
   const handleLogOut = async () => {
@@ -22,11 +28,15 @@ export const Header = () => {
       await logOut();
       navigate("/");
     } catch (error) {
-      console.log(error);
+      console.error(error.message);
     }
   };
   useEffect(() => {
     const token = window.localStorage.getItem("token");
+    const userIdAux = localStorage.getItem("userId");
+    axios
+      .get(`${VITE_URL_USERS}/${userIdAux}`)
+      .then((res) => setUser(res.data));
   }, []);
 
   const handleSwitch = (e) => {
@@ -67,7 +77,7 @@ export const Header = () => {
                   height="45px"
                   onClick={() => navigate("/signup")}
                 />
-                <h6>Sign Up</h6>
+                <h5>Sign Up</h5>
               </button>
               <button>
                 <img
@@ -77,14 +87,21 @@ export const Header = () => {
                   height="45px"
                   onClick={() => navigate("/login")}
                 />
-                <h6>Log In</h6>
+                <h5>Log In</h5>
               </button>
             </div>
           )}
 
           {auth.currentUser && (
-            <div>
-              <h5 className={style.name}>{auth.currentUser.email}</h5>
+            <div className={style.loginCorrectContainer}>
+              <Link to="/user" className={style.logInUserStyle}>
+                <button>
+                  <img src={userIcon} alt="userIcon" />
+                </button>
+                <h5 className={style.name}>
+                  {user.name && user.name.split(" ")[0]}
+                </h5>
+              </Link>
               <div className={style.inputs}>
                 <button>
                   <img
@@ -94,7 +111,7 @@ export const Header = () => {
                     height="45px"
                     onClick={handleLogOut}
                   />
-                  <h6>Sign Out</h6>
+                  <h5>Sign Out</h5>
                 </button>
               </div>
             </div>

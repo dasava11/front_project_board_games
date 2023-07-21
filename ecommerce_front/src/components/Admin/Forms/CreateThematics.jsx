@@ -23,7 +23,6 @@ export const CreateThematics = (setIsOpen) => {
       <Modal
         open={setIsOpen.isOpen}
         title="Create Information"
-        onOk={handleOk}
         onCancel={setIsOpen.setIsOpen}
         footer={[<button key="Guardar" onClick={handleOk}></button>]}
       >

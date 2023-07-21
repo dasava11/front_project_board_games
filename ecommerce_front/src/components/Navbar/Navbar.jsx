@@ -4,7 +4,6 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux/es/hooks/useSelector";
 import shoppingCart from "../../Photos/shoppingCart.svg";
 import { useAuth } from "../Auth/authContext";
-import userIcon from "../../Photos/icons8-user.png";
 
 const Navbar = () => {
   const navigate = useNavigate();
@@ -41,10 +40,13 @@ const Navbar = () => {
               isActive ? style.active : style.disable
             }
           >
-            Contact Us
+
+           Contact Us
           </NavLink>
         </li>
-        {role === "admin" && (
+           {role === "admin" && (
+       
+      
           <li>
             <NavLink
               to="/admin"
@@ -55,20 +57,11 @@ const Navbar = () => {
               Menu Admin
             </NavLink>
           </li>
+
         )}
+
       </ul>
       <div className={style.navBarIcons}>
-        {userAuth && (
-          <button>
-            <img
-              src={userIcon}
-              alt="userIcon"
-              width="40px"
-              height="40px"
-              onClick={() => navigate("/user")}
-            />
-          </button>
-        )}
         <button>
           <img
             src={shoppingCart}
