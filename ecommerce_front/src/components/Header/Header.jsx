@@ -12,10 +12,15 @@ import { useAuth } from "../Auth/authContext";
 import { auth } from "../Auth/firebase";
 import { Switch } from "antd";
 import { setDarkMode } from "../../Redux/actions_creators";
+import axios from "axios";
+
+const VITE_URL_USERS = import.meta.env.VITE_URL_USERS;
+
 export const Header = () => {
   const navigate = useNavigate();
   const { logOut } = useAuth();
   const dispatch = useDispatch();
+  const [user, setUser] = useState({});
   const darkMode = useSelector((state) => state.darkMode);
 
   const handleLogOut = async () => {
@@ -28,12 +33,19 @@ export const Header = () => {
   };
   useEffect(() => {
     const token = window.localStorage.getItem("token");
+    const userIdAux = localStorage.getItem("userId");
+    console.log(localStorage.getItem("userId"));
+    axios
+      .get(`${VITE_URL_USERS}/${userIdAux}`)
+      .then((res) => setUser(res.data));
   }, []);
 
   const handleSwitch = (e) => {
     dispatch(setDarkMode(e));
     document.body.classList.toggle("dark");
   };
+
+  console.log(auth.currentUser);
 
   return (
     <div>
@@ -90,8 +102,7 @@ export const Header = () => {
                   <img src={userIcon} alt="userIcon" />
                 </button>
                 <h5 className={style.name}>
-                  {auth.currentUser.displayName &&
-                    auth.currentUser.displayName.split(" ")[0]}
+                  {user && user.name.split(" ")[0]}
                 </h5>
               </Link>
               <div className={style.inputs}>
