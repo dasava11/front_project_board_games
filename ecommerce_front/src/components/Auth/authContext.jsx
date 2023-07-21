@@ -62,8 +62,7 @@ export const AuthProvider = ({ children }) => {
 
   const sendEmail = (name, email, uid) => {
     // const link = "http://localhost:5173/login?verify=" + uid;
-    const link =
-      "https://front-project-board-games.vercel.app/login?verify=" + uid;
+    const link ="https://front-project-board-games.vercel.app/login?verify=" + uid;
 
     const templateParams = {
       user_name: name,
