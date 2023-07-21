@@ -17,6 +17,7 @@ const FormReview = ({ gameId }) => {
 
   const handleStars = (e) => {
     setStars(e);
+    console.log(stars);
   };
 
   useEffect(() => {
@@ -30,7 +31,7 @@ const FormReview = ({ gameId }) => {
       user_id: userId,
       game_id: gameId,
       comment: message,
-      raiting: Number.stars,
+      raiting: stars,
     };
     try {
       axios.post(VITE_URL_REVIEWS, reviewObj);
