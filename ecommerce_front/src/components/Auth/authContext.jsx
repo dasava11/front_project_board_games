@@ -15,8 +15,8 @@ import {
 import { auth } from "../Auth/firebase";
 import { toast } from "react-toastify";
 export const authContext = createContext();
-const userUrl = import.meta.env.VITE_URL_USERS;
-// const userUrl = 'http://localhost:3001/users';
+// const userUrl = import.meta.env.VITE_URL_USERS;
+const userUrl = 'http://localhost:3001/users';
 // const userUrlVerifyEmail = 'http://localhost:3001/users/verifyemail';
 
 const URL_LOGIN = "https://front-project-board-games.vercel.app/login";
@@ -61,8 +61,8 @@ export const AuthProvider = ({ children }) => {
   };
 
   const sendEmail = (name, email, uid) => {
-    // const link = "http://localhost:5173/login?verify=" + uid;
-    const link ="https://front-project-board-games.vercel.app/login?verify=" + uid;
+    const link = "http://localhost:5173/login?verify=" + uid;
+    // const link ="https://front-project-board-games.vercel.app/login?verify=" + uid;
 
     const templateParams = {
       user_name: name,
@@ -106,7 +106,21 @@ export const AuthProvider = ({ children }) => {
     const credentials = await signInWithEmailAndPassword(auth, email, password);
 
     const { user } = credentials;
+
+    console.llog('credentials')
+    console.llog(credentials)
+    console.llog('user')
+    console.llog(user)
     let role = "";
+    /////
+      //   if (user) {
+      // axios
+      //   .get(`${userUrl}/${user.uid}`)
+      //   .then(({ data }) => {
+      //     window.localStorage.setItem("role", data.Role.role_name);
+      //     setUserAuth(data.Role.role_name);
+      //   })
+////
 
     if (!user.emailVerified) {
       await signOut(auth);

@@ -257,8 +257,8 @@ export const getAllUsers = () => {
 export const getAllPurchases = () => {
   return async (dispatch) => {
     try {
-      const resp = await axios.get("https://backprojectboardgames-production.up.railway.app/purchase/");
-      // const resp = await axios.get("http://localhost:3001/purchase/");
+      // const resp = await axios.get("https://backprojectboardgames-production.up.railway.app/purchase/");
+      const resp = await axios.get("http://localhost:3001/purchase/");
 
 
         let sorted = resp.data;
