@@ -16,6 +16,11 @@
     height: 30px;
 }
 
+
+.inputSearch:focus {
+    outline: 0 none;
+  }
+
 .mainFormPurchase{
     display: flex;
     justify-content: center;
@@ -38,6 +43,7 @@
 
 }
 .purchTr{}
+
 .tH{
     text-align:center;
     border-bottom: 1px solid rgb(196, 194, 194);
