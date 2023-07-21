@@ -260,7 +260,7 @@ export const EditProductForm = () => {
       )
       .catch((err) => toast.error(err));
   };
-
+  console.log(product);
   return (
     <div>
       <div className={style.title}>

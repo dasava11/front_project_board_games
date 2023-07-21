@@ -100,6 +100,7 @@ const CardDetail = () => {
 
     setModalReview(modalReview === true ? false : true);
   };
+
   return loading ? (
     <h1>Cargando...</h1>
   ) : (
