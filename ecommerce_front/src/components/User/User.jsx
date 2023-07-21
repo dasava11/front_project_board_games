@@ -12,27 +12,28 @@ const User = () => {
 
   useEffect(() => {
     const userIdAux = localStorage.getItem("userId");
-    console.log(localStorage.getItem("userId"));
+
     axios
       .get(`${VITE_URL_USERS}/${userIdAux}`)
       .then((res) => setUser(res.data));
   }, []);
-  console.log(user);
   return (
-    <div
-      className={
-        darkMode === true ? style.darkUserContainer : style.userContainer
-      }
-    >
-      <div className={style.userImg}>
-        <img src={userSvg} alt="user logo" />
-        <div>
-          {user && <h4>{user.name}</h4>}
-          {user && <h2>{user.email}</h2>}
+    user && (
+      <div
+        className={
+          darkMode === true ? style.darkUserContainer : style.userContainer
+        }
+      >
+        <div className={style.userImg}>
+          <img src={userSvg} alt="user logo" />
+          <div>
+            {user && <h4>{user.name}</h4>}
+            {user && <h2>{user.email}</h2>}
+          </div>
         </div>
+        <UserMenu darkMode={darkMode} user={user} />
       </div>
-      <UserMenu darkMode={darkMode} user={user} />
-    </div>
+    )
   );
 };
 

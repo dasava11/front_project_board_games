@@ -1,0 +1,15 @@
+.formUserData {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin: auto;
+}
+
+.userDataLabels {
+  display: flex;
+  flex-direction: column;
+}
+
+.userDataLabels input {
+  width: 50%;
+}
