@@ -8,23 +8,6 @@ const Reviews = ({ data }) => {
     item.Reviews.map((item2) => reviews.push(item2));
   });
 
-  reviews.map((item) => console.log(item));
-  
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(
-          `${VITE_URL_REVIEWS}/idGame/${gameId}`
-        );
-        setData(response.data);
-
-        setReviews(data[0].Reviews);
-      } catch (error) {
-      }
-    };
-    fetchData();
-  }, [data]);
-
   return (
     <div className={style.cardReviewDetail}>
       {reviews.map((r) => {
