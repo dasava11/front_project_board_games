@@ -241,7 +241,7 @@ const CardDetail = () => {
         footer={""}
         title="Leave a Review"
       >
-       {/* <FormReview gameId={game.game_id} handleModal={handleModal} /> */}
+        <FormReview gameId={game.game_id} handleModal={handleModal} />
       </Modal>
     </div>
   );
