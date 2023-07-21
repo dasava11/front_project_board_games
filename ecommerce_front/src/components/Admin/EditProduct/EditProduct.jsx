@@ -100,7 +100,7 @@ export const EditProduct = () => {
                       <div className={style.td}>
                         <Switch
                           onChange={() => {
-                            handleSwitchActivate();
+                            handleSwitch(g.game_id);
                           }}
                         />
                       </div>
