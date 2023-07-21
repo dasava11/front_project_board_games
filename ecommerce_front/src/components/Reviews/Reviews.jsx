@@ -1,13 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import style from "./Reviews.module.css";
-import axios from "axios";
+import { Rate } from "antd";
 
-const VITE_URL_REVIEWS = import.meta.env.VITE_URL_REVIEWS;
+const Reviews = ({ data }) => {
+  const reviews = [];
+  data.map((item) => {
+    item.Reviews.map((item2) => reviews.push(item2));
+  });
 
-const Reviews = ({ gameId }) => {
-  const [data, setData] = useState({});
-  const [reviews, setReviews] = useState([]);
-
+  reviews.map((item) => console.log(item));
+  
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -24,10 +26,11 @@ const Reviews = ({ gameId }) => {
   }, [data]);
 
   return (
-    <div>
+    <div className={style.cardReviewDetail}>
       {reviews.map((r) => {
         return (
-          <div>
+          <div key={r.review_id} className={style.cardReviewItem}>
+            <Rate disabled defaultValue={r.rating} />
             <h1>{r.comment}</h1>
           </div>
         );

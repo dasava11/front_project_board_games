@@ -257,10 +257,23 @@ export const getAllUsers = () => {
 export const getAllPurchases = () => {
   return async (dispatch) => {
     try {
-      const resp = await axios.get(
-        "https://backprojectboardgames-production.up.railway.app/purchase/"
-      );
-      dispatch({ type: GET_ALL_PURCHASES, payload: resp.data });
+      const resp = await axios.get("https://backprojectboardgames-production.up.railway.app/purchase/");
+      // const resp = await axios.get("http://localhost:3001/purchase/");
+
+
+        let sorted = resp.data;
+    
+        sorted = sorted.sort((a, b) => {
+            if (a.purchase_id < b.purchase_id) {
+                return -1;
+            } else if (a.purchase_id > b.purchase_id) {
+                return 1;
+            } else {
+                return 0;
+            }
+        });
+
+      dispatch({ type: GET_ALL_PURCHASES, payload: sorted });
     } catch (err) {
       console.error(err);
     }
