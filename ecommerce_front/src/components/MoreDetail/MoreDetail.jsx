@@ -29,7 +29,7 @@ const MoreDetail = (props) => {
           <span>
             {game &&
               game.Mechanics.map((m) => {
-                return <span> - {m.mechanic_name}</span>;
+                return <span key={m.mechanic_id}> - {m.mechanic_name}</span>;
               })}
           </span>
         </h2>
@@ -41,7 +41,7 @@ const MoreDetail = (props) => {
           <span>
             {game &&
               game.Thematics.map((t) => {
-                return <span> - {t.thematic_name}</span>;
+                return <span key={t.thematic_id}> - {t.thematic_name}</span>;
               })}
           </span>
         </h2>
@@ -71,7 +71,7 @@ const MoreDetail = (props) => {
           <span>
             {game &&
               game.Languages.map((l) => {
-                return <span> - {l.language_name}</span>;
+                return <span key={l.language_id}> - {l.language_name}</span>;
               })}
           </span>
         </h2>

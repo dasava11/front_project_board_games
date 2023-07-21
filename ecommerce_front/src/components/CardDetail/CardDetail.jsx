@@ -56,9 +56,9 @@ const CardDetail = () => {
     fetchDataReview();
   }, [id]);
 
-  setTimeout(() => {
+  /*  setTimeout(() => {
     setReviews(data[0].Reviews);
-  }, 1000);
+  }, 1000); */
 
   const handleCart = () => {
     let duplicate = cart?.find((g) => g.game_id === game.game_id);
