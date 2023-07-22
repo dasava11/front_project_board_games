@@ -31,7 +31,9 @@ const Reviews = () => {
   if (data) {
     const reviewArray = [];
     data.map((item) => {
-      reviewArray.push(item.Reviews);
+      item.Reviews.map((item2) => {
+        reviewArray.push(item2);
+      });
     });
 
     console.log(reviewArray);
