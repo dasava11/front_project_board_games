@@ -30,7 +30,6 @@ const CardDetail = () => {
   const navigate = useNavigate();
   const darkMode = useSelector((state) => state.darkMode);
   const [modalReview, setModalReview] = useState(false);
-  const [reviews, setReviews] = useState([]);
 
   useEffect(() => {
     const fetchGameDetail = async () => {
@@ -44,21 +43,9 @@ const CardDetail = () => {
         console.log(error);
       }
     };
-    fetchGameDetail();
-    const fetchDataReview = async () => {
-      try {
-        const response = await axios.get(`${VITE_URL_REVIEWS}/idGame/${id}`);
-        setData(response.data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    fetchDataReview();
-  }, [id]);
 
-  /*  setTimeout(() => {
-    setReviews(data[0].Reviews);
-  }, 1000); */
+    fetchGameDetail();
+  }, [id]);
 
   const handleCart = () => {
     let duplicate = cart?.find((g) => g.game_id === game.game_id);
@@ -240,7 +227,7 @@ const CardDetail = () => {
         )}
       </div>
 
-      {/* {<div>{userAuth && data && <Reviews reviews={reviews} />}</div>} */}
+      <div>{userAuth && data && <Reviews review={data} />}</div>
       <Modal
         open={modalReview}
         onOk={handleSubmitReview}
