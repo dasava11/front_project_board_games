@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 // import style from "./Reviews.module.css";
-// import { Rate } from "antd";
+import { Rate } from "antd";
 
 const VITE_URL_REVIEWS = import.meta.env.VITE_URL_REVIEWS;
 
@@ -27,11 +27,18 @@ const Reviews = () => {
     fetchReviews();
   }, []);
 
-  if (reviews) {
-    console.log(reviews);
-  }
-
-  return reviews ? <h1>Si hay reviews</h1> : <h1>No hay reviews</h1>;
+  return reviews ? (
+    <div>
+      {reviews.map((item) => {
+        <div>
+          <Rate disabled defaultValue={reviews.rate} />
+          <p>{reviews.comment}</p>
+        </div>;
+      })}
+    </div>
+  ) : (
+    <h1>No hay reviews</h1>
+  );
 };
 
 export default Reviews;
