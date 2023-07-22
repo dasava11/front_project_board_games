@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import style from "./Reviews.module.css";
 import { Rate } from "antd";
 
-const Reviews = ({ data }) => {
-  console.log(data);
+const Reviews = () => {
+  console.log("hola");
 
   return;
   // reviews ? (
