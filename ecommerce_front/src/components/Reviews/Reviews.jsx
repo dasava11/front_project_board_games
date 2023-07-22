@@ -5,11 +5,9 @@ import { Rate } from "antd";
 const Reviews = ({ reviews }) => {
   const [reviews2, setReviews2] = useState([]);
 
-  const fetchData = async () => {
-    const reviews21 = await reviews;
-
-    setReviews2(reviews21);
-  };
+  setTimeout(() => {
+    setReviews2(reviews);
+  }, 2000);
 
   fetchData();
   return (
