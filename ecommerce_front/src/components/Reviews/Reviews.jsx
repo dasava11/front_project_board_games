@@ -9,19 +9,19 @@ const Reviews = ({ reviews }) => {
     setReviews2(reviews);
   }, 2000);
 
-  return (
-    reviews2 && (
-      <div className={style.cardReviewDetail}>
-        {reviews2?.map((r) => {
-          return (
-            <div key={r.review_id} className={style.cardReviewItem}>
-              <Rate disabled defaultValue={r.rating} />
-              <h1>{r.comment}</h1>
-            </div>
-          );
-        })}
-      </div>
-    )
+  return reviews2 ? (
+    <div className={style.cardReviewDetail}>
+      {reviews2?.map((r) => {
+        return (
+          <div key={r.review_id} className={style.cardReviewItem}>
+            <Rate disabled defaultValue={r.rating} />
+            <h1>{r.comment}</h1>
+          </div>
+        );
+      })}
+    </div>
+  ) : (
+    <h1>No reviews</h1>
   );
 };
 
