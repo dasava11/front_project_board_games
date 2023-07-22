@@ -8,7 +8,7 @@ const VITE_URL_REVIEWS = import.meta.env.VITE_URL_REVIEWS;
 
 const Reviews = () => {
   const { id } = useParams();
-  const [reviews, setReviews] = useState([]);
+  const [reviews, setReviews] = useState();
   const [data, setData] = useState([]);
 
   console.log(id);
