@@ -34,23 +34,24 @@ const Reviews = () => {
       reviewArray.push(item.Reviews);
     });
 
-    setReviews(reviewArray);
+    console.log(reviewArray);
   }
 
-  return reviews ? (
-    <div>
-      {reviews.map((item) => {
-        return (
-          <div>
-            <Rate disabled defaultValue={item.rate} />
-            <p>{item.comment}</p>
-          </div>
-        );
-      })}
-    </div>
-  ) : (
-    <h1>No hay reviews</h1>
-  );
+  return;
+  // reviews ? (
+  //   <div>
+  //     {reviews.map((item) => {
+  //       return (
+  //         <div>
+  //           <Rate disabled defaultValue={item.rate} />
+  //           <p>{item.comment}</p>
+  //         </div>
+  //       );
+  //     })}
+  //   </div>
+  // ) : (
+  //   <h1>No hay reviews</h1>
+  // );
 };
 
 export default Reviews;
