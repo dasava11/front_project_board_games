@@ -36,7 +36,11 @@ const Reviews = () => {
       });
     });
 
-    console.log(reviewArray);
+    setReviews(reviewArray);
+  }
+
+  if (reviews) {
+    console.log(reviews);
   }
 
   return;
