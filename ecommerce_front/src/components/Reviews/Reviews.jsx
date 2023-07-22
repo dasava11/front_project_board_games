@@ -30,10 +30,12 @@ const Reviews = () => {
   return reviews ? (
     <div>
       {reviews.map((item) => {
-        <div>
-          <Rate disabled defaultValue={item.rate} />
-          <p>{item.comment}</p>
-        </div>;
+        return (
+          <div>
+            <Rate disabled defaultValue={item.rate} />
+            <p>{item.comment}</p>
+          </div>
+        );
       })}
     </div>
   ) : (
