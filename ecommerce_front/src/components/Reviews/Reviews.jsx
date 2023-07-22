@@ -7,13 +7,14 @@ import axios from "axios";
 const VITE_URL_REVIEWS = import.meta.env.VITE_URL_REVIEWS;
 
 const Reviews = () => {
-  const { id } = useParams();
   const [reviews, setReviews] = useState();
 
   useEffect(() => {
     const fetchReviews = async () => {
       try {
-        const response = await axios.get(`${VITE_URL_REVIEWS}/idGame/${id}`);
+        const response = await axios.get(
+          "https://backprojectboardgames-production.up.railway.app/reviews"
+        );
         setReviews(response.data);
       } catch (error) {
         console.log(error);
@@ -21,7 +22,7 @@ const Reviews = () => {
     };
 
     fetchReviews();
-  }, [id]);
+  }, []);
 
   if (reviews) {
     console.log(reviews);
