@@ -27,6 +27,8 @@ const Reviews = () => {
     fetchReviews();
   }, []);
 
+  console.log(reviews);
+
   return reviews ? (
     <div>
       {reviews.map((item) => {
