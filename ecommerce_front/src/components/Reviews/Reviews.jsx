@@ -3,11 +3,19 @@ import style from "./Reviews.module.css";
 import { Rate } from "antd";
 
 const Reviews = ({ reviews }) => {
-  console.log(reviews);
+  const [reviews2, setReviews2] = useState([]);
+
+  const fetchData = async () => {
+    const reviews21 = await reviews;
+
+    setReviews2(reviews21);
+  };
+
+  fetchData();
   return (
-    reviews && (
+    reviews2 && (
       <div className={style.cardReviewDetail}>
-        {reviews?.map((r) => {
+        {reviews2?.map((r) => {
           return (
             <div key={r.review_id} className={style.cardReviewItem}>
               <Rate disabled defaultValue={r.rating} />
