@@ -30,7 +30,6 @@ const CardDetail = () => {
   const navigate = useNavigate();
   const darkMode = useSelector((state) => state.darkMode);
   const [modalReview, setModalReview] = useState(false);
-  const [reviews, setReviews] = useState([]);
 
   useEffect(() => {
     const fetchGameDetail = async () => {
@@ -55,10 +54,6 @@ const CardDetail = () => {
     };
     fetchDataReview();
   }, [id]);
-
-  setTimeout(() => {
-    setReviews(data[0].Reviews);
-  }, 1000);
 
   const handleCart = () => {
     let duplicate = cart?.find((g) => g.game_id === game.game_id);
@@ -240,7 +235,7 @@ const CardDetail = () => {
         )}
       </div>
 
-      <div>{userAuth && data && <Reviews reviews={reviews} />}</div>
+      <div>{userAuth && data && <Reviews data={data} />}</div>
       <Modal
         open={modalReview}
         onOk={handleSubmitReview}
