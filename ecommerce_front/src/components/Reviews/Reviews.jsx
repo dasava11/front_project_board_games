@@ -8,26 +8,34 @@ const VITE_URL_REVIEWS = import.meta.env.VITE_URL_REVIEWS;
 
 const Reviews = () => {
   const { id } = useParams();
-  const [reviews, setReviews] = useState();
+  const [reviews, setReviews] = useState([]);
+  const [data, setData] = useState([]);
 
   console.log(id);
 
   useEffect(() => {
-    const fetchReviews = async () => {
+    const fetchData = async () => {
       try {
         const response = await axios.get(
           `https://backprojectboardgames-production.up.railway.app/reviews/idGame/${id}`
         );
-        setReviews(response.data);
+        setData(response.data);
       } catch (error) {
         console.log(error);
       }
     };
 
-    fetchReviews();
+    fetchData();
   }, []);
 
-  console.log(reviews);
+  if (data) {
+    const reviewArray = [];
+    data.map((item) => {
+      reviewArray.push(item.Reviews);
+    });
+
+    setReviews(reviewArray);
+  }
 
   return reviews ? (
     <div>
