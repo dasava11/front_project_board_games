@@ -29,11 +29,9 @@ const Reviews = () => {
 
   if (reviews) {
     console.log(reviews);
-  } else {
-    console.log("no reviews");
   }
 
-  return <h1>Desde Review</h1>;
+  return reviews ? <h1>Si hay reviews</h1> : <h1>No hay reviews</h1>;
 };
 
 export default Reviews;
