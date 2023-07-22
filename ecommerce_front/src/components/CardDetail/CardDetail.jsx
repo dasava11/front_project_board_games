@@ -43,16 +43,8 @@ const CardDetail = () => {
         console.log(error);
       }
     };
+
     fetchGameDetail();
-    const fetchDataReview = async () => {
-      try {
-        const response = await axios.get(`${VITE_URL_REVIEWS}/idGame/${id}`);
-        setData(response.data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    fetchDataReview();
   }, [id]);
 
   const handleCart = () => {
