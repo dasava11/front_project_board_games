@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
-import style from "./Reviews.module.css";
-import { Rate } from "antd";
+// import style from "./Reviews.module.css";
+// import { Rate } from "antd";
 
 const VITE_URL_REVIEWS = import.meta.env.VITE_URL_REVIEWS;
 
@@ -23,7 +23,11 @@ const Reviews = () => {
     fetchReviews();
   }, [id]);
 
-  console.log(reviews);
+  if (reviews) {
+    console.log(reviews);
+  } else {
+    console.log("no reviews");
+  }
 
   return <h1>Desde Review</h1>;
 };
