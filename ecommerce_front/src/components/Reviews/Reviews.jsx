@@ -31,8 +31,8 @@ const Reviews = () => {
     <div>
       {reviews.map((item) => {
         <div>
-          <Rate disabled defaultValue={reviews.rate} />
-          <p>{reviews.comment}</p>
+          <Rate disabled defaultValue={item.rate} />
+          <p>{item.comment}</p>
         </div>;
       })}
     </div>
