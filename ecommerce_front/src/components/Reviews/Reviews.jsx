@@ -6,7 +6,7 @@ const Reviews = ({ reviews }) => {
   const [reviews2, setReviews2] = useState([]);
 
   setTimeout(() => {
-    setReviews2(reviews);
+    console.log(reviews);
   }, 2000);
 
   return reviews2 ? (
