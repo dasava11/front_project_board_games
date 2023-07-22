@@ -9,7 +9,6 @@ const Reviews = ({ reviews }) => {
     setReviews2(reviews);
   }, 2000);
 
-  fetchData();
   return (
     reviews2 && (
       <div className={style.cardReviewDetail}>
