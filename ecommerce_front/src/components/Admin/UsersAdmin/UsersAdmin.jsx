@@ -17,7 +17,6 @@ export const UsersAdmin = () => {
   }, []);
 
   const handleSwitch = (user_id) => {
-    console.log(user_id);
     axios
       .delete(
         `https://backprojectboardgames-production.up.railway.app/users/${user_id}`
@@ -31,10 +30,14 @@ export const UsersAdmin = () => {
     const { name, value } = e.target;
     navigate(`/admin/userid/${value}`);
   };
-
+  const handleSubmit = () => {};
   return (
     <div className={style.mainContainerUser}>
       <h2>All Users</h2>
+      <form onSubmit={handleSubmit}>
+        <input placeholer="Search user by ID" />
+        <button type="submit">Search</button>
+      </form>
       <table className={style.tableUser}>
         <thead className={style.titleUser}>
           <tr className={style.tr}>
