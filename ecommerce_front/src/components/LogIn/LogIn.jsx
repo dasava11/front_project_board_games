@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useAuth } from "../Auth/authContext";
 import { useNavigate, useSearchParams } from "react-router-dom";
+import { getWishList } from "../../Redux/actions_creators/index"
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-toastify";
@@ -9,7 +11,9 @@ import { FcGoogle } from "react-icons/fc";
 
 
 export const LogIn = () => {
+
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [searchParams] = useSearchParams();
   const [forgotPassword, setForgotPassword] = useState(false)
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -61,7 +65,9 @@ export const LogIn = () => {
     e.preventDefault();
     try {
       await logInWithGoogle();
+      dispatch(getWishList());
       toast.success("A successfull log in with Google!");
+
       navigate("/");
     } catch (error) {
       toast.error(error.message);
@@ -93,6 +99,7 @@ export const LogIn = () => {
       await login(user.email, user.password);
 
       toast.success("Successful Log in");
+      dispatch(getWishList());
       navigate("/");
     } catch (error) {
       if (error.code === "auth/user-not-found") {

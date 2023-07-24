@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllGames } from "../../Redux/actions_creators/index";
 import { filterDelete } from "../../Redux/actions_creators/index";
+import { getWishList } from "../../Redux/actions_creators/index"
 import style from "./Games.module.css";
 import promotionalBanner from "../../Photos/PromotionalBanner.png";
 import Filter from "../Filter/Filter";
@@ -24,11 +25,17 @@ const Games = () => {
   //   category_name: "",
   // });
   const [filter, setFilter] = useState(filters);
+  const userIdAux = localStorage.getItem("userId");
 
   //const [currentGames, setCurrentGames] = useLocalStorage("currentGames", []);
 
   useEffect(() => {
     allGames.length === 0 && dispatch(getAllGames());
+    // return (
+    //   () => {
+    //     dispatch(getWishList());
+    //   }
+    // )
   }, []);
 
   const handleDelete = (e) => {

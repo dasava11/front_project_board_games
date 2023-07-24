@@ -167,13 +167,15 @@ export const AuthProvider = ({ children }) => {
     const googleProvider = new GoogleAuthProvider();
 
     const { user } = await signInWithPopup(auth, googleProvider);
+    
 
-    if (user) {
+    if (user) {    
       axios
         .get(`${userUrl}/${user.uid}`)
         .then(({ data }) => {
           window.localStorage.setItem("role", data.Role.role_name);
           setRole(data.Role.role_name);
+          
         })
         .catch((error) => {
           axios

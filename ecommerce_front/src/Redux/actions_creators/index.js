@@ -16,7 +16,8 @@ import {
   GET_USER_BY_ID,
   GET_ROLES,
   SET_DARK_MODE,
-  GET_ALL_GAMES_ADMIN
+  GET_ALL_GAMES_ADMIN,
+  GET_WISH_LIST,
 } from "../action-types/index";
 import { toast } from "react-toastify";
 
@@ -30,7 +31,6 @@ const VITE_URL_MECHANICS = import.meta.env.VITE_URL_MECHANICS;
 const VITE_URL_THEMATICS = import.meta.env.VITE_URL_THEMATICS;
 const VITE_URL_USERS = import.meta.env.VITE_URL_USERS;
 const VITE_GET_ALL_GAMES_ADMIN = import.meta.env.VITE_GET_ALL_GAMES_ADMIN;
-
 const VITE_URL_GET_PURCHASES = import.meta.env.VITE_URL_GET_PURCHASES;
 
 export const getAllGames = () => {
@@ -45,14 +45,30 @@ export const getAllGames = () => {
 };
 
 export const getAllGamesAdmin = () => {
-  console.log("action")
   return async (dispatch) => {
     try {
-      const response = await axios.get("https://backprojectboardgames-production.up.railway.app/games/admin");
+      const response = await axios.get(
+        "https://backprojectboardgames-production.up.railway.app/games/admin"
+      );
       console.log(response.data);
       return dispatch({ type: GET_ALL_GAMES_ADMIN, payload: response.data });
     } catch (error) {
       console.error(error);
+    }
+  };
+};
+
+export const getWishList = () => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.get(
+        `${VITE_URL_USERS}/${localStorage.getItem("userId")}`
+      );
+      const wish_list = response.data.wish_list;
+      console.log(wish_list);
+      return dispatch({ type: GET_WISH_LIST, payload: wish_list });
+    } catch (error) {
+      alert(error.message);
     }
   };
 };
@@ -273,21 +289,22 @@ export const getAllUsers = () => {
 export const getAllPurchases = () => {
   return async (dispatch) => {
     try {
-      const resp = await axios.get("https://backprojectboardgames-production.up.railway.app/purchase/");
+      const resp = await axios.get(
+        "https://backprojectboardgames-production.up.railway.app/purchase/"
+      );
       // const resp = await axios.get("https://backprojectboardgames-production.up.railway.app/purchase/");
 
+      let sorted = resp.data;
 
-        let sorted = resp.data;
-    
-        sorted = sorted.sort((a, b) => {
-            if (a.purchase_id < b.purchase_id) {
-                return -1;
-            } else if (a.purchase_id > b.purchase_id) {
-                return 1;
-            } else {
-                return 0;
-            }
-        });
+      sorted = sorted.sort((a, b) => {
+        if (a.purchase_id < b.purchase_id) {
+          return -1;
+        } else if (a.purchase_id > b.purchase_id) {
+          return 1;
+        } else {
+          return 0;
+        }
+      });
 
       dispatch({ type: GET_ALL_PURCHASES, payload: sorted });
     } catch (err) {

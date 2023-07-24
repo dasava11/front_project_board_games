@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { getUserById, getAllUsers } from "../../Redux/actions_creators/index";
 import { useAuth } from "../Auth/authContext";
 import style from "./Card.module.css";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
+import { getWishList } from "../../Redux/actions_creators/index"
 import axios from "axios";
 import { auth } from "../Auth/firebase";
 import { toast } from "react-toastify";
@@ -13,21 +13,26 @@ const Card = (props) => {
   const { name, image, price, id, onSale } = props;
   const [isFav, setIsFav] = useState(false);
   const darkMode = useSelector((state) => state.darkMode);
+  const wish_list = useSelector((state) => state.wish_list);
   const dispatch = useDispatch();
   const { userAuth } = useAuth();
-  const [fav, setFav] = useState();
+  //const [fav, setFav] = useState();
 
-  // useEffect(() => {
-  //   // const userIdAux = localStorage.getItem("user_id");
-  //   if (userAuth && userAuth.uid) {
-  //     axios
-  //       .get(`${VITE_URL_USERS}/${userAuth.uid}`)
-  //       .then((res) => setFav(res.data.wish_list))
-  //       .then(() =>
-  //         setIsFav(fav && fav.some((g) => parseInt(g.game_id) === parseInt(id)))
-  //       );
-  //   }
-  // }, [fav]);
+  
+
+  useEffect(() => {
+    
+    //wish_list && console.log(wish_list);
+    // const favAux = wish_list && wish_list.some((g) => parseInt(g.game_id) === parseInt(id));
+    // if(favAux) {
+    //   setIsFav(true);
+    // }
+    return (
+      () => {
+        console.log(wish_list);
+      }
+    )
+  }, []);
 
   const handleFavorite = async (res) => {
     try {
@@ -47,6 +52,7 @@ const Card = (props) => {
     }
   };
 
+  
   return (
     <div className={darkMode === true ? style.darkCard : style.card}>
       <Link to={`/details/${id}`}>

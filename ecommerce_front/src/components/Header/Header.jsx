@@ -43,7 +43,6 @@ export const Header = () => {
     dispatch(setDarkMode(e));
     document.body.classList.toggle("dark");
   };
-
   return (
     <div>
       <div
@@ -92,7 +91,7 @@ export const Header = () => {
             </div>
           )}
 
-          {auth.currentUser && (
+          {auth?.currentUser && (
             <div className={style.loginCorrectContainer}>
               <Link to="/user" className={style.logInUserStyle}>
                 <button>
