@@ -55,7 +55,7 @@ export default function CreateGame() {
     stock: "",
   });
   const [next, setNext] = useState(false);
-  const [allowNext, setAllowNext] = useState(false);
+
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -66,9 +66,7 @@ export default function CreateGame() {
     dispatch(getLanguages());
     dispatch(getMechanics());
     dispatch(getThematics());
-    const isFormValid = Object.values(errors).every((error) => error === "");
-    setAllowNext(isFormValid);
-  }, [input, errors]);
+  }, []);
 
   const handleModalCreateCategories = () => {
     setModalCategories(modalCategories === true ? false : true);
@@ -146,8 +144,10 @@ export default function CreateGame() {
   };
 
   const handleNext = () => {
-    if (allowNext) {
-      setNext(!next);
+    if (next === true) {
+      setNext(false);
+    } else {
+      setNext(true);
     }
   };
 
@@ -391,11 +391,7 @@ export default function CreateGame() {
             </>
           )}
           {next === false ? (
-            <a
-              onClick={handleNext}
-              className="next-button"
-              disabled={!allowNext}
-            >
+            <a onClick={handleNext} className="next-button">
               Next
             </a>
           ) : (
