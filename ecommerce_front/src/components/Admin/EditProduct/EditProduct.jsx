@@ -16,8 +16,8 @@ export const EditProduct = () => {
     dispatch(getAllGamesAdmin());
   }, []);
 
-  const handleSwitch = async (game_id) => {
-    await axios
+  const handleSwitch = (game_id) => {
+    axios
       .put(
         `https://backprojectboardgames-production.up.railway.app/games/delete/${game_id}`
       )
@@ -32,7 +32,7 @@ export const EditProduct = () => {
     navigate(`/admin/editproductform/${value}`);
   };
 
-  const handleSwitchActivate = async (product) => {
+  const handleSwitchActivate = (product) => {
     const productAct = {
       ...product,
       active: true,
@@ -44,7 +44,7 @@ export const EditProduct = () => {
       thematics_name: product.Thematics.map((t) => t.thematic_name),
       languages_name: product.Languages.map((lan) => lan.language_name),
     };
-    await axios
+    axios
       .put(
         "https://backprojectboardgames-production.up.railway.app/games",
         productAct

@@ -43,16 +43,8 @@ const CardDetail = () => {
         console.log(error);
       }
     };
+
     fetchGameDetail();
-    const fetchDataReview = async () => {
-      try {
-        const response = await axios.get(`${VITE_URL_REVIEWS}/idGame/${id}`);
-        setData(response.data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    fetchDataReview();
   }, [id]);
 
   const handleCart = () => {
@@ -95,6 +87,7 @@ const CardDetail = () => {
 
     setModalReview(modalReview === true ? false : true);
   };
+
   return loading ? (
     <h1>Cargando...</h1>
   ) : (
@@ -233,7 +226,8 @@ const CardDetail = () => {
           </span>
         )}
       </div>
-      <div>{userAuth && <Reviews data={data} />}</div>
+
+      <div>{userAuth && data && <Reviews review={data} />}</div>
       <Modal
         open={modalReview}
         onOk={handleSubmitReview}
@@ -241,7 +235,7 @@ const CardDetail = () => {
         footer={""}
         title="Leave a Review"
       >
-       {/* <FormReview gameId={game.game_id} handleModal={handleModal} /> */}
+        <FormReview gameId={game.game_id} handleModal={handleModal} />
       </Modal>
     </div>
   );

@@ -1,42 +1,63 @@
 import React, { useState, useEffect } from "react";
-import style from "./Reviews.module.css";
+import { useParams } from "react-router-dom";
+import axios from "axios";
+// import style from "./Reviews.module.css";
 import { Rate } from "antd";
 
-const Reviews = ({ data }) => {
-  const reviews = [];
-  data.map((item) => {
-    item.Reviews.map((item2) => reviews.push(item2));
-  });
+const VITE_URL_REVIEWS = import.meta.env.VITE_URL_REVIEWS;
 
-  reviews.map((item) => console.log(item));
-  
+const Reviews = () => {
+  const { id } = useParams();
+  const [reviews, setReviews] = useState();
+  const [data, setData] = useState([]);
+
+  console.log(id);
+
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `${VITE_URL_REVIEWS}/idGame/${gameId}`
+          `https://backprojectboardgames-production.up.railway.app/reviews/idGame/${id}`
         );
         setData(response.data);
-
-        setReviews(data[0].Reviews);
       } catch (error) {
+        console.log(error);
       }
     };
-    fetchData();
-  }, [data]);
 
-  return (
-    <div className={style.cardReviewDetail}>
-      {reviews.map((r) => {
-        return (
-          <div key={r.review_id} className={style.cardReviewItem}>
-            <Rate disabled defaultValue={r.rating} />
-            <h1>{r.comment}</h1>
-          </div>
-        );
-      })}
-    </div>
-  );
+    fetchData();
+  }, []);
+
+  if (data) {
+    const reviewArray = [];
+    data.map((item) => {
+      item.Reviews.map((item2) => {
+        reviewArray.push(item2);
+      });
+    });
+
+    setReviews(reviewArray);
+  }
+
+  if (reviews) {
+    console.log(reviews);
+  }
+
+  return;
+  // reviews ? (
+  //   <div>
+  //     {reviews.map((item) => {
+  //       return (
+  //         <div>
+  //           <Rate disabled defaultValue={item.rate} />
+  //           <p>{item.comment}</p>
+  //         </div>
+  //       );
+  //     })}
+  //   </div>
+  // ) : (
+  //   <h1>No hay reviews</h1>
+  // );
 };
 
 export default Reviews;

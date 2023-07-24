@@ -14,8 +14,6 @@ const validationsEdit = (input) => {
 
   if (!input.released) {
     errors.released = "Date is required";
-  } else if (!regexReleased.test(input.released)) {
-    errors.released = "Date must be in date format";
   }
 
   if (!input.price) {
@@ -57,7 +55,7 @@ const validationsEdit = (input) => {
     errors.stock = "Stock must be a number";
   }
 
-  if (input.Author.lenght === 0) {
+  /*   if (input.Author.lenght === 0) {
     errors.Author = "Author is required";
   }
 
@@ -87,7 +85,7 @@ const validationsEdit = (input) => {
 
   if (input.image.lenght === 0) {
     errors.image = "Image is required";
-  }
+  } */
 
   return errors;
 };
