@@ -127,3 +127,8 @@
 .priceFull {
   text-decoration: none;
 }
+
+.cardCartShop{
+max-width: 10%;
+cursor: pointer;
+}
