@@ -15,7 +15,8 @@ import {
   GET_ROLES,
   SET_DARK_MODE,
   GET_USER_BY_ID,
-  GET_ALL_GAMES_ADMIN
+  GET_ALL_GAMES_ADMIN,
+  GET_WISH_LIST
 
 } from "../action-types/index";
 
@@ -31,6 +32,7 @@ const initialState = {
   allMechanics: [],
   allThematics: [],
   allUsers: [],
+  wish_list: [],
   filter: {
     mechanic_name: "",
     thematic_name: "",
@@ -80,6 +82,13 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         allDesigners: action.payload,
       };
+
+    case GET_WISH_LIST:
+      return {
+        ...state,
+        wish_list: action.payload,
+      };
+      
     case GET_EDITORIALS:
       return {
         ...state,
