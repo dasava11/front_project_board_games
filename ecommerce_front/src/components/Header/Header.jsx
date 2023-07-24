@@ -92,7 +92,7 @@ export const Header = () => {
             </div>
           )}
 
-          {auth.currentUser && (
+          {auth?.currentUser && (
             <div className={style.loginCorrectContainer}>
               <Link to="/user" className={style.logInUserStyle}>
                 <button>

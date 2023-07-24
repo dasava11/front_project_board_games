@@ -2,9 +2,11 @@ import React, { useState, useEffect } from "react";
 import { getUserById, getAllUsers } from "../../Redux/actions_creators/index";
 import { useAuth } from "../Auth/authContext";
 import style from "./Card.module.css";
+import useLocalStorage from "../LocalStorage/useLocalStorage";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import axios from "axios";
+import shoppingCart from "../../Photos/plusCart.svg";
 import { auth } from "../Auth/firebase";
 import { toast } from "react-toastify";
 const VITE_URL_USERS = import.meta.env.VITE_URL_USERS;
@@ -12,6 +14,7 @@ const VITE_URL_USERS = import.meta.env.VITE_URL_USERS;
 const Card = (props) => {
   const { name, image, price, id, onSale } = props;
   const [isFav, setIsFav] = useState(false);
+  const [cart, setCart] = useLocalStorage("cart", []);
   const darkMode = useSelector((state) => state.darkMode);
   const dispatch = useDispatch();
   const { userAuth } = useAuth();
@@ -47,6 +50,31 @@ const Card = (props) => {
     }
   };
 
+  const handleCart = () => {
+    let duplicate = cart?.find((g) => g.game_id === game.game_id);
+
+    if (duplicate) {
+      for (let index = 0; index < cart.length; index++) {
+        let g = cart[index];
+        if (g.game_id === game.game_id) {
+          if (g.count < g.stock) {
+            g.count = g.count + 1;
+            g.total_price = g.count * g.price;
+            setCart([...cart]);
+            toast.success(`${game.name} added to cart`);
+          } else if (g.count >= g.stock) {
+            toast.error(`${game.name} exceeds stock`);
+          }
+        }
+      }
+    } else {
+      game.count = +1;
+      game.total_price = game.price;
+      setCart([...cart, game]);
+      toast.success(`${game.name} added to cart`);
+    }
+  };
+
   return (
     <div className={darkMode === true ? style.darkCard : style.card}>
       <Link to={`/details/${id}`}>
@@ -78,6 +106,13 @@ const Card = (props) => {
           </p>
         )}
       </div>
+
+      <img
+        src={shoppingCart}
+        alt="Shopping cart"
+        className={style.cardCartShop}
+        onClick={handleCart}
+      />
     </div>
   );
 };

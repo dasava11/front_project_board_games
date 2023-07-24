@@ -54,9 +54,6 @@ const CardDetail = () => {
       for (let index = 0; index < cart.length; index++) {
         let g = cart[index];
         if (g.game_id === game.game_id) {
-          // if (g.game.on_sale === true) {
-          //   g.game.price = g.game.price * 0.8;
-          // }
           if (g.count < g.stock) {
             g.count = g.count + 1;
             g.total_price = g.count * g.price;
@@ -68,9 +65,6 @@ const CardDetail = () => {
         }
       }
     } else {
-      // if (game.on_sale === true) {
-      //   game.price = game.price * 0.8;
-      // }
       game.count = +1;
       game.total_price = game.price;
       setCart([...cart, game]);
