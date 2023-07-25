@@ -14,18 +14,10 @@ const Games = () => {
   let allGames = useSelector((state) => state.allGames);
   let filters = useSelector((state) => state.filter);
   const darkMode = useSelector((state) => state.darkMode);
-
   const [currentPage, SetCurrentPage] = useState(1);
   const [postPerPage, setPostPerPage] = useState(12);
   const [loading, setLoading] = useState(false);
-  // const [filter, setFilter] = useState({
-  //   mechanic_name: "",
-  //   thematic_name: "",
-  //   category_name: "",
-  // });
   const [filter, setFilter] = useState(filters);
-
-  //const [currentGames, setCurrentGames] = useLocalStorage("currentGames", []);
 
   useEffect(() => {
     allGames.length === 0 && dispatch(getAllGames());
@@ -39,6 +31,8 @@ const Games = () => {
   const lastPostIndex = currentPage * postPerPage;
   const firstPostIndex = lastPostIndex - postPerPage;
   const currentPosts = allGames.slice(firstPostIndex, lastPostIndex);
+
+  console.log(allGames);
 
   if (allGames.length === 0) {
     return (
