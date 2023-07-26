@@ -4,7 +4,7 @@ import style from "./Card.module.css";
 import useLocalStorage from "../LocalStorage/useLocalStorage";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { getWishList } from "../../Redux/actions_creators/index"
+import { getWishList } from "../../Redux/actions_creators/index";
 import axios from "axios";
 import shoppingCart from "../../Photos/plusCart.svg";
 import { auth } from "../Auth/firebase";
@@ -12,29 +12,26 @@ import { toast } from "react-toastify";
 const VITE_URL_USERS = import.meta.env.VITE_URL_USERS;
 
 const Card = (props) => {
-  const { name, image, price, id, onSale } = props;
+  const { name, image, price, id, onSale, wish_list } = props;
   const [isFav, setIsFav] = useState(false);
   const [cart, setCart] = useLocalStorage("cart", []);
   const darkMode = useSelector((state) => state.darkMode);
-  const wish_list = useSelector((state) => state.wish_list);
+  /* const wish_list = useSelector((state) => state.wish_list); */
   const dispatch = useDispatch();
   const { userAuth } = useAuth();
-  //const [fav, setFav] = useState();
-
-  
+  const [fav, setFav] = useState();
 
   useEffect(() => {
-    
-    //wish_list && console.log(wish_list);
-    // const favAux = wish_list && wish_list.some((g) => parseInt(g.game_id) === parseInt(id));
-    // if(favAux) {
-    //   setIsFav(true);
-    // }
-    return (
-      () => {
-        console.log(wish_list);
-      }
-    )
+    wish_list && console.log(wish_list);
+    const favAux =
+      wish_list && wish_list.some((g) => parseInt(g.game_id) === parseInt(id));
+    if (favAux && auth.currentUser !== null) {
+      setIsFav(true);
+    }
+    /* if (auth.currentUser === null) {
+      setIsFav(false)
+    } */
+    /* return () => {}; */
   }, []);
 
   const handleFavorite = async (res) => {
@@ -54,7 +51,6 @@ const Card = (props) => {
       setIsFav(true);
     }
   };
-
 
   const handleCart = () => {
     let duplicate = cart?.find((g) => g.game_id === id);

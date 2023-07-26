@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllGames } from "../../Redux/actions_creators/index";
 import { filterDelete } from "../../Redux/actions_creators/index";
-import { getWishList } from "../../Redux/actions_creators/index"
+import { getWishList } from "../../Redux/actions_creators/index";
 import style from "./Games.module.css";
 import promotionalBanner from "../../Photos/PromotionalBanner.png";
 import Filter from "../Filter/Filter";
@@ -15,6 +15,7 @@ const Games = () => {
   let allGames = useSelector((state) => state.allGames);
   let filters = useSelector((state) => state.filter);
   const darkMode = useSelector((state) => state.darkMode);
+  const wish_list = useSelector((state) => state.wish_list);
   const [currentPage, SetCurrentPage] = useState(1);
   const [postPerPage, setPostPerPage] = useState(12);
   const [loading, setLoading] = useState(false);
@@ -23,11 +24,14 @@ const Games = () => {
 
   useEffect(() => {
     allGames.length === 0 && dispatch(getAllGames());
-    // return (
-    //   () => {
-    //     dispatch(getWishList());
-    //   }
-    // )
+    if (userIdAux !== null) {
+      dispatch(getWishList());
+    }
+    return () => {
+      if (userIdAux !== null) {
+        dispatch(getWishList());
+      }
+    };
   }, []);
 
   const handleDelete = (e) => {
@@ -232,6 +236,7 @@ const Games = () => {
                     key={game.game_id}
                     id={game.game_id}
                     onSale={game.on_sale}
+                    wish_list={wish_list}
                   />
                 );
               })}
