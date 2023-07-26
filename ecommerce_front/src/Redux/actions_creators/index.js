@@ -61,12 +61,13 @@ export const getAllGamesAdmin = () => {
 export const getWishList = () => {
   return async (dispatch) => {
     try {
-      const response = await axios.get(
-        `${VITE_URL_USERS}/${localStorage.getItem("userId")}`
-      );
-      const wish_list = response.data.wish_list;
-      console.log(wish_list);
-      return dispatch({ type: GET_WISH_LIST, payload: wish_list });
+      if (localStorage.getItem("userId")) {
+        const response = await axios.get(
+          `${VITE_URL_USERS}/${localStorage.getItem("userId")}`
+        );
+        const wish_list = response.data.wish_list;
+        return dispatch({ type: GET_WISH_LIST, payload: wish_list });
+      }
     } catch (error) {
       alert(error.message);
     }
@@ -289,12 +290,10 @@ export const getAllUsers = () => {
 export const getAllPurchases = () => {
   return async (dispatch) => {
     try {
-
       const resp = await axios.get(
         "https://backprojectboardgames-production.up.railway.app/purchase/"
       );
       // const resp = await axios.get("https://backprojectboardgames-production.up.railway.app/purchase/");
-
 
       let sorted = resp.data;
 
